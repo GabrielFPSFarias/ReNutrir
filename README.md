@@ -11,4 +11,5 @@ Dado que milhares de toneladas de alimentos são jogados fora toda semana, em gr
 
 * **Requisito 1** - Cadastro dos usuários, através de informações básicas para posteriomernte funcionar como uma conta para cada pessoa ter seu login e senha.
 * **Requisito 2** - O aplicativo tem por funcionalidade trazer a comunicação e instituições de caridade se cadastrem fornecendo informações como nome e local.
-* **Requisito 3** -
+* **Requisito 3** - Permitir que o beneficiário da doação faça uma avaliação sobre o processo, com o viés de obter melhorias e manter a qualidade do serviço de caridade.
+* **Requisito 4** - Enviar notificações para as pessoas que estão próximas dos locais de doação.
