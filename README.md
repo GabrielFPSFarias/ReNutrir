@@ -10,7 +10,9 @@ O ReNutrir é um aplicativo que possui como objetivo evitar o desperdício de al
 Dado que milhares de toneladas de alimentos são jogados fora toda semana, em grandes e pequenas feiras alimentícias, e existindo carência de alimento por parte de Instituições de Caridade, a exemplo de creches e centros sociais, esse sistema busca interligar essas duas realidades, visando um ganho social. Nesse app, as instituições interessadas poderão se cadastrar e indicar no perfil a necessidade ou não de alimentos no momento. Já, os doadores cadastrados poderão visualizar os locais necessitados e assim realizar as doações.
 
 ## Requisitos do projeto
-* **Requisito 1** - Cadastro dos usuários, através de informações básicas para posteriomernte funcionar como uma conta para cada pessoa ter seu login e senha.
-* **Requisito 2** - O aplicativo tem por funcionalidade trazer a comunicação e instituições de caridade se cadastrem fornecendo informações como nome e local.
-* **Requisito 3** - Permitir que o beneficiário da doação faça uma avaliação sobre o processo, com o viés de obter melhorias e manter a qualidade do serviço de caridade.
-* **Requisito 4** - Enviar notificações para as pessoas que estão próximas dos locais de doação.
+* **Requisito 1** - O cadastro dos doadores será feito através de informações básicas, para , posteriomernte, funcionar como uma conta para cada pessoa, com seu login e senha. O cadastro das instituições necessita de documento validado federalmente, comprovando a existência e confiabilidade destas.
+* **Requisito 2** - O aplicativo busca facilitar a comunicação entre os dois polos, contando, inclusive, com serviços de chat.
+* **Requisito 3** - Disponibilizar, a partir de uma certas quantidade de doações, um certficado digital de colaborador do programa social para os doadores.
+* **Requisito 4** - Conter um filtro de buscas que facilite a localização e identificação das instituições.
+
+
