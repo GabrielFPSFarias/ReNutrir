@@ -6,8 +6,8 @@
  * Gabriel Felipe Pontes da Silva Farias - gabriel.fpsfarias@ufrpe.br
 
 ## Descrição geral do projeto
-O ReNutrir será um aplicativo para unir grandes comércios alimentícios com instituições de caridade, com o objetivo de evitar o desperdício de alimentos, encaminhando o que seria desperdiçado para as pessoas que precisam desse alimento.
-Por ele As instituições próximas que precisam de alimento poderão se cadastrar, para que grandes feiras entrem em contato com elas e realizem doações. 
+O ReNutrir é um aplicativo que possui como objetivo evitar o desperdício de alimentos e, ao mesmo tempo, abastecer instituições de caridade. 
+Dado que milhares de toneladas de alimentos são jogados fora toda semana, em grandes e pequenas feiras alimentícias, e existindo carência de alimento por parte de Instituições de Caridade, a exemplo de creches e centros sociais, esse sistema busca interligar essas duas realidades, visando um ganho social. Nesse app, as instuições e os comerciantes poderão se cadastar e assim, através de comunicação simplificada, se conectar para a realização das doações.
 
 * **Requisito 1** - Cadastro dos usuários, através de informações básicas para posteriomernte funcionar como uma conta para cada pessoa ter seu login e senha.
 * **Requisito 2** - O aplicativo tem por funcionalidade trazer a comunicação e instituições de caridade se cadastrem fornecendo informações como nome e local.
