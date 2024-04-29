@@ -10,4 +10,4 @@ O ReNutrir será um aplicativo para unir grandes comércios alimentícios com in
 Por ele As instituições próximas que precisam de alimento poderão se cadastrar, para que grandes feiras entrem em contato com elas e realizem doações. 
 
 * **Requisito 1** - Cadastro dos usuários, através de informações básicas para posteriomernte funcionar como uma conta para cada pessoa ter seu login e senha.
-* Cocoricó
+* **Requisito 2** - O site 
