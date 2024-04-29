@@ -7,4 +7,4 @@
 
 ## Descrição geral do projeto
 O ReNutrir será um aplicativo para unir grandes comércios alimentícios com instituições de caridade, com o objetivo de evitar o desperdício de alimentos, encaminhando o que seria desperdiçado para as pessoas que precisam desse alimento.
-Por ele os feirantes saberão as istituições próximas que precisam 
+Por ele As instituições próximas que precisam de alimento e 
