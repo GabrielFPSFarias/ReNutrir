@@ -14,7 +14,7 @@ public class RepositorioContas {
 
    }
 
-   public boolean buscarConta (String nome, Conta contas){
+   public boolean buscarConta (String nome){
 
        return false;
    }
