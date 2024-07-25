@@ -1,0 +1,5 @@
+package Renutrir;
+
+public class Instituicao extends Conta{
+
+    private String cnpj;
