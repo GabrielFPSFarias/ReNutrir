@@ -1,0 +1,9 @@
+package Renutrir;
+
+public class Doacao {
+
+    private String tipoAlimento;
+    private Doador doador;
+    private Instituicao instituicao;
+    private float quantidadeDoacao;
+}
