@@ -1,0 +1,8 @@
+package Renutrir;
+
+public class Doador extends Conta {
+
+    private float creditoDoacao;
+    public void doar (String tipoAlimento, float quantidade){
+    }
+}
