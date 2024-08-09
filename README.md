@@ -12,7 +12,7 @@ Dado que milhares de toneladas de alimentos são jogados fora toda semana, em gr
 ## Requisitos do projeto
 * **Requisito 1** - cadastrar doadores através de informações básicas, para , posteriomernte, funcionar como uma conta para cada pessoa, com seu login e senha.
 * **Requisito 2** - comprovar a existência e confiabilidade das instituições através de documento validado federalmente.
-* **Requisito 3** - Implementar serviço de chat para facilitar a comunicação entre os dois polos.
+* **Requisito 3** - Implementar serviço de chat para facilitar a comunicação entre os usuários.
 * **Requisito 4** - Assim que o doador indicar a sua doação, o sistema deve avaliar quais instituições estão precisando daquele alimento e retornar o nome destas e sua localização.
 * **Requisito 5** - Disponibilizar, a partir de uma certas quantidade de doações, um certficado digital de colaborador do programa social para os doadores.
 * **Requisito 6** - Conter um filtro de buscas que facilite a localização e identificação das instituições.
