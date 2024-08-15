@@ -9,6 +9,11 @@ public class Evento {
     private String local;
     private List<Doacao> doacoes;
 
+    public evento(String nome, LocalDate data, String local){
+        this.setNome(nome);
+        this.getData(data);
+        this.getLocal(local);
+    }
     public String getNome() {
         return nome;
     }
