@@ -11,8 +11,8 @@ public class Evento {
 
     public evento(String nome, LocalDate data, String local){
         this.setNome(nome);
-        this.getData(data);
-        this.getLocal(local);
+        this.setData(data);
+        this.setLocal(local);
     }
     public String getNome() {
         return nome;
