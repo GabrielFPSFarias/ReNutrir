@@ -12,8 +12,9 @@ public class Doador extends Cadastro{
 
     // Construtor, getters e setters
 
-    public void doar(Doacao doacao) {
-        // Implementação do método de doação
+    public Doacao doar(String tipo, int qtd, Instituicao instituicao) {
+        Doacao doacao = new Doacao(tipo, this, qtd, instituicao);
+        return doacao;
     }
 
     public void setNivel(int nivel){
