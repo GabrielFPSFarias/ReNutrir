@@ -27,7 +27,10 @@ public class Doador extends Cadastro{
         this.certificado = certificado;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento){
+    public void setDataNascimento(LocalDate dataNascimento) {
+            if (dataNascimento.isAfter(LocalDate.now())) {
+                throw new IllegalArgumentException("A data de nascimento não pode ser no futuro.");
+            }
             this.dataNascimento = dataNascimento;
     }
 
