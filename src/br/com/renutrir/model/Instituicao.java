@@ -10,6 +10,11 @@ import java.time.format.DateTimeParseException;
 public class Instituicao extends Cadastro {
     private String cnpj;
     private LocalDate dataFundacao;
+    
+    public Evento criarEvento(String nome, LocalDate data, String local){
+        Evento evento = new Evento(nome, data, local);
+        return evento;
+    }
 
     public LocalDate getDataFundacao() {
         return dataFundacao;
@@ -42,8 +47,5 @@ public class Instituicao extends Cadastro {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
-        //Falta criar lógica
     }
 }
-
-
