@@ -20,18 +20,12 @@ public class Instituicao extends Cadastro {
         return dataFundacao;
     }
 
-    public void setDataFundacao(String dataFundacaoStr) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate dataFundacao = LocalDate.parse(dataFundacaoStr, formatter);
+    public void setDataFundacao(LocalDate dataFundacao) {
             if (dataFundacao.isAfter(LocalDate.now())) {
                 throw new IllegalArgumentException("A data de fundação não pode ser no futuro.");
             }
             this.dataFundacao = dataFundacao;
-        } catch (DateTimeParseException e) {
-            System.out.println("Formato de data inválido. Use o formato dd/MM/yyyy.");
         }
-    }
 
     public int calcularFundacao() {
         if (dataFundacao == null) {
