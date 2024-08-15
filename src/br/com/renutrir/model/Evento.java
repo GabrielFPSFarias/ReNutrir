@@ -9,7 +9,7 @@ public class Evento {
     private String local;
     private List<Doacao> doacoes;
 
-    public evento(String nome, LocalDate data, String local){
+    public Evento(String nome, LocalDate data, String local){
         this.setNome(nome);
         this.setData(data);
         this.setLocal(local);
