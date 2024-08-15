@@ -5,6 +5,8 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import br.com.renutrir.servicos.Cadastro;
+
 public class Doador extends Cadastro{
     private int nivel;
     private LocalDate dataNascimento;
@@ -25,17 +27,8 @@ public class Doador extends Cadastro{
         this.certificado = certificado;
     }
 
-    public void setDataNascimento(String dataNascimentoStr) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
-            if (dataNascimento.isAfter(LocalDate.now())) {
-                throw new IllegalArgumentException("A data de nascimento não pode ser no futuro.");
-            }
+    public void setDataNascimento(LocalDate dataNascimento){
             this.dataNascimento = dataNascimento;
-        } catch (DateTimeParseException e) {
-            System.out.println("Formato de data inválido. Use o formato dia/mês/ano.");
-        }
     }
 
     public int getNivel(){
