@@ -1,6 +1,6 @@
 package br.com.renutrir.repositorio;
 
-public class CertificadoRepositorio {
+public class RepositorioCertificado {
 
   // D
 }
