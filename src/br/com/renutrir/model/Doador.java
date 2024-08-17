@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 
 import br.com.renutrir.servicos.Cadastro;
 
-public class Doador extends Cadastro{
+public class Doador extends Conta {
     private int nivel;
     private LocalDate dataNascimento;
     private Certificado certificado;
