@@ -12,6 +12,9 @@ public class Conta {
     }
 
     public void setNome(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome não pode estar vazio.");
+        }
         this.nome = nome;
     }
 
@@ -21,7 +24,7 @@ public class Conta {
 
     public void setNomeUsuario(String nomeUsuario) {
         if (nomeUsuario == null || nomeUsuario.length() < 6){
-            throw new IllegalArgumentException("Coloque um nome de usuário com 6 ou mais caracteres.");
+            throw new IllegalArgumentException("O nome de usuário deve ter 6 ou mais caracteres.");
         }
         this.nomeUsuario = nomeUsuario;
     }
@@ -31,6 +34,9 @@ public class Conta {
     }
 
     public void setEmail(String email) {
+        if (email == null || !email.contains("@")) {
+            throw new IllegalArgumentException("E-mail inválido.");
+        }
         this.email = email;
     }
 
@@ -40,7 +46,7 @@ public class Conta {
 
     public void setSenha(String senha) {
         if (senha == null || senha.length() < 4){
-            throw new IllegalArgumentException("A senha deve ter mais de 4 caracteres");
+            throw new IllegalArgumentException("A senha deve ter mais de 4 caracteres.");
         }
         this.senha = senha;
     }
