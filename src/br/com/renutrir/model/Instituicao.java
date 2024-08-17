@@ -1,13 +1,11 @@
 package br.com.renutrir.model;
 
-import br.com.renutrir.servicos.Cadastro;
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Instituicao extends Cadastro {
+public class Instituicao extends Conta {
     private String cnpj;
     private LocalDate dataFundacao;
     
