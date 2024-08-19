@@ -15,6 +15,5 @@ Dado que milhares de toneladas de alimentos são jogados fora toda semana, em gr
 * **Requisito 3** - Avaliar quais instituições estão precisando de uma doação específica, através da indicação de doação do doador, e retornar o nome destas e sua localização para o doador.
 * **Requisito 4** - Disponibilizar, a partir de uma certas quantidade de doações, um certficado digital de colaborador do programa social para os doadores.
 * **Requisito 5** - Possibilitar a criação de eventos de doação pelas instituições.
-* **Requisito 6** - Facilitar a solicitação de doações pelas instituições aos doadores, para a realização de eventos e mutirões.
-* **Requisito 7** - Permitir a solicitação de voluntários pelas instituições.
-* **Requisito 8** - Possibilitar os doadores se tornarem voluntários para ajudar nas instituições, de forma casual (em eventos), ou de forma permanente.
+* **Requisito 6** - Permitir a solicitação de voluntários pelas instituições.
+* **Requisito 7** - Possibilitar os doadores se tornarem voluntários para ajudar nas instituições, de forma casual (em eventos), ou de forma permanente.
