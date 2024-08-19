@@ -13,7 +13,7 @@ Dado que milhares de toneladas de alimentos são jogados fora toda semana, em gr
 * **Requisito 1** - Cadastrar doadores através de informações básicas, para , posteriomernte, funcionar como uma conta para cada pessoa, com seu login e senha.
 * **Requisito 2** - Comprovar a existência e confiabilidade das instituições através de documento validado federalmente.
 * **Requisito 3** - Avaliar quais instituições estão precisando de uma doação específica, através da intenção de doação e dentro do raio de distânica definido pelo doador, e retornar o nome destas e sua localização para o doador.
-* **Requisito 4** - Disponibilizar, a partir de uma certas quantidade de doações, um certficado digital de colaborador do programa social para os doadores.
+* **Requisito 4** - Disponibilizar, a partir de uma certas quantidade de doações, um certificado digital de colaborador do programa social para os doadores.
 * **Requisito 5** - Possibilitar a criação de eventos de doação pelas instituições.
 * **Requisito 6** - Permitir a solicitação de voluntários pelas instituições.
 * **Requisito 7** - Possibilitar os doadores se tornarem voluntários para ajudar nas instituições, de forma casual (em eventos), ou de forma permanente.
