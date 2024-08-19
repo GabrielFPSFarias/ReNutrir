@@ -1,7 +1,9 @@
 public class Transporte {
 
-  private tipoDeTransporte;
+  private String tipoDeTransporte;
+  
   //Herdar tipoDeDoacao da intenção de doação
-  private horarioDeColeta;
-  private horarioDeEntrega;
+  
+  private DateTime horarioDeColeta;
+  private DateTime horarioDeEntrega;
 }
