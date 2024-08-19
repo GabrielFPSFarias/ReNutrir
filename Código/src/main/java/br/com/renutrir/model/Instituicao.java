@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 public class Instituicao extends Conta {
     private String cnpj;
     private LocalDate dataFundacao;
+    private float distanciaMaximaDeTransporte;
     
     public Evento criarEvento(String nome, LocalDate data, String local){
         return new Evento(nome, data, local);
