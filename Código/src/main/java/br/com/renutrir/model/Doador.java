@@ -5,8 +5,6 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import br.com.renutrir.servicos.Cadastro;
-
 public class Doador extends Conta {
     private int nivel;
     private LocalDate dataNascimento;
@@ -59,6 +57,11 @@ public class Doador extends Conta {
             throw new IllegalArgumentException("CPF inválido. Deve conter 11 dígitos.");
         }
         this.cpf = cpf;
+    }
+
+    public void gerarDescricao() {
+        this.certificado.setDescricao("Certificado emitido para " + this.getNome() +
+                " em reconhecimento às suas " + this.certificado.getQuantDoacoes() + " doações.");
     }
 
     private boolean CpfValidacao(String cpf) {

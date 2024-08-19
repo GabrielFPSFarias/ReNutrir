@@ -7,15 +7,23 @@ public class Certificado {
     private LocalDate dataEmissao;
     private int quantDoacoes;
 
-    public Certificado(){
-    }
-
     public Certificado(String descricao, LocalDate dataEmissao, int quantDoacoes) {
         this.descricao = descricao;
         this.dataEmissao = dataEmissao;
         this.quantDoacoes = quantDoacoes;
     }
-    
+
+    public Certificado() {
+    }
+
+    public int getQuantDoacoes() {
+        return quantDoacoes;
+    }
+
+    public void setQuantDoacoes(int quantDoacoes) {
+        this.quantDoacoes = quantDoacoes;
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -32,8 +40,4 @@ public class Certificado {
         this.dataEmissao = dataEmissao;
     }
 
-    public void gerarDescricao() {
-        this.descricao = "Certificado emitido para " + this.getNome() +
-                " em reconhecimento às suas " + this.quantDoacoes + " doações.";
-    }
 }

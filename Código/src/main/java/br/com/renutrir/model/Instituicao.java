@@ -10,8 +10,7 @@ public class Instituicao extends Conta {
     private LocalDate dataFundacao;
     
     public Evento criarEvento(String nome, LocalDate data, String local){
-        Evento evento = new Evento(nome, data, local);
-        return evento;
+        return new Evento(nome, data, local);
     }
 
     public LocalDate getDataFundacao() {
