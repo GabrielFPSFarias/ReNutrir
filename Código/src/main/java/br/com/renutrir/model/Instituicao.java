@@ -9,6 +9,8 @@ public class Instituicao extends Conta {
     private String cnpj;
     private LocalDate dataFundacao;
     private float distanciaMaximaDeColeta;
+    private DateTime horarioFuncionamento;
+    private DateTime horarioColeta;
     
     public Evento criarEvento(String nome, LocalDate data, String local){
         return new Evento(nome, data, local);
