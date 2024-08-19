@@ -73,5 +73,13 @@ public class Instituicao extends Conta {
         int digito2 = (resto < 2) ? 0 : 11 - resto;
 
         return (digito1 == cnpjInt[12] && digito2 == cnpjInt[13]);
+
+        public float getDataFundacao() {
+        return distanciaMaximaDeColeta;
+    }
+
+    public void setDistanciaMaximaDeColeta(float distanciaMaximaDeColeta) {
+
+        this.distanciaMaximaDeColeta = distanciaMaximaDeColeta;
     }
 }
