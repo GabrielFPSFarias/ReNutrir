@@ -10,7 +10,7 @@ public class Doador extends Conta {
     private LocalDate dataNascimento;
     private Certificado certificado;
     private String cpf;
-    private distanciaDeEntrega;
+    private float distanciaDeEntrega;
 
     // Construtor, getters e setters
 
