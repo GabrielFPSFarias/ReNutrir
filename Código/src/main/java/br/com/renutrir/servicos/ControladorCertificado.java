@@ -25,6 +25,8 @@ public class ControladorCertificado {
     private void validarQuantDoacoes(int quantDoacoes) {
         if (quantDoacoes < 0) {
             throw new IllegalArgumentException("A quantidade de doações não pode ser negativa.");
+        } else if (quantDoacoes < 10) {
+            throw new IllegalArgumentException("O doador não pode receber o certificado, ainda tem menos de 10 doações efetuadas.");
         }
     }
 }
