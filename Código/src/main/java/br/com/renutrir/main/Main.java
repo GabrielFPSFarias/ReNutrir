@@ -44,9 +44,9 @@ public class Main {
 		// Criar e cadastrar uma instituição
 		Endereco enderecoInstituicao = new Endereco("456", "Sala 2", "Bairro B", "Cidade B", "RJ");
 		Instituicao instituicao = new Instituicao();
-		instituicao.setNome("Instituição A");
-		instituicao.setNomeUsuario("instituicaoA");
-		instituicao.setEmail("instituicao@example.com");
+		instituicao.setNome("Instituição Alvin");
+		instituicao.setNomeUsuario("instituicaoAlvin24");
+		instituicao.setEmail("instituicao@hotmail.com");
 		instituicao.setSenha("54321");
 		instituicao.setTelefone("987654321");
 		instituicao.setEndereco(enderecoInstituicao);
