@@ -8,6 +8,9 @@ public class Evento {
     private LocalDate data;
     private String local;
     private List<Doacao> doacoes;
+    private int quantidadeVoluntarios;
+    private int doacoesEfetuadas;
+    private int pessoasAtendidas;
 
     public Evento(String nome, LocalDate data, String local){
         this.setNome(nome);
@@ -44,5 +47,29 @@ public class Evento {
 
     public void setDoacoes(List<Doacao> doacoes) {
         this.doacoes = doacoes;
+    }
+    
+    public void setQuantidadeVoluntarios() {
+    	this.quantidadeVoluntarios = quantidadeVoluntarios;
+    }
+    
+    public int getQuantidadeVoluntarios() {
+    	return quantidadeVoluntarios;
+    }
+    
+    public void setDoacoesEfetuadas(){
+    	this.doacoesEfetuadas = doacoesEfetuadas;
+    }
+    
+    public int getDoacoesEfetuadas(){
+    	return doacoesEfetuadas;
+    }
+    
+    public void setPessoasAtendidas(){
+    	this.pessoasAtendidas = pessoasAtendidas;
+    }
+    
+    public int getPessoasAtendidas(){
+    	return pessoasAtendidas;
     }
 }
