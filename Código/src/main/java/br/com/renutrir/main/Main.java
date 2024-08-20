@@ -93,6 +93,8 @@ public class Main {
 		System.out.println("Certificado: " + certificado.getDescricao());
 		System.out.println("Intenção de doação: " + intencaoDoacao.getDescricao());
 		System.out.println("Doação realizada: " + doacao.getDescricao());
-		System.out.println("Evento criado: " + evento.getNome());
+		System.out.println("Evento criado: " + evento.getNome() + " pela " + instituicao.getNome());
+		System.out.println("Nível: " + doador.getNivel());
+		System.out.println(instituicao.getDistanciaMaximaDeColeta() + " km");
 	}
 }
