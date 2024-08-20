@@ -17,7 +17,7 @@ public class ControladorCadastro {
         novaConta.setTelefone(telefone);
         novaConta.setEndereco(endereco);
 
-        // Aqui você pode adicionar o código para salvar a conta no banco de dados ou outro repositório
+        // Aqui dá pra adicionar o código para salvar a conta no banco de dados ou outro repositório
 
         return novaConta;
     }
