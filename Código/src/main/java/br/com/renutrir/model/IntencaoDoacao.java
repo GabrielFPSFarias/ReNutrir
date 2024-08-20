@@ -2,20 +2,23 @@ package br.com.renutrir.model;
 
 import java.time.LocalDate;
 
-public class IntencaoDoacao extends Doador {
+public class IntencaoDoacao {
     private String tipoItem; // Alimento, Roupas, Móveis, etc.
-    private int quantidade;
+    private String id;
     private String descricao;
+    private int quantidade;
     private LocalDate dataIntencao;
     private String status; // Pendente, Aceita, Concluída
+    private String doadorId;
 
-    // Construtor
-    public IntencaoDoacao(String tipoItem, int quantidade, String descricao) {
+    public IntencaoDoacao(String tipoItem, String id, String descricao, int quantidade, LocalDate dataIntencao, String status, String doadorId) {
         this.tipoItem = tipoItem;
-        this.quantidade = quantidade;
+        this.id = id;
         this.descricao = descricao;
+        this.quantidade = quantidade;
         this.dataIntencao = LocalDate.now();
         this.status = "Pendente";
+        this.doadorId = doadorId;
     }
 
     // Getters e Setters
@@ -27,15 +30,12 @@ public class IntencaoDoacao extends Doador {
         this.tipoItem = tipoItem;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public String getId() {
+        return id;
     }
 
-    public void setQuantidade(int quantidade) {
-        if (quantidade <= 0) {
-            throw new IllegalArgumentException("A quantidade deve ser maior que zero.");
-        }
-        this.quantidade = quantidade;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDescricao() {
@@ -54,6 +54,14 @@ public class IntencaoDoacao extends Doador {
         this.dataIntencao = dataIntencao;
     }
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -61,5 +69,12 @@ public class IntencaoDoacao extends Doador {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
+    public String getDoadorId() {
+        return doadorId;
+    }
+
+    public void setDoadorId(String doadorId) {
+        this.doadorId = doadorId;
+    }
 }
