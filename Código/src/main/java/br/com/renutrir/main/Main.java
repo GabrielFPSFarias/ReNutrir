@@ -8,6 +8,8 @@ import br.com.renutrir.servicos.ControladorIntencaoDeDoacao;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -39,35 +41,57 @@ public class Main {
 		doador.setNivel(1);
 		repositorioContas.adicionarUsuario(doador);
 
-		// Criar certificado
-		Certificado certificado = controladorCertificado.criarCertificado("Certificado de Agradecimento", 5);
-		repositorioCertificado.adicionarCertificado(certificado);
-
-		// Criar intenção de doação
-		IntencaoDoacao intencao = new IntencaoDoacao("Alimento", "1", "Doação de alimentos", 50, LocalDate.now(), "Pendente", doador.getEmail());
-		controladorIntencaoDeDoacao.adicionarIntencao(intencao);
-
-		// Criar doação
-		Doacao doacao = new Doacao("1", "Doação de alimentos", 50, doador.getEmail(), "InstituicaoX", doador, null, LocalDate.now());
-		repositorioDoacoes.adicionarDoacao(doacao);
-
-		// Criar evento
+		// Criar e cadastrar uma instituição
+		Endereco enderecoInstituicao = new Endereco("456", "Sala 2", "Bairro B", "Cidade B", "RJ");
 		Instituicao instituicao = new Instituicao();
-		instituicao.setNome("Instituição AlvinBR");
-		instituicao.setNomeUsuario("instituicao1alvin");
-		instituicao.setEmail("instituicaoalvin@hotmail.com");
-		instituicao.setSenha("senha5678");
-		instituicao.setTelefone("1187654321");
-		instituicao.setEndereco(endereco);
+		instituicao.setNome("Instituição A");
+		instituicao.setNomeUsuario("instituicaoA");
+		instituicao.setEmail("instituicao@example.com");
+		instituicao.setSenha("54321");
+		instituicao.setTelefone("987654321");
+		instituicao.setEndereco(enderecoInstituicao);
 		instituicao.setCnpj("12345678000195");
 		instituicao.setDataFundacao(LocalDate.of(2000, 1, 1));
-		instituicao.setDistanciaMaximaDeColeta(50.0);
-		Evento evento = instituicao.criarEvento("Evento de Doação", LocalDate.now(), "Rua das Flores, 123");
+		instituicao.setDistanciaMaximaDeColeta(20.0);
+
+		// Criar uma doação
+		Doacao doacao = new Doacao("1", "Alimentos não perecíveis", 100, doador.getEmail(), instituicao.getEmail(), doador, instituicao, LocalDate.now());
+		repositorioDoacoes.adicionarDoacao(doacao);
+
+		// Criar uma intenção de doação
+		IntencaoDoacao intencaoDoacao = new IntencaoDoacao("Alimentos", "2", "Doação de alimentos para a festa", 50, LocalDate.now(), "Pendente", doador.getEmail());
+		repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
+
+		// Criar um certificado
+		Certificado certificado = controladorCertificado.criarCertificado("Certificado de Participação", 10);
+		repositorioCertificado.adicionarCertificado(certificado);
+
+		// Criar um evento
+		Evento evento = instituicao.criarEvento("Evento de Doação", LocalDate.now().plusDays(10), "Local do Evento");
+		evento.setDoacoes(repositorioDoacoes.listarDoacoes());
+
+		// Listar doadores
+		System.out.println("Doadores: " + doador.getNome());
+
+		// Listar doações
+		System.out.println("\nDoações:");
+		List<Doacao> doacoesList = repositorioDoacoes.listarDoacoes();
+		doacoesList.forEach(d -> System.out.println("Doação ID: " + d.getId() + ", Descrição: " + d.getDescricao() + ", Quantidade: " + d.getQuantidade()));
+
+		// Listar intenções de doação
+		System.out.println("\nIntenções de Doação:");
+		List<IntencaoDoacao> intencoesList = repositorioIntencaoDoacao.listarIntencoes();
+		intencoesList.forEach(i -> System.out.println("Intenção ID: " + i.getId() + ", Descrição: " + i.getDescricao() + ", Quantidade: " + i.getQuantidade() + ", Status: " + i.getStatus()));
+
+		// Listar certificados
+		System.out.println("\nCertificados:");
+		List<Certificado> certificadosList = repositorioCertificado.listarCertificados();
+		certificadosList.forEach(c -> System.out.println("Certificado Descrição: " + c.getDescricao() + ", Data Emissão: " + c.getDataEmissao() + ", Quantidade de Doações: " + c.getQuantDoacoes()));
 
 		// Exibir informações
 		System.out.println("Doador cadastrado: " + doador.getNome());
 		System.out.println("Certificado: " + certificado.getDescricao());
-		System.out.println("Intenção de Doação: " + intencao.getDescricao());
+		System.out.println("Intenção de doação: " + intencaoDoacao.getDescricao());
 		System.out.println("Doação realizada: " + doacao.getDescricao());
 		System.out.println("Evento criado: " + evento.getNome());
 	}
