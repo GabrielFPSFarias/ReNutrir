@@ -2,9 +2,7 @@ package br.com.renutrir.main;
 
 import br.com.renutrir.model.*;
 import br.com.renutrir.repositorio.*;
-import br.com.renutrir.servicos.ControladorCadastro;
-import br.com.renutrir.servicos.ControladorCertificado;
-import br.com.renutrir.servicos.ControladorIntencaoDeDoacao;
+import br.com.renutrir.servicos.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
