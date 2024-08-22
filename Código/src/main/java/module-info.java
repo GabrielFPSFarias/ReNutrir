@@ -1,10 +1,8 @@
 module br.com.renutrir.renutrir {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
 
-    requires org.controlsfx.controls;
-    requires org.kordamp.bootstrapfx.core;
-
-    opens br.com.renutrir.javafx to javafx.fxml;
-    exports br.com.renutrir.javafx;
+    opens br.com.renutrir.renutrir to javafx.graphics, javafx.fxml;
+    exports br.com.renutrir.renutrir;
 }
