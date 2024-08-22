@@ -14,7 +14,7 @@
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastro Instituição" textAlignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastro Doador" textAlignment="CENTER" wrappingWidth="338.154296875">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
@@ -81,7 +81,7 @@
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CEP (apenas números):" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CNPJ (apenas números):" GridPane.rowIndex="10" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CPF (apenas números):" GridPane.rowIndex="10" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" GridPane.rowIndex="12" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome de Usuário:" GridPane.rowIndex="1" />
