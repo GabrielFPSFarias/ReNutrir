@@ -1,18 +1,17 @@
 package br.com.renutrir.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Instituicao extends Conta {
     private String cnpj;
     private LocalDate dataFundacao;
-    private float distanciaMaximaDeColeta;
-    private DateTime horarioFuncionamento;
-    private DateTime horarioColeta;
-    
-    public Evento criarEvento(String nome, LocalDate data, String local){
+    private double distanciaMaximaDeColeta;
+    private LocalDateTime horarioFuncionamento;
+    private LocalDateTime horarioColeta;
+
+    public Evento criarEvento(String nome, LocalDate data, String local) {
         return new Evento(nome, data, local);
     }
 
@@ -21,11 +20,11 @@ public class Instituicao extends Conta {
     }
 
     public void setDataFundacao(LocalDate dataFundacao) {
-            if (dataFundacao.isAfter(LocalDate.now())) {
-                throw new IllegalArgumentException("A data de fundação não pode ser no futuro.");
-            }
-            this.dataFundacao = dataFundacao;
+        if (dataFundacao.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("A data de fundação não pode ser no futuro.");
         }
+        this.dataFundacao = dataFundacao;
+    }
 
     public int calcularFundacao() {
         if (dataFundacao == null) {
@@ -40,13 +39,13 @@ public class Instituicao extends Conta {
     }
 
     public void setCnpj(String cnpj) {
-        if (!CnpjValidacao(cnpj)) {
+        if (!cnpjValidacao(cnpj)) {
             throw new IllegalArgumentException("CNPJ inválido.");
         }
         this.cnpj = cnpj;
     }
 
-    private boolean CnpjValidacao(String cnpj) {
+    private boolean cnpjValidacao(String cnpj) {
         if (cnpj == null || !cnpj.matches("\\d{14}")) {
             return false;
         }
@@ -58,8 +57,6 @@ public class Instituicao extends Conta {
         }
 
         int[] multiplicador1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
-        int[] multiplicador2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
-
         int soma = 0;
         for (int i = 0; i < 12; i++) {
             soma += cnpjInt[i] * multiplicador1[i];
@@ -67,6 +64,7 @@ public class Instituicao extends Conta {
         int resto = soma % 11;
         int digito1 = (resto < 2) ? 0 : 11 - resto;
 
+        int[] multiplicador2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
         soma = 0;
         for (int i = 0; i < 13; i++) {
             soma += cnpjInt[i] * multiplicador2[i];
@@ -75,13 +73,29 @@ public class Instituicao extends Conta {
         int digito2 = (resto < 2) ? 0 : 11 - resto;
 
         return (digito1 == cnpjInt[12] && digito2 == cnpjInt[13]);
+    }
 
-        public float getDataFundacao() {
+    public double getDistanciaMaximaDeColeta() {
         return distanciaMaximaDeColeta;
     }
 
-    public void setDistanciaMaximaDeColeta(float distanciaMaximaDeColeta) {
-
+    public void setDistanciaMaximaDeColeta(double distanciaMaximaDeColeta) {
         this.distanciaMaximaDeColeta = distanciaMaximaDeColeta;
+    }
+
+    public LocalDateTime getHorarioFuncionamento() {
+        return horarioFuncionamento;
+    }
+
+    public void setHorarioFuncionamento(LocalDateTime horarioFuncionamento) {
+        this.horarioFuncionamento = horarioFuncionamento;
+    }
+
+    public LocalDateTime getHorarioColeta() {
+        return horarioColeta;
+    }
+
+    public void setHorarioColeta(LocalDateTime horarioColeta) {
+        this.horarioColeta = horarioColeta;
     }
 }
