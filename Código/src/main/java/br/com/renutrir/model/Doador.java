@@ -12,8 +12,14 @@ public class Doador extends Conta {
     private String cpf;
     private float distanciaMaximaDeEntrega;
 
-    // Construtor, getters e setters
+    public Doador() {
+    }
 
+    public Doador(String nome, String email, String telefone) {
+        super();
+    }
+
+    // Construtor, getters e setters
     public void setNivel(int nivel){
         this.nivel = nivel;
     }
