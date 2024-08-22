@@ -43,7 +43,7 @@ public class RepositorioDoacoes {
         return null;
     }
 
-    // Retorna todas as doações
+    // retorna todas as doações
     public List<Doacao> listarDoacoes() {
         return new ArrayList<>(doacoes); // Retorna uma cópia da lista
     }
