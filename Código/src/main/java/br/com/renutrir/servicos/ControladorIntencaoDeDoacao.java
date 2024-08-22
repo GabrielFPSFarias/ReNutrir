@@ -49,7 +49,7 @@ public class ControladorIntencaoDeDoacao {
             System.out.println("Quantidade inválida.");
             return false;
         }
-        // Outras validações necessárias podem ser adicionadas aqui
+        // espaço para mais validações..
 
         return true;
     }
