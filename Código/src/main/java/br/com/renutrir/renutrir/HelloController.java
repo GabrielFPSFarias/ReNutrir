@@ -15,12 +15,6 @@ public class HelloController {
     private Label textoTeste;
 
     @FXML
-    private Button botaoCadastro;
-
-    @FXML
-    private Button botaoLogin;
-
-    @FXML
     public void botaoLogin() {
         textoTeste.setText("Clicou no botão login");
         System.out.println("Login");
@@ -36,6 +30,16 @@ public class HelloController {
 
     @FXML
     private void initialize() {
+    }
+
+    @FXML
+    public void botaoSouInstituicao() {
+        cadastroInstituicao();
+    }
+
+    @FXML
+    public void botaoSouDoador() {
+        cadastroDoador();
     }
 
     private void terceiraTelaLogin() {
@@ -61,6 +65,36 @@ public class HelloController {
             stage.setTitle("ReNutrir - Cadastro");
             stage.setResizable(false);
             stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void cadastroInstituicao() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("02-cadastro-instituicao.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 800, 500));
+            stage.setTitle("ReNutrir - Cadastro");
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void cadastroDoador() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("02-cadastro-doador.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 800, 500));
+            stage.setTitle("ReNutrir - Cadastro");
+            stage.setResizable(false);
+            stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
