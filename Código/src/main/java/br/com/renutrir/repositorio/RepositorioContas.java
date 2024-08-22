@@ -7,14 +7,13 @@ import java.util.Optional;
 
 public class RepositorioContas {
 
-    // Mapa para armazenar os usuários, onde a chave é o email/login do doador
+    // armazenar os usuários - email/login
     private Map<String, Doador> contas;
 
     public RepositorioContas() {
         this.contas = new HashMap<>();
     }
 
-    // Método para adicionar um novo usuário ao repositório
     public void adicionarUsuario(Doador usuario) {
         if (!contas.containsKey(usuario.getEmail())) {
             contas.put(usuario.getEmail(), usuario);
@@ -23,12 +22,10 @@ public class RepositorioContas {
         }
     }
 
-    // Método para buscar um usuário pelo email/login
     public Optional<Doador> buscarUsuarioPorEmail(String email) {
         return Optional.ofNullable(contas.get(email));
     }
 
-    // Método para remover um usuário do repositório
     public void removerUsuario(String email) {
         if (contas.containsKey(email)) {
             contas.remove(email);
@@ -37,7 +34,7 @@ public class RepositorioContas {
         }
     }
 
-    // Método para verificar as credenciais de login
+    // verificar login
     public boolean autenticarUsuario(String email, String senha) {
         Doador usuario = contas.get(email);
         if (usuario != null && usuario.getSenha().equals(senha)) {
@@ -46,7 +43,6 @@ public class RepositorioContas {
         return false;
     }
 
-    // Método para listar todos os usuários cadastrados
     public void listarUsuarios() {
         contas.values().forEach(usuario -> System.out.println(usuario));
     }
