@@ -49,7 +49,7 @@ public class ControladorTransporte {
       System.out.println("Quantidade inválida.");
       return false;
     }
-    // Outras validações necessárias podem ser adicionadas aqui
+    // mais validações...
 
     return true;
   }
