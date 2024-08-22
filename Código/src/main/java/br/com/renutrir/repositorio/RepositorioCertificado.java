@@ -19,6 +19,4 @@ public class RepositorioCertificado {
     public List<Certificado> listarCertificados() {
         return new ArrayList<>(certificados);
     }
-
-
 }
