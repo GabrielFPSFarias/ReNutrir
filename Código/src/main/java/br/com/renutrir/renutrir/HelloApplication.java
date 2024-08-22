@@ -1,5 +1,6 @@
 package br.com.renutrir.renutrir;
 
+import br.com.renutrir.servicos.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
