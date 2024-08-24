@@ -36,7 +36,7 @@
    <bottom>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="72.0" BorderPane.alignment="CENTER">
          <children>
-            <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
+            <Button fx:id="voltarBotao" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
                <VBox.margin>
                   <Insets right="10.0" />
                </VBox.margin>
