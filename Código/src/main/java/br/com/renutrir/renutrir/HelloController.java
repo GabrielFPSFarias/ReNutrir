@@ -1,100 +1,89 @@
 package br.com.renutrir.renutrir;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class HelloController {
 
     @FXML
-    private Label textoTeste;
+    private Button loginBotao;
+
+    @FXML
+    private Button cadastroBotao;
+
+    @FXML
+    private Button confCad;
+
+    @FXML
+    private Button confCadIns;
+
+    @FXML
+    private Button doadorBotao;
+
+    @FXML
+    private Button instBotao;
 
     @FXML
     public void botaoLogin() {
-        textoTeste.setText("Clicou no botão login");
         System.out.println("Login");
-        terceiraTelaLogin();
+        Stage stage = (Stage) loginBotao.getScene().getWindow();
+        trocarTela(stage, "03-login.fxml", "ReNutrir - Login");
     }
 
     @FXML
     public void botaoCadastro() {
-        textoTeste.setText("Clicou no botão cadastro");
         System.out.println("Cadastro");
-        segundaTelaCadastro();
-    }
-
-    @FXML
-    private void initialize() {
+        Stage stage = (Stage) cadastroBotao.getScene().getWindow();
+        trocarTela(stage, "02-pre-cadastro.fxml", "ReNutrir - Cadastro");
     }
 
     @FXML
     public void botaoSouInstituicao() {
-        cadastroInstituicao();
+        System.out.println("Cadastro instituição");
+        Stage stage = (Stage) instBotao.getScene().getWindow();
+        trocarTela(stage, "02-cadastro-instituicao.fxml", "ReNutrir - Cadastro Instituição");
     }
 
     @FXML
     public void botaoSouDoador() {
-        cadastroDoador();
+        System.out.println("Cadastro doador");
+        Stage stage = (Stage) doadorBotao.getScene().getWindow();
+        trocarTela(stage, "02-cadastro-doador.fxml", "ReNutrir - Cadastro Doador");
     }
 
-    private void terceiraTelaLogin() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("03-login.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 800, 500));
-            stage.setTitle("ReNutrir - Login");
-            stage.setResizable(false);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    public void confirmarCadastro() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cadastro");
+        alert.setHeaderText(null);
+        alert.setContentText("Cadastro de doador confirmado!");
+        alert.showAndWait();
     }
 
-    private void segundaTelaCadastro() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("02-pre-cadastro.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 800, 500));
-            stage.setTitle("ReNutrir - Cadastro");
-            stage.setResizable(false);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    public void confirmarCadastroIns() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cadastro");
+        alert.setHeaderText(null);
+        alert.setContentText("Cadastro de instituição confirmado!");
+        alert.showAndWait();
     }
 
-    private void cadastroInstituicao() {
+    private void trocarTela(Stage stage, String fxmlFile, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("02-cadastro-instituicao.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
-            Stage stage = new Stage();
             stage.setScene(new Scene(root, 800, 500));
-            stage.setTitle("ReNutrir - Cadastro");
+            stage.setTitle(title);
             stage.setResizable(false);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void cadastroDoador() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("02-cadastro-doador.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 800, 500));
-            stage.setTitle("ReNutrir - Cadastro");
-            stage.setResizable(false);
-            stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
