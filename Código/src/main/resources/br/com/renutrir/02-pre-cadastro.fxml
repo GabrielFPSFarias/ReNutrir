@@ -68,12 +68,12 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" onAction="#botaoSouDoador" prefHeight="37.0" prefWidth="250.0" text="Sou doador" textAlignment="CENTER" GridPane.rowIndex="2">
+                  <Button fx:id="doadorBotao" mnemonicParsing="false" onAction="#botaoSouDoador" prefHeight="37.0" prefWidth="250.0" text="Sou doador" textAlignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button layoutX="281.0" layoutY="107.0" mnemonicParsing="false" onAction="#botaoSouInstituicao" prefHeight="37.0" prefWidth="250.0" text="Sou instituição" textAlignment="CENTER" GridPane.rowIndex="3">
+                  <Button fx:id="instBotao" layoutX="281.0" layoutY="107.0" mnemonicParsing="false" onAction="#botaoSouInstituicao" prefHeight="37.0" prefWidth="250.0" text="Sou instituição" textAlignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font size="16.0" />
                      </font>
