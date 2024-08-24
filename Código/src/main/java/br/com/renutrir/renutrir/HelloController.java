@@ -1,14 +1,22 @@
 package br.com.renutrir.renutrir;
 
+import br.com.renutrir.repositorio.RepositorioContas;
+import br.com.renutrir.servicos.ControladorCadastro;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 public class HelloController {
 
@@ -118,4 +126,118 @@ public class HelloController {
             e.printStackTrace();
         }
     }
+
+    //Variáveis do cadastro doador
+
+    private ControladorCadastro controladorCadastro;
+    private RepositorioContas repositorioContas;
+
+    @FXML
+    private TextField fieldNome;
+
+    @FXML
+    private TextField fieldUserNome;
+
+    @FXML
+    private TextField fieldCep;
+
+    @FXML
+    private TextField fieldEndereco;
+
+    @FXML
+    private TextField fieldBairro;
+
+    @FXML
+    private TextField fieldNumero;
+
+    @FXML
+    private TextField fieldMunicipio;
+
+    @FXML
+    private TextField fieldUf;
+
+    @FXML
+    private TextField fieldComp;
+
+    @FXML
+    private TextField fieldRef;
+
+    @FXML
+    private TextField fieldCpf;
+
+    @FXML
+    private TextField fieldTelefone;
+
+    @FXML
+    private TextField fieldEmail;
+
+    @FXML
+    private PasswordField fieldSenha;
+
+    @FXML
+    private PasswordField fieldConfSenha;
+
+    //Métodos do cadastro doador
+
+    public void emailField() {
+
+    }
+
+    public void nomeField() {
+
+    }
+
+    public void cepField() {
+
+    }
+
+    public void cpfField() {
+
+    }
+
+    public void nomeUserField() {
+
+    }
+
+    public void senhaField() {
+
+    }
+
+    public void confSenhaField() {
+
+    }
+
+    public void telefoneField() {
+
+    }
+
+    public void enderecoField() {
+
+    }
+
+    public void refField() {
+
+    }
+
+    public void bairroField() {
+
+    }
+
+    public void numField() {
+
+    }
+
+    public void municipioField() {
+
+    }
+
+    public void ufField() {
+
+    }
+
+    public void compField() {
+
+    }
+
+    //Próximos métodos
 }
