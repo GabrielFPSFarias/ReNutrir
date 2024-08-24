@@ -1,6 +1,5 @@
 package br.com.renutrir.renutrir;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,6 +19,9 @@ public class HelloController {
     private Button cadastroBotao;
 
     @FXML
+    private Button voltarBotao;
+
+    @FXML
     private Button confCad;
 
     @FXML
@@ -30,6 +32,32 @@ public class HelloController {
 
     @FXML
     private Button instBotao;
+
+    private void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
+        System.out.println("Clicou para voltar: " + fxmlArquivo);
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        trocarTela(stage, fxmlArquivo, titulo);
+    }
+
+    @FXML
+    public void botaoVoltar() {
+        realizarTrocaDeTela("01-tela-inicial.fxml", "ReNutrir");
+    }
+
+    @FXML
+    public void botaoVoltar1() {
+        realizarTrocaDeTela("02-pre-cadastro.fxml", "ReNutrir - Cadastro");
+    }
+
+    @FXML
+    public void botaoVoltar2() {
+        realizarTrocaDeTela("02-pre-cadastro.fxml", "ReNutrir - Cadastro");
+    }
+
+    @FXML
+    public void botaoVoltar3() {
+        realizarTrocaDeTela("01-tela-inicial.fxml", "ReNutrir");
+    }
 
     @FXML
     public void botaoLogin() {
@@ -65,6 +93,7 @@ public class HelloController {
         alert.setTitle("Cadastro");
         alert.setHeaderText(null);
         alert.setContentText("Cadastro de doador confirmado!");
+        System.out.println("Cadastro confirmado.");
         alert.showAndWait();
     }
 
@@ -74,6 +103,7 @@ public class HelloController {
         alert.setTitle("Cadastro");
         alert.setHeaderText(null);
         alert.setContentText("Cadastro de instituição confirmado!");
+        System.out.println("Cadastro confirmado.");
         alert.showAndWait();
     }
 
