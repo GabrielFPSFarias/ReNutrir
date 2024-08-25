@@ -116,14 +116,14 @@ public class HelloController {
     private Doador doador = new Doador();
 
     @FXML
-    public void confirmarCadastro() {
+    public void confirmarCadastroIns() {
         String nome = fieldNome.getText();
         String nomeUsuario = fieldUserNome.getText();
         String email = fieldEmail.getText();
         String senha = fieldSenha.getText();
         String confSenha = fieldConfSenha.getText();
         String telefone = fieldTelefone.getText();
-        String cpf = fieldCpf.getText();
+        String cnpj = fieldCnpj.getText();
         String endereco = fieldEndereco.getText();
         String bairro = fieldBairro.getText();
         String numero = fieldNumero.getText();
@@ -162,16 +162,16 @@ public class HelloController {
             return;
         }
 
-        if (repositorioContas.buscarUsuarioPorCpf(cpf).isPresent()) {
-            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse CPF.");
+        if (repositorioContas.buscarUsuarioPorCnpj(cnpj).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse CNPJ.");
             return;
         }
 
         try {
-            doador.setCpf(cpf);
+            doador.setCnpj(cnpj);
         } catch (IllegalArgumentException e) {
-            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O CPF digitado é inválido ou não existe.");
-            System.out.println("CPF inválido.");
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O CNPJ digitado é inválido ou não existe.");
+            System.out.println("CNPJ inválido.");
             return;
         }
 
@@ -181,7 +181,7 @@ public class HelloController {
         doador.setEmail(email);
         doador.setSenha(senha);
         doador.setTelefone(telefone);
-        doador.setCpf(cpf);
+        doador.setCnpj(cnpj);
         doador.setEndereco(new Endereco(endereco, bairro, numero, municipio, uf, comp, ref));
 
         if (repositorioContas.adicionarUsuario(doador)) {
