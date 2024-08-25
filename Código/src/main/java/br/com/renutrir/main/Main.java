@@ -24,7 +24,7 @@ public class Main {
 		ControladorIntencaoDeDoacao controladorIntencaoDeDoacao = new ControladorIntencaoDeDoacao();
 
 		// Cadastrar endereço
-		Endereco endereco = new Endereco("901", "Em frente a estação do metrô", "Centro", "Jaboatão dos Guararapes", "PE");
+		Endereco endereco = new Endereco("Rua Aprígio", "Jaboatão", "901", "Jaboatão dos Guararapes", "PE", "Casa", "Próx");
 
 		// Cadastrar doador
 		Doador doador = new Doador();
@@ -40,7 +40,7 @@ public class Main {
 		repositorioContas.adicionarUsuario(doador);
 
 		// Criar e cadastrar uma instituição
-		Endereco enderecoInstituicao = new Endereco("456", "Sala 2", "Bairro B", "Cidade B", "RJ");
+		Endereco enderecoInstituicao = new Endereco("Av Silva", "Bairro Novo", "4289", "Cidade B", "RJ", "Comércio", "Próximo");
 		Instituicao instituicao = new Instituicao();
 		instituicao.setNome("Instituição Alvin");
 		instituicao.setNomeUsuario("instituicaoAlvin24");
