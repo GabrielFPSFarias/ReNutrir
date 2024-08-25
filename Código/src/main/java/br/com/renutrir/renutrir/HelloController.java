@@ -17,12 +17,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.lang.reflect.Field;
 
 public class HelloController {
+
+    @FXML
+    private TextField loginEmailField;
+
+    @FXML
+    private PasswordField loginSenhaField;
+
+    @FXML
+    private Button loginEntrarBotao;
 
     @FXML
     private Button loginBotao;
@@ -72,6 +80,11 @@ public class HelloController {
     }
 
     @FXML
+    public void botaoVoltar4() {
+        realizarTrocaDeTela("03-login.fxml", "ReNutrir - Login");
+    }
+
+    @FXML
     public void botaoLogin() {
         System.out.println("Login");
         Stage stage = (Stage) loginBotao.getScene().getWindow();
@@ -98,6 +111,9 @@ public class HelloController {
         Stage stage = (Stage) doadorBotao.getScene().getWindow();
         trocarTela(stage, "02-cadastro-doador.fxml", "ReNutrir - Cadastro Doador");
     }
+
+    private RepositorioContas repositorioContas = new RepositorioContas();
+    private Doador doador = new Doador();
 
     @FXML
     public void confirmarCadastro() {
@@ -136,26 +152,47 @@ public class HelloController {
             return;
         }
 
-        Doador doador = new Doador();
+        if (repositorioContas.buscarUsuarioPorEmail(email).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse e-mail.");
+            return;
+        }
+
+        if (repositorioContas.buscarUsuarioPorNomeUsuario(nomeUsuario).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse nome de usuário.");
+            return;
+        }
+
+        if (repositorioContas.buscarUsuarioPorCpf(cpf).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse CPF.");
+            return;
+        }
+
         try {
-            doador.setNome(nome);
-            doador.setNomeUsuario(nomeUsuario);
-            doador.setEmail(email);
-            doador.setSenha(senha);
-            doador.setTelefone(telefone);
             doador.setCpf(cpf);
-            doador.setEndereco(new Endereco(endereco, bairro, numero, municipio, uf, comp, ref));
+        } catch (IllegalArgumentException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O CPF digitado é inválido ou não existe.");
+            System.out.println("CPF inválido.");
+            return;
+        }
 
+        Doador doador = new Doador();
+        doador.setNome(nome);
+        doador.setNomeUsuario(nomeUsuario);
+        doador.setEmail(email);
+        doador.setSenha(senha);
+        doador.setTelefone(telefone);
+        doador.setCpf(cpf);
+        doador.setEndereco(new Endereco(endereco, bairro, numero, municipio, uf, comp, ref));
+
+        if (repositorioContas.adicionarUsuario(doador)) {
             salvarDadosEmArquivo(doador);
-
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Cadastro");
             alert.setHeaderText(null);
             alert.setContentText("Cadastro de doador confirmado!");
-            System.out.println("Cadastro confirmado.");
             alert.showAndWait();
-        } catch (IllegalArgumentException e) {
-            showAlert(Alert.AlertType.ERROR, "Erro ao Confirmar Cadastro", e.getMessage());
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Não foi possível realizar o cadastro.");
         }
     }
 
@@ -174,6 +211,8 @@ public class HelloController {
             controladorArquivo.novaLinha();
             controladorArquivo.escrever("CPF: " + (doador.getCpf() != null ? doador.getCpf() : "Não informado"));
             controladorArquivo.novaLinha();
+            controladorArquivo.escrever("Senha: " + (doador.getSenha() != null ? doador.getSenha() : "Não informado"));
+            controladorArquivo.novaLinha();
 
             if (doador.getEndereco() != null) {
                 Endereco endereco = doador.getEndereco();
@@ -182,16 +221,16 @@ public class HelloController {
                         (endereco.getBairro() != null ? endereco.getBairro() : "Não informado") + ", " +
                         (endereco.getNumero() != null ? endereco.getNumero() : "Não informado") + ", " +
                         (endereco.getCidade() != null ? endereco.getCidade() : "Não informado") + ", " +
-                        (endereco.getUf() != null ? endereco.getUf() : "Não informado") + ", " +
-                        (endereco.getComplemento() != null ? endereco.getComplemento() : "Não informado") + ", " +
-                        (endereco.getReferencia() != null ? endereco.getReferencia() : "Não informado"));
-            } else {
-                controladorArquivo.escrever("Endereço: Não informado");
+                        (endereco.getUf() != null ? endereco.getUf() : "Não informado"));
+                controladorArquivo.novaLinha();
+                controladorArquivo.escrever("Complemento: " + (endereco.getComplemento() != null ? endereco.getComplemento() : "Não informado"));
+                controladorArquivo.novaLinha();
+                controladorArquivo.escrever("Referência: " + (endereco.getReferencia() != null ? endereco.getReferencia() : "Não informado"));
+                controladorArquivo.novaLinha();
+                controladorArquivo.novaLinha();
             }
-            controladorArquivo.novaLinha();
-            controladorArquivo.novaLinha();
-        } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "Erro ao Salvar Dados", "Não foi possível salvar os dados no arquivo.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -225,10 +264,53 @@ public class HelloController {
         }
     }
 
+    private String caminhoArquivo = "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo.txt";
+
+    public boolean autenticarUsuario(String login, String senha) {
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+            Doador doadorAtual = null;
+
+            while ((linha = br.readLine()) != null) {
+                if (linha.startsWith("Nome: ")) {
+                    doadorAtual = new Doador();
+                    doadorAtual.setNome(linha.substring(6));
+                } else if (linha.startsWith("Nome de Usuário: ")) {
+                    if (doadorAtual != null) {
+                        doadorAtual.setNomeUsuario(linha.substring(17));
+                    }
+                } else if (linha.startsWith("Email: ")) {
+                    if (doadorAtual != null) {
+                        doadorAtual.setEmail(linha.substring(7));
+                    }
+                } else if (linha.startsWith("CPF: ")) {
+                    if (doadorAtual != null) {
+                        doadorAtual.setCpf(linha.substring(5));
+                    }
+                } else if (linha.startsWith("Senha: ")) {
+                    if (doadorAtual != null) {
+                        doadorAtual.setSenha(linha.substring(7));
+                    }
+                }
+
+                if (linha.isEmpty() && doadorAtual != null) {
+                    if ((doadorAtual.getEmail().equals(login) || doadorAtual.getNomeUsuario().equals(login)) &&
+                            doadorAtual.getSenha().equals(senha)) {
+                        return true;
+                    }
+                    doadorAtual = null; //Reinicia para a próxima conta
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false; //Se não existir o usuário correspondente
+    }
+
     //Variáveis do cadastro doador
 
     private ControladorCadastro controladorCadastro;
-    private RepositorioContas repositorioContas;
 
     @FXML
     private TextField fieldNome;
@@ -335,6 +417,38 @@ public class HelloController {
 
     public void compField() {
 
+    }
+
+    //Tela de login
+
+    public void fieldLoginEmail() {
+
+    }
+
+    public void fieldLoginSenha() {
+
+    }
+
+    public void botaoLoginEntrar() {
+        String login = loginEmailField.getText();
+        String senha = loginSenhaField.getText();
+
+        boolean autenticado = autenticarUsuario(login, senha);
+
+        if (autenticado) {
+            //Login bem-sucedido
+            System.out.println("Login bem-sucedido!");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Login");
+            alert.setHeaderText(null);
+            alert.setContentText("Login bem-sucedido!");
+            alert.showAndWait();
+            realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Menu Doador");
+        } else {
+            // Falha no login
+            System.out.println("Falha no login: email ou senha incorretos.");
+            showAlert(Alert.AlertType.ERROR, "Erro de Login", "Email/nome de usuário ou senha inválidos.");
+        }
     }
 
     //Próximos métodos
