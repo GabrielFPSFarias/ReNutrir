@@ -1,6 +1,7 @@
 package br.com.renutrir.renutrir;
 
 import br.com.renutrir.model.Endereco;
+import br.com.renutrir.model.Instituicao;
 import br.com.renutrir.repositorio.*;
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.servicos.*;
@@ -67,12 +68,6 @@ public class HelloController {
 
     @FXML
     public TextField fieldUfIns;
-    public Button intencaoDoacaoBotao;
-    public Button voluntarioBotao;
-    public Button certificadosBotao;
-    public Button eventosBotao;
-    public Button perfilBotao;
-    public Button doacoesPendentesDoadorBotao;
 
     @FXML
     private TextField loginEmailField;
@@ -103,6 +98,14 @@ public class HelloController {
 
     @FXML
     private Button instBotao;
+
+    @FXML
+    public Button intencaoDoacaoBotao;
+    public Button voluntarioBotao;
+    public Button certificadosBotao;
+    public Button eventosBotao;
+    public Button perfilBotao;
+    public Button doacoesPendentesDoadorBotao;
 
     private void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
         System.out.println("Clicou para voltar: " + fxmlArquivo);
@@ -273,9 +276,6 @@ public class HelloController {
         trocarTela(stage, "02-cadastro-doador.fxml", "ReNutrir - Cadastro Doador");
     }
 
-    @FXML
-
-
     private RepositorioContas repositorioContas = new RepositorioContas();
     private Doador doador = new Doador();
 
@@ -398,6 +398,44 @@ public class HelloController {
         }
     }
 
+    private void salvarDadosEmArquivoIns(Instituicao instituicao) {
+        String caminhoArquivo = "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo1.txt";
+        ControladorArquivo controladorArquivo = new ControladorArquivo(caminhoArquivo);
+
+        try {
+            controladorArquivo.escrever("Nome: " + (instituicao.getNome() != null ? instituicao.getNome() : "Não informado"));
+            controladorArquivo.novaLinha();
+            controladorArquivo.escrever("Nome de Usuário: " + (instituicao.getNomeUsuario() != null ? instituicao.getNomeUsuario() : "Não informado"));
+            controladorArquivo.novaLinha();
+            controladorArquivo.escrever("Email: " + (instituicao.getEmail() != null ? instituicao.getEmail() : "Não informado"));
+            controladorArquivo.novaLinha();
+            controladorArquivo.escrever("Telefone: " + (instituicao.getTelefone() != null ? instituicao.getTelefone() : "Não informado"));
+            controladorArquivo.novaLinha();
+            controladorArquivo.escrever("CNPJ: " + (instituicao.getCnpj() != null ? instituicao.getCnpj() : "Não informado"));
+            controladorArquivo.novaLinha();
+            controladorArquivo.escrever("Senha: " + (instituicao.getSenha() != null ? instituicao.getSenha() : "Não informado"));
+            controladorArquivo.novaLinha();
+
+            if (instituicao.getEndereco() != null) {
+                Endereco endereco = instituicao.getEndereco();
+                controladorArquivo.escrever("Endereço: " +
+                        (endereco.getEndereco() != null ? endereco.getEndereco() : "Não informado") + ", " +
+                        (endereco.getBairro() != null ? endereco.getBairro() : "Não informado") + ", " +
+                        (endereco.getNumero() != null ? endereco.getNumero() : "Não informado") + ", " +
+                        (endereco.getCidade() != null ? endereco.getCidade() : "Não informado") + ", " +
+                        (endereco.getUf() != null ? endereco.getUf() : "Não informado"));
+                controladorArquivo.novaLinha();
+                controladorArquivo.escrever("Complemento: " + (endereco.getComplemento() != null ? endereco.getComplemento() : "Não informado"));
+                controladorArquivo.novaLinha();
+                controladorArquivo.escrever("Referência: " + (endereco.getReferencia() != null ? endereco.getReferencia() : "Não informado"));
+                controladorArquivo.novaLinha();
+                controladorArquivo.novaLinha();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -408,12 +446,84 @@ public class HelloController {
 
     @FXML
     public void confirmarCadastroIns() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Cadastro");
-        alert.setHeaderText(null);
-        alert.setContentText("Cadastro de instituição confirmado!");
-        System.out.println("Cadastro confirmado.");
-        alert.showAndWait();
+        String nome = fieldNomeIns.getText();
+        String nomeUsuario = fieldUserNomeIns.getText();
+        String email = fieldEmailIns.getText();
+        String senha = fieldSenhaIns.getText();
+        String confSenha = fieldConfSenhaIns.getText();
+        String telefone = fieldTelefoneIns.getText();
+        String cnpj = fieldCnpjIns.getText();
+        String endereco = fieldEnderecoIns.getText();
+        String bairro = fieldBairroIns.getText();
+        String numero = fieldNumeroIns.getText();
+        String municipio = fieldCidadeIns.getText();
+        String uf = fieldUfIns.getText();
+        String comp = fieldCompIns.getText();
+        String ref = fieldRefIns.getText();
+
+        if (email == null || email.trim().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O e-mail não pode estar vazio.");
+            return;
+        }
+
+        if (!email.contains("@")) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O e-mail deve conter um '@'.");
+            return;
+        }
+
+        if (senha == null || senha.length() < 4) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "A senha deve ter pelo menos 4 caracteres.");
+            return;
+        }
+
+        if (!senha.equals(confSenha)) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "As senhas não correspondem.");
+            return;
+        }
+
+        if (repositorioContas.buscarUsuarioPorEmail(email).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse e-mail.");
+            return;
+        }
+
+        if (repositorioContas.buscarUsuarioPorNomeUsuario(nomeUsuario).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse nome de usuário.");
+            return;
+        }
+
+        if (repositorioContas.buscarUsuarioPorCpf(cnpj).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe uma instituição cadastrada com esse CNPJ.");
+            return;
+        }
+
+        Instituicao instituicao = new Instituicao();
+        instituicao.setNome(nome);
+        instituicao.setNomeUsuario(nomeUsuario);
+        instituicao.setEmail(email);
+        instituicao.setSenha(senha);
+        instituicao.setTelefone(telefone);
+
+        try {
+            instituicao.setCnpj(cnpj);
+        } catch (IllegalArgumentException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O CNPJ digitado é inválido ou não existe.");
+            System.out.println("CNPJ inválido.");
+            return;
+        }
+
+        instituicao.setEndereco(new Endereco(endereco, bairro, numero, municipio, uf, comp, ref));
+
+        if (repositorioContas.adicionarInstituicao(instituicao)) {
+            salvarDadosEmArquivoIns(instituicao);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Cadastro");
+            alert.setHeaderText(null);
+            alert.setContentText("Cadastro da instituição confirmado!");
+            alert.showAndWait();
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Não foi possível realizar o cadastro.");
+        }
+
     }
 
     private void trocarTela(Stage stage, String fxmlFile, String title) {
@@ -685,6 +795,7 @@ public class HelloController {
     public void botaoDoacoesPendentesDoador(ActionEvent actionEvent) {
         realizarTrocaDeTela("18-doacoes-pendentes-doador.fxml", "ReNutrir - Doações Pendentes");
     }
+
 
     //Próximos métodos
 }
