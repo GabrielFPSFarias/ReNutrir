@@ -77,7 +77,7 @@
                   <Button fx:id="confCad" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#confirmarCadastro" prefHeight="19.0" prefWidth="281.0" text="Confirmar cadastro" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="15" />
                   <TextField fx:id="fieldEmail" onAction="#emailField" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                   <TextField fx:id="fieldCpf" onAction="#cpfField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                  <TextField fx:id="fieldDoadorNome" onAction="#nomeField" GridPane.columnIndex="1" />
+                  <TextField fx:id="fieldNome" onAction="#nomeField" GridPane.columnIndex="1" />
                   <TextField fx:id="fieldCep" onAction="#cepField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CEP (apenas números):" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" />
@@ -96,11 +96,11 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ponto de referência:" GridPane.rowIndex="9" />
                   <TextField fx:id="fieldRef" onAction="#refField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                   <TextField fx:id="fieldBairro" onAction="#bairroField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="fieldNum" onAction="#numField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="fieldMunicipio" onAction="#municipioField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="fieldNumero" onAction="#numField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="fieldCidade" onAction="#cidadeField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bairro:" GridPane.rowIndex="4" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Número:" GridPane.rowIndex="5" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Município:" GridPane.rowIndex="6" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cidade:" GridPane.rowIndex="6" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UF:" GridPane.rowIndex="7" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Complemento:" GridPane.rowIndex="8" />
                   <TextField fx:id="fieldComp" onAction="#compField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
