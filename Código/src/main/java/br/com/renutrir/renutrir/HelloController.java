@@ -85,6 +85,116 @@ public class HelloController {
     }
 
     @FXML
+    public void botaoVoltar5() {
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
+    }
+
+    @FXML
+    public void botaoVoltar6() {
+        realizarTrocaDeTela("05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
+    }
+
+    @FXML
+    public void botaoVoltar7() {
+        realizarTrocaDeTela("06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
+    }
+
+    @FXML
+    public void botaoVoltar8() {
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
+    }
+
+    @FXML
+    public void botaoVoltar9() {
+        realizarTrocaDeTela("08-menu-voluntario.fxml", "ReNutrir - Voluntario");
+    }
+
+    @FXML
+    public void botaoVoltar10() {
+        realizarTrocaDeTela("08-menu-voluntario.fxml", "ReNutrir - Voluntario");
+    }
+
+    @FXML
+    public void botaoVoltar11() {
+        realizarTrocaDeTela("10-transportes-doacoes.fxml", "ReNutrir - Transportes");
+    }
+
+    @FXML
+    public void botaoVoltar12() {
+        realizarTrocaDeTela("11-transportes-solicitados.fxml", "ReNutrir - Transportes Solicitados");
+    }
+
+    @FXML
+    public void botaoVoltar13() {
+        realizarTrocaDeTela("08-menu-voluntario.fxml", "ReNutrir - Voluntario");
+    }
+
+    @FXML
+    public void botaoVoltar14() {
+        realizarTrocaDeTela("08-menu-voluntario.fxml", "ReNutrir - Voluntario");
+    }
+
+    @FXML
+    public void botaoVoltar15() {
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
+    }
+
+    @FXML
+    public void botaoVoltar16() {
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
+    }
+
+    @FXML
+    public void botaoVoltar17() {
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
+    }
+
+    @FXML
+    public void botaoVoltar18() {
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
+    }
+
+    @FXML
+    public void botaoVoltar19() {
+        realizarTrocaDeTela("03-login.fxml", "ReNutrir - Login");
+    }
+
+    @FXML
+    public void botaoVoltar20() {
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
+    }
+
+    @FXML
+    public void botaoVoltar21() {
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
+    }
+
+    @FXML
+    public void botaoVoltar22() {
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
+    }
+
+    @FXML
+    public void botaoVoltar23() {
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
+    }
+
+    @FXML
+    public void botaoVoltar24() {
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
+    }
+
+    @FXML
+    public void botaoVoltar25() {
+        realizarTrocaDeTela("24-voluntarios.fxml", "ReNutrir - Voluntários");
+    }
+
+    @FXML
+    public void botaoVoltar26() {
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
+    }
+
+    @FXML
     public void botaoLogin() {
         System.out.println("Login");
         Stage stage = (Stage) loginBotao.getScene().getWindow();
