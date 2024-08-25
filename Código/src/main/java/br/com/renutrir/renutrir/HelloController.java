@@ -179,8 +179,8 @@ public class HelloController {
 
     //Métodos do cadastro doador
 
-    public void emailField() {
-
+    public void emailField(String email, int indice) {
+        contas[indice].email = email;
     }
 
     public void nomeField() {
