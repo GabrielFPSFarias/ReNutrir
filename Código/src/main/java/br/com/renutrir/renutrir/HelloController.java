@@ -226,14 +226,14 @@ public class HelloController {
     private Doador doador = new Doador();
 
     @FXML
-    public void confirmarCadastroIns() {
+    public void confirmarCadastro() {
         String nome = fieldNome.getText();
         String nomeUsuario = fieldUserNome.getText();
         String email = fieldEmail.getText();
         String senha = fieldSenha.getText();
         String confSenha = fieldConfSenha.getText();
         String telefone = fieldTelefone.getText();
-        String cnpj = fieldCnpj.getText();
+        String cpf = fieldCpf.getText();
         String endereco = fieldEndereco.getText();
         String bairro = fieldBairro.getText();
         String numero = fieldNumero.getText();
@@ -291,7 +291,7 @@ public class HelloController {
         doador.setEmail(email);
         doador.setSenha(senha);
         doador.setTelefone(telefone);
-        doador.setCnpj(cnpj);
+        doador.setCpf(cpf);
         doador.setEndereco(new Endereco(endereco, bairro, numero, municipio, uf, comp, ref));
 
         if (repositorioContas.adicionarUsuario(doador)) {
