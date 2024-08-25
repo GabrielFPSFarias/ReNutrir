@@ -24,6 +24,51 @@ import java.lang.reflect.Field;
 public class HelloController {
 
     @FXML
+    public TextField fieldEmailIns;
+
+    @FXML
+    public TextField fieldCnpjIns;
+
+    @FXML
+    public TextField fieldNomeIns;
+
+    @FXML
+    public TextField fieldInsCep;
+
+    @FXML
+    public TextField fieldUserNomeIns;
+
+    @FXML
+    public PasswordField fieldSenhaIns;
+
+    @FXML
+    public PasswordField fieldConfSenhaIns;
+
+    @FXML
+    public TextField fieldTelefoneIns;
+
+    @FXML
+    public TextField fieldEnderecoIns;
+
+    @FXML
+    public TextField fieldRefIns;
+
+    @FXML
+    public TextField fieldBairroIns;
+
+    @FXML
+    public TextField fieldCidadeIns;
+
+    @FXML
+    public TextField fieldNumeroIns;
+
+    @FXML
+    public TextField fieldCompIns;
+
+    @FXML
+    public TextField fieldUfIns;
+    
+    @FXML
     private TextField loginEmailField;
 
     @FXML
@@ -559,6 +604,53 @@ public class HelloController {
             System.out.println("Falha no login: email ou senha incorretos.");
             showAlert(Alert.AlertType.ERROR, "Erro de Login", "Email/nome de usuário ou senha inválidos.");
         }
+    }
+
+    //Métodos de cadastro instituição
+    
+    public void ufInsField(ActionEvent actionEvent) {
+    }
+
+    public void compInsField(ActionEvent actionEvent) {
+    }
+
+    public void cidadeInsField(ActionEvent actionEvent) {
+    }
+
+    public void numInsField(ActionEvent actionEvent) {
+    }
+
+    public void bairroInsField(ActionEvent actionEvent) {
+    }
+
+    public void refInsField(ActionEvent actionEvent) {
+    }
+
+    public void enderecoInsField(ActionEvent actionEvent) {
+    }
+
+    public void telefoneInsField(ActionEvent actionEvent) {
+    }
+
+    public void confSenhaInsField(ActionEvent actionEvent) {
+    }
+
+    public void senhaInsField(ActionEvent actionEvent) {
+    }
+
+    public void nomeUserInsField(ActionEvent actionEvent) {
+    }
+
+    public void cepInsField(ActionEvent actionEvent) {
+    }
+
+    public void nomeInsField(ActionEvent actionEvent) {
+    }
+
+    public void cnpjInsField(ActionEvent actionEvent) {
+    }
+
+    public void emailInsField(ActionEvent actionEvent) {
     }
 
     //Próximos métodos
