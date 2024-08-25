@@ -11,8 +11,11 @@ public class Doador extends Conta {
     private Certificado certificado;
     private String cpf;
     private float distanciaMaximaDeEntrega;
+    ArrayList<String> repositorioTransacao;
 
     public Doador() {
+
+        this.repositorioTransacao = new ArrayList<>();
     }
 
     public Doador(String nome, String email, String telefone) {
