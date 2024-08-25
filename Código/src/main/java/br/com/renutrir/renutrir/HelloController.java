@@ -67,7 +67,13 @@ public class HelloController {
 
     @FXML
     public TextField fieldUfIns;
-    
+    public Button intencaoDoacaoBotao;
+    public Button voluntarioBotao;
+    public Button certificadosBotao;
+    public Button eventosBotao;
+    public Button perfilBotao;
+    public Button doacoesPendentesDoadorBotao;
+
     @FXML
     private TextField loginEmailField;
 
@@ -266,6 +272,9 @@ public class HelloController {
         Stage stage = (Stage) doadorBotao.getScene().getWindow();
         trocarTela(stage, "02-cadastro-doador.fxml", "ReNutrir - Cadastro Doador");
     }
+
+    @FXML
+
 
     private RepositorioContas repositorioContas = new RepositorioContas();
     private Doador doador = new Doador();
@@ -651,6 +660,30 @@ public class HelloController {
     }
 
     public void emailInsField(ActionEvent actionEvent) {
+    }
+
+    public void botaoItencaoDoacao(ActionEvent actionEvent) {
+        realizarTrocaDeTela("05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
+    }
+
+    public void botaoVoluntario(ActionEvent actionEvent) {
+        realizarTrocaDeTela("08-menu-voluntario.fxml", "ReNutrir - Voluntario");
+    }
+
+    public void botaoCertificados(ActionEvent actionEvent) {
+        realizarTrocaDeTela("15-pontuacoes-certificados.fxml", "ReNutrir - Certificados");
+    }
+
+    public void botaoEventos(ActionEvent actionEvent) {
+        realizarTrocaDeTela("16-proximos-eventos.fxml", "ReNutrir - Eventos");
+    }
+
+    public void botaoPerfil(ActionEvent actionEvent) {
+        realizarTrocaDeTela("17-perfil-doador.fxml", "ReNutrir - Perfil");
+    }
+
+    public void botaoDoacoesPendentesDoador(ActionEvent actionEvent) {
+        realizarTrocaDeTela("18-doacoes-pendentes-doador.fxml", "ReNutrir - Doações Pendentes");
     }
 
     //Próximos métodos
