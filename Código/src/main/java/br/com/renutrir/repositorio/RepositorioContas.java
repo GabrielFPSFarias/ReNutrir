@@ -19,23 +19,20 @@ public class RepositorioContas {
     }
 
     public boolean adicionarUsuario(Doador usuario) {
-        //Verificar se já existe um usuário com o mesmo e-mail
         if (contasPorEmail.containsKey(usuario.getEmail())) {
             System.out.println("Erro: Já existe um usuário com esse e-mail.");
             return false;
         }
-
-        //Verificar se já existe um usuário com o mesmo nome de usuário
         if (contasPorNomeUsuario.containsKey(usuario.getNomeUsuario())) {
             System.out.println("Erro: Já existe um usuário com esse nome de usuário.");
             return false;
         }
-
-        //Verificar se já existe um usuário com o mesmo CPF
         if (contasPorCpf.containsKey(usuario.getCpf())) {
             System.out.println("Erro: Já existe um usuário com esse CPF.");
             return false;
         }
+
+        // Adicionar o usuário aos mapas
         contasPorEmail.put(usuario.getEmail(), usuario);
         contasPorNomeUsuario.put(usuario.getNomeUsuario(), usuario);
         contasPorCpf.put(usuario.getCpf(), usuario);
@@ -65,9 +62,13 @@ public class RepositorioContas {
         }
     }
 
-    //Verifica login
     public boolean autenticarUsuario(String email, String senha) {
         Doador usuario = contasPorEmail.get(email);
+        return usuario != null && usuario.getSenha().equals(senha);
+    }
+
+    public boolean autenticarUsuarioPorNomeUsuario(String nomeUsuario, String senha) {
+        Doador usuario = contasPorNomeUsuario.get(nomeUsuario);
         return usuario != null && usuario.getSenha().equals(senha);
     }
 
