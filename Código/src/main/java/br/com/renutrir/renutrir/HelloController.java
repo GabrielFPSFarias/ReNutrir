@@ -1,7 +1,10 @@
 package br.com.renutrir.renutrir;
 
-import br.com.renutrir.repositorio.RepositorioContas;
-import br.com.renutrir.servicos.ControladorCadastro;
+import br.com.renutrir.model.Endereco;
+import br.com.renutrir.repositorio.*;
+import br.com.renutrir.model.Doador;
+import br.com.renutrir.servicos.*;
+import br.com.renutrir.main.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
@@ -97,11 +101,105 @@ public class HelloController {
 
     @FXML
     public void confirmarCadastro() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Cadastro");
+        String nome = fieldNome.getText();
+        String nomeUsuario = fieldUserNome.getText();
+        String email = fieldEmail.getText();
+        String senha = fieldSenha.getText();
+        String confSenha = fieldConfSenha.getText();
+        String telefone = fieldTelefone.getText();
+        String cpf = fieldCpf.getText();
+        String endereco = fieldEndereco.getText();
+        String bairro = fieldBairro.getText();
+        String numero = fieldNumero.getText();
+        String municipio = fieldCidade.getText();
+        String uf = fieldUf.getText();
+        String comp = fieldComp.getText();
+        String ref = fieldRef.getText();
+
+        if (email == null || email.trim().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O e-mail não pode estar vazio.");
+            return;
+        }
+
+        if (!email.contains("@")) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O e-mail deve conter um '@'.");
+            return;
+        }
+
+        if (senha == null || senha.length() < 4) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "A senha deve ter pelo menos 4 caracteres.");
+            return;
+        }
+
+        if (!senha.equals(confSenha)) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "As senhas não correspondem.");
+            return;
+        }
+
+        Doador doador = new Doador();
+        try {
+            doador.setNome(nome);
+            doador.setNomeUsuario(nomeUsuario);
+            doador.setEmail(email);
+            doador.setSenha(senha);
+            doador.setTelefone(telefone);
+            doador.setCpf(cpf);
+            doador.setEndereco(new Endereco(endereco, bairro, numero, municipio, uf, comp, ref));
+
+            salvarDadosEmArquivo(doador);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Cadastro");
+            alert.setHeaderText(null);
+            alert.setContentText("Cadastro de doador confirmado!");
+            System.out.println("Cadastro confirmado.");
+            alert.showAndWait();
+        } catch (IllegalArgumentException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro ao Confirmar Cadastro", e.getMessage());
+        }
+    }
+
+    private void salvarDadosEmArquivo(Doador doador) {
+        String caminhoArquivo = "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo.txt";
+        ControladorArquivo controladorArquivo = new ControladorArquivo(caminhoArquivo);
+
+        try {
+            controladorArquivo.escrever("Nome: " + (doador.getNome() != null ? doador.getNome() : "Não informado"));
+            controladorArquivo.novaLinha();
+            controladorArquivo.escrever("Nome de Usuário: " + (doador.getNomeUsuario() != null ? doador.getNomeUsuario() : "Não informado"));
+            controladorArquivo.novaLinha();
+            controladorArquivo.escrever("Email: " + (doador.getEmail() != null ? doador.getEmail() : "Não informado"));
+            controladorArquivo.novaLinha();
+            controladorArquivo.escrever("Telefone: " + (doador.getTelefone() != null ? doador.getTelefone() : "Não informado"));
+            controladorArquivo.novaLinha();
+            controladorArquivo.escrever("CPF: " + (doador.getCpf() != null ? doador.getCpf() : "Não informado"));
+            controladorArquivo.novaLinha();
+
+            if (doador.getEndereco() != null) {
+                Endereco endereco = doador.getEndereco();
+                controladorArquivo.escrever("Endereço: " +
+                        (endereco.getEndereco() != null ? endereco.getEndereco() : "Não informado") + ", " +
+                        (endereco.getBairro() != null ? endereco.getBairro() : "Não informado") + ", " +
+                        (endereco.getNumero() != null ? endereco.getNumero() : "Não informado") + ", " +
+                        (endereco.getCidade() != null ? endereco.getCidade() : "Não informado") + ", " +
+                        (endereco.getUf() != null ? endereco.getUf() : "Não informado") + ", " +
+                        (endereco.getComplemento() != null ? endereco.getComplemento() : "Não informado") + ", " +
+                        (endereco.getReferencia() != null ? endereco.getReferencia() : "Não informado"));
+            } else {
+                controladorArquivo.escrever("Endereço: Não informado");
+            }
+            controladorArquivo.novaLinha();
+            controladorArquivo.novaLinha();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro ao Salvar Dados", "Não foi possível salvar os dados no arquivo.");
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText("Cadastro de doador confirmado!");
-        System.out.println("Cadastro confirmado.");
+        alert.setContentText(message);
         alert.showAndWait();
     }
 
@@ -151,7 +249,7 @@ public class HelloController {
     private TextField fieldNumero;
 
     @FXML
-    private TextField fieldMunicipio;
+    private TextField fieldCidade;
 
     @FXML
     private TextField fieldUf;
@@ -179,8 +277,8 @@ public class HelloController {
 
     //Métodos do cadastro doador
 
-    public void emailField(String email, int indice) {
-        contas[indice].email = email;
+    public void emailField() {
+
     }
 
     public void nomeField() {
@@ -227,7 +325,7 @@ public class HelloController {
 
     }
 
-    public void municipioField() {
+    public void cidadeField() {
 
     }
 
