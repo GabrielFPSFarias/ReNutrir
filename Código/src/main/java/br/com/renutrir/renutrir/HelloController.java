@@ -272,13 +272,13 @@ public class HelloController {
             return;
         }
 
-        if (repositorioContas.buscarUsuarioPorCnpj(cnpj).isPresent()) {
+        if (repositorioContas.buscarUsuarioPorCpf(cpf).isPresent()) {
             showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse CNPJ.");
             return;
         }
 
         try {
-            doador.setCnpj(cnpj);
+            doador.setCpf(cpf);
         } catch (IllegalArgumentException e) {
             showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O CNPJ digitado é inválido ou não existe.");
             System.out.println("CNPJ inválido.");
