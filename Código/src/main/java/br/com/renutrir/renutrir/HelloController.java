@@ -21,6 +21,7 @@ import javafx.scene.control.*;
 
 import java.io.*;
 import java.lang.reflect.Field;
+import java.util.Optional;
 
 public class HelloController {
 
@@ -68,6 +69,7 @@ public class HelloController {
 
     @FXML
     public TextField fieldUfIns;
+    public CheckBox checarInstituicao;
 
     @FXML
     private TextField loginEmailField;
@@ -279,7 +281,6 @@ public class HelloController {
     private RepositorioContas repositorioContas = new RepositorioContas();
     private Doador doador = new Doador();
 
-    @FXML
     public void confirmarCadastro() {
         String nome = fieldNome.getText();
         String nomeUsuario = fieldUserNome.getText();
@@ -316,26 +317,21 @@ public class HelloController {
             return;
         }
 
-        if (repositorioContas.buscarUsuarioPorEmail(email).isPresent()) {
-            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse e-mail.");
+        if (repositorioContas.buscarDoadorPorNomeUsuario(nomeUsuario).isPresent() ||
+                repositorioContas.buscarDoadorPorNomeUsuario(nomeUsuario).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe uma conta cadastrada com esse e-mail.");
             return;
         }
 
-        if (repositorioContas.buscarUsuarioPorNomeUsuario(nomeUsuario).isPresent()) {
-            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse nome de usuário.");
+        if (repositorioContas.buscarDoadorPorEmail(email).isPresent() ||
+                repositorioContas.buscarDoadorPorEmail(email).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe uma conta cadastrada com esse nome de usuário.");
             return;
         }
 
-        if (repositorioContas.buscarUsuarioPorCpf(cpf).isPresent()) {
-            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse CNPJ.");
-            return;
-        }
-
-        try {
-            doador.setCpf(cpf);
-        } catch (IllegalArgumentException e) {
-            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O CNPJ digitado é inválido ou não existe.");
-            System.out.println("CNPJ inválido.");
+        if (repositorioContas.buscarDoadorPorCpf(cpf).isPresent() ||
+                repositorioContas.buscarInstituicaoPorCnpj(cpf).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe uma conta cadastrada com esse CPF/CNPJ.");
             return;
         }
 
@@ -345,16 +341,19 @@ public class HelloController {
         doador.setEmail(email);
         doador.setSenha(senha);
         doador.setTelefone(telefone);
-        doador.setCpf(cpf);
+
+        try {
+            doador.setCpf(cpf);
+        } catch (IllegalArgumentException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O CPF digitado é inválido.");
+            return;
+        }
+
         doador.setEndereco(new Endereco(endereco, bairro, numero, municipio, uf, comp, ref));
 
         if (repositorioContas.adicionarUsuario(doador)) {
             salvarDadosEmArquivo(doador);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Cadastro");
-            alert.setHeaderText(null);
-            alert.setContentText("Cadastro de doador confirmado!");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.INFORMATION, "Cadastro", "Cadastro de doador confirmado!");
         } else {
             showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Não foi possível realizar o cadastro.");
         }
@@ -481,17 +480,17 @@ public class HelloController {
             return;
         }
 
-        if (repositorioContas.buscarUsuarioPorEmail(email).isPresent()) {
+        if (repositorioContas.buscarInstituicaoPorEmail(email).isPresent()) {
             showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse e-mail.");
             return;
         }
 
-        if (repositorioContas.buscarUsuarioPorNomeUsuario(nomeUsuario).isPresent()) {
+        if (repositorioContas.buscarInstituicaoPorNomeUsuario(nomeUsuario).isPresent()) {
             showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse nome de usuário.");
             return;
         }
 
-        if (repositorioContas.buscarUsuarioPorCpf(cnpj).isPresent()) {
+        if (repositorioContas.buscarInstituicaoPorCnpj(cnpj).isPresent()) {
             showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe uma instituição cadastrada com esse CNPJ.");
             return;
         }
@@ -703,30 +702,91 @@ public class HelloController {
 
     }
 
+    @FXML
     public void botaoLoginEntrar() {
-        String login = loginEmailField.getText();
+        String emailOuUsuario = loginEmailField.getText();
         String senha = loginSenhaField.getText();
 
-        boolean autenticado = autenticarUsuario(login, senha);
+        if (emailOuUsuario.isEmpty() || senha.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "Por favor, preencha todos os campos.");
+            return;
+        }
 
-        if (autenticado) {
-            //Login bem-sucedido
-            System.out.println("Login bem-sucedido!");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Login");
-            alert.setHeaderText(null);
-            alert.setContentText("Login bem-sucedido!");
-            alert.showAndWait();
-            realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Menu Doador");
+        if (checarInstituicao.isSelected()) {
+            //Autenticar como Instituição
+            Instituicao instituicao = buscarInstituicaoNoArquivo(emailOuUsuario, senha, "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo1.txt");
+            if (instituicao != null) {
+                showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Instituição!");
+                realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Erro de Login", "E-mail, nome de usuário ou senha inválidos para instituição.");
+            }
         } else {
-            // Falha no login
-            System.out.println("Falha no login: email ou senha incorretos.");
-            showAlert(Alert.AlertType.ERROR, "Erro de Login", "Email/nome de usuário ou senha inválidos.");
+            //Autenticar como Doador
+            Doador doador = buscarDoadorNoArquivo(emailOuUsuario, senha, "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo.txt");
+            if (doador != null) {
+                showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Doador!");
+                realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Erro de Login", "E-mail, nome de usuário ou senha inválidos para doador.");
+            }
         }
     }
 
+    private Instituicao buscarInstituicaoNoArquivo(String emailOuUsuario, String senha, String caminhoArquivo) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+            Instituicao instituicao = null;
+            while ((linha = reader.readLine()) != null) {
+                if (linha.contains("Email: " + emailOuUsuario) || linha.contains("Nome de Usuário: " + emailOuUsuario)) {
+                    instituicao = new Instituicao();
+
+                    if (emailOuUsuario.contains("@")) {
+                        instituicao.setEmail(emailOuUsuario);
+                    } else {
+                        instituicao.setNomeUsuario(emailOuUsuario);
+                    }
+
+                    instituicao.setSenha(senha);
+                } else if (linha.contains("Senha: " + senha) && instituicao != null) {
+                    return instituicao;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Doador buscarDoadorNoArquivo(String emailOuUsuario, String senha, String caminhoArquivo) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+            Doador doador = null;
+            while ((linha = reader.readLine()) != null) {
+                if (linha.contains("Email: " + emailOuUsuario) || linha.contains("Nome de Usuário: " + emailOuUsuario)) {
+                    doador = new Doador();
+
+                    //Verifica se é um email antes de chamar setEmail
+                    if (emailOuUsuario.contains("@")) {
+                        doador.setEmail(emailOuUsuario);
+                    } else {
+                        //Trate como nome de usuário e associe ao campo apropriado
+                        doador.setNomeUsuario(emailOuUsuario);
+                    }
+
+                    doador.setSenha(senha);
+                } else if (linha.contains("Senha: " + senha) && doador != null) {
+                    return doador;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     //Métodos de cadastro instituição
-    
+
     public void ufInsField(ActionEvent actionEvent) {
     }
 
@@ -796,6 +856,8 @@ public class HelloController {
         realizarTrocaDeTela("18-doacoes-pendentes-doador.fxml", "ReNutrir - Doações Pendentes");
     }
 
+    public void instituicaoChecar(ActionEvent actionEvent) {
+    }
 
     //Próximos métodos
 }
