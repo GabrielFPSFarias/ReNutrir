@@ -133,10 +133,15 @@ public class RepositorioContas {
         return doador != null && doador.getSenha().equals(senha);
     }
 
+    //Exceção?????????
+    //Login????
+
     public boolean autenticarInstituicao(String email, String senha) {
         Instituicao instituicao = instituicoesPorEmail.get(email);
         return instituicao != null && instituicao.getSenha().equals(senha);
     }
+
+    //Exceção?
 
     public void listarDoadores() {
         doadoresPorEmail.values().forEach(doador -> System.out.println(doador));
@@ -162,12 +167,12 @@ public class RepositorioContas {
         return doador;
     }
 
-    private Map<String, Doador> doadores = new HashMap<>();
+/* ************ private Map<String, Doador> doadores = new HashMap<>();
     private Map<String, Instituicao> instituicoes = new HashMap<>();
 
     // Adicionar doador
     public boolean adicionarUsuario(Doador doador) {
         return true;
-    }
+    }*/
 
 }
