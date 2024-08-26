@@ -70,6 +70,8 @@ public class HelloController {
     @FXML
     public TextField fieldUfIns;
     public CheckBox checarInstituicao;
+    public Button instituicoesDoacaoBotao;
+    public Button doacoesSolicitadasBotao;
 
     @FXML
     private TextField loginEmailField;
@@ -912,6 +914,14 @@ public class HelloController {
     }
 
     public void instituicaoChecar(ActionEvent actionEvent) {
+    }
+
+    public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
+        realizarTrocaDeTela("06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
+    }
+
+    public void botaoDoacoesSolicitadas(ActionEvent actionEvent) {
+        realizarTrocaDeTela("07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
     }
 
     //Próximos métodos
