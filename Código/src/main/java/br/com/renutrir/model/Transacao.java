@@ -1,6 +1,8 @@
+package br.com.renutrir.model;
+
 public class Transacao{
 
-double valorTransacao;
-String idTransacao;
+    private double valorTransacao;
+    private String idTransacao;
 
 }
