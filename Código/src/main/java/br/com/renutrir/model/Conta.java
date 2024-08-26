@@ -44,7 +44,7 @@ public class Conta {
 
     public void setEmail(String email) {
         if (email == null || !email.contains("@")) {
-            throw new IllegalArgumentException("E-mail inválido.");
+            throw new IllegalArgumentException("Email inválido.");
         }
         this.email = email;
     }
@@ -70,5 +70,5 @@ public class Conta {
         }
         this.telefone = telefone;
     }
-    
+
 }
