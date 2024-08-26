@@ -3,6 +3,7 @@ package br.com.renutrir.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.List;
 
 public class Instituicao extends Conta {
     private String cnpj;
@@ -43,6 +44,15 @@ public class Instituicao extends Conta {
             throw new IllegalArgumentException("CNPJ inválido.");
         }
         this.cnpj = cnpj;
+    }
+
+    public boolean isPresent(List<Instituicao> instituicoes) {
+        for (Instituicao instituicao : instituicoes) {
+            if (this.cnpj.equals(instituicao.getCnpj()) || this.getEmail().equals(instituicao.getEmail())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean cnpjValidacao(String cnpj) {
@@ -97,5 +107,10 @@ public class Instituicao extends Conta {
 
     public void setHorarioColeta(LocalDateTime horarioColeta) {
         this.horarioColeta = horarioColeta;
+    }
+
+    @Override
+    public void setNomeUsuario(String nomeUsuario) {
+        super.setNomeUsuario(nomeUsuario);
     }
 }
