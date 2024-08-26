@@ -27,6 +27,42 @@ public class ControladorCadastro {
             throw new IllegalArgumentException("O nome não pode estar vazio.");
         }
 
+/* SUGESTÃO DE CONTROLADOR DE NOME
+
+public static void validarNome(String nome) {
+        // Verifica se o nome é null ou vazio
+        if (nome == null || nome.isEmpty()) {
+            throw new IllegalArgumentException("O nome não pode estar vazio.");
+        }
+
+        // Regex para garantir que o nome tenha pelo menos 2 caracteres alfabéticos
+        // e que permita apenas letras, espaços e apóstrofos
+        String regex = "^[a-zA-Z]+(?: [a-zA-Z]+)*(?: '[a-zA-Z]+)*$";
+
+        // Compila a expressão regular
+        Pattern pattern = Pattern.compile(regex);
+
+        // Verifica se o nome corresponde ao padrão
+        Matcher matcher = pattern.matcher(nome);
+
+        // Verifica se o nome é válido
+        if (!matcher.matches() || nome.length() < 2) {
+            throw new IllegalArgumentException("O nome deve ter pelo menos dois caracteres e pode conter apenas letras, espaços e apóstrofos.");
+        }
+    }
+
+CÓDIGO DA EXCEÇÃO NO MAIN
+
+for (String name : testNames) {
+            try {
+                validarNome(name);
+                System.out.println(name + " é válido.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(name + " é inválido: " + e.getMessage());
+            }
+        }
+        */
+
         if (nomeUsuario == null || nomeUsuario.length() < 6) {
             throw new IllegalArgumentException("O nome de usuário deve ter 6 ou mais caracteres.");
         }
