@@ -72,6 +72,20 @@ public class HelloController {
     public CheckBox checarInstituicao;
     public Button instituicoesDoacaoBotao;
     public Button doacoesSolicitadasBotao;
+    public Button sejaVoluntarioBotao;
+    public Button transportesDoacoesBotao;
+    public Button transportesPendentesBotao;
+    public Button transportesConcluidosBotao;
+    public Button queroVoluntarioBotao;
+    public Button transportesSolicitadosBotao;
+    public Button confirmarTransportesBotao;
+    public Button criarEventoBotao;
+    public Button historicoDoacoesBotao;
+    public Button solicitarDoacoesBotao;
+    public Button atuaisVoluntariosBotao;
+    public Button perfilInstituicaoBotao;
+    public Button doacoesPendentesInstituicaoBotao;
+    public Button solicitarVoluntariosBotao;
 
     @FXML
     private TextField loginEmailField;
@@ -116,7 +130,7 @@ public class HelloController {
         Stage stage = (Stage) voltarBotao.getScene().getWindow();
         trocarTela(stage, fxmlArquivo, titulo);
     }
-
+//Botões Voltar
     @FXML
     public void botaoVoltar() {
         realizarTrocaDeTela("01-tela-inicial.fxml", "ReNutrir");
@@ -888,7 +902,7 @@ public class HelloController {
 
     public void emailInsField(ActionEvent actionEvent) {
     }
-
+//Botões mudança de tela
     public void botaoItencaoDoacao(ActionEvent actionEvent) {
         realizarTrocaDeTela("05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
@@ -922,6 +936,59 @@ public class HelloController {
 
     public void botaoDoacoesSolicitadas(ActionEvent actionEvent) {
         realizarTrocaDeTela("07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
+    }
+
+    public void botaoSejaVoluntario(ActionEvent actionEvent) {
+        realizarTrocaDeTela("09-seja-voluntario.fxml", "ReNutrir - Seja Voluntario");
+    }
+
+    public void botaoTransportesDoacoes(ActionEvent actionEvent) {
+        realizarTrocaDeTela("10-transportes-doacoes.fxml", "ReNutrir - Transportes");
+    }
+
+    public void botaoTransportesPendentes(ActionEvent actionEvent) {
+        realizarTrocaDeTela("13-transportes-pendentes.fxml", "ReNutrir - Transportes Pendentes");
+    }
+
+    public void botaoTransportesConcluidos(ActionEvent actionEvent) {
+        realizarTrocaDeTela("14-transportes-concluidos.fxml", "ReNutrir - Transportes Concluidos");
+    }
+
+    public void botaoTransportesSolicitados(ActionEvent actionEvent) {
+        realizarTrocaDeTela("11-transportes-solicitados.fxml", "ReNutrir - Transportes Solicitados");
+    }
+
+    public void botaoConfirmarTransportes(ActionEvent actionEvent) {
+        realizarTrocaDeTela("12-confirmar-transporte.fxml", "ReNutrir - Confirmar Transportes");
+    }
+
+    public void botaoCriarEvento(ActionEvent actionEvent) {
+        realizarTrocaDeTela("20-criar-eventos.fxml", "ReNutrir - Criar Eventos");
+    }
+
+    public void botaoHistoricoDoacoes(ActionEvent actionEvent) {
+        realizarTrocaDeTela("21-historico-doacoes.fxml", "ReNutrir - Histórico de Doações");
+    }
+
+    public void botaoSolicitarDoacoes(ActionEvent actionEvent) {
+        realizarTrocaDeTela("22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
+        
+    }
+
+    public void botaoPerfilInstituicao(ActionEvent actionEvent) {
+        realizarTrocaDeTela("23-perfil-instituicao.fxml", "ReNutrir - Perfil da Instituição");
+    }
+
+    public void botaoAtuaisVoluntarios(ActionEvent actionEvent) {
+        realizarTrocaDeTela("24-voluntarios.fxml", "ReNutrir - Voluntários");
+    }
+
+    public void botaoDoacoesPendentesInstituicao(ActionEvent actionEvent) {
+        realizarTrocaDeTela("26-doacoes-pendentes-inst.fxml", "ReNutrir - Doações Pendentes");
+    }
+
+    public void botaoSolicitarVoluntarios(ActionEvent actionEvent) {
+        realizarTrocaDeTela("25-solicitar-voluntarios.fxml", "ReNutrir - Solicitar Voluntários");
     }
 
     //Próximos métodos
