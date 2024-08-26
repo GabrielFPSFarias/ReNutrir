@@ -169,10 +169,11 @@ public class RepositorioContas {
 
 /* ************ private Map<String, Doador> doadores = new HashMap<>();
     private Map<String, Instituicao> instituicoes = new HashMap<>();
+*/
 
     // Adicionar doador
     public boolean adicionarUsuario(Doador doador) {
         return true;
-    }*/
+    }
 
 }
