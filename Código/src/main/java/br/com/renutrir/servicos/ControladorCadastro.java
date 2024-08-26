@@ -31,7 +31,7 @@ public class ControladorCadastro {
             throw new IllegalArgumentException("O nome de usuário deve ter 6 ou mais caracteres.");
         }
 
-        /* SUGESTÂO PARA VALIDAR O NOME 
+        /* SUGESTÂO PARA VALIDAR O NOME DE USUÁRIO
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
