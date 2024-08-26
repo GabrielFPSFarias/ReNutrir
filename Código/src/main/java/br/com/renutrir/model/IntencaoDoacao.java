@@ -3,7 +3,7 @@ package br.com.renutrir.model;
 import java.time.LocalDate;
 
 public class IntencaoDoacao {
-    private String tipoItem; // Alimento, Roupas, Móveis, etc.
+    private String tipoItem; // Valor, alimento, Roupas, Móveis, etc.
     private String id;
     private String descricao;
     private int quantidade;
