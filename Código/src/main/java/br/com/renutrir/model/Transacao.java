@@ -4,5 +4,6 @@ public class Transacao{
 
     private double valorTransacao;
     private String idTransacao;
+    //Doador e instituição
 
 }
