@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="" />
+    <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/Doador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/Doador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioIntencaoDoacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioIntencaoDoacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorTransacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorTransacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/javafx/HelloApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/javafx/HelloController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/javafx/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Certificado.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Certificado.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Conta.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Conta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Doacao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Doacao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Doador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Doador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Evento.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Evento.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Instituicao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Instituicao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/IntencaoDoacao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/IntencaoDoacao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Voluntario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Voluntario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/repositorio/RepositorioContas.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/repositorio/RepositorioContas.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/repositorio/RepositorioDoacoes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/repositorio/RepositorioDoacoes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/DoacaoServico.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/DoacaoServicos.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +42,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -37,9 +66,70 @@
     "Application.HelloApplication.executor": "Run",
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "kotlin-language-version-configured": "true"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager" selected="Application.HelloApplication">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.com.renutrir.renutrir.HelloApplication" />
+      <module name="ReNutrir" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.com.renutrir.renutrir.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.com.renutrir.main.Main" />
+      <module name="ReNutrir" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.com.renutrir.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -48,7 +138,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1724023127520</updated>
+      <workItem from="1724659082802" duration="1937000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
