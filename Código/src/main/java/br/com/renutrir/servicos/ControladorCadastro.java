@@ -31,9 +31,72 @@ public class ControladorCadastro {
             throw new IllegalArgumentException("O nome de usuário deve ter 6 ou mais caracteres.");
         }
 
+        /* SUGESTÂO PARA VALIDAR O NOME 
+
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+     public static void validarNomeDeUsuario(String nomeUsuario) {
+        // Verifica se o nome de usuário é null ou vazio
+        if (nomeUsuario == null || nomeUsuario.isEmpty()) {
+            throw new IllegalArgumentException("O nome não pode estar vazio.");
+        }
+
+        // Regex para garantir que o nome de usuário tenha pelo menos 2 caracteres alfanuméricos
+        // e que pontos, underscores e hífens não sejam consecutivos
+        String regex = "^[a-zA-Z0-9]+([._-]?[a-zA-Z0-9]+)*$";
+
+        // Compila a expressão regular
+        Pattern pattern = Pattern.compile(regex);
+
+        // Verifica se o nome do usuário corresponde ao padrão
+        Matcher matcher = pattern.matcher(nomeUsuario);
+
+        // Verifica se o nome de usuário é válido
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("O nome de usuário deve ter 2 ou mais caracteres alfanuméricos, "
+                    + "além de ponto, hífen e sublinhado, exceto de forma consecutiva.");
+        }
+    }
+
+    Código da exceção no MAIN
+
+    for (String user : testUsers) {
+            try {
+                validarNomeDeUsuario(user);
+                System.out.println(user + " é válido.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(user + " é inválido: " + e.getMessage());
+            }
+        }
+
+        */
+        
+
         if (email == null || !email.contains("@")) {
             throw new IllegalArgumentException("E-mail inválido.");
         }
+
+         /*SUGESTÂO DE NOVO CÓDIGO PARA VALIDAÇÂO DO EMAIL;
+
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+    public static boolean validarEmail(String email) {
+        // Regex que segue as regras descritas
+        String regex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+        // Compila a expressão regular
+        Pattern pattern = Pattern.compile(regex);
+        
+        // Verifica se o e-mail corresponde ao padrão
+        Matcher matcher = pattern.matcher(email);
+
+        // Retorna verdadeiro se o e-mail for válido
+        return matcher.matches();
+    }
+        */
+        
 
         if (senha == null || senha.length() < 4) {
             throw new IllegalArgumentException("A senha deve ter mais de 4 caracteres.");
