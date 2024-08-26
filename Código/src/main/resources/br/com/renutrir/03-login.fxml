@@ -73,7 +73,8 @@
                   <PasswordField fx:id="loginSenhaField" onAction="#fieldLoginSenha" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Senha:" GridPane.rowIndex="3" />
                   <TextFlow prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <Button fx:id="loginEntrarBotao" mnemonicParsing="false" onAction="#botaoLoginEntrar" prefHeight="27.0" prefWidth="147.0" text="Entrar" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Button fx:id="loginEntrarBotao" mnemonicParsing="false" onAction="#botaoLoginEntrar" prefHeight="27.0" prefWidth="147.0" text="Entrar" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <CheckBox fx:id="checarInstituicao" mnemonicParsing="false" onAction="#instituicaoChecar" text="Sou instituição" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="40.0" top="-40.0" />
