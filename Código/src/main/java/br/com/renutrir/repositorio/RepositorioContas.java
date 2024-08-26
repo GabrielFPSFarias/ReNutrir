@@ -9,17 +9,29 @@ import java.util.Optional;
 
 public class RepositorioContas {
 
-    //Salva os usuários por email, nome usuário e CPF
+    // Salva os doadores por email, nome usuário e CPF
+    private Map<String, Doador> doadoresPorEmail;
+    private Map<String, Doador> doadoresPorNomeUsuario;
+    private Map<String, Doador> doadoresPorCpf;
     private Map<String, Doador> contasPorEmail;
     private Map<String, Doador> contasPorNomeUsuario;
     private Map<String, Doador> contasPorCpf;
 
-    //Salva as instituições por CNPJ, nome usuário instituição e email
+    // Salva as instituições por CNPJ, nome usuário instituição e email
+    private Map<String, Instituicao> instituicoesPorCnpj;
+    private Map<String, Instituicao> instituicoesPorNomeUsuario;
+    private Map<String, Instituicao> instituicoesPorEmail;
     private Map<String, Instituicao> contasPorCnpj;
     private Map<String, Instituicao> contasPorNomeInstituicao;
     private Map<String, Instituicao> contasEmailInstituicao;
 
     public RepositorioContas() {
+        this.doadoresPorEmail = new HashMap<>();
+        this.doadoresPorNomeUsuario = new HashMap<>();
+        this.doadoresPorCpf = new HashMap<>();
+        this.instituicoesPorCnpj = new HashMap<>();
+        this.instituicoesPorNomeUsuario = new HashMap<>();
+        this.instituicoesPorEmail = new HashMap<>();
         this.contasPorEmail = new HashMap<>();
         this.contasPorNomeUsuario = new HashMap<>();
         this.contasPorCpf = new HashMap<>();
@@ -28,95 +40,134 @@ public class RepositorioContas {
         this.contasEmailInstituicao = new HashMap<>();
     }
 
-    public boolean adicionarUsuario(Doador usuario) {
-        if (contasPorEmail.containsKey(usuario.getEmail())) {
-            System.out.println("Erro: Já existe um usuário com esse email.");
+    public boolean adicionarDoador(Doador doador) {
+        if (doadoresPorEmail.containsKey(doador.getEmail())) {
+            System.out.println("Erro: Já existe um doador com esse email.");
             return false;
         }
-        if (contasPorNomeUsuario.containsKey(usuario.getNomeUsuario())) {
-            System.out.println("Erro: Já existe um usuário com esse nome de usuário.");
+        if (doadoresPorNomeUsuario.containsKey(doador.getNomeUsuario())) {
+            System.out.println("Erro: Já existe um doador com esse nome de usuário.");
             return false;
         }
-        if (contasPorCpf.containsKey(usuario.getCpf())) {
-            System.out.println("Erro: Já existe um usuário com esse CPF.");
+        if (doadoresPorCpf.containsKey(doador.getCpf())) {
+            System.out.println("Erro: Já existe um doador com esse CPF.");
             return false;
         }
 
-        // Adicionar o usuário aos mapas
-        contasPorEmail.put(usuario.getEmail(), usuario);
-        contasPorNomeUsuario.put(usuario.getNomeUsuario(), usuario);
-        contasPorCpf.put(usuario.getCpf(), usuario);
+        // Adicionar o doador aos mapas
+        doadoresPorEmail.put(doador.getEmail(), doador);
+        doadoresPorNomeUsuario.put(doador.getNomeUsuario(), doador);
+        doadoresPorCpf.put(doador.getCpf(), doador);
 
         return true;
     }
 
     public boolean adicionarInstituicao(Instituicao instituicao) {
-        if (contasEmailInstituicao.containsKey(instituicao.getEmail())) {
+        if (instituicoesPorEmail.containsKey(instituicao.getEmail())) {
             System.out.println("Erro: Já existe uma instituição com esse email.");
             return false;
         }
-        if (contasPorNomeInstituicao.containsKey(instituicao.getNomeUsuario())) {
+        if (instituicoesPorNomeUsuario.containsKey(instituicao.getNomeUsuario())) {
             System.out.println("Erro: Já existe uma instituição com esse nome de usuário.");
             return false;
         }
-        if (contasPorCnpj.containsKey(instituicao.getCnpj())) {
+        if (instituicoesPorCnpj.containsKey(instituicao.getCnpj())) {
             System.out.println("Erro: Já existe uma instituição com esse CNPJ.");
             return false;
         }
 
         // Adicionar a instituição aos mapas
-        contasEmailInstituicao.put(instituicao.getEmail(), instituicao);
-        contasPorNomeInstituicao.put(instituicao.getNomeUsuario(), instituicao);
-        contasPorCnpj.put(instituicao.getCnpj(), instituicao);
+        instituicoesPorEmail.put(instituicao.getEmail(), instituicao);
+        instituicoesPorNomeUsuario.put(instituicao.getNomeUsuario(), instituicao);
+        instituicoesPorCnpj.put(instituicao.getCnpj(), instituicao);
 
         return true;
     }
 
-    public Optional<Doador> buscarUsuarioPorEmail(String email) {
-        return Optional.ofNullable(contasPorEmail.get(email));
+    public Optional<Doador> buscarDoadorPorEmail(String email) {
+        return Optional.ofNullable(doadoresPorEmail.get(email));
     }
 
-    public Optional<Doador> buscarUsuarioPorNomeUsuario(String nomeUsuario) {
-        return Optional.ofNullable(contasPorNomeUsuario.get(nomeUsuario));
+    public Optional<Doador> buscarDoadorPorNomeUsuario(String nomeUsuario) {
+        return Optional.ofNullable(doadoresPorNomeUsuario.get(nomeUsuario));
     }
 
-    public Optional<Doador> buscarUsuarioPorCpf(String cpf) {
-        return Optional.ofNullable(contasPorCpf.get(cpf));
+    public Optional<Doador> buscarDoadorPorCpf(String cpf) {
+        return Optional.ofNullable(doadoresPorCpf.get(cpf));
     }
 
-    public Optional<Instituicao> buscarInstituicaoEmail(String email) {
-        return Optional.ofNullable(contasEmailInstituicao.get(email));
+    public Optional<Instituicao> buscarInstituicaoPorEmail(String email) {
+        return Optional.ofNullable(instituicoesPorEmail.get(email));
     }
 
-    public Optional<Instituicao> buscarUsuarioPorNomeInstituicao(String nomeUsuario) {
-        return Optional.ofNullable(contasPorNomeInstituicao.get(nomeUsuario));
+    public Optional<Instituicao> buscarInstituicaoPorNomeUsuario(String nomeUsuario) {
+        return Optional.ofNullable(instituicoesPorNomeUsuario.get(nomeUsuario));
     }
 
-    public Optional<Instituicao> buscarUsuarioPorCnpj(String cnpj) {
-        return Optional.ofNullable(contasPorCnpj.get(cnpj));
+    public Optional<Instituicao> buscarInstituicaoPorCnpj(String cnpj) {
+        return Optional.ofNullable(instituicoesPorCnpj.get(cnpj));
     }
 
-    public void removerUsuario(String email) {
-        Doador usuario = contasPorEmail.remove(email);
-        if (usuario != null) {
-            contasPorNomeUsuario.remove(usuario.getNomeUsuario());
-            contasPorCpf.remove(usuario.getCpf());
+    public void removerDoador(String email) {
+        Doador doador = doadoresPorEmail.remove(email);
+        if (doador != null) {
+            doadoresPorNomeUsuario.remove(doador.getNomeUsuario());
+            doadoresPorCpf.remove(doador.getCpf());
         } else {
-            System.out.println("Usuário não encontrado.");
+            System.out.println("Doador não encontrado.");
         }
     }
 
-    public boolean autenticarUsuario(String email, String senha) {
-        Doador usuario = contasPorEmail.get(email);
-        return usuario != null && usuario.getSenha().equals(senha);
+    public void removerInstituicao(String email) {
+        Instituicao instituicao = instituicoesPorEmail.remove(email);
+        if (instituicao != null) {
+            instituicoesPorNomeUsuario.remove(instituicao.getNomeUsuario());
+            instituicoesPorCnpj.remove(instituicao.getCnpj());
+        } else {
+            System.out.println("Instituição não encontrada.");
+        }
     }
 
-    public boolean autenticarUsuarioPorNomeUsuario(String nomeUsuario, String senha) {
-        Doador usuario = contasPorNomeUsuario.get(nomeUsuario);
-        return usuario != null && usuario.getSenha().equals(senha);
+    public boolean autenticarDoador(String email, String senha) {
+        Doador doador = doadoresPorEmail.get(email);
+        return doador != null && doador.getSenha().equals(senha);
     }
 
-    public void listarUsuarios() {
-        contasPorEmail.values().forEach(usuario -> System.out.println(usuario));
+    public boolean autenticarInstituicao(String email, String senha) {
+        Instituicao instituicao = instituicoesPorEmail.get(email);
+        return instituicao != null && instituicao.getSenha().equals(senha);
     }
+
+    public void listarDoadores() {
+        doadoresPorEmail.values().forEach(doador -> System.out.println(doador));
+    }
+
+    public void listarInstituicoes() {
+        instituicoesPorEmail.values().forEach(instituicao -> System.out.println(instituicao));
+    }
+
+    public Instituicao buscarInstituicaoPorEmailOuUsuario(String emailOuUsuario) {
+        Instituicao instituicao = contasEmailInstituicao.get(emailOuUsuario);
+        if (instituicao == null) {
+            instituicao = contasPorNomeInstituicao.get(emailOuUsuario);
+        }
+        return instituicao;
+    }
+
+    public Doador buscarDoadorPorEmailOuUsuario(String emailOuUsuario) {
+        Doador doador = contasPorEmail.get(emailOuUsuario);
+        if (doador == null) {
+            doador = contasPorNomeUsuario.get(emailOuUsuario);
+        }
+        return doador;
+    }
+
+    private Map<String, Doador> doadores = new HashMap<>();
+    private Map<String, Instituicao> instituicoes = new HashMap<>();
+
+    // Adicionar doador
+    public boolean adicionarUsuario(Doador doador) {
+        return true;
+    }
+
 }
