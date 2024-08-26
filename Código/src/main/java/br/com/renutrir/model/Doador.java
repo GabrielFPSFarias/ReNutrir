@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Doador extends Conta {
     private int nivel;
@@ -12,11 +12,8 @@ public class Doador extends Conta {
     private Certificado certificado;
     private String cpf;
     private float distanciaMaximaDeEntrega;
-    ArrayList<String> repositorioTransacao;
 
     public Doador() {
-
-        this.repositorioTransacao = new ArrayList<>();
     }
 
     public Doador(String nome, String email, String telefone) {
@@ -69,6 +66,7 @@ public class Doador extends Conta {
         this.certificado.setDescricao("Certificado emitido para " + this.getNome() +
                 " em reconhecimento às suas " + this.certificado.getQuantDoacoes() + " doações.");
     }
+    
 
     private boolean CpfValidacao(String cpf) {
         if (cpf == null || !cpf.matches("\\d{11}")) {
