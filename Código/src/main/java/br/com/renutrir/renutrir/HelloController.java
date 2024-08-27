@@ -993,6 +993,56 @@ public class HelloController {
         realizarTrocaDeTela("/br/com/renutrir/25-solicitar-voluntarios.fxml", "ReNutrir - Solicitar Voluntários");
     }
 
+    // Interface e FXML
+
+    @FXML
+    private Button alimentosDoar;
+
+    @FXML
+    private Button mobiliasDoar;
+
+    @FXML
+    private Button outrosDoar;
+
+    @FXML
+    private Button pixDoar;
+
+    @FXML
+    private Button roupasDoar;
+
+    @FXML
+    private Button cartaoDoar;
+
+    @FXML
+    public void doarPix(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void doarCartao(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void doarAlimentos(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void doarRoupas(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void doarMobilias(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void doarOutros(ActionEvent event) {
+
+    }
+
 
     //Próximos métodos
 }
