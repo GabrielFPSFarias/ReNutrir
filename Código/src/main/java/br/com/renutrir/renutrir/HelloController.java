@@ -133,137 +133,137 @@ public class HelloController {
 //Botões Voltar
 @FXML
 public void botaoVoltar() {
-    realizarTrocaDeTela("/br/com/renutrir/01-tela-inicial.fxml", "ReNutrir");
+    realizarTrocaDeTela("01-tela-inicial.fxml", "ReNutrir");
 }
 
     @FXML
     public void botaoVoltar1() {
-        realizarTrocaDeTela("/br/com/renutrir/02-pre-cadastro.fxml", "ReNutrir - Cadastro");
+        realizarTrocaDeTela("02-pre-cadastro.fxml", "ReNutrir - Cadastro");
     }
 
     @FXML
     public void botaoVoltar2() {
-        realizarTrocaDeTela("/br/com/renutrir/02-pre-cadastro.fxml", "ReNutrir - Cadastro");
+        realizarTrocaDeTela("02-pre-cadastro.fxml", "ReNutrir - Cadastro");
     }
 
     @FXML
     public void botaoVoltar3() {
-        realizarTrocaDeTela("/br/com/renutrir/01-tela-inicial.fxml", "ReNutrir");
+        realizarTrocaDeTela("01-tela-inicial.fxml", "ReNutrir");
     }
 
     @FXML
     public void botaoVoltar4() {
-        realizarTrocaDeTela("/br/com/renutrir/03-login.fxml", "ReNutrir - Login");
+        realizarTrocaDeTela("03-login.fxml", "ReNutrir - Login");
     }
 
     @FXML
     public void botaoVoltar5() {
-        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
     }
 
     @FXML
     public void botaoVoltar6() {
-        realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
+        realizarTrocaDeTela("05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
     public void botaoVoltar7() {
-        realizarTrocaDeTela("/br/com/renutrir/06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
+        realizarTrocaDeTela("06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
     }
 
     @FXML
     public void botaoVoltar8() {
-        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
     }
 
     @FXML
     public void botaoVoltar9() {
-        realizarTrocaDeTela("/br/com/renutrir/08-menu-voluntario.fxml", "ReNutrir - Voluntario");
+        realizarTrocaDeTela("08-menu-voluntario.fxml", "ReNutrir - Voluntario");
     }
 
     @FXML
     public void botaoVoltar10() {
-        realizarTrocaDeTela("/br/com/renutrir/08-menu-voluntario.fxml", "ReNutrir - Voluntario");
+        realizarTrocaDeTela("08-menu-voluntario.fxml", "ReNutrir - Voluntario");
     }
 
     @FXML
     public void botaoVoltar11() {
-        realizarTrocaDeTela("/br/com/renutrir/10-transportes-doacoes.fxml", "ReNutrir - Transportes");
+        realizarTrocaDeTela("10-transportes-doacoes.fxml", "ReNutrir - Transportes");
     }
 
     @FXML
     public void botaoVoltar12() {
-        realizarTrocaDeTela("/br/com/renutrir/11-transportes-solicitados.fxml", "ReNutrir - Transportes Solicitados");
+        realizarTrocaDeTela("11-transportes-solicitados.fxml", "ReNutrir - Transportes Solicitados");
     }
 
     @FXML
     public void botaoVoltar13() {
-        realizarTrocaDeTela("/br/com/renutrir/08-menu-voluntario.fxml", "ReNutrir - Voluntario");
+        realizarTrocaDeTela("08-menu-voluntario.fxml", "ReNutrir - Voluntario");
     }
 
     @FXML
     public void botaoVoltar14() {
-        realizarTrocaDeTela("/br/com/renutrir/08-menu-voluntario.fxml", "ReNutrir - Voluntario");
+        realizarTrocaDeTela("08-menu-voluntario.fxml", "ReNutrir - Voluntario");
     }
 
     @FXML
     public void botaoVoltar15() {
-        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
     }
 
     @FXML
     public void botaoVoltar16() {
-        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
     }
 
     @FXML
     public void botaoVoltar17() {
-        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
     }
 
     @FXML
     public void botaoVoltar18() {
-        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+        realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
     }
 
     @FXML
     public void botaoVoltar19() {
-        realizarTrocaDeTela("/br/com/renutrir/03-login.fxml", "ReNutrir - Login");
+        realizarTrocaDeTela("03-login.fxml", "ReNutrir - Login");
     }
 
     @FXML
     public void botaoVoltar20() {
-        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
 
     @FXML
     public void botaoVoltar21() {
-        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
 
     @FXML
     public void botaoVoltar22() {
-        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
 
     @FXML
     public void botaoVoltar23() {
-        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
 
     @FXML
     public void botaoVoltar24() {
-        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
 
     @FXML
     public void botaoVoltar25() {
-        realizarTrocaDeTela("/br/com/renutrir/24-voluntarios.fxml", "ReNutrir - Voluntários");
+        realizarTrocaDeTela("24-voluntarios.fxml", "ReNutrir - Voluntários");
     }
 
     @FXML
     public void botaoVoltar26() {
-        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+        realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
 
     @FXML
