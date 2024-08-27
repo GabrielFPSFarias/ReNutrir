@@ -397,7 +397,7 @@ public class HelloController {
     }
 
     private void salvarDadosEmArquivo(Doador doador) {
-        String caminhoArquivo = "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo.txt";
+        String caminhoArquivo = "/src/dados/arquivo.txt";
         ControladorArquivo controladorArquivo = new ControladorArquivo(caminhoArquivo);
 
         try {
@@ -435,7 +435,7 @@ public class HelloController {
     }
 
     private void salvarDadosEmArquivoIns(Instituicao instituicao) {
-        String caminhoArquivo = "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo1.txt";
+        String caminhoArquivo = "/src/dados/arquivo1.txt";
         ControladorArquivo controladorArquivo = new ControladorArquivo(caminhoArquivo);
 
         try {
@@ -582,7 +582,7 @@ public class HelloController {
         }
     }
 
-    private String caminhoArquivo = "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo.txt";
+    private String caminhoArquivo = "/src/dados/arquivo.txt";
 
     public boolean autenticarUsuario(String login, String senha) {
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
@@ -759,7 +759,7 @@ public class HelloController {
 
         if (checarInstituicao.isSelected()) {
             //Autenticar como Instituição
-            Instituicao instituicao = buscarInstituicaoNoArquivo(emailOuUsuario, senha, "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo1.txt");
+            Instituicao instituicao = buscarInstituicaoNoArquivo(emailOuUsuario, senha, "/src/dados/arquivo1.txt");
             if (instituicao != null) {
                 showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Instituição!");
                 realizarTrocaDeTela("19-menu-instituicao.fxml", "ReNutrir - Instituição");
@@ -768,7 +768,7 @@ public class HelloController {
             }
         } else {
             //Autenticar como Doador
-            Doador doador = buscarDoadorNoArquivo(emailOuUsuario, senha, "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo.txt");
+            Doador doador = buscarDoadorNoArquivo(emailOuUsuario, senha, "/src/dados/arquivo.txt");
             if (doador != null) {
                 showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Doador!");
                 realizarTrocaDeTela("04-menu-doador.fxml", "ReNutrir - Doador");
