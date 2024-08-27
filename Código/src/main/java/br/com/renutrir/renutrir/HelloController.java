@@ -2,6 +2,7 @@ package br.com.renutrir.renutrir;
 
 import br.com.renutrir.model.Endereco;
 import br.com.renutrir.model.Instituicao;
+import br.com.renutrir.model.SolicitacaoDoacao;
 import br.com.renutrir.repositorio.*;
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.servicos.*;
@@ -1030,48 +1031,99 @@ public class HelloController {
     @FXML
     private Button alimentosSolicitar;
 
+    private static Instituicao instituicaoAtual;
+    
+
+    public static Instituicao getInstituicaoAtual() {
+        return instituicaoAtual;
+    }
+
+    public static void setInstituicaoAtual(Instituicao instituicao) {
+        instituicaoAtual = instituicao;
+    }
+
     @FXML
     void solicitarPix(ActionEvent event) {
-
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Pix");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Pix");
+        solicitacao.salvarSolicitacaoEmArquivo();
     }
 
     @FXML
     void solicitarCartao(ActionEvent event) {
-
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Cartão");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Cartão");
+        solicitacao.salvarSolicitacaoEmArquivo();
     }
 
     @FXML
     void solicitarAlimentos(ActionEvent event) {
-
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Alimentos");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Alimentos");
+        solicitacao.salvarSolicitacaoEmArquivo();
     }
 
     @FXML
     void solicitarRoupas(ActionEvent event) {
-
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Roupas");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Roupas");
+        solicitacao.salvarSolicitacaoEmArquivo();
     }
 
     @FXML
     void solicitarMoveis(ActionEvent event) {
-
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Móveis");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Móveis");
+        solicitacao.salvarSolicitacaoEmArquivo();
     }
 
     @FXML
     void solicitarBebidas(ActionEvent event) {
-
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Bebidas");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Bebidas");
+        solicitacao.salvarSolicitacaoEmArquivo();
     }
 
     @FXML
     void solicitarProdutoLimpeza(ActionEvent event) {
-
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Produtos de Limpeza");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Produtos de Limpeza");
+        solicitacao.salvarSolicitacaoEmArquivo();
     }
 
     @FXML
     void solicitarItemHgiene(ActionEvent event) {
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Itens de Higiene");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Itens de Higiene");
+        solicitacao.salvarSolicitacaoEmArquivo();
+    }
 
+    private Instituicao obterInstituicaoAtual() {
+        String identificador = getInstituicaoAtual().getNomeUsuario();
+        RepositorioContas repositorio = new RepositorioContas();
+        return repositorio.buscarInstituicaoPorEmailOuUsuario(identificador);
+    }
+
+    private int solicitarMeta(String tipoItem) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Definir Meta de Doações");
+        dialog.setHeaderText("Solicitação de " + tipoItem);
+        dialog.setContentText("Por favor, insira a meta de doações:");
+
+        Optional<String> result = dialog.showAndWait();
+        return result.map(Integer::parseInt).orElse(0);
     }
 
 
-    //Tela 07 - Solicitar Doações (Instituição)
+    //Tela 07 - Intenção Doação (Doador)
 
     @FXML
     private Button alimentosDoar;
