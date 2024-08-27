@@ -15,7 +15,7 @@ public class ControladorCadastro {
         novaConta.setEmail(email);
         novaConta.setSenha(senha);
         novaConta.setTelefone(telefone);
-        novaConta.setEndereco(endereco);
+        novaConta.setEndereco(endereco); //AINDA NÃO TEM CONTROLADOR
 
         // Aqui dá pra adicionar o código para salvar a conta no banco de dados ou outro repositório
 
