@@ -12,7 +12,7 @@ public class Doador extends Conta {
     private Certificado certificado;
     private String cpf;
     private float distanciaMaximaDeEntrega;
-    private ArrayList <double> idsDeTransacao;
+    //private ArrayList <double> idsDeTransacao;
 
     public Doador() {
     }
@@ -20,7 +20,7 @@ public class Doador extends Conta {
     public Doador(String nome, String email, String telefone) {
         super();
         
-        idsDeTransacao = new ArrayList<>();
+        //idsDeTransacao = new ArrayList<>();
     }
 
     // Construtor, getters e setters
@@ -98,12 +98,15 @@ public class Doador extends Conta {
         return (digito1 == cpfInt[9] && digito2 == cpfInt[10]);
     }
 
-    public boolean identificarIdsDeTransacao(ArrayList idsDeTranscao, String idDeTransacaoInserido){
-        for(String idDeTransacao  : idsDeTransacao){
-            if(idDeTransacao.equals(idDeTransacaoInserido){
-                return true;
+   /*public boolean identificarIdsDeTransacao(ArrayList idsDeTranscao, String idDeTransacaoInserido){
+            for(String idDeTransacao  : idsDeTransacao){
+                if(idDeTransacao.equals(idDeTransacaoInserido){
+                    return true;
+                }
+                else false;
             }
-            else false;
-        }
-    }
+        } 
+      }
+    
+    */
 }
