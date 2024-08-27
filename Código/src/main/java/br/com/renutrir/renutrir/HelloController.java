@@ -128,7 +128,7 @@ public class HelloController {
     private void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
         System.out.println("Clicou para voltar: " + fxmlArquivo);
         Stage stage = (Stage) voltarBotao.getScene().getWindow();
-        trocarTela(stage, fxmlArquivo, titulo);
+        trocarTela(stage, "/br/com/renutrir/" + fxmlArquivo, titulo);
     }
 //Botões Voltar
     @FXML
@@ -270,28 +270,28 @@ public class HelloController {
     public void botaoLogin() {
         System.out.println("Login");
         Stage stage = (Stage) loginBotao.getScene().getWindow();
-        trocarTela(stage, "03-login.fxml", "ReNutrir - Login");
+        trocarTela(stage, "/br/com/renutrir/03-login.fxml", "ReNutrir - Login");
     }
 
     @FXML
     public void botaoCadastro() {
         System.out.println("Cadastro");
         Stage stage = (Stage) cadastroBotao.getScene().getWindow();
-        trocarTela(stage, "02-pre-cadastro.fxml", "ReNutrir - Cadastro");
+        trocarTela(stage, "/br/com/renutrir/02-pre-cadastro.fxml", "ReNutrir - Cadastro");
     }
 
     @FXML
     public void botaoSouInstituicao() {
         System.out.println("Cadastro instituição");
         Stage stage = (Stage) instBotao.getScene().getWindow();
-        trocarTela(stage, "02-cadastro-instituicao.fxml", "ReNutrir - Cadastro Instituição");
+        trocarTela(stage, "/br/com/renutrir/02-cadastro-instituicao.fxml", "ReNutrir - Cadastro Instituição");
     }
 
     @FXML
     public void botaoSouDoador() {
         System.out.println("Cadastro doador");
         Stage stage = (Stage) doadorBotao.getScene().getWindow();
-        trocarTela(stage, "02-cadastro-doador.fxml", "ReNutrir - Cadastro Doador");
+        trocarTela(stage, "/br/com/renutrir/02-cadastro-doador.fxml", "ReNutrir - Cadastro Doador");
     }
 
     private RepositorioContas repositorioContas = new RepositorioContas();
@@ -902,94 +902,97 @@ public class HelloController {
 
     public void emailInsField(ActionEvent actionEvent) {
     }
+
 //Botões mudança de tela
+
     public void botaoItencaoDoacao(ActionEvent actionEvent) {
-        realizarTrocaDeTela("05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
+        realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     public void botaoVoluntario(ActionEvent actionEvent) {
-        realizarTrocaDeTela("08-menu-voluntario.fxml", "ReNutrir - Voluntario");
+        realizarTrocaDeTela("/br/com/renutrir/08-menu-voluntario.fxml", "ReNutrir - Voluntario");
     }
 
     public void botaoCertificados(ActionEvent actionEvent) {
-        realizarTrocaDeTela("15-pontuacoes-certificados.fxml", "ReNutrir - Certificados");
+        realizarTrocaDeTela("/br/com/renutrir/15-pontuacoes-certificados.fxml", "ReNutrir - Certificados");
     }
 
     public void botaoEventos(ActionEvent actionEvent) {
-        realizarTrocaDeTela("16-proximos-eventos.fxml", "ReNutrir - Eventos");
+        realizarTrocaDeTela("/br/com/renutrir/16-proximos-eventos.fxml", "ReNutrir - Eventos");
     }
 
     public void botaoPerfil(ActionEvent actionEvent) {
-        realizarTrocaDeTela("17-perfil-doador.fxml", "ReNutrir - Perfil");
+        realizarTrocaDeTela("/br/com/renutrir/17-perfil-doador.fxml", "ReNutrir - Perfil");
     }
 
     public void botaoDoacoesPendentesDoador(ActionEvent actionEvent) {
-        realizarTrocaDeTela("18-doacoes-pendentes-doador.fxml", "ReNutrir - Doações Pendentes");
+        realizarTrocaDeTela("/br/com/renutrir/18-doacoes-pendentes-doador.fxml", "ReNutrir - Doações Pendentes");
     }
 
     public void instituicaoChecar(ActionEvent actionEvent) {
+        // Implementação necessária
     }
 
     public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
-        realizarTrocaDeTela("06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
+        realizarTrocaDeTela("/br/com/renutrir/06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
     }
 
     public void botaoDoacoesSolicitadas(ActionEvent actionEvent) {
-        realizarTrocaDeTela("07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
     }
 
     public void botaoSejaVoluntario(ActionEvent actionEvent) {
-        realizarTrocaDeTela("09-seja-voluntario.fxml", "ReNutrir - Seja Voluntario");
+        realizarTrocaDeTela("/br/com/renutrir/09-seja-voluntario.fxml", "ReNutrir - Seja Voluntario");
     }
 
     public void botaoTransportesDoacoes(ActionEvent actionEvent) {
-        realizarTrocaDeTela("10-transportes-doacoes.fxml", "ReNutrir - Transportes");
+        realizarTrocaDeTela("/br/com/renutrir/10-transportes-doacoes.fxml", "ReNutrir - Transportes");
     }
 
     public void botaoTransportesPendentes(ActionEvent actionEvent) {
-        realizarTrocaDeTela("13-transportes-pendentes.fxml", "ReNutrir - Transportes Pendentes");
+        realizarTrocaDeTela("/br/com/renutrir/13-transportes-pendentes.fxml", "ReNutrir - Transportes Pendentes");
     }
 
     public void botaoTransportesConcluidos(ActionEvent actionEvent) {
-        realizarTrocaDeTela("14-transportes-concluidos.fxml", "ReNutrir - Transportes Concluidos");
+        realizarTrocaDeTela("/br/com/renutrir/14-transportes-concluidos.fxml", "ReNutrir - Transportes Concluidos");
     }
 
     public void botaoTransportesSolicitados(ActionEvent actionEvent) {
-        realizarTrocaDeTela("11-transportes-solicitados.fxml", "ReNutrir - Transportes Solicitados");
+        realizarTrocaDeTela("/br/com/renutrir/11-transportes-solicitados.fxml", "ReNutrir - Transportes Solicitados");
     }
 
     public void botaoConfirmarTransportes(ActionEvent actionEvent) {
-        realizarTrocaDeTela("12-confirmar-transporte.fxml", "ReNutrir - Confirmar Transportes");
+        realizarTrocaDeTela("/br/com/renutrir/12-confirmar-transporte.fxml", "ReNutrir - Confirmar Transportes");
     }
 
     public void botaoCriarEvento(ActionEvent actionEvent) {
-        realizarTrocaDeTela("20-criar-eventos.fxml", "ReNutrir - Criar Eventos");
+        realizarTrocaDeTela("/br/com/renutrir/20-criar-eventos.fxml", "ReNutrir - Criar Eventos");
     }
 
     public void botaoHistoricoDoacoes(ActionEvent actionEvent) {
-        realizarTrocaDeTela("21-historico-doacoes.fxml", "ReNutrir - Histórico de Doações");
+        realizarTrocaDeTela("/br/com/renutrir/21-historico-doacoes.fxml", "ReNutrir - Histórico de Doações");
     }
 
     public void botaoSolicitarDoacoes(ActionEvent actionEvent) {
-        realizarTrocaDeTela("22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
-        
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
     }
 
     public void botaoPerfilInstituicao(ActionEvent actionEvent) {
-        realizarTrocaDeTela("23-perfil-instituicao.fxml", "ReNutrir - Perfil da Instituição");
+        realizarTrocaDeTela("/br/com/renutrir/23-perfil-instituicao.fxml", "ReNutrir - Perfil da Instituição");
     }
 
     public void botaoAtuaisVoluntarios(ActionEvent actionEvent) {
-        realizarTrocaDeTela("24-voluntarios.fxml", "ReNutrir - Voluntários");
+        realizarTrocaDeTela("/br/com/renutrir/24-voluntarios.fxml", "ReNutrir - Voluntários");
     }
 
     public void botaoDoacoesPendentesInstituicao(ActionEvent actionEvent) {
-        realizarTrocaDeTela("26-doacoes-pendentes-inst.fxml", "ReNutrir - Doações Pendentes");
+        realizarTrocaDeTela("/br/com/renutrir/26-doacoes-pendentes-inst.fxml", "ReNutrir - Doações Pendentes");
     }
 
     public void botaoSolicitarVoluntarios(ActionEvent actionEvent) {
-        realizarTrocaDeTela("25-solicitar-voluntarios.fxml", "ReNutrir - Solicitar Voluntários");
+        realizarTrocaDeTela("/br/com/renutrir/25-solicitar-voluntarios.fxml", "ReNutrir - Solicitar Voluntários");
     }
+
 
     //Próximos métodos
 }
