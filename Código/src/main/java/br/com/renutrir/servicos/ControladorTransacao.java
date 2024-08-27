@@ -49,6 +49,8 @@ public class ControladorTransacao {
 package br.com.renutrir.servicos;
 
 public class ControladorTransacao {
+
+//PIXXXX
   
       // Limite mínimo e máximo para valor de transação, exemplo fictício.
       private static final double VALOR_MINIMO = 0.01;
@@ -81,8 +83,9 @@ public class ControladorTransacao {
         // Se passou todas as verificações, o ID é válido
         return true;
      }
-    }
-  
+
+    ---------------------------------------------------------------------------------------------------------------
+
       private boolean validarValor(double valor) {
           if (valor < VALOR_MINIMO || valor > VALOR_MAXIMO) {
               System.out.println("Valor da transação deve estar entre " + VALOR_MINIMO + " e " + VALOR_MAXIMO + ".");
@@ -90,7 +93,32 @@ public class ControladorTransacao {
           }
           return true;
       }
-   }
+      ==============================================================================================================
+
+      //CARTÃO DE CRÉDITO
+
+      public static boolean validarAutenticacaoPagamento(String codigo) {
+
+        if (codigo == null || codigo.trim().isEmpty()){
+        
+            return false;  
+          }
+        // Verifica se o código da autenticação tem no mínimo 10 e no máximo 32 caracteres
+        if (codigo.length() < 10 || codigo.length() > 32) {
+            return false;
+        }
+        // Verifica se o código contém apenas letras e números
+        for (int i = 0; i < codigo.length(); i++) {
+            char c = codigo.charAt(i);
+            if (!Character.isLetterOrDigit(c)) {
+                return false;
+            }
+        }
+        // Se passar por todas as verificações, o código é válido
+        return true;
+    }
+ 
+}
   
-  }
+      
 */
