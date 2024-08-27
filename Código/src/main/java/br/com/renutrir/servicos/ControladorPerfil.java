@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import br.com.renutrir.*;
 
 public class ControladorPerfil {
 
