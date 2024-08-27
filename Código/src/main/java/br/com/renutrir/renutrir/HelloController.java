@@ -993,16 +993,94 @@ public class HelloController {
         realizarTrocaDeTela("/br/com/renutrir/25-solicitar-voluntarios.fxml", "ReNutrir - Solicitar Voluntários");
     }
 
-    // Interface e FXML
+    //Tela 05 - Intenção Doação
+
+    @FXML
+    private Button doarAgoraBotao;
+
+    @FXML
+    void botaoDoarAgora(ActionEvent event) {
+
+    }
+
+
+    //Tela 22 - Solicitar Doações (Instituição)
+
+    @FXML
+    private Button pixSolicitar;
+
+    @FXML
+    private Button bebidasSolicitar;
+
+    @FXML
+    private Button itemHigienerSolicitar;
+
+    @FXML
+    private Button produtoLimpezaSolicitar;
+
+    @FXML
+    private Button cartaoSolicitar;
+
+    @FXML
+    private Button roupasSolicitar;
+
+    @FXML
+    private Button moveisSolicitar;
+
+    @FXML
+    private Button alimentosSolicitar;
+
+    @FXML
+    void solicitarPix(ActionEvent event) {
+
+    }
+
+    @FXML
+    void solicitarCartao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void solicitarAlimentos(ActionEvent event) {
+
+    }
+
+    @FXML
+    void solicitarRoupas(ActionEvent event) {
+
+    }
+
+    @FXML
+    void solicitarMoveis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void solicitarBebidas(ActionEvent event) {
+
+    }
+
+    @FXML
+    void solicitarProdutoLimpeza(ActionEvent event) {
+
+    }
+
+    @FXML
+    void solicitarItemHgiene(ActionEvent event) {
+
+    }
+
+
+    //Tela 07 - Solicitar Doações (Instituição)
 
     @FXML
     private Button alimentosDoar;
 
     @FXML
-    private Button mobiliasDoar;
+    private Button moveisDoar;
 
     @FXML
-    private Button outrosDoar;
+    private Button bebidasDoar;
 
     @FXML
     private Button pixDoar;
@@ -1011,38 +1089,54 @@ public class HelloController {
     private Button roupasDoar;
 
     @FXML
+    private Button produtoLimpezaDoar;
+
+    @FXML
+    private Button itemHigienerDoar;
+
+    @FXML
     private Button cartaoDoar;
 
+
     @FXML
-    public void doarPix(ActionEvent event) {
+    void doarPix(ActionEvent event) {
 
     }
 
     @FXML
-    public void doarCartao(ActionEvent event) {
+    void doarCartao(ActionEvent event) {
 
     }
 
     @FXML
-    public void doarAlimentos(ActionEvent event) {
+    void doarAlimentos(ActionEvent event) {
 
     }
 
     @FXML
-    public void doarRoupas(ActionEvent event) {
+    void doarRoupas(ActionEvent event) {
 
     }
 
     @FXML
-    public void doarMobilias(ActionEvent event) {
+    void doarMoveis(ActionEvent event) {
 
     }
 
     @FXML
-    public void doarOutros(ActionEvent event) {
+    void doarBebidas(ActionEvent event) {
 
     }
 
+    @FXML
+    void doarProdutoLimpeza(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doarItemHgiene(ActionEvent event) {
+
+    }
 
     //Próximos métodos
 }
