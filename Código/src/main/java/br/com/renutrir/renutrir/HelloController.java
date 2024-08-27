@@ -1001,9 +1001,8 @@ public class HelloController {
 
     @FXML
     void botaoDoarAgora(ActionEvent event) {
-
+        realizarTrocaDeTela("07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
     }
-
 
     //Tela 22 - Solicitar Doações (Instituição)
 
@@ -1032,7 +1031,7 @@ public class HelloController {
     private Button alimentosSolicitar;
 
     private static Instituicao instituicaoAtual;
-    
+
 
     public static Instituicao getInstituicaoAtual() {
         return instituicaoAtual;
@@ -1044,6 +1043,7 @@ public class HelloController {
 
     @FXML
     void solicitarPix(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/22-1-pix.fxml", "ReNutrir - Solicitar PIX");
         Instituicao instituicao = obterInstituicaoAtual();
         int meta = solicitarMeta("Pix");
         SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Pix");
@@ -1122,6 +1122,22 @@ public class HelloController {
         return result.map(Integer::parseInt).orElse(0);
     }
 
+    //Tela 07.1 Doar com pix
+
+    @FXML
+    private Button confPixDoar;
+
+    @FXML
+    void botaoVoltar27(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doarConfPix(ActionEvent event) {
+
+    }
+
+
 
     //Tela 07 - Intenção Doação (Doador)
 
@@ -1152,6 +1168,7 @@ public class HelloController {
 
     @FXML
     void doarPix(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/07-1-pix.fxml", "ReNutrir - Doar com PIX");
 
     }
 
@@ -1187,6 +1204,22 @@ public class HelloController {
 
     @FXML
     void doarItemHgiene(ActionEvent event) {
+
+    }
+
+
+    //Tela 22.1 Solicitar PIX
+
+    @FXML
+    private Button confPixSolicitar;
+    
+    @FXML
+    void botaoVoltar28(ActionEvent event) {
+
+    }
+
+    @FXML
+    void solicitarConfPix(ActionEvent event) {
 
     }
 
