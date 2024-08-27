@@ -70,12 +70,12 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="PIX" textAlignment="CENTER" />
-                  <Button layoutX="293.0" layoutY="19.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Cartão de crédito/débito" textAlignment="CENTER" GridPane.rowIndex="1" />
-                  <Button layoutX="293.0" layoutY="67.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Alimentos" textAlignment="CENTER" GridPane.rowIndex="2" />
-                  <Button layoutX="293.0" layoutY="115.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Roupas" textAlignment="CENTER" GridPane.rowIndex="3" />
-                  <Button layoutX="293.0" layoutY="163.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Pequenas mobílias" textAlignment="CENTER" GridPane.rowIndex="4" />
-                  <Button layoutX="293.0" layoutY="211.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Outros" textAlignment="CENTER" GridPane.rowIndex="5" />
+                  <Button fx:id="pixDoar" mnemonicParsing="false" onAction="#doarPix" prefHeight="30.0" prefWidth="226.0" text="PIX" textAlignment="CENTER" />
+                  <Button fx:id="cartaoDoar" layoutX="293.0" layoutY="19.0" mnemonicParsing="false" onAction="#doarCartao" prefHeight="30.0" prefWidth="226.0" text="Cartão de crédito/débito" textAlignment="CENTER" GridPane.rowIndex="1" />
+                  <Button fx:id="alimentosDoar" layoutX="293.0" layoutY="67.0" mnemonicParsing="false" onAction="#doarAlimentos" prefHeight="30.0" prefWidth="226.0" text="Alimentos" textAlignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="roupasDoar" layoutX="293.0" layoutY="115.0" mnemonicParsing="false" onAction="#doarRoupas" prefHeight="30.0" prefWidth="226.0" text="Roupas" textAlignment="CENTER" GridPane.rowIndex="3" />
+                  <Button fx:id="mobiliasDoar" layoutX="293.0" layoutY="163.0" mnemonicParsing="false" onAction="#doarMobilias" prefHeight="30.0" prefWidth="226.0" text="Pequenas mobílias" textAlignment="CENTER" GridPane.rowIndex="4" />
+                  <Button fx:id="outrosDoar" layoutX="293.0" layoutY="211.0" mnemonicParsing="false" onAction="#doarOutros" prefHeight="30.0" prefWidth="226.0" text="Outros" textAlignment="CENTER" GridPane.rowIndex="5" />
                </children>
             </GridPane>
          </content>
