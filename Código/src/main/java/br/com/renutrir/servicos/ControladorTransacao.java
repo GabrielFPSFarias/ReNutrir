@@ -54,7 +54,7 @@ public class ControladorTransacao {
   
       // Limite mínimo e máximo para valor de transação, exemplo fictício.
       private static final double VALOR_MINIMO = 0.01;
-      private static final double VALOR_MAXIMO = 1000000.00;
+      private static final double VALOR_MAXIMO = 1000000000.00;
   
       public boolean validarTransacao(Transacao transacao) {
           return validarIdTransacao(transacao.getIdTransacao()) &&
