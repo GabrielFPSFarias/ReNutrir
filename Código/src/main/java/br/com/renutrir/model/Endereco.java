@@ -9,6 +9,19 @@ public class Endereco {
     private String complemento;
     private String referencia;
 
+    /*
+
+        public class Endereco {
+    private String numeroCasa;
+    private String rua;
+    private String bairro;
+    private String cidade;
+    private String estado;
+    private String pais;
+    private String cep;
+
+    */
+
     public Endereco(String endereco, String bairro, String numero, String cidade, String uf, String complemento, String referencia) {
         this.endereco = endereco;
         this.bairro = bairro;
