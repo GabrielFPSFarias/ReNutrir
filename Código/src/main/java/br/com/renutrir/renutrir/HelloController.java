@@ -7,6 +7,8 @@ import br.com.renutrir.repositorio.*;
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.servicos.*;
 import br.com.renutrir.main.*;
+import br.com.renutrir.sessao.SessaoDoador;
+import br.com.renutrir.sessao.SessaoInstituicao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -128,7 +130,7 @@ public class HelloController {
     public Button doacoesPendentesDoadorBotao;
 
     private void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
-        System.out.println("Clicou para voltar: " + fxmlArquivo);
+        System.out.println("Clicou: " + fxmlArquivo);
         Stage stage = (Stage) voltarBotao.getScene().getWindow();
         trocarTela(stage, fxmlArquivo, titulo);
     }
@@ -750,6 +752,11 @@ public class HelloController {
     }
 
     @FXML
+    private SessaoDoador sessaoDoador;
+    @FXML
+    private SessaoInstituicao sessaoInstituicao;
+
+    @FXML
     public void botaoLoginEntrar() {
         String emailOuUsuario = loginEmailField.getText();
         String senha = loginSenhaField.getText();
@@ -760,18 +767,20 @@ public class HelloController {
         }
 
         if (checarInstituicao.isSelected()) {
-            //Autenticar como Instituição
+            //Logar como Instituição
             Instituicao instituicao = buscarInstituicaoNoArquivo(emailOuUsuario, senha, "/src/dados/arquivo1.txt");
             if (instituicao != null) {
+                SessaoInstituicao.getInstancia().setInstituicaoLogada(instituicao); //Sala a instituição que fez login
                 showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Instituição!");
                 realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
             } else {
                 showAlert(Alert.AlertType.ERROR, "Erro de Login", "E-mail, nome de usuário ou senha inválidos para instituição.");
             }
         } else {
-            //Autenticar como Doador
+            //Logar como Doador
             Doador doador = buscarDoadorNoArquivo(emailOuUsuario, senha, "/src/dados/arquivo.txt");
             if (doador != null) {
+                SessaoDoador.getInstancia().setDoadorLogado(doador); //Salva o doador que fez login
                 showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Doador!");
                 realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
             } else {
@@ -857,6 +866,7 @@ public class HelloController {
         }
         return null;
     }
+
 
     //Métodos de cadastro instituição
 
@@ -1231,18 +1241,28 @@ public class HelloController {
     }
 
     @FXML
-    void doarCartaoDebito(ActionEvent event) {
-
-    }
-
-    @FXML
     void inserirValorCartaoField(ActionEvent event) {
 
     }
 
     @FXML
-    void doarCartaoCredito(ActionEvent event) {
+    private Label valorDoacaoExibirDeb; //label da tela 07-2-2
 
+    @FXML
+    private Label valorDoacaoCreExibir; //label da tela 07-2-1
+
+    @FXML
+    void doarCartaoDebito(ActionEvent event) {
+        String valor = fieldInserirValorCartao.getText();
+        realizarTrocaDeTela("/br/com/renutrir/07-2-2-debito.fxml", "ReNutrir - Doar com Débito");
+        valorDoacaoExibirDeb.setText("Valor: R$ " + valor);
+    }
+
+    @FXML
+    void doarCartaoCredito(ActionEvent event) {
+        String valor = fieldInserirValorCartao.getText();
+        realizarTrocaDeTela("/br/com/renutrir/07-2-1-credito.fxml", "ReNutrir - Doar com Crédito");
+        valorDoacaoCreExibir.setText("Valor: R$ " + valor);
     }
 
 
@@ -1259,9 +1279,6 @@ public class HelloController {
 
     @FXML
     private Button creditoDoar;
-
-    @FXML
-    private Text valorDoacaoCreExibir;
 
     @FXML
     void botaoVoltar31(ActionEvent event) {
@@ -1295,9 +1312,6 @@ public class HelloController {
 
 
     //Tela 07.2.2 Doar com débito
-
-    @FXML
-    private Text valorDoacaoExibirDeb;
 
     @FXML
     private TextField fieldInserirSenhaDeb;
@@ -1528,6 +1542,24 @@ public class HelloController {
 
     @FXML
     void inserirQtdHigieneField(ActionEvent event) {
+
+    }
+
+    //Tela 07.10 Doação concluída
+
+    @FXML
+    private Label exibirInfoDoacaoLabel;
+
+    @FXML
+    private Button salvarComprovanteBotao;
+
+    @FXML
+    void botaoVoltar39(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
+    }
+
+    @FXML
+    void botaoSalvarComprovante(ActionEvent event) {
 
     }
 
