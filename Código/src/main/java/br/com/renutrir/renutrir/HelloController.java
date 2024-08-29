@@ -1122,22 +1122,6 @@ public class HelloController {
         return result.map(Integer::parseInt).orElse(0);
     }
 
-    //Tela 07.1 Doar com pix
-
-    @FXML
-    private Button confPixDoar;
-
-    @FXML
-    void botaoVoltar27(ActionEvent event) {
-
-    }
-
-    @FXML
-    void doarConfPix(ActionEvent event) {
-
-    }
-
-
 
     //Tela 07 - Intenção Doação (Doador)
 
@@ -1169,7 +1153,6 @@ public class HelloController {
     @FXML
     void doarPix(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/07-1-pix.fxml", "ReNutrir - Doar com PIX");
-
     }
 
     @FXML
@@ -1207,12 +1190,52 @@ public class HelloController {
 
     }
 
+    //Tela 07.1 Doar com PIX
+
+    @FXML
+    private Button confPixDoar;
+
+    @FXML
+    private TextField fieldInserirValorPix;
+
+    @FXML
+    void botaoVoltar29(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/07-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
+    }
+
+    @FXML
+    void doarConfPix(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirValorPixField(ActionEvent event) {
+
+    }
+
+    //Tela 07.2
+
+    //Tela 07.2.1
+
+    //Tela 07.2.2
+
+    //Tela 07.3
+
+    //Tela 07.4
+
+    //Tela 07.5
+
+    //Tela 07.6
+
+    //Tela 07.7
+
+
 
     //Tela 22.1 Solicitar PIX
 
     @FXML
     private Button confPixSolicitar;
-    
+
     @FXML
     void botaoVoltar28(ActionEvent event) {
 

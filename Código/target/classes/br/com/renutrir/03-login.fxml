@@ -1,37 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Button?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.renutrir.HelloController">
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmar Doação" textAlignment="CENTER" wrappingWidth="469.173828125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ReNutrir" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" top="20.0" />
+                  <Insets bottom="10.0" left="75.0" top="20.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirme a sua doação via PIX" textAlignment="CENTER" wrappingWidth="469.1875">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Faça seu login" textAlignment="CENTER" wrappingWidth="188.1875">
                <VBox.margin>
-                  <Insets />
+                  <Insets left="55.0" />
                </VBox.margin>
             </Text>
          </children>
@@ -43,7 +37,7 @@
    <bottom>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="72.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="voltarBotao" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar29" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
+            <Button fx:id="voltarBotao" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar3" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
                <VBox.margin>
                   <Insets right="10.0" />
                </VBox.margin>
@@ -57,11 +51,13 @@
    <center>
       <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0">
          <content>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="327.0" prefWidth="591.0" BorderPane.alignment="CENTER">
+            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="315.0" prefWidth="591.0" BorderPane.alignment="CENTER">
               <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="10.0" prefWidth="151.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
               </columnConstraints>
               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -70,19 +66,22 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
+               <children>
+                  <TextField fx:id="loginEmailField" onAction="#fieldLoginEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email ou nome de usuário:" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="loginSenhaField" onAction="#fieldLoginSenha" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Senha:" GridPane.rowIndex="3" />
+                  <TextFlow prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Button fx:id="loginEntrarBotao" mnemonicParsing="false" onAction="#botaoLoginEntrar" prefHeight="27.0" prefWidth="147.0" text="Entrar" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <CheckBox fx:id="checarInstituicao" mnemonicParsing="false" onAction="#instituicaoChecar" text="Sou instituição" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
                <BorderPane.margin>
                   <Insets bottom="40.0" top="-40.0" />
                </BorderPane.margin>
                <padding>
                   <Insets left="100.0" right="-100.0" />
                </padding>
-               <children>
-                  <Button fx:id="confPixDoar" mnemonicParsing="false" onAction="#doarConfPix" prefHeight="30.0" prefWidth="226.0" text="Doar com PIX" textAlignment="CENTER" GridPane.rowIndex="6" />
-                  <TextField fx:id="fieldInserirValorPix" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirValorPixField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="3" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite o valor da sua doação em reais:" GridPane.rowIndex="2" />
-               </children>
             </GridPane>
          </content>
       </ScrollPane>
