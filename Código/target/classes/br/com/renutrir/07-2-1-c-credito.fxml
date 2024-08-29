@@ -29,7 +29,7 @@
                   <Insets bottom="10.0" top="20.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirme a sua doação via PIX" textAlignment="CENTER" wrappingWidth="469.1875">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirme a sua doação via CARTÃO DE CRÉDITO" textAlignment="CENTER" wrappingWidth="469.1875">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -43,7 +43,7 @@
    <bottom>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="72.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="voltarBotao" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar29" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
+            <Button fx:id="voltarBotao" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar31" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
                <VBox.margin>
                   <Insets right="10.0" />
                </VBox.margin>
@@ -57,13 +57,16 @@
    <center>
       <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0">
          <content>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="327.0" prefWidth="591.0" BorderPane.alignment="CENTER">
+            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="364.0" prefWidth="591.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -79,9 +82,16 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button fx:id="confPixDoar" mnemonicParsing="false" onAction="#doarConfPix" prefHeight="30.0" prefWidth="226.0" text="Doar com PIX" textAlignment="CENTER" GridPane.rowIndex="6" />
-                  <TextField fx:id="fieldInserirValorPix" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirValorPixField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="3" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite o valor da sua doação em reais:" GridPane.rowIndex="2" />
+                  <Button fx:id="creditoDoar" mnemonicParsing="false" onAction="#doarCredito" prefHeight="30.0" prefWidth="226.0" text="Doar com cartão de CRÉDITO" textAlignment="CENTER" GridPane.rowIndex="11" />
+                  <TextField fx:id="fieldInserirNomeTitularCre" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirNomeTitularCreField" prefHeight="25.0" prefWidth="452.0" GridPane.rowIndex="4" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Valor da doação:" wrappingWidth="162.8984375" GridPane.rowIndex="1" />
+                  <Text fx:id="valorDoacaoCreExibir" fill="RED" onDragDetected="#exibirValorDoacaoCre" strokeType="OUTSIDE" strokeWidth="0.0" text="//%d, valor" textAlignment="RIGHT" wrappingWidth="156.08984375" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite o nome do titular do cartão:" GridPane.rowIndex="3" />
+                  <TextField fx:id="fieldInserirNumCredito" layoutX="180.0" layoutY="127.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirNumCreditoField" prefHeight="25.0" prefWidth="452.0" GridPane.rowIndex="6" />
+                  <Text layoutX="314.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digite os números do cartão:" GridPane.rowIndex="5" />
+                  <Text layoutX="329.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digite a senha do cartão:" GridPane.rowIndex="7" />
+                  <TextField fx:id="fieldInserirSenhaCre" layoutX="180.0" layoutY="139.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirSenhaCreField" prefHeight="25.0" prefWidth="452.0" GridPane.rowIndex="8" />
                </children>
             </GridPane>
          </content>

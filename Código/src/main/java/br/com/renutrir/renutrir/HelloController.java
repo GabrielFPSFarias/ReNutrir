@@ -1002,7 +1002,7 @@ public class HelloController {
 
     @FXML
     void botaoDoarAgora(ActionEvent event) {
-        realizarTrocaDeTela("07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
     }
 
     //Tela 22 - Solicitar Doações (Instituição)
@@ -1158,37 +1158,37 @@ public class HelloController {
 
     @FXML
     void doarCartao(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
     }
 
     @FXML
     void doarAlimentos(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-3-alimentos.fxml", "ReNutrir - Doar Alimentos");
     }
 
     @FXML
     void doarRoupas(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-5-roupas.fxml", "ReNutrir - Doar Roupas");
     }
 
     @FXML
     void doarMoveis(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-7-moveis.fxml", "ReNutrir - Doar Móveis");
     }
 
     @FXML
     void doarBebidas(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-4-bebidas.fxml", "ReNutrir - Doar Bebidas");
     }
 
     @FXML
     void doarProdutoLimpeza(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-6-produtos-limpeza.fxml", "ReNutrir - Doar");
     }
 
     @FXML
     void doarItemHgiene(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-8-higiene-pessoal.fxml", "ReNutrir - Doar");
     }
 
     //Tela 07.1 Doar com PIX
@@ -1201,7 +1201,7 @@ public class HelloController {
 
     @FXML
     void botaoVoltar29(ActionEvent event) {
-        realizarTrocaDeTela("/br/com/renutrir/07-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -1227,7 +1227,7 @@ public class HelloController {
 
     @FXML
     void botaoVoltar30(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -1265,7 +1265,7 @@ public class HelloController {
 
     @FXML
     void botaoVoltar31(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
     }
 
     @FXML
@@ -1313,7 +1313,7 @@ public class HelloController {
 
     @FXML
     void botaoVoltar32(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
     }
 
     @FXML
@@ -1354,7 +1354,7 @@ public class HelloController {
 
     @FXML
     void botaoVoltar33(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -1386,7 +1386,7 @@ public class HelloController {
 
     @FXML
     void botaoVoltar34(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -1417,7 +1417,7 @@ public class HelloController {
 
     @FXML
     void botaoVoltar35(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -1450,7 +1450,7 @@ public class HelloController {
 
     @FXML
     void botaoVoltar36(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -1482,7 +1482,7 @@ public class HelloController {
 
     @FXML
     void botaoVoltar37(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -1499,7 +1499,7 @@ public class HelloController {
     void boxSelecionarTipoMovel(ActionEvent event) {
 
     }
-    
+
 
     //Tela 22.1 Solicitar PIX
 
