@@ -29,6 +29,8 @@ import java.util.Optional;
 
 public class HelloController {
 
+    private Doador doadorLogado;
+
     @FXML
     public TextField fieldEmailIns;
 
@@ -133,8 +135,13 @@ public class HelloController {
         System.out.println("Clicou: " + fxmlArquivo);
         Stage stage = (Stage) voltarBotao.getScene().getWindow();
         trocarTela(stage, fxmlArquivo, titulo);
+
+        if (fxmlArquivo.equals("/br/com/renutrir/03-login.fxml")){
+            SessaoDoador.getInstancia().limparSessao();
+            SessaoInstituicao.getInstancia().limparSessao();
+        }
     }
-//Botões Voltar
+
     @FXML
     public void botaoVoltar() {
         realizarTrocaDeTela("/br/com/renutrir/01-tela-inicial.fxml", "ReNutrir");
@@ -578,6 +585,12 @@ public class HelloController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
+
+            if (fxmlFile.equals("/br/com/renutrir/03-login.fxml")) {
+                SessaoDoador.getInstancia().limparSessao();
+                //se for a tela de login, limpa a sessão.
+            }
+
             stage.setScene(new Scene(root, 800, 500));
             stage.setTitle(title);
             stage.setResizable(false);
@@ -585,6 +598,7 @@ public class HelloController {
             e.printStackTrace();
         }
     }
+
 
     private String caminhoArquivo = "/src/dados/arquivo.txt";
 
@@ -631,8 +645,6 @@ public class HelloController {
     }
 
     //Variáveis do cadastro doador
-
-    private ControladorCadastro controladorCadastro;
 
     @FXML
     private TextField fieldNome;
@@ -770,7 +782,7 @@ public class HelloController {
             //Logar como Instituição
             Instituicao instituicao = buscarInstituicaoNoArquivo(emailOuUsuario, senha, "/src/dados/arquivo1.txt");
             if (instituicao != null) {
-                SessaoInstituicao.getInstancia().setInstituicaoLogada(instituicao); //Sala a instituição que fez login
+                SessaoInstituicao.getInstancia().setInstituicaoLogada(instituicao); //Salva a instituição que fez login
                 showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Instituição!");
                 realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
             } else {
@@ -1377,7 +1389,6 @@ public class HelloController {
     @FXML
     private Button salvarComprovanteBotao;
 
-    @FXML
     void doarAlimentosBotao(ActionEvent actionEvent) {
         String nomeAlimento = fieldInserirNomeAlimento.getText();
         String qtdAlimento = fieldInserirQtdAlimento.getText();
@@ -1387,28 +1398,20 @@ public class HelloController {
             return;
         }
 
-        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
-        System.out.println(SessaoDoador.getInstancia().getDoadorLogado()); //testar
-        if (doador == null) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhum doador logado.");
-            return;
-        }
-
-        String doadorNome = doador.getNome();
+        doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+        String doadorNome = doadorLogado != null ? doadorLogado.getNome() : "Desconhecido";
         String tipoDoacao = "Alimentos";
         LocalDateTime dataHora = LocalDateTime.now();
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
-            Parent novaTela = loader.load();
-
+            Parent root = loader.load();
             HelloController controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, dataHora);
 
-            // Substituir o conteúdo da cena atual
             Stage stage = (Stage) botaoAlimentosDoar.getScene().getWindow();
-            stage.getScene().setRoot(novaTela);
-
+            stage.setTitle("ReNutrir - Doação Concluída");
+            stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
@@ -1641,6 +1644,12 @@ public class HelloController {
     }
 
 
+    //Limpar a sessão
+
+    public void limparSessao() {
+        SessaoDoador.getInstancia().limparSessao();
+        doadorLogado = null;
+    }
 
     //Próximos métodos
 }

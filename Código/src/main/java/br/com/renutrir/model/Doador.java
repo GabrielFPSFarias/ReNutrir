@@ -19,6 +19,7 @@ public class Doador extends Conta {
 
     public Doador(String nome, String email, String telefone) {
         super();
+        this.setNome(nome);
         
         //idsDeTransacao = new ArrayList<>();
     }
