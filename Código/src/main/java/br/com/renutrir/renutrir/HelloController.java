@@ -6,25 +6,25 @@ import br.com.renutrir.model.SolicitacaoDoacao;
 import br.com.renutrir.repositorio.*;
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.servicos.*;
-import br.com.renutrir.main.*;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
-import org.w3c.dom.Text;
 
 import java.io.*;
-import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class HelloController {
@@ -1372,9 +1372,43 @@ public class HelloController {
     }
 
     @FXML
-    void doarAlimentosBotao(ActionEvent event) {
+    public Label exibirInfoDoacaoLabel;
 
+    @FXML
+    private Button salvarComprovanteBotao;
+
+    @FXML
+    void doarAlimentosBotao(ActionEvent actionEvent) {
+        String nomeAlimento = fieldInserirNomeAlimento.getText();
+        String qtdAlimento = fieldInserirQtdAlimento.getText();
+
+        if (nomeAlimento.isEmpty() || qtdAlimento.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "Por favor, preencha todos os campos.");
+            return;
+        }
+
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+        String doadorNome = doador != null ? doador.getNome() : "Desconhecido";
+        String tipoDoacao = "Alimentos";
+        LocalDateTime dataHora = LocalDateTime.now();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
+            Parent root = loader.load();
+            HelloController controlador = loader.getController();
+            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, dataHora);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("ReNutrir - Doação Concluída");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
+        }
     }
+
 
     @FXML
     void inserirNomeAlimentoField(ActionEvent event) {
@@ -1548,20 +1582,41 @@ public class HelloController {
     //Tela 07.10 Doação concluída
 
     @FXML
-    private Label exibirInfoDoacaoLabel;
-
-    @FXML
-    private Button salvarComprovanteBotao;
-
-    @FXML
     void botaoVoltar39(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
     }
 
     @FXML
     void botaoSalvarComprovante(ActionEvent event) {
+        String infoDoacao = exibirInfoDoacaoLabel.getText();
 
+        if (infoDoacao.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma informação para salvar.");
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Salvar Comprovante de Doação");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+
+        File file = fileChooser.showSaveDialog(((Stage) salvarComprovanteBotao.getScene().getWindow()));
+        if (file != null) {
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write(infoDoacao);
+                showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Comprovante salvo com sucesso!");
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar o comprovante.");
+            }
+        }
     }
+
+    public void setInformacoesDoacao(String doadorNome, String tipoDoacao, LocalDateTime dataHora) {
+        String dataHoraFormatada = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        exibirInfoDoacaoLabel.setText(String.format("Doador: %s\nData e hora: %s\nTipo da doação: %s",
+                doadorNome, dataHoraFormatada, tipoDoacao));
+    }
+
 
 
     //Tela 22.1 Solicitar PIX
@@ -1578,6 +1633,8 @@ public class HelloController {
     void solicitarConfPix(ActionEvent event) {
 
     }
+
+
 
     //Próximos métodos
 }

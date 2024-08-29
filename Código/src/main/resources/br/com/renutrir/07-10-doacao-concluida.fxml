@@ -74,7 +74,7 @@
                </padding>
                <children>
                   <Button fx:id="salvarComprovanteBotao" layoutX="293.0" layoutY="163.0" mnemonicParsing="false" onAction="#botaoSalvarComprovante" prefHeight="30.0" prefWidth="226.0" text="Salvar comprovante" textAlignment="CENTER" GridPane.rowIndex="3" />
-                  <Label fx:id="exibirInfoDoacaoLabel" prefHeight="78.0" prefWidth="351.0" GridPane.rowIndex="1" />
+                  <Label fx:id="exibirInfoDoacaoLabel" text="Doador:\nData e hora:\nTipo da doação:" prefHeight="78.0" prefWidth="351.0" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </content>
