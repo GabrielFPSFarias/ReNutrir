@@ -1500,6 +1500,37 @@ public class HelloController {
 
     }
 
+    //Tela 07.8 Doar itens de higiene pessoal
+
+    @FXML
+    private TextField fieldInserirProdHigiene;
+
+    @FXML
+    private TextField fieldInserirQtdHigiene;
+
+    @FXML
+    private Button botaoProdHigieneDoar;
+
+    @FXML
+    void botaoVoltar38(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
+    }
+
+    @FXML
+    void doarProdHigieneBotao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirProdHigieneField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirQtdHigieneField(ActionEvent event) {
+
+    }
+
 
     //Tela 22.1 Solicitar PIX
 
