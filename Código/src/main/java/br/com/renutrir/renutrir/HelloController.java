@@ -139,6 +139,11 @@ public class HelloController {
         if (fxmlArquivo.equals("/br/com/renutrir/03-login.fxml")){
             SessaoDoador.getInstancia().limparSessao();
             SessaoInstituicao.getInstancia().limparSessao();
+        } else {
+            Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+            if (doadorLogado != null) {
+                System.out.println("Doador logado: " + doadorLogado.getNome()); //testar
+            }
         }
     }
 
@@ -861,7 +866,11 @@ public class HelloController {
             String linha;
             Doador doador = null;
             while ((linha = reader.readLine()) != null) {
-                if (linha.contains("Email: " + emailOuUsuario) || linha.contains("Nome de Usuário: " + emailOuUsuario)) {
+                if (linha.startsWith("Nome: ")) {
+                    if (doador != null && (linha.contains("Email: " + emailOuUsuario) || linha.contains("Nome de Usuário: " + emailOuUsuario))) {
+                        doador.setNome(linha.substring(1));
+                    }
+                } else if (linha.contains("Email: " + emailOuUsuario) || linha.contains("Nome de Usuário: " + emailOuUsuario)) {
                     doador = new Doador();
                     if (emailOuUsuario.contains("@")) {
                         doador.setEmail(emailOuUsuario);
@@ -1389,6 +1398,7 @@ public class HelloController {
     @FXML
     private Button salvarComprovanteBotao;
 
+    @FXML
     void doarAlimentosBotao(ActionEvent actionEvent) {
         String nomeAlimento = fieldInserirNomeAlimento.getText();
         String qtdAlimento = fieldInserirQtdAlimento.getText();
@@ -1624,8 +1634,9 @@ public class HelloController {
         String dataHoraFormatada = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         exibirInfoDoacaoLabel.setText(String.format("Doador: %s\nData e hora: %s\nTipo da doação: %s",
                 doadorNome, dataHoraFormatada, tipoDoacao));
-    }
 
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+    }
 
 
     //Tela 22.1 Solicitar PIX

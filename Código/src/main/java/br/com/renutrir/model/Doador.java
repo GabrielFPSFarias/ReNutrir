@@ -25,6 +25,10 @@ public class Doador extends Conta {
     }
 
     // Construtor, getters e setters
+    public String getNome() {
+        return super.getNome();
+    }
+
     public void setNivel(int nivel){
         this.nivel = nivel;
     }
