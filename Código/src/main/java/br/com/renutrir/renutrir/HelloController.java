@@ -1388,20 +1388,26 @@ public class HelloController {
         }
 
         Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
-        String doadorNome = doador != null ? doador.getNome() : "Desconhecido";
+        System.out.println(SessaoDoador.getInstancia().getDoadorLogado()); //testar
+        if (doador == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhum doador logado.");
+            return;
+        }
+
+        String doadorNome = doador.getNome();
         String tipoDoacao = "Alimentos";
         LocalDateTime dataHora = LocalDateTime.now();
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
-            Parent root = loader.load();
+            Parent novaTela = loader.load();
+
             HelloController controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, dataHora);
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("ReNutrir - Doação Concluída");
-            stage.show();
+            // Substituir o conteúdo da cena atual
+            Stage stage = (Stage) botaoAlimentosDoar.getScene().getWindow();
+            stage.getScene().setRoot(novaTela);
 
         } catch (IOException e) {
             e.printStackTrace();
