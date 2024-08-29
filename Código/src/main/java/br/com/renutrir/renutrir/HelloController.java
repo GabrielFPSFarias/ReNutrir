@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import org.w3c.dom.Text;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -1213,23 +1214,292 @@ public class HelloController {
 
     }
 
-    //Tela 07.2
+    //Tela 07.2 Doar com cartão
 
-    //Tela 07.2.1
+    @FXML
+    private Button cartaoDebitoDoar;
 
-    //Tela 07.2.2
+    @FXML
+    private Button cartaoCreditoDoar;
 
-    //Tela 07.3
+    @FXML
+    private TextField fieldInserirValorCartao;
 
-    //Tela 07.4
+    @FXML
+    void botaoVoltar30(ActionEvent event) {
 
-    //Tela 07.5
+    }
 
-    //Tela 07.6
+    @FXML
+    void doarCartaoDebito(ActionEvent event) {
 
-    //Tela 07.7
+    }
+
+    @FXML
+    void inserirValorCartaoField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doarCartaoCredito(ActionEvent event) {
+
+    }
 
 
+    //Tela 07.2.1 Doar com crédito
+
+    @FXML
+    private TextField fieldInserirNomeTitularCre;
+
+    @FXML
+    private TextField fieldInserirNumCredito;
+
+    @FXML
+    private TextField fieldInserirSenhaCre;
+
+    @FXML
+    private Button creditoDoar;
+
+    @FXML
+    private Text valorDoacaoCreExibir;
+
+    @FXML
+    void botaoVoltar31(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doarCredito(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirNomeTitularCreField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void exibirValorDoacaoCre(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirNumCreditoField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirSenhaCreField(ActionEvent event) {
+
+    }
+
+
+    //Tela 07.2.2 Doar com débito
+
+    @FXML
+    private Text valorDoacaoExibirDeb;
+
+    @FXML
+    private TextField fieldInserirSenhaDeb;
+
+    @FXML
+    private TextField fieldInserirNumDebito;
+
+    @FXML
+    private Button debitoDoar;
+
+    @FXML
+    private TextField fieldInserirTitularDeb;
+
+    @FXML
+    void botaoVoltar32(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doarDebito(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirTitularDebField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void exibirValorDoacao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirNumDebitoField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirSenhaDebField(ActionEvent event) {
+
+    }
+
+    //Tela 07.3 Doar com alimentos
+
+    @FXML
+    private TextField fieldInserirNomeAlimento;
+
+    @FXML
+    private TextField fieldInserirQtdAlimento;
+
+    @FXML
+    private Button botaoAlimentosDoar;
+
+    @FXML
+    void botaoVoltar33(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doarAlimentosBotao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirNomeAlimentoField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirQtdAlimentoField(ActionEvent event) {
+
+    }
+
+
+    //Tela 07.4 Doar bebidas
+
+    @FXML
+    private TextField fieldInserirQtdBebida;
+
+    @FXML
+    private Button botaoBebidaDoar;
+
+    @FXML
+    private TextField fieldInserirNomeBebida;
+
+    @FXML
+    void botaoVoltar34(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doarBebidaBotao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirNomeBebidaField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirQtdBebidaField(ActionEvent event) {
+
+    }
+
+    //Tela 07.5 Doar roupas
+
+    @FXML
+    private TextField fieldInserirNomeRoupa;
+
+    @FXML
+    private Button botaoRoupaDoar;
+
+    @FXML
+    private TextField fieldInserirQtdRoupa;
+
+    @FXML
+    void botaoVoltar35(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doarRoupaBotao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirNomeRoupaField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirQtdRoupaField(ActionEvent event) {
+
+    }
+
+
+    //Tela 07.6 Doar produtos de limpeza
+
+    @FXML
+    private Button botaoProdLimpezaDoar;
+
+    @FXML
+    private TextField fieldInserirQtdLimpeza;
+
+    @FXML
+    private TextField fieldInserirProdLimpeza;
+
+
+    @FXML
+    void botaoVoltar36(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doarProdLimpezaBotao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirProdLimpezaField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirQtdLimpezaField(ActionEvent event) {
+
+    }
+
+
+    //Tela 07.7 Doar móveis
+
+    @FXML
+    private TextField fieldInserirNomeMovel;
+
+    @FXML
+    private Button movelDoarBotao;
+
+    @FXML
+    private ComboBox<?> selecionarTipoMovelBox;
+
+    @FXML
+    void botaoVoltar37(ActionEvent event) {
+
+    }
+
+    @FXML
+    void botaoDoarMovel(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirNomeMovelField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void boxSelecionarTipoMovel(ActionEvent event) {
+
+    }
+    
 
     //Tela 22.1 Solicitar PIX
 
