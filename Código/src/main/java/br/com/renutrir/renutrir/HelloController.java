@@ -826,24 +826,41 @@ public class HelloController {
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;
             Instituicao instituicao = null;
+            boolean instituicaoEncontrada = false;
+
             while ((linha = reader.readLine()) != null) {
-                if (linha.contains("Email: " + emailOuUsuario) || linha.contains("Nome de Usuário: " + emailOuUsuario)) {
+                // Verifica o início da leitura da instituição
+                if (linha.startsWith("Nome: ")) {
                     instituicao = new Instituicao();
-                    if (emailOuUsuario.contains("@")) {
-                        instituicao.setEmail(emailOuUsuario);
-                    } else {
-                        instituicao.setNomeUsuario(emailOuUsuario);
+                    instituicao.setNome(linha.substring(6).trim());
+                } else if (linha.startsWith("Nome de Usuário: ") && instituicao != null) {
+                    String nomeUsuario = linha.substring(17).trim();
+                    if (nomeUsuario.equals(emailOuUsuario)) {
+                        instituicao.setNomeUsuario(nomeUsuario);
+                        instituicaoEncontrada = true;
                     }
-                    instituicao.setSenha(senha);
-                } else if (linha.contains("Senha: " + senha) && instituicao != null) {
-                    return instituicao;
+                } else if (linha.startsWith("Email: ") && instituicao != null) {
+                    String email = linha.substring(7).trim();
+                    if (email.equals(emailOuUsuario)) {
+                        instituicao.setEmail(email);
+                        instituicaoEncontrada = true;
+                    }
+                } else if (linha.startsWith("Senha: ") && instituicaoEncontrada && instituicao != null) {
+                    String senhaLida = linha.substring(7).trim();
+                    if (senhaLida.equals(senha)) {
+                        instituicao.setSenha(senhaLida);
+                        return instituicao;
+                    } else {
+                        instituicao = null; //Se a senha não estiver certa, a instituição é inválida
+                    }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return null; //Retorna null se não encontrar a instituição
     }
+
 
     private boolean verificarDoadorExistente(String emailOuUsuario, String cpf, String caminhoArquivo) {
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {
@@ -865,27 +882,39 @@ public class HelloController {
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;
             Doador doador = null;
+            boolean doadorEncontrado = false;
+
             while ((linha = reader.readLine()) != null) {
+                //Verifica o início da leitura do doador
                 if (linha.startsWith("Nome: ")) {
-                    if (doador != null && (linha.contains("Email: " + emailOuUsuario) || linha.contains("Nome de Usuário: " + emailOuUsuario))) {
-                        doador.setNome(linha.substring(1));
-                    }
-                } else if (linha.contains("Email: " + emailOuUsuario) || linha.contains("Nome de Usuário: " + emailOuUsuario)) {
                     doador = new Doador();
-                    if (emailOuUsuario.contains("@")) {
-                        doador.setEmail(emailOuUsuario);
-                    } else {
-                        doador.setNomeUsuario(emailOuUsuario);
+                    doador.setNome(linha.substring(6).trim());
+                } else if (linha.startsWith("Nome de Usuário: ") && doador != null) {
+                    String nomeUsuario = linha.substring(17).trim();
+                    if (nomeUsuario.equals(emailOuUsuario)) {
+                        doador.setNomeUsuario(nomeUsuario);
+                        doadorEncontrado = true;
                     }
-                    doador.setSenha(senha);
-                } else if (linha.contains("Senha: " + senha) && doador != null) {
-                    return doador;
+                } else if (linha.startsWith("Email: ") && doador != null) {
+                    String email = linha.substring(7).trim();
+                    if (email.equals(emailOuUsuario)) {
+                        doador.setEmail(email);
+                        doadorEncontrado = true;
+                    }
+                } else if (linha.startsWith("Senha: ") && doadorEncontrado && doador != null) {
+                    String senhaLida = linha.substring(7).trim();
+                    if (senhaLida.equals(senha)) {
+                        doador.setSenha(senhaLida);
+                        return doador;
+                    } else {
+                        doador = null; //Se a senha não estiver certa, o doador é inválido
+                    }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return null; //Retorna null se não encontrar o doador
     }
 
 
