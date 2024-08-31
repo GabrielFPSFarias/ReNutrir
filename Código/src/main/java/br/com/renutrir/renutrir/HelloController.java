@@ -2090,5 +2090,12 @@ public class HelloController {
         doadorLogado = null;
     }
 
+
+    //Tela 25 Solicitar Voluntários
+
+    public void SolicitarNovosVoluntariosBotao(ActionEvent actionEvent) {
+        instituicaoAtual.solicitarVoluntarios();
+    }
+
     //Próximos métodos
 }
