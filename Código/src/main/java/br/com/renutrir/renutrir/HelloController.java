@@ -1829,6 +1829,9 @@ public class HelloController {
     private ComboBox<String> cboxFuncaoVoluntario;
 
     @FXML
+    private ComboBox<String> cboxInstVinculada;
+
+    @FXML
     private Text exibirVoluntarioLabel;
 
     @FXML
@@ -1850,6 +1853,11 @@ public class HelloController {
 
     @FXML
     void funcaoVoluntarioCbox(ActionEvent event) {
+
+    }
+
+    @FXML
+    void instVinculadaCbox(ActionEvent event) {
 
     }
 
