@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import org.w3c.dom.Text;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -82,7 +83,6 @@ public class HelloController {
     public Button transportesDoacoesBotao;
     public Button transportesPendentesBotao;
     public Button transportesConcluidosBotao;
-    public Button queroVoluntarioBotao;
     public Button transportesSolicitadosBotao;
     public Button confirmarTransportesBotao;
     public Button criarEventoBotao;
@@ -1803,6 +1803,89 @@ public class HelloController {
                 doadorNome, dataHoraFormatada, tipoDoacao, item, quantidade));
 
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+    }
+
+    //Tela 09 Seja Voluntário
+
+    @FXML
+    private TextField fieldHoraInicialVoluntario;
+
+    @FXML
+    private CheckBox boxQuintaVoluntario;
+
+    @FXML
+    private CheckBox boxQuartaVoluntario;
+
+    @FXML
+    private CheckBox boxSextaVoluntario;
+
+    @FXML
+    private TextField fieldHoraFinalVoluntario;
+
+    @FXML
+    private CheckBox boxSegundaVoluntario;
+
+    @FXML
+    private ComboBox<?> cboxFuncaoVoluntario;
+
+    @FXML
+    private Text exibirVoluntarioLabel;
+
+    @FXML
+    private CheckBox boxTercaVoluntario;
+
+    @FXML
+    private CheckBox boxSabadoVoluntario;
+
+    @FXML
+    private CheckBox boxDomingoVoluntario;
+
+    @FXML
+    private Button queroVoluntarioBotao;
+
+    @FXML
+    void botaoQueroVoluntario(ActionEvent event) {
+
+    }
+
+    @FXML
+    void funcaoVoluntarioCbox(ActionEvent event) {
+
+    }
+
+    @FXML
+    void segundaVoluntarioBox(ActionEvent event) {
+
+    }
+
+    @FXML
+    void domingoVoluntarioBox(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tercaVoluntarioBox(ActionEvent event) {
+
+    }
+
+    @FXML
+    void quartaVoluntarioBox(ActionEvent event) {
+
+    }
+
+    @FXML
+    void quintaVoluntarioBox(ActionEvent event) {
+
+    }
+
+    @FXML
+    void sextaVoluntarioBox(ActionEvent event) {
+
+    }
+
+    @FXML
+    void sabadoVoluntarioBox(ActionEvent event) {
+
     }
 
 
