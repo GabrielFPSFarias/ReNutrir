@@ -1831,7 +1831,7 @@ public class HelloController {
     private ComboBox<String> cboxFuncaoVoluntario;
 
     @FXML
-    private ComboBox<Instituicao> cboxInstVinculada;
+    private ComboBox<String> cboxInstVinculada;
 
     @FXML
     private Text exibirVoluntarioLabel;
@@ -1863,40 +1863,16 @@ public class HelloController {
     }
 
     @FXML
-    public void instVinculadaCbox(ActionEvent event) {
-        cboxInstVinculada.getItems().clear(); // Limpa itens existentes na ComboBox
-
+    public void instVinculadaCbox() {
+        cboxInstVinculada.getItems().clear();
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivoInstituicoes))) {
             String linha;
-            Instituicao instituicao = null;
 
             while ((linha = reader.readLine()) != null) {
-                System.out.println("Lendo linha: " + linha); // Depuração
-
                 if (linha.startsWith("Nome: ")) {
-                    if (instituicao != null) {
-                        cboxInstVinculada.getItems().add(instituicao);
-                        System.out.println("Instituição adicionada: " + instituicao.getNome()); // Depuração
-                    }
-                    instituicao = new Instituicao();
-                    instituicao.setNome(linha.substring(6).trim());
-                } else if (linha.startsWith("Nome de Usuário: ") && instituicao != null) {
-                    instituicao.setNomeUsuario(linha.substring(17).trim());
-                } else if (linha.startsWith("Email: ") && instituicao != null) {
-                    instituicao.setEmail(linha.substring(7).trim());
-                } else if (linha.startsWith("Telefone: ") && instituicao != null) {
-                    instituicao.setTelefone(linha.substring(10).trim());
-                } else if (linha.startsWith("CNPJ: ") && instituicao != null) {
-                    instituicao.setCnpj(linha.substring(6).trim());
-                } else if (linha.startsWith("Endereço: ") && instituicao != null) {
-                    String enderecoStr = linha.substring(10).trim();
-                    instituicao.setEndereco(new Endereco(enderecoStr, null, null, null, null, null, null)); // Preencher com os valores restantes
+                    String nomeInstituicao = linha.substring(6).trim();
+                    cboxInstVinculada.getItems().add(nomeInstituicao);
                 }
-            }
-
-            if (instituicao != null) {
-                cboxInstVinculada.getItems().add(instituicao);
-                System.out.println("Instituição adicionada: " + instituicao.getNome()); // Depuração
             }
 
         } catch (IOException e) {
@@ -1904,9 +1880,12 @@ public class HelloController {
         }
     }
 
+
+
     @FXML
     void funcaoVoluntarioCbox(ActionEvent event) {
-        cboxFuncaoVoluntario.getItems().addAll(funcoesVoluntario);
+        cboxFuncaoVoluntario.getItems().clear(); // Limpa as opções atuais, se houver
+        cboxFuncaoVoluntario.getItems().addAll("Transportador de Doações", "Ajudante dos Eventos");
     }
 
 
