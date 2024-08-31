@@ -11,6 +11,7 @@ public class Instituicao extends Conta {
     private double distanciaMaximaDeColeta;
     private LocalDateTime horarioFuncionamento;
     private LocalDateTime horarioColeta;
+    private boolean PrecisaVoluntario;
 
     public Evento criarEvento(String nome, LocalDate data, String local) {
         return new Evento(nome, data, local);
@@ -109,5 +110,9 @@ public class Instituicao extends Conta {
     @Override
     public void setNomeUsuario(String nomeUsuario) {
         super.setNomeUsuario(nomeUsuario);
+    }
+
+    public void solicitarVoluntarios(){
+        this.PrecisaVoluntario = true;
     }
 }

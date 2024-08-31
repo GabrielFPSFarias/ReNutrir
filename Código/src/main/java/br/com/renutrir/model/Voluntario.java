@@ -80,5 +80,9 @@ public class Voluntario extends Doador {
     public int hashCode() {
         return Objects.hash(super.hashCode(), disponibilidade, funcaoVoluntariado, instituicaoVinculada);
     }
+
+    public void voluntariar(){
+
+    }
 }
 
