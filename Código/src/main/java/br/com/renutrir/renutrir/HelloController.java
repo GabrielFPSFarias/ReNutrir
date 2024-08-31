@@ -1953,7 +1953,7 @@ public class HelloController {
             exibirInfoInstLabel.setText("Nenhuma instituição logada.");
         }
     }
-
+    
 
     //Limpar a sessão
 
