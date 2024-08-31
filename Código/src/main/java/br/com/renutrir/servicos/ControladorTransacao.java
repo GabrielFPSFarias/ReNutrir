@@ -89,8 +89,6 @@ public class ControladorTransacao {
         return true;
      }
 
-    ---------------------------------------------------------------------------------------------------------------
-
       private boolean validarValor(double valor) {
           if (valor < VALOR_MINIMO || valor > VALOR_MAXIMO) {
               System.out.println("Valor da transação deve estar entre " + VALOR_MINIMO + " e " + VALOR_MAXIMO + ".");
