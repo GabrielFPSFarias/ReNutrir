@@ -189,7 +189,7 @@ public class HelloController {
 
     @FXML
     public void botaoVoltar7() {
-        realizarTrocaDeTela("/br/com/renutrir/06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
+        realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Doações Solicitadas");
     }
 
     @FXML
@@ -895,7 +895,7 @@ public class HelloController {
         return null; // Retorna null se não encontrar a instituição
     }
 
-    
+
     private boolean verificarDoadorExistente(String emailOuUsuario, String cpf, String caminhoArquivo) {
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;
@@ -1151,109 +1151,6 @@ public class HelloController {
     @FXML
     void botaoDoarAgora(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
-    }
-
-    //Tela 22 - Solicitar Doações (Instituição)
-
-    @FXML
-    private Button bebidasSolicitar;
-
-    @FXML
-    private Button itemHigienerSolicitar;
-
-    @FXML
-    private Button produtoLimpezaSolicitar;
-
-    @FXML
-    private Button roupasSolicitar;
-
-    @FXML
-    private Button moveisSolicitar;
-
-    @FXML
-    private Button dinheiroSolicitar;
-
-    @FXML
-    private Button alimentosSolicitar;
-
-    private static Instituicao instituicaoAtual;
-
-
-    public static Instituicao getInstituicaoAtual() {
-        return instituicaoAtual;
-    }
-
-    public static void setInstituicaoAtual(Instituicao instituicao) {
-        instituicaoAtual = instituicao;
-    }
-
-    @FXML
-    void solicitarDinheiro(ActionEvent event) {
-
-    }
-
-    @FXML
-    void solicitarAlimentos(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Alimentos");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Alimentos");
-        solicitacao.salvarSolicitacaoEmArquivo();
-    }
-
-    @FXML
-    void solicitarRoupas(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Roupas");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Roupas");
-        solicitacao.salvarSolicitacaoEmArquivo();
-    }
-
-    @FXML
-    void solicitarMoveis(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Móveis");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Móveis");
-        solicitacao.salvarSolicitacaoEmArquivo();
-    }
-
-    @FXML
-    void solicitarBebidas(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Bebidas");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Bebidas");
-        solicitacao.salvarSolicitacaoEmArquivo();
-    }
-
-    @FXML
-    void solicitarProdutoLimpeza(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Produtos de Limpeza");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Produtos de Limpeza");
-        solicitacao.salvarSolicitacaoEmArquivo();
-    }
-
-    @FXML
-    void solicitarItemHgiene(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Itens de Higiene");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Itens de Higiene");
-        solicitacao.salvarSolicitacaoEmArquivo();
-    }
-
-    private Instituicao obterInstituicaoAtual() {
-        String identificador = getInstituicaoAtual().getNomeUsuario();
-        RepositorioContas repositorio = new RepositorioContas();
-        return repositorio.buscarInstituicaoPorEmailOuUsuario(identificador);
-    }
-
-    private int solicitarMeta(String tipoItem) {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Definir Meta de Doações");
-        dialog.setHeaderText("Solicitação de " + tipoItem);
-        dialog.setContentText("Por favor, insira a meta de doações:");
-
-        Optional<String> result = dialog.showAndWait();
-        return result.map(Integer::parseInt).orElse(0);
     }
 
 
@@ -1938,6 +1835,118 @@ public class HelloController {
         }
     }
 
+    //Tela 22 Solicitar Doações
+
+
+    //Tela 22 - Solicitar Doações (Instituição)
+
+    @FXML
+    private Button bebidasSolicitar;
+
+    @FXML
+    private Button itemHigienerSolicitar;
+
+    @FXML
+    private Button produtoLimpezaSolicitar;
+
+    @FXML
+    private Button roupasSolicitar;
+
+    @FXML
+    private Button moveisSolicitar;
+
+    @FXML
+    private Button dinheiroSolicitar;
+
+    @FXML
+    private Button alimentosSolicitar;
+
+    private static Instituicao instituicaoAtual;
+
+
+    public static Instituicao getInstituicaoAtual() {
+        return instituicaoAtual;
+    }
+
+    public static void setInstituicaoAtual(Instituicao instituicao) {
+        instituicaoAtual = instituicao;
+    }
+
+    @FXML
+    public void botaoVoltar40() {
+        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Menu Instituição");
+    }
+
+    @FXML
+    void solicitarDinheiro(ActionEvent event) {
+
+    }
+
+    @FXML
+    void solicitarAlimentos(ActionEvent event) {
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Alimentos");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Alimentos");
+        solicitacao.salvarSolicitacaoEmArquivo();
+    }
+
+    @FXML
+    void solicitarRoupas(ActionEvent event) {
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Roupas");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Roupas");
+        solicitacao.salvarSolicitacaoEmArquivo();
+    }
+
+    @FXML
+    void solicitarMoveis(ActionEvent event) {
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Móveis");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Móveis");
+        solicitacao.salvarSolicitacaoEmArquivo();
+    }
+
+    @FXML
+    void solicitarBebidas(ActionEvent event) {
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Bebidas");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Bebidas");
+        solicitacao.salvarSolicitacaoEmArquivo();
+    }
+
+    @FXML
+    void solicitarProdutoLimpeza(ActionEvent event) {
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Produtos de Limpeza");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Produtos de Limpeza");
+        solicitacao.salvarSolicitacaoEmArquivo();
+    }
+
+    @FXML
+    void solicitarItemHgiene(ActionEvent event) {
+        Instituicao instituicao = obterInstituicaoAtual();
+        int meta = solicitarMeta("Itens de Higiene");
+        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Itens de Higiene");
+        solicitacao.salvarSolicitacaoEmArquivo();
+    }
+
+    private Instituicao obterInstituicaoAtual() {
+        String identificador = getInstituicaoAtual().getNomeUsuario();
+        RepositorioContas repositorio = new RepositorioContas();
+        return repositorio.buscarInstituicaoPorEmailOuUsuario(identificador);
+    }
+
+    private int solicitarMeta(String tipoItem) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Definir Meta de Doações");
+        dialog.setHeaderText("Solicitação de " + tipoItem);
+        dialog.setContentText("Por favor, insira a meta de doações:");
+
+        Optional<String> result = dialog.showAndWait();
+        return result.map(Integer::parseInt).orElse(0);
+    }
+
+
 
     //Tela 22.1 Solicitar PIX
 
@@ -1953,6 +1962,7 @@ public class HelloController {
     void solicitarConfPix(ActionEvent event) {
 
     }
+
 
     //Tela 23 Perfil Instituição
 
