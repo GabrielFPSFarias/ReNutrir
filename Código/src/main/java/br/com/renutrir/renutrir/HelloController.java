@@ -941,15 +941,16 @@ public class HelloController {
                         doador.setSenha(senhaLida); // Definir a senha após a verificação
                         return doador;
                     } else {
-                        doador = null; // Se a senha não estiver correta, o doador é inválido
+                        doador = null; //Se a senha não estiver correta, o doador é inválido
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null; // Retorna null se não encontrar o doador
+        return null; //Retorna null se não encontrar o doador
     }
+
 
 
     //Métodos de cadastro instituição
@@ -1087,7 +1088,20 @@ public class HelloController {
     }
 
     public void botaoPerfilInstituicao(ActionEvent actionEvent) {
-        realizarTrocaDeTela("/br/com/renutrir/23-perfil-instituicao.fxml", "ReNutrir - Perfil da Instituição");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/23-perfil-instituicao.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("ReNutrir - Perfil");
+            stage.show();
+            HelloController controller = loader.getController();
+            controller.exibirPerfilInstituicao();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void botaoAtuaisVoluntarios(ActionEvent actionEvent) {
@@ -1880,19 +1894,14 @@ public class HelloController {
             String perfilDoador = String.format(
                     "Nome: %s\n" +
                             "Nome de Usuário: %s\n" +
-                            "Email: %s\n" +
                             "Telefone: %s\n" +
-                            "CPF: %s\n" +
-                            "Endereço: %s\n",
+                            "CPF: %s\n",
                     doadorLogado.getNome() != null ? doadorLogado.getNome() : "",
                     doadorLogado.getNomeUsuario() != null ? doadorLogado.getNomeUsuario() : "",
-                    doadorLogado.getEmail() != null ? doadorLogado.getEmail() : "",
                     doadorLogado.getTelefone() != null ? doadorLogado.getTelefone() : "",
-                    doadorLogado.getCpf() != null ? doadorLogado.getCpf() : "",
-                    doadorLogado.getEndereco() != null ? doadorLogado.getEndereco() : ""
+                    doadorLogado.getCpf() != null ? doadorLogado.getCpf() : ""
             );
 
-            //Ver se o label não está null e se o perfil tá certo
             System.out.println("Label: " + exibirInfoDoadorLabel);
             System.out.println("Perfil: " + perfilDoador);
 
@@ -1901,7 +1910,8 @@ public class HelloController {
             exibirInfoDoadorLabel.setText("Nenhum doador logado.");
         }
     }
-    
+
+
     //Tela 22.1 Solicitar PIX
 
     @FXML
@@ -1915,6 +1925,33 @@ public class HelloController {
     @FXML
     void solicitarConfPix(ActionEvent event) {
 
+    }
+
+    //Tela 23 Perfil Instituição
+
+    @FXML
+    private Label exibirInfoInstLabel;
+
+    public void exibirPerfilInstituicao() throws IOException {
+        Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+
+        if (instituicaoLogada != null) {
+            String perfilInst = String.format(
+                    "Nome: %s\n" +
+                            "Nome de Usuário: %s\n" +
+                            "Telefone: %s\n" +
+                            "CNPJ: %s\n",
+                    instituicaoLogada.getNome() != null ? instituicaoLogada.getNome() : "N/A",
+                    instituicaoLogada.getNomeUsuario() != null ? instituicaoLogada.getNomeUsuario() : "N/A",
+                    instituicaoLogada.getTelefone() != null ? instituicaoLogada.getTelefone() : "N/A",
+                    instituicaoLogada.getCnpj() != null ? instituicaoLogada.getCnpj() : "N/A"
+            );
+
+            exibirInfoInstLabel.setText(perfilInst);
+            System.out.println("Perfil: " + perfilInst);
+        } else {
+            exibirInfoInstLabel.setText("Nenhuma instituição logada.");
+        }
     }
 
 

@@ -47,13 +47,10 @@ public class Instituicao extends Conta {
     }
 
     public boolean isPresent(List<Instituicao> instituicoes) {
-        for (Instituicao instituicao : instituicoes) {
-            if (this.cnpj.equals(instituicao.getCnpj()) || this.getEmail().equals(instituicao.getEmail())) {
-                return true;
-            }
-        }
-        return false;
+        return instituicoes.stream()
+                .anyMatch(instituicao -> this.cnpj.equals(instituicao.getCnpj()) || this.getEmail().equals(instituicao.getEmail()));
     }
+
 
     private boolean cnpjValidacao(String cnpj) {
         if (cnpj == null || !cnpj.matches("\\d{14}")) {
