@@ -58,7 +58,7 @@
    <center>
       <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0">
          <content>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="455.0" prefWidth="591.0" BorderPane.alignment="CENTER">
+            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="488.0" prefWidth="591.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
               </columnConstraints>
@@ -73,6 +73,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <BorderPane.margin>
                   <Insets bottom="40.0" top="-40.0" />
@@ -81,8 +82,8 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button fx:id="queroVoluntarioBotao" mnemonicParsing="false" onAction="#botaoQueroVoluntario" prefHeight="30.0" prefWidth="226.0" text="Quero ser voluntário" textAlignment="CENTER" GridPane.rowIndex="9" />
-                  <Text fx:id="exibirVoluntarioLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="LEIA COM ATENÇÃO: Ser voluntário" textAlignment="CENTER" wrappingWidth="443.31640625" />
+                  <Button fx:id="queroVoluntarioBotao" mnemonicParsing="false" onAction="#botaoQueroVoluntario" prefHeight="30.0" prefWidth="226.0" text="Quero ser voluntário" textAlignment="CENTER" GridPane.rowIndex="10" />
+                  <Text fx:id="exibirVoluntarioLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Você está no menu para se tornar um voluntário do projeto ReNutrir" textAlignment="CENTER" wrappingWidth="443.31640625" />
                   <ComboBox fx:id="cboxFuncaoVoluntario" onAction="#funcaoVoluntarioCbox" prefHeight="27.0" prefWidth="225.0" promptText="Função de Voluntário" GridPane.rowIndex="7" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Horário de disponibilidade:" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dias de disponibilidade:" GridPane.rowIndex="4" />
@@ -125,6 +126,7 @@
                         <CheckBox fx:id="boxSabadoVoluntario" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="250.0" layoutY="15.0" mnemonicParsing="false" onAction="#sabadoVoluntarioBox" prefHeight="17.0" prefWidth="138.0" text="Sábado" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
+                  <ComboBox fx:id="cboxInstVinculada" layoutX="293.0" layoutY="235.0" onAction="#instVinculadaCbox" prefHeight="27.0" prefWidth="225.0" promptText="Instituição Vinculada" GridPane.rowIndex="8" />
                </children>
             </GridPane>
          </content>

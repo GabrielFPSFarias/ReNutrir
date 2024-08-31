@@ -26,6 +26,8 @@ import javafx.scene.text.*;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public class HelloController {
@@ -1848,13 +1850,20 @@ public class HelloController {
 
     private String caminhoArquivoInstituicoes = "/src/dados/arquivo1.txt";
 
+    //Funções dos voluntário
+    private List<String> funcoesVoluntario = Arrays.asList(
+            "Transporte de Doações",
+            "Ajudante dos Eventos"
+    );
+
+
     @FXML
-    public void botaoQueroVoluntario () {
+    public void botaoQueroVoluntario() {
 
     }
 
     @FXML
-    public void instVinculadaCbox (ActionEvent event) {
+    public void instVinculadaCbox(ActionEvent event) {
         cboxInstVinculada.getItems().clear();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivoInstituicoes))) {
@@ -1893,7 +1902,7 @@ public class HelloController {
 
     @FXML
     void funcaoVoluntarioCbox(ActionEvent event) {
-
+        cboxFuncaoVoluntario.getItems().addAll(funcoesVoluntario);
     }
 
     @FXML
