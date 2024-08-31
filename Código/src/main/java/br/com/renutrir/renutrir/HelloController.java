@@ -1864,14 +1864,19 @@ public class HelloController {
 
     @FXML
     public void instVinculadaCbox(ActionEvent event) {
+        cboxInstVinculada.getItems().clear(); // Limpa itens existentes na ComboBox
+
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivoInstituicoes))) {
             String linha;
             Instituicao instituicao = null;
 
             while ((linha = reader.readLine()) != null) {
+                System.out.println("Lendo linha: " + linha); // Depuração
+
                 if (linha.startsWith("Nome: ")) {
                     if (instituicao != null) {
                         cboxInstVinculada.getItems().add(instituicao);
+                        System.out.println("Instituição adicionada: " + instituicao.getNome()); // Depuração
                     }
                     instituicao = new Instituicao();
                     instituicao.setNome(linha.substring(6).trim());
@@ -1891,6 +1896,7 @@ public class HelloController {
 
             if (instituicao != null) {
                 cboxInstVinculada.getItems().add(instituicao);
+                System.out.println("Instituição adicionada: " + instituicao.getNome()); // Depuração
             }
 
         } catch (IOException e) {
@@ -1902,6 +1908,7 @@ public class HelloController {
     void funcaoVoluntarioCbox(ActionEvent event) {
         cboxFuncaoVoluntario.getItems().addAll(funcoesVoluntario);
     }
+
 
     @FXML
     void segundaVoluntarioBox(ActionEvent event) {
