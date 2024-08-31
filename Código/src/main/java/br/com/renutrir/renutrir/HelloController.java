@@ -1864,8 +1864,6 @@ public class HelloController {
 
     @FXML
     public void instVinculadaCbox(ActionEvent event) {
-        cboxInstVinculada.getItems().clear();
-
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivoInstituicoes))) {
             String linha;
             Instituicao instituicao = null;

@@ -12,11 +12,11 @@ public class Voluntario extends Doador {
     }
     
     public Voluntario(String nome, String email, String telefone, String disponibilidade,
-                      String funcaoVoluntariado, String instituicaoVinculada) {
+                      String funcaoVoluntariado, Instituicao instituicaoVinculada) {
         super(nome, email, telefone);
         this.disponibilidade = disponibilidade;
         this.funcaoVoluntariado = funcaoVoluntariado;
-        this.instituicaoVinculada = instituicaoVinculada;
+        this.instituicaoVinculada = String.valueOf(instituicaoVinculada);
     }
 
     public String getDisponibilidade() {
