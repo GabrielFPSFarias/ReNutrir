@@ -990,6 +990,7 @@ public class HelloController {
 
     public void botaoPerfil(ActionEvent actionEvent) {
         realizarTrocaDeTela("/br/com/renutrir/17-perfil-doador.fxml", "ReNutrir - Perfil");
+        exibirPerfilDoador();
     }
 
     public void botaoDoacoesPendentesDoador(ActionEvent actionEvent) {
@@ -1838,6 +1839,39 @@ public class HelloController {
                 doadorNome, dataHoraFormatada, tipoDoacao, item, quantidade));
 
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+    }
+
+
+    //Tela 17 Perfil doador
+
+    @FXML
+    private Label exibirInfoDoadorLabel;
+
+    public void exibirPerfilDoador() {
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+
+        if (doadorLogado != null) {
+            String perfilDoador = String.format(
+                    "Nome: %s\n" +
+                            "Nome de Usuário: %s\n" +
+                            "Email: %s\n" +
+                            "Telefone: %s\n" +
+                            "CPF: %s\n" +
+                            "Endereço: %s\n" +
+                            "Complemento: %s\n" +
+                            "Referência: %s",
+                    doadorLogado.getNome(),
+                    doadorLogado.getNomeUsuario(),
+                    doadorLogado.getEmail(),
+                    doadorLogado.getTelefone(),
+                    doadorLogado.getCpf(),
+                    doadorLogado.getEndereco()
+            );
+
+            exibirInfoDoadorLabel.setText(perfilDoador);
+        } else {
+            exibirInfoDoadorLabel.setText("Nenhum doador logado.");
+        }
     }
 
 
