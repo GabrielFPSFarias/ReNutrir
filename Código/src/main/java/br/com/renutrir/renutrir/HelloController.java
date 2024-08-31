@@ -1850,7 +1850,7 @@ public class HelloController {
 
     @FXML
     void botaoQueroVoluntario (ActionEvent event) {
-        cboxInstVinculada.getItems().clear(); // Limpa o ComboBox antes de adicionar as instituições
+        cboxInstVinculada.getItems().clear();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivoInstituicoes))) {
             String linha;
@@ -1878,7 +1878,7 @@ public class HelloController {
             }
 
             if (instituicao != null) {
-                cboxInstVinculada.getItems().add(instituicao); // Adiciona a última instituição lida
+                cboxInstVinculada.getItems().add(instituicao);
             }
 
         } catch (IOException e) {
