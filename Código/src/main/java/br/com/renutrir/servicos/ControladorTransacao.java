@@ -95,30 +95,178 @@ public class ControladorTransacao {
       }
       ==============================================================================================================
 
-      //CARTÃO DE CRÉDITO
+ //CARTÃO DE CRÉDITO
 
-      public static boolean validarAutenticacaoPagamento(String codigo) {
+      @  VALIDAR N° DO CARTÃO
 
-        if (codigo == null || codigo.trim().isEmpty()){
-        
-            return false;  
-          }
-        // Verifica se o código da autenticação tem no mínimo 10 e no máximo 32 caracteres
-        if (codigo.length() < 10 || codigo.length() > 32) {
-            return false;
+      public static void validarNumeroCartao(String numeroCartao) {
+        if (numeroCartao == null || numeroCartao.isEmpty() || !numeroCartao.matches("\\d+")) {
+            throw new NumeroCartaoInvalidoException("Número de cartão inválido. Deve conter apenas dígitos.");
         }
-        // Verifica se o código contém apenas letras e números
-        for (int i = 0; i < codigo.length(); i++) {
-            char c = codigo.charAt(i);
-            if (!Character.isLetterOrDigit(c)) {
-                return false;
-            }
+
+        if (!verificarLuhn(numeroCartao)) {
+            throw new NumeroCartaoInvalidoException("Número de cartão inválido. Falhou na verificação de Luhn.");
         }
-        // Se passar por todas as verificações, o código é válido
-        return true;
     }
- 
-}
-  
+
+    private static boolean verificarLuhn(String numeroCartao) {
+        int soma = 0;
+        boolean alternar = false;
+
+        for (int i = numeroCartao.length() - 1; i >= 0; i--) {
+            int digito = Character.getNumericValue(numeroCartao.charAt(i));
+
+            if (alternar) {
+                digito *= 2;
+                if (digito > 9) {
+                    digito -= 9;
+                }
+            }
+
+            soma += digito;
+            alternar = !alternar;
+        }
+
+        return (soma % 10 == 0);
+    }
+
+
+            //EXCEÇÃO
+
+                Classe para a exceção personalizada
+                public class NumeroCartaoInvalidoException extends RuntimeException {
+                    public NumeroCartaoInvalidoException(String mensagem) {
+                        super(mensagem);
+                    }
+                }
+                
+                
+                MAIN 
+                
+                 try {
+                            validarNumeroCartao("4532015112830366"); // Número de exemplo válido
+                            System.out.println("Número de cartão válido.");
+                        } catch (NumeroCartaoInvalidoException e) {
+                            System.err.println(e.getMessage());
+                        }
+
+                        
+
+
+ @  VALIDAR DATA DE VALIDADE
+
+ CÓDIGO 1 (SIMPLIFICADO)
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class ValidadorCartao {
+
+      public static boolean validarDataValidade(String dataValidade) {
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+         LocalDate hoje = LocalDate.now();
+
+            // Tenta parsear a data fornecida
+            LocalDate data = LocalDate.parse("01/" + dataValidade, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+            // Verifica se a data está no passado
+            if (data.isBefore(hoje.withDayOfMonth(1))) {
+               return false;
+            }
+
+            else if (data.getMonthValue() < 1 || data.getMonthValue() > 12) {
+               return false;
+            }
+
+            return true;
+      }
+
+      ===============================================================================================================================
+
+CÓDIGO 2
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+      public static void main(String[] args) {
+         // Teste com datas válidas e inválidas
+
+         if(validarDataValidade("01/2023")){
+
+            System.out.println("Data válida");
+         }
+         else System.out.println("Data inválida");
+      }
       
+public static void main(String[] args) {
+   // Teste com datas válidas e inválidas
+   try {
+      validarDataValidade("08/2024");  // Data válida
+      System.out.println("Data de validade válida.");
+   } catch (IllegalArgumentException e) {
+      System.err.println(e.getMessage());
+   }
+
+   try {
+      validarDataValidade("12/2022");  // Data já expirada
+      System.out.println("Data de validade válida.");
+   } catch (IllegalArgumentException e) {
+      System.err.println(e.getMessage());
+   }
+
+   try {
+      validarDataValidade("13/2025");  // Mês inválido
+      System.out.println("Data de validade válida.");
+   } catch (IllegalArgumentException e) {
+      System.err.println(e.getMessage());
+   }
+
+   try {
+      validarDataValidade("08/2025");  // Data válida
+      System.out.println("Data de validade válida.");
+   } catch (IllegalArgumentException e) {
+      System.err.println(e.getMessage());
+   }
+}
+
+   public static void validarDataValidade(String dataValidade) {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+      LocalDate hoje = LocalDate.now();
+
+      try {
+         // Adiciona o primeiro dia do mês à data fornecida
+         LocalDate data = LocalDate.parse("01/" + dataValidade, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+         // Verifica se a data está no passado
+         LocalDate primeiroDiaDoMes = data.withDayOfMonth(1);
+         LocalDate ultimoDiaDoMes = primeiroDiaDoMes.plusMonths(1).minusDays(1);
+
+         // Verifica se o primeiro dia do mês da data fornecida é antes do início do mês atual
+         if (primeiroDiaDoMes.isBefore(hoje.withDayOfMonth(1))) {
+            throw new IllegalArgumentException("Data de validade já expirada.");
+         }
+
+         // Verifica se o último dia do mês é antes do início do mês atual
+         if (ultimoDiaDoMes.isBefore(hoje.withDayOfMonth(1))) {
+            throw new IllegalArgumentException("Data de validade já expirada.");
+         }
+
+      } catch (DateTimeParseException e) {
+         throw new IllegalArgumentException("Formato de data inválido. Use MM/AAAA.");
+      }
+    }
+   }
+
+
+
+   
+
+
+
+
+
+
+ 
+}     
 */
