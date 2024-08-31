@@ -6,6 +6,9 @@ import java.util.List;
 
 public class ControladorTransacao {
 
+
+    //PIX
+
     // Limite mínimo e máximo para valor de transação, exemplo fictício.
     private static final double VALOR_MINIMO = 0.01;
     private static final double VALOR_MAXIMO = 1000000.00;
@@ -44,6 +47,8 @@ public class ControladorTransacao {
         return true;
     }
 }
+
+
 
 /*
 package br.com.renutrir.servicos;
@@ -93,20 +98,26 @@ public class ControladorTransacao {
           }
           return true;
       }
-      ==============================================================================================================
+#########################################################################################################################################
 
  //CARTÃO DE CRÉDITO
 
-      @  VALIDAR N° DO CARTÃO
+      @  VALIDAR N° DO CARTÃO 
 
-      public static void validarNumeroCartao(String numeroCartao) {
+
+
+
+CÓDIGO (BOOLEAN)
+
+
+public static boolean validarNumeroCartao(String numeroCartao) {
+        // Verificar se o número do cartão é nulo, vazio ou não contém apenas dígitos
         if (numeroCartao == null || numeroCartao.isEmpty() || !numeroCartao.matches("\\d+")) {
-            throw new NumeroCartaoInvalidoException("Número de cartão inválido. Deve conter apenas dígitos.");
+            return false;
         }
 
-        if (!verificarLuhn(numeroCartao)) {
-            throw new NumeroCartaoInvalidoException("Número de cartão inválido. Falhou na verificação de Luhn.");
-        }
+        // Verificar se o número do cartão passa na verificação de Luhn
+        return verificarLuhn(numeroCartao);
     }
 
     private static boolean verificarLuhn(String numeroCartao) {
@@ -131,24 +142,8 @@ public class ControladorTransacao {
     }
 
 
-            //EXCEÇÃO
 
-                Classe para a exceção personalizada
-                public class NumeroCartaoInvalidoException extends RuntimeException {
-                    public NumeroCartaoInvalidoException(String mensagem) {
-                        super(mensagem);
-                    }
-                }
-                
-                
-                MAIN 
-                
-                 try {
-                            validarNumeroCartao("4532015112830366"); // Número de exemplo válido
-                            System.out.println("Número de cartão válido.");
-                        } catch (NumeroCartaoInvalidoException e) {
-                            System.err.println(e.getMessage());
-                        }
+
 
                         
 
@@ -260,10 +255,163 @@ public static void main(String[] args) {
 
 
 
+
+
+
+   @ NOME TO TITULAR
+
+   CÓDIGO 1 (RETORNA EXCEÇÕES)
+
+   public class ValidadorNome {
+
+    // Regex para validar o nome do titular do cartão, permitindo pontos
+    private static final String NOME_REGEX = "^[A-Za-zÀ-ÿ.]+(?: [A-Za-zÀ-ÿ.]+)*$";
+    private static final Pattern NOME_PATTERN = Pattern.compile(NOME_REGEX);
+
+    public static void main(String[] args) {
+        // Teste com exemplos de nomes
+        String[] nomesParaTestar = {
+                "João da Silva",                // Válido
+                "Maria Clara",                  // Válido
+                "John Doe",                     // Válido
+                "Jean-Luc Picard",              // Válido
+                "Ana-Maria",                    // Inválido (hifens não permitidos)
+                "O. Connor",                    // Válido (ponto permitido)
+                "Name.With.Points",             // Válido (pontos permitidos)
+                "Name With   Multiple Spaces",  // Inválido (múltiplos espaços)
+                "Name@With$Special#Characters", // Inválido (caracteres especiais não permitidos)
+                "1234"                          // Inválido (números não permitidos)
+        };
+
+        for (String nome : nomesParaTestar) {
+            if (validarNomeTitular(nome)) {
+                System.out.println(nome + " é um nome válido.");
+            } else {
+                System.err.println(nome + " é inválido.");
+            }
+        }
+    }
+
+    public static boolean validarNomeTitular(String nome) {
+        if (nome == null || nome.isEmpty()) {
+            return false;
+        }
+
+        if (nome.length() > 26) {
+            return false;
+        }
+
+        if (!NOME_PATTERN.matcher(nome).matches()) {
+            return false;
+        }
+
+        return true;
+    }
+}
+
+=========================================================================================================================================
+
+  CÓDIGO 2 
+
+  import java.util.regex.Pattern;
+
+public class ValidadorNome {
+
+    // Regex para validar o nome do titular do cartão, permitindo pontos
+    private static final String NOME_REGEX = "^[A-Za-zÀ-ÿ.]+(?: [A-Za-zÀ-ÿ.]+)*$";
+    private static final Pattern NOME_PATTERN = Pattern.compile(NOME_REGEX);
+
+    public static void main(String[] args) {
+        // Teste com exemplos de nomes
+        String[] nomesParaTestar = {
+                "João da Silva",                // Válido
+                "Maria Clara",                  // Válido
+                "John Doe",                     // Válido
+                "Jean-Luc Picard",              // Válido
+                "Ana-Maria",                    // Inválido (hifens não permitidos)
+                "O. Connor",                    // Válido (ponto permitido)
+                "Name.With.Points",             // Válido (pontos permitidos)
+                "Name With   Multiple Spaces",  // Inválido (múltiplos espaços)
+                "Name@With$Special#Characters", // Inválido (caracteres especiais não permitidos)
+                "1234"                          // Inválido (números não permitidos)
+        };
+
+        for (String nome : nomesParaTestar) {
+            if (validarNomeTitular(nome)) {
+                System.out.println(nome + " é um nome válido.");
+            } else {
+                System.err.println(nome + " é inválido.");
+            }
+        }
+    }
+
+    public static boolean validarNomeTitular(String nome) {
+        if (nome == null || nome.isEmpty()) {
+            return false;
+        }
+
+        if (nome.length() > 26) {
+            return false;
+        }
+
+        return NOME_PATTERN.matcher(nome).matches();
+    }
+}
+
+
+
    
+@ VALIDAR CVV
+
+CÓDIGO 1
+
+  for (String cvv : cvvsParaTestar) {
+            if (validarCVV(cvv)) {
+                System.out.println(cvv + " é um CVV válido.");
+            } else {
+                System.err.println(cvv + " é um CVV inválido.");
+            }
+        }
+    }
+
+    public static boolean validarCVV(String cvv) {
+        // Verificar se o CVV é nulo ou vazio
+        if (cvv == null || cvv.isEmpty()) {
+            return false;
+        }
+
+        // Verificar se o CVV contém apenas números
+        if (!cvv.matches("\\d+")) {
+            return false;
+        }
+
+        // Verificar o comprimento do CVV (3 ou 4 dígitos)
+        return cvv.length() == 3 || cvv.length() == 4;
+    }
 
 
 
+#########################################################################################################################################
+
+//PAGAMENTO EM DÉBITO
+
+@ VALIDAR SENHA
+
+public static boolean validarSenha(String senha) {
+        // Verificar se a senha é nula ou vazia
+        if (senha == null || senha.isEmpty()) {
+            return false;
+        }
+
+        // Verificar se a senha contém apenas números
+        if (!senha.matches("\\d+")) {
+            return false;
+        }
+
+        // Verificar o comprimento da senha (4 ou 6 dígitos)
+        
+        return senha.length() == 4 || senha.length() == 6;
+    }
 
 
 
