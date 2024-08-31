@@ -62,11 +62,9 @@ public class ControladorTransacaoPix {
 /*
 package br.com.renutrir.servicos;
 
-import br.com.renutrir.model.*;
+import br.com.renutrir.model.Transacao;
 
-import java.util.ArrayList;
-
-public class ControladorTransacaoPix {
+public class TransacaoPix {
 // Limite mínimo e máximo para valor de transação, exemplo fictício.
       private static final double VALOR_MINIMO = 0.01;
       private static final double VALOR_MAXIMO = 1000000000.00;
@@ -77,19 +75,20 @@ public class ControladorTransacaoPix {
       }
 
       public static boolean validarIdTransacao(String idTransacao) {
-          // Verifica se o ID é nulo ou não possui 32 caracteres
-          if (idTransacao == null || idTransacao.length() != 32) {
-              return false;
-          }
+        // Verifica se o ID é nulo ou não possui 32 caracteres
+        if (idTransacao == null || idTransacao.length() != 32) {
+            return false;
+        }
 
-          // Verifica se o ID contém apenas caracteres alfanuméricos
-          if (!idTransacao.matches("[A-Za-z0-9]+")) {
-              return false;
-          }
+        // Verifica se o ID contém apenas caracteres alfanuméricos
+        if (!idTransacao.matches("[A-Za-z0-9]+")) {
+            return false;
+        }
 
-          if(identificarIdsDeTransacao(ArrayList idsDeTransacao, String idDeTransacaoInserido)) {
-              //Escrever que esse ID de transação já foi utilizado pelo usuário
-          }
+      if(identificarIdsDeTransacao(ArrayList idsDeTransacao, String idDeTransacaoInserido)){
+
+        //Escrever que esse ID de transação já foi utilizado pelo usuário
+
         return false;
 
       }
@@ -107,5 +106,4 @@ public class ControladorTransacaoPix {
       }
 
 }
-
 */
