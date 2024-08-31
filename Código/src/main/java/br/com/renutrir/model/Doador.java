@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Doador extends Conta {
@@ -20,7 +21,7 @@ public class Doador extends Conta {
     public Doador(String nome, String email, String telefone) {
         super();
         this.setNome(nome);
-        
+
         //idsDeTransacao = new ArrayList<>();
     }
 
@@ -29,11 +30,11 @@ public class Doador extends Conta {
         return super.getNome();
     }
 
-    public void setNivel(int nivel){
+    public void setNivel(int nivel) {
         this.nivel = nivel;
     }
 
-    public void setCertificado(Certificado certificado){
+    public void setCertificado(Certificado certificado) {
         this.certificado = certificado;
     }
 
@@ -44,13 +45,14 @@ public class Doador extends Conta {
         this.dataNascimento = dataNascimento;
     }
 
-    public int getNivel(){
+    public int getNivel() {
         return this.nivel;
     }
 
     public Certificado getCertificado() {
         return this.certificado;
     }
+
     public int calcularIdade() {
         if (dataNascimento == null) {
             throw new IllegalStateException("Data de nascimento não foi definida.");
@@ -74,7 +76,7 @@ public class Doador extends Conta {
         this.certificado.setDescricao("Certificado emitido para " + this.getNome() +
                 " em reconhecimento às suas " + this.certificado.getQuantDoacoes() + " doações.");
     }
-    
+
 
     private boolean CpfValidacao(String cpf) {
         if (cpf == null || !cpf.matches("\\d{11}")) {
@@ -103,15 +105,17 @@ public class Doador extends Conta {
         return (digito1 == cpfInt[9] && digito2 == cpfInt[10]);
     }
 
-   /*public boolean identificarIdsDeTransacao(ArrayList idsDeTranscao, String idDeTransacaoInserido){
-            for(String idDeTransacao  : idsDeTransacao){
-                if(idDeTransacao.equals(idDeTransacaoInserido){
-                    return true;
-                }
-                else false;
+    public boolean identificarIdsDeTransacao(ArrayList idsDeTranscao, String idDeTransacaoInserido) {
+        String[] idsDeTransacao = new String[0];
+        for (String idDeTransacao : idsDeTransacao) {
+            if (idDeTransacao.equals(idDeTransacaoInserido)) {
+                return true;
+            } else {
+                return false;
             }
-        } 
-      }
-    
-    */
+        }
+        return false;
+    }
+
+
 }
