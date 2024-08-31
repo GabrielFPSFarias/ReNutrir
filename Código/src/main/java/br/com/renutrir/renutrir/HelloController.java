@@ -1659,10 +1659,11 @@ public class HelloController {
         }
     }
 
-    public void setInformacoesDoacao(String doadorNome, String tipoDoacao, LocalDateTime dataHora) {
+    public void setInformacoesDoacao(String doadorNome, String tipoDoacao, int quantidade, String item, LocalDateTime dataHora) {
         String dataHoraFormatada = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
-        exibirInfoDoacaoLabel.setText(String.format("Doador: %s\nData e hora: %s\nTipo da doação: %s",
-                doadorNome, dataHoraFormatada, tipoDoacao));
+        exibirInfoDoacaoLabel.setText(String.format(
+                "Doador: %s\nData e hora: %s\nTipo da doação: %s\nItem: %s\nQuantidade: %d",
+                doadorNome, dataHoraFormatada, tipoDoacao, item, quantidade));
 
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
     }
