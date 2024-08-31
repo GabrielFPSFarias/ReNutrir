@@ -1565,7 +1565,40 @@ public class HelloController {
 
     @FXML
     void doarRoupaBotao(ActionEvent event) {
+        String nomeRoupa = fieldInserirNomeRoupa.getText();
+        String qtdRoupa = fieldInserirQtdRoupa.getText();
 
+        if (nomeRoupa.isEmpty() || qtdRoupa.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
+            return;
+        }
+
+        int quantidade;
+        try {
+            quantidade = Integer.parseInt(qtdRoupa);
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
+            return;
+        }
+
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+        String doadorNome = doadorLogado != null ? doadorLogado.getNome(): "Desconhecido";
+        String tipoDoacao = "Roupas";
+        LocalDateTime dataHora = LocalDateTime.now();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
+            Parent root = loader.load();
+            HelloController controlador = loader.getController();
+            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeRoupa, dataHora);
+
+            Stage stage = (Stage) botaoRoupaDoar.getScene().getWindow();
+            stage.setTitle("ReNutrir - Doação Concluída");
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
+        }
     }
 
     @FXML
