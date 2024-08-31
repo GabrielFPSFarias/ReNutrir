@@ -26,7 +26,7 @@ public class ControladorPerfil {
     @FXML
     private Label labelCpf;
 
-    private String caminhoArquivoDoador = "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo.txt";
+    private String caminhoArquivoDoador = "/src/dados/arquivo.txt";
 
     @FXML
     private void carregarPerfilDoador() {
@@ -81,7 +81,7 @@ public class ControladorPerfil {
     @FXML
     private Label labelEmailInstituicao;
 
-    private String caminhoArquivoInstituicao = "C:/Users/Daniel Dionísio/IdeaProjects/D/ReNutrir/src/dados/arquivo1.txt";
+    private String caminhoArquivoInstituicao = "/src/dados/arquivo1.txt";
 
     @FXML
     private void carregarPerfilInstituicao() {

@@ -1829,7 +1829,7 @@ public class HelloController {
     private ComboBox<String> cboxFuncaoVoluntario;
 
     @FXML
-    private ComboBox<String> cboxInstVinculada;
+    private ComboBox<Instituicao> cboxInstVinculada;
 
     @FXML
     private Text exibirVoluntarioLabel;
@@ -1846,9 +1846,44 @@ public class HelloController {
     @FXML
     private Button queroVoluntarioBotao;
 
-    @FXML
-    void botaoQueroVoluntario(ActionEvent event) {
+    private String caminhoArquivoInstituicoes = "/src/dados/arquivo1.txt";
 
+    @FXML
+    void botaoQueroVoluntario (ActionEvent event) {
+        cboxInstVinculada.getItems().clear(); // Limpa o ComboBox antes de adicionar as instituições
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivoInstituicoes))) {
+            String linha;
+            Instituicao instituicao = null;
+
+            while ((linha = reader.readLine()) != null) {
+                if (linha.startsWith("Nome: ")) {
+                    if (instituicao != null) {
+                        cboxInstVinculada.getItems().add(instituicao);
+                    }
+                    instituicao = new Instituicao();
+                    instituicao.setNome(linha.substring(6).trim());
+                } else if (linha.startsWith("Nome de Usuário: ") && instituicao != null) {
+                    instituicao.setNomeUsuario(linha.substring(17).trim());
+                } else if (linha.startsWith("Email: ") && instituicao != null) {
+                    instituicao.setEmail(linha.substring(7).trim());
+                } else if (linha.startsWith("Telefone: ") && instituicao != null) {
+                    instituicao.setTelefone(linha.substring(10).trim());
+                } else if (linha.startsWith("CNPJ: ") && instituicao != null) {
+                    instituicao.setCnpj(linha.substring(6).trim());
+                } else if (linha.startsWith("Endereço: ") && instituicao != null) {
+                    String enderecoStr = linha.substring(10).trim();
+                    instituicao.setEndereco(new Endereco(enderecoStr, null, null, null, null, null, null)); // Preencher com os valores restantes
+                }
+            }
+
+            if (instituicao != null) {
+                cboxInstVinculada.getItems().add(instituicao); // Adiciona a última instituição lida
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
