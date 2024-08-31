@@ -833,10 +833,19 @@ public class HelloController {
             Instituicao instituicao = null;
             boolean instituicaoEncontrada = false;
 
+            String enderecoStr = null;
+            String bairro = null;
+            String numero = null;
+            String cidade = null;
+            String uf = null;
+            String complemento = null;
+            String referencia = null;
+
             while ((linha = reader.readLine()) != null) {
-                // Verifica o início da leitura da instituição
                 if (linha.startsWith("Nome: ")) {
-                    instituicao = new Instituicao();
+                    if (instituicao == null) {
+                        instituicao = new Instituicao();
+                    }
                     instituicao.setNome(linha.substring(6).trim());
                 } else if (linha.startsWith("Nome de Usuário: ") && instituicao != null) {
                     String nomeUsuario = linha.substring(17).trim();
@@ -850,23 +859,43 @@ public class HelloController {
                         instituicao.setEmail(email);
                         instituicaoEncontrada = true;
                     }
+                } else if (linha.startsWith("Telefone: ") && instituicao != null) {
+                    instituicao.setTelefone(linha.substring(10).trim());
+                } else if (linha.startsWith("CNPJ: ") && instituicao != null) {
+                    instituicao.setCnpj(linha.substring(6).trim());
+                } else if (linha.startsWith("Endereço: ") && instituicao != null) {
+                    enderecoStr = linha.substring(10).trim();
+                } else if (linha.startsWith("Bairro: ") && instituicao != null) {
+                    bairro = linha.substring(8).trim();
+                } else if (linha.startsWith("Número: ") && instituicao != null) {
+                    numero = linha.substring(8).trim();
+                } else if (linha.startsWith("Cidade: ") && instituicao != null) {
+                    cidade = linha.substring(8).trim();
+                } else if (linha.startsWith("UF: ") && instituicao != null) {
+                    uf = linha.substring(4).trim();
+                } else if (linha.startsWith("Complemento: ") && instituicao != null) {
+                    complemento = linha.substring(13).trim();
+                } else if (linha.startsWith("Referência: ") && instituicao != null) {
+                    referencia = linha.substring(12).trim();
                 } else if (linha.startsWith("Senha: ") && instituicaoEncontrada && instituicao != null) {
                     String senhaLida = linha.substring(7).trim();
                     if (senhaLida.equals(senha)) {
-                        instituicao.setSenha(senhaLida);
+                        Endereco endereco = new Endereco(enderecoStr, bairro, numero, cidade, uf, complemento, referencia);
+                        instituicao.setEndereco(endereco);
+                        instituicao.setSenha(senhaLida); // Definir a senha após a verificação
                         return instituicao;
                     } else {
-                        instituicao = null; //Se a senha não estiver certa, a instituição é inválida
+                        instituicao = null; // Se a senha não estiver correta, a instituição é inválida
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null; //Retorna null se não encontrar a instituição
+        return null; // Retorna null se não encontrar a instituição
     }
 
-
+    
     private boolean verificarDoadorExistente(String emailOuUsuario, String cpf, String caminhoArquivo) {
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;
@@ -950,8 +979,6 @@ public class HelloController {
         }
         return null; //Retorna null se não encontrar o doador
     }
-
-
 
     //Métodos de cadastro instituição
 
