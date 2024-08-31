@@ -889,10 +889,19 @@ public class HelloController {
             Doador doador = null;
             boolean doadorEncontrado = false;
 
+            String enderecoStr = null;
+            String bairro = null;
+            String numero = null;
+            String cidade = null;
+            String uf = null;
+            String complemento = null;
+            String referencia = null;
+
             while ((linha = reader.readLine()) != null) {
-                //Verifica o início da leitura do doador
                 if (linha.startsWith("Nome: ")) {
-                    doador = new Doador();
+                    if (doador == null) {
+                        doador = new Doador();
+                    }
                     doador.setNome(linha.substring(6).trim());
                 } else if (linha.startsWith("Nome de Usuário: ") && doador != null) {
                     String nomeUsuario = linha.substring(17).trim();
@@ -906,20 +915,40 @@ public class HelloController {
                         doador.setEmail(email);
                         doadorEncontrado = true;
                     }
+                } else if (linha.startsWith("Telefone: ") && doador != null) {
+                    doador.setTelefone(linha.substring(10).trim());
+                } else if (linha.startsWith("CPF: ") && doador != null) {
+                    doador.setCpf(linha.substring(5).trim());
+                } else if (linha.startsWith("Endereço: ") && doador != null) {
+                    enderecoStr = linha.substring(10).trim();
+                } else if (linha.startsWith("Bairro: ") && doador != null) {
+                    bairro = linha.substring(8).trim();
+                } else if (linha.startsWith("Número: ") && doador != null) {
+                    numero = linha.substring(8).trim();
+                } else if (linha.startsWith("Cidade: ") && doador != null) {
+                    cidade = linha.substring(8).trim();
+                } else if (linha.startsWith("UF: ") && doador != null) {
+                    uf = linha.substring(4).trim();
+                } else if (linha.startsWith("Complemento: ") && doador != null) {
+                    complemento = linha.substring(13).trim();
+                } else if (linha.startsWith("Referência: ") && doador != null) {
+                    referencia = linha.substring(12).trim();
                 } else if (linha.startsWith("Senha: ") && doadorEncontrado && doador != null) {
                     String senhaLida = linha.substring(7).trim();
                     if (senhaLida.equals(senha)) {
-                        doador.setSenha(senhaLida);
+                        Endereco endereco = new Endereco(enderecoStr, bairro, numero, cidade, uf, complemento, referencia);
+                        doador.setEndereco(endereco);
+                        doador.setSenha(senhaLida); // Definir a senha após a verificação
                         return doador;
                     } else {
-                        doador = null; //Se a senha não estiver certa, o doador é inválido
+                        doador = null; // Se a senha não estiver correta, o doador é inválido
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null; //Retorna null se não encontrar o doador
+        return null; // Retorna null se não encontrar o doador
     }
 
 
@@ -1086,9 +1115,6 @@ public class HelloController {
     //Tela 22 - Solicitar Doações (Instituição)
 
     @FXML
-    private Button pixSolicitar;
-
-    @FXML
     private Button bebidasSolicitar;
 
     @FXML
@@ -1098,13 +1124,13 @@ public class HelloController {
     private Button produtoLimpezaSolicitar;
 
     @FXML
-    private Button cartaoSolicitar;
-
-    @FXML
     private Button roupasSolicitar;
 
     @FXML
     private Button moveisSolicitar;
+
+    @FXML
+    private Button dinheiroSolicitar;
 
     @FXML
     private Button alimentosSolicitar;
@@ -1121,20 +1147,8 @@ public class HelloController {
     }
 
     @FXML
-    void solicitarPix(ActionEvent event) {
-        realizarTrocaDeTela("/br/com/renutrir/22-1-pix.fxml", "ReNutrir - Solicitar PIX");
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Pix");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Pix");
-        solicitacao.salvarSolicitacaoEmArquivo();
-    }
+    void solicitarDinheiro(ActionEvent event) {
 
-    @FXML
-    void solicitarCartao(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Cartão");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Cartão");
-        solicitacao.salvarSolicitacaoEmArquivo();
     }
 
     @FXML
