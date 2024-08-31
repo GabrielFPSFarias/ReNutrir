@@ -21,7 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
-import org.w3c.dom.Text;
+import javafx.scene.text.*;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -1826,7 +1826,7 @@ public class HelloController {
     private CheckBox boxSegundaVoluntario;
 
     @FXML
-    private ComboBox<?> cboxFuncaoVoluntario;
+    private ComboBox<String> cboxFuncaoVoluntario;
 
     @FXML
     private Text exibirVoluntarioLabel;
