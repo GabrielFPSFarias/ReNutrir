@@ -144,6 +144,11 @@ public class HelloController {
             if (doadorLogado != null) {
                 System.out.println("Doador logado: " + doadorLogado.getNome()); //testar
             }
+
+            Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+            if (instituicaoLogada != null) {
+                System.out.println("Instituição logada: " + instituicaoLogada.getNome()); //testar tbm
+            }
         }
     }
 
@@ -1437,7 +1442,15 @@ public class HelloController {
             return;
         }
 
-        doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+        int quantidade;
+        try {
+            quantidade = Integer.parseInt(qtdAlimento);
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "A quantidade deve ser um número válido.");
+            return;
+        }
+
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
         String doadorNome = doadorLogado != null ? doadorLogado.getNome() : "Desconhecido";
         String tipoDoacao = "Alimentos";
         LocalDateTime dataHora = LocalDateTime.now();
@@ -1446,7 +1459,7 @@ public class HelloController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
             Parent root = loader.load();
             HelloController controlador = loader.getController();
-            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, dataHora);
+            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeAlimento, dataHora);
 
             Stage stage = (Stage) botaoAlimentosDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Doação Concluída");
