@@ -989,8 +989,20 @@ public class HelloController {
     }
 
     public void botaoPerfil(ActionEvent actionEvent) {
-        realizarTrocaDeTela("/br/com/renutrir/17-perfil-doador.fxml", "ReNutrir - Perfil");
-        exibirPerfilDoador();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/17-perfil-doador.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("ReNutrir - Perfil");
+            stage.show();
+            HelloController controller = loader.getController();
+            controller.exibirPerfilDoador();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void botaoDoacoesPendentesDoador(ActionEvent actionEvent) {
@@ -1847,7 +1859,7 @@ public class HelloController {
     @FXML
     private Label exibirInfoDoadorLabel;
 
-    public void exibirPerfilDoador() {
+    public void exibirPerfilDoador() throws IOException {
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
 
         if (doadorLogado != null) {
@@ -1857,24 +1869,25 @@ public class HelloController {
                             "Email: %s\n" +
                             "Telefone: %s\n" +
                             "CPF: %s\n" +
-                            "Endereço: %s\n" +
-                            "Complemento: %s\n" +
-                            "Referência: %s",
-                    doadorLogado.getNome(),
-                    doadorLogado.getNomeUsuario(),
-                    doadorLogado.getEmail(),
-                    doadorLogado.getTelefone(),
-                    doadorLogado.getCpf(),
-                    doadorLogado.getEndereco()
+                            "Endereço: %s\n",
+                    doadorLogado.getNome() != null ? doadorLogado.getNome() : "",
+                    doadorLogado.getNomeUsuario() != null ? doadorLogado.getNomeUsuario() : "",
+                    doadorLogado.getEmail() != null ? doadorLogado.getEmail() : "",
+                    doadorLogado.getTelefone() != null ? doadorLogado.getTelefone() : "",
+                    doadorLogado.getCpf() != null ? doadorLogado.getCpf() : "",
+                    doadorLogado.getEndereco() != null ? doadorLogado.getEndereco() : ""
             );
+
+            //Ver se o label não está null e se o perfil tá certo
+            System.out.println("Label: " + exibirInfoDoadorLabel);
+            System.out.println("Perfil: " + perfilDoador);
 
             exibirInfoDoadorLabel.setText(perfilDoador);
         } else {
             exibirInfoDoadorLabel.setText("Nenhum doador logado.");
         }
     }
-
-
+    
     //Tela 22.1 Solicitar PIX
 
     @FXML
