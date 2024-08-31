@@ -83,7 +83,7 @@
                </padding>
                <children>
                   <Button fx:id="queroVoluntarioBotao" mnemonicParsing="false" onAction="#botaoQueroVoluntario" prefHeight="30.0" prefWidth="226.0" text="Quero ser voluntário" textAlignment="CENTER" GridPane.rowIndex="10" />
-                  <Text fx:id="exibirVoluntarioLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="LEIA COM ATENÇÃO: Ser voluntário" textAlignment="CENTER" wrappingWidth="443.31640625" />
+                  <Text fx:id="exibirVoluntarioLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Você está no menu para se tornar um voluntário do projeto ReNutrir" textAlignment="CENTER" wrappingWidth="443.31640625" />
                   <ComboBox fx:id="cboxFuncaoVoluntario" onAction="#funcaoVoluntarioCbox" prefHeight="27.0" prefWidth="225.0" promptText="Função de Voluntário" GridPane.rowIndex="7" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Horário de disponibilidade:" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dias de disponibilidade:" GridPane.rowIndex="4" />

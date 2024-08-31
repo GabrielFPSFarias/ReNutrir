@@ -1849,7 +1849,12 @@ public class HelloController {
     private String caminhoArquivoInstituicoes = "/src/dados/arquivo1.txt";
 
     @FXML
-    void botaoQueroVoluntario (ActionEvent event) {
+    public void botaoQueroVoluntario () {
+
+    }
+
+    @FXML
+    public void instVinculadaCbox (ActionEvent event) {
         cboxInstVinculada.getItems().clear();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivoInstituicoes))) {
@@ -1888,11 +1893,6 @@ public class HelloController {
 
     @FXML
     void funcaoVoluntarioCbox(ActionEvent event) {
-
-    }
-
-    @FXML
-    void instVinculadaCbox(ActionEvent event) {
 
     }
 
