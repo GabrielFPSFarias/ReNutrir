@@ -1,3 +1,7 @@
+package br.com.renutrir.servicos;
+
+import br.com.renutrir.model.Transacao;
+
 public class TransacaoPix {
 // Limite mínimo e máximo para valor de transação, exemplo fictício.
       private static final double VALOR_MINIMO = 0.01;
