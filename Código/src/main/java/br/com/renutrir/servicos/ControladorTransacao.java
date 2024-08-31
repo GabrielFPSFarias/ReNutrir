@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ControladorTransacao {
 
-
+/*
     //PIX
 
     // Limite mínimo e máximo para valor de transação, exemplo fictício.
@@ -49,7 +49,7 @@ public class ControladorTransacao {
 }
 
 
-
+*/
 /*
 package br.com.renutrir.servicos;
 
