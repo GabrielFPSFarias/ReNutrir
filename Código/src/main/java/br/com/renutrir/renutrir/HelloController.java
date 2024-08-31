@@ -8,9 +8,11 @@ import br.com.renutrir.model.Doador;
 import br.com.renutrir.servicos.*;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,11 +26,13 @@ import javafx.scene.control.*;
 import javafx.scene.text.*;
 
 import java.io.*;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class HelloController {
 
@@ -1850,13 +1854,6 @@ public class HelloController {
 
     private String caminhoArquivoInstituicoes = "/src/dados/arquivo1.txt";
 
-    //Funções dos voluntário
-    private List<String> funcoesVoluntario = Arrays.asList(
-            "Transporte de Doações",
-            "Ajudante dos Eventos"
-    );
-
-
     @FXML
     public void botaoQueroVoluntario() {
 
@@ -1879,7 +1876,6 @@ public class HelloController {
             e.printStackTrace();
         }
     }
-
 
 
     @FXML

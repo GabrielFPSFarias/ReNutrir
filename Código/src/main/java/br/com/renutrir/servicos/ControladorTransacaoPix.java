@@ -2,7 +2,9 @@ package br.com.renutrir.servicos;
 
 import br.com.renutrir.model.Transacao;
 
-public class TransacaoPix {
+import java.util.ArrayList;
+
+public class ControladorTransacaoPix {
 // Limite mínimo e máximo para valor de transação, exemplo fictício.
       private static final double VALOR_MINIMO = 0.01;
       private static final double VALOR_MAXIMO = 1000000000.00;
@@ -11,7 +13,7 @@ public class TransacaoPix {
           return validarIdTransacao(transacao.getIdTransacao()) &&
                  validarValor(transacao.getValor());
       }
-  
+
       public static boolean validarIdTransacao(String idTransacao) {
         // Verifica se o ID é nulo ou não possui 32 caracteres
         if (idTransacao == null || idTransacao.length() != 32) {
