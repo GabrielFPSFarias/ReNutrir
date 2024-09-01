@@ -2,21 +2,15 @@ package br.com.renutrir.model;
 
 public class Transacao {
 
-    private double valorTransacao;
-    private String idTransacao;
     private Doador doador;
     private Instituicao instituicao;
+    private valorTransacao;
 
     //Construtor com todos os parâmetros
-    public Transacao(double valorTransacao, String idTransacao, Doador doador, Instituicao instituicao) {
+    public Transacao(double valorTransacao, Doador doador, Instituicao instituicao) {
         this.valorTransacao = valorTransacao;
-        this.idTransacao = idTransacao;
         this.doador = doador;
         this.instituicao = instituicao;
-    }
-
-    public double getValor() {
-        return this.valorTransacao;
     }
 
     // Getters e Setters
@@ -28,13 +22,6 @@ public class Transacao {
         this.valorTransacao = valorTransacao;
     }
 
-    public String getIdTransacao() {
-        return idTransacao;
-    }
-
-    public void setIdTransacao(String idTransacao) {
-        this.idTransacao = idTransacao;
-    }
 
     public Doador getDoador() {
         return doador;
