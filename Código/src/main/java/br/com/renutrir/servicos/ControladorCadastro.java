@@ -1,8 +1,8 @@
 package br.com.renutrir.servicos;
 
 import br.com.renutrir.model.*;
-import br.com.renutrir.model.Conta;
-import br.com.renutrir.model.Endereco;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class ControladorCadastro {
 
@@ -23,15 +23,17 @@ public class ControladorCadastro {
     }
 
     private void validarDados(String nome, String nomeUsuario, String email, String senha, String telefone) {
-
-        
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("O nome não pode estar vazio.");
+        validarNome(nome);
+        validarNomeDeUsuario(nomeUsuario);
+        if (!validarEmail(email)) {
+            throw new IllegalArgumentException("E-mail inválido.");
         }
+        validarSenha(senha);
+        validarTelefone(telefone);
+    }
 
-/* SUGESTÃO DE CONTROLADOR DE NOME
-
-public static void validarNome(String nome) {
+    // SUGESTÃO DE CONTROLADOR DE NOME
+    public static void validarNome(String nome) {
         // Verifica se o nome é null ou vazio
         if (nome == null || nome.isEmpty()) {
             throw new IllegalArgumentException("O nome não pode estar vazio.");
@@ -53,28 +55,20 @@ public static void validarNome(String nome) {
         }
     }
 
-CÓDIGO DA EXCEÇÃO NO MAIN
-
-for (String name : testNames) {
-            try {
-                validarNome(name);
-                System.out.println(name + " é válido.");
-            } catch (IllegalArgumentException e) {
-                System.out.println(name + " é inválido: " + e.getMessage());
-            }
+    // CÓDIGO DA EXCEÇÃO NO MAIN
+    /*
+    for (String name : testNames) {
+        try {
+            validarNome(name);
+            System.out.println(name + " é válido.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(name + " é inválido: " + e.getMessage());
         }
-        */
+    }
+    */
 
-        if (nomeUsuario == null || nomeUsuario.length() < 6) {
-            throw new IllegalArgumentException("O nome de usuário deve ter 6 ou mais caracteres.");
-        }
-
-        /* SUGESTÂO PARA VALIDAR O NOME DE USUÁRIO
-
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
-     public static void validarNomeDeUsuario(String nomeUsuario) {
+    // SUGESTÃO PARA VALIDAR O NOME DE USUÁRIO
+    public static void validarNomeDeUsuario(String nomeUsuario) {
         // Verifica se o nome de usuário é null ou vazio
         if (nomeUsuario == null || nomeUsuario.isEmpty()) {
             throw new IllegalArgumentException("O nome não pode estar vazio.");
@@ -97,93 +91,76 @@ import java.util.regex.Matcher;
         }
     }
 
-    Código da exceção no MAIN
-
+    /* Código da exceção no MAIN
     for (String user : testUsers) {
-            try {
-                validarNomeDeUsuario(user);
-                System.out.println(user + " é válido.");
-            } catch (IllegalArgumentException e) {
-                System.out.println(user + " é inválido: " + e.getMessage());
-            }
+        try {
+            validarNomeDeUsuario(user);
+            System.out.println(user + " é válido.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(user + " é inválido: " + e.getMessage());
         }
+    }
+    */
 
-        */
-        
-
-        if (email == null || !email.contains("@")) {
-            throw new IllegalArgumentException("E-mail inválido.");
-        }
-
-         /*SUGESTÂO DE NOVO CÓDIGO PARA VALIDAÇÂO DO EMAIL;
-
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
+    // SUGESTÃO DE NOVO CÓDIGO PARA VALIDAÇÃO DO EMAIL
     public static boolean validarEmail(String email) {
         // Regex que segue as regras descritas
         String regex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
         // Compila a expressão regular
         Pattern pattern = Pattern.compile(regex);
-        
+
         // Verifica se o e-mail corresponde ao padrão
         Matcher matcher = pattern.matcher(email);
 
         // Retorna verdadeiro se o e-mail for válido
         return matcher.matches();
     }
-        */
-        
 
-        if (senha == null || senha.isEmpty() || senha.length() < 8) {
-            throw new IllegalArgumentException("A senha deve ter mais de 8 caracteres.");
-        }
+    /* 
+    if (senha == null || senha.isEmpty() || senha.length() < 8) {
+        throw new IllegalArgumentException("A senha deve ter mais de 8 caracteres.");
+    }
+    */ 
 
-        /*SUGESTÃO DE VALIDAÇÃO PARA SENHA
-
-        public static void validarSenha(String senha) {
+    // SUGESTÃO DE VALIDAÇÃO PARA SENHA
+    public static void validarSenha(String senha) {
         // Verifica se a senha é null ou vazia
         if (senha == null || senha.trim().isEmpty()) {
             throw new IllegalArgumentException("A senha não pode ser null ou vazia.");
         }
 
-        // Verifica se a senha tem pelo menos 8 caracteres
-        if (senha.length() < 8) {
-            throw new IllegalArgumentException("A senha deve ter no mínimo 8 caracteres.");
+        // Verifica se a senha tem pelo menos 4 caracteres
+        if (senha.length() < 4) {
+            throw new IllegalArgumentException("A senha deve ter no mínimo 4 caracteres.");
         }
     }
 
-    EXCEÇÕES NO MAIN
-
+    // EXCEÇÕES NO MAIN
+    /*
     for (String senha : testSenhas) {
-            try {
-                validarSenha(senha);
-                System.out.println("Senha \"" + senha + "\" é válida.");
-            } catch (IllegalArgumentException e) {
-                System.out.println("Senha \"" + senha + "\" é inválida: " + e.getMessage());
-            }
+        try {
+            validarSenha(senha);
+            System.out.println("Senha \"" + senha + "\" é válida.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Senha \"" + senha + "\" é inválida: " + e.getMessage());
         }
-        */
+    }
+    */
         
-
-        if (telefone == null || telefone.length() < 8) {
-            throw new IllegalArgumentException("Telefone inválido.");
-        }
-
-    /*SUGESTÃO DE CÓDIGO PARA O TELEFONE
-
-    import java.util.regex.Pattern;
-    import java.util.regex.Matcher;
-
-    public class ValidarTelefone {
-
-     public static void validarTelefone(String telefone) {
+    /*
+    if (telefone == null || telefone.length() < 8) {
+        throw new IllegalArgumentException("Telefone inválido.");
+    }
+    */
+    
+    // SUGESTÃO DE CÓDIGO PARA O TELEFONE
+    public static void validarTelefone(String telefone) {
         // Verifica se o telefone é null ou vazio
         if (telefone == null || telefone.trim().isEmpty()) {
             throw new IllegalArgumentException("O número de telefone não pode ser null ou vazio.");
         }
-
+         
         // Expressão regular para validar o formato internacional de número de telefone
         // A regex permite:
         // - Começar com '+' seguido pelo código do país (1 a 3 dígitos)
@@ -202,19 +179,15 @@ import java.util.regex.Matcher;
         }
     }
 
-    CÓDIGO DAS EXCEÇÕES
-    
+    /* CÓDIGO DAS EXCEÇÕES
     for (String telefone : testTelefones) {
-            try {
-                validarTelefone(telefone);
-                System.out.println("Telefone \"" + telefone + "\" é válido.");
-            } catch (IllegalArgumentException e) {
-                System.out.println("Telefone \"" + telefone + "\" é inválido: " + e.getMessage());
-            }
+        try {
+            validarTelefone(telefone);
+            System.out.println("Telefone \"" + telefone + "\" é válido.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Telefone \"" + telefone + "\" é inválido: " + e.getMessage());
         }
-
-    
-
-            */
     }
+    */
 }
+    

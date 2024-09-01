@@ -2,10 +2,7 @@ package br.com.renutrir.model;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Doador extends Conta {
@@ -126,8 +123,8 @@ public class Doador extends Conta {
         return (digito1 == cpfInt[9] && digito2 == cpfInt[10]);
     }
 
-    public void doar(Instituicao instituicao) {
-
+    public IntencaoDoacao doar(Instituicao instituicao, int quantidade, String tipoItem, String item) {
+return new IntencaoDoacao(this, instituicao, quantidade, tipoItem, item);
     }
 
     @Override

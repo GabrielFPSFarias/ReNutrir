@@ -63,8 +63,8 @@ public class ControladorIntencaoDeDoacao {
     }
 
     private boolean validarIntencaoDeDoacao(IntencaoDoacao intencao) {
-        if (intencao.getDescricao() == null || intencao.getDescricao().isEmpty()) {
-            System.out.println("Descrição inválida.");
+        if (intencao.Item() == null || intencao.getItem().isEmpty()) {
+            System.out.println("Item inválido.");
             return false;
         }
         if (intencao.getQuantidade() <= 0) {
