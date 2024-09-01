@@ -1,10 +1,7 @@
 package br.com.renutrir.renutrir;
 
-import br.com.renutrir.model.Endereco;
-import br.com.renutrir.model.Instituicao;
-import br.com.renutrir.model.SolicitacaoDoacao;
+import br.com.renutrir.model.*;
 import br.com.renutrir.repositorio.*;
-import br.com.renutrir.model.Doador;
 import br.com.renutrir.servicos.*;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
@@ -29,12 +26,9 @@ import java.io.*;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
-public class HelloController {
+public class HelloController implements Initializable{
 
     private Doador doadorLogado;
 
@@ -137,7 +131,7 @@ public class HelloController {
     public Button perfilBotao;
     public Button doacoesPendentesDoadorBotao;
 
-    private void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
+    public void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
         System.out.println("Clicou: " + fxmlArquivo);
         Stage stage = (Stage) voltarBotao.getScene().getWindow();
         trocarTela(stage, fxmlArquivo, titulo);
@@ -1859,6 +1853,7 @@ public class HelloController {
 
     }
 
+    /*
     @FXML
     public void instVinculadaCbox() {
         cboxInstVinculada.getItems().clear();
@@ -1882,6 +1877,28 @@ public class HelloController {
     void funcaoVoluntarioCbox(ActionEvent event) {
         cboxFuncaoVoluntario.getItems().clear(); // Limpa as opções atuais, se houver
         cboxFuncaoVoluntario.getItems().addAll("Transportador de Doações", "Ajudante dos Eventos");
+    }
+    */
+
+    private List<String> listaVoluntarios = new ArrayList<String>();
+
+    private ObservableList<Voluntario> observableListVoluntarios;
+
+    private ComboBox<Voluntario> voluntarioComboBox;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        funcaoVoluntarioCbox();
+    }
+
+    @FXML
+    public void funcaoVoluntarioCbox () {
+
+    }
+
+    @FXML
+    public void instVinculadaCbox () {
+
     }
 
 
