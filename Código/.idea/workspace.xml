@@ -5,31 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/Doador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/Doador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioIntencaoDoacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioIntencaoDoacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorTransacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorTransacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/javafx/HelloApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/javafx/HelloController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/javafx/hello-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Certificado.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Certificado.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Conta.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Conta.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Doacao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Doacao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Doador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Doador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Evento.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Evento.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Instituicao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Instituicao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/IntencaoDoacao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/IntencaoDoacao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Voluntario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Voluntario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/repositorio/RepositorioContas.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/repositorio/RepositorioContas.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/repositorio/RepositorioDoacoes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/repositorio/RepositorioDoacoes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/DoacaoServico.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/DoacaoServicos.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/TransacaoPix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/TransacaoPix.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +45,7 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -104,31 +82,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
