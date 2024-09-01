@@ -32,7 +32,7 @@ public class ControladorTransacaoPix {
         }
 
         // Verifica se o ID já foi utilizado
-        //ArrayList<String> idsDeTransacao = new ArrayList<>(); // Substitua por uma lista real de IDs
+
         if (identificarIdsDeTransacao(Transacao.doador.idsDeTransacao, idTransacao)) {
             System.out.println("Esse ID de transação já foi utilizado pelo usuário.");
             return false;
