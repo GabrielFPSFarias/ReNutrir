@@ -1,6 +1,6 @@
 package br.com.renutrir.model;
 
-public class TransacaoCartaoCredito{
+public class TransacaoCartaoCredito extends Transacao {
 
   
 }
