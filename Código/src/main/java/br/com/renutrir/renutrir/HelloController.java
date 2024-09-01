@@ -1987,12 +1987,12 @@ public class HelloController {
 
     @FXML
     public void botaoListaEventosCriadosBotao(ActionEvent actionEvent) {
-
+        realizarTrocaDeTela("/br/com/renutrir/20-2-lista-eventos.fxml","ReNutrir - Lista de Eventos");
     }
 
     @FXML
     void botaoEditarEvento(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/20-3-editar-eventos.fxml","ReNutrir - Lista de Eventos");
     }
 
     @FXML
@@ -2124,7 +2124,6 @@ public class HelloController {
         }
     }
 
-    // Métodos relacionados aos campos de entrada
     @FXML
     void fieldNomeEvento(ActionEvent event) {
 
@@ -2153,6 +2152,24 @@ public class HelloController {
     @FXML
     void fieldDescricaoEvento(ActionEvent event) {
 
+    }
+
+
+    //Tela 20.2 Lista de eventos criados
+
+    @FXML
+    private Label labelEventosLista;
+
+    @FXML
+    void botaoVoltar43(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+    }
+
+    //Tela 20.3 Editar eventos criados pela instituição
+
+    @FXML
+    void botaoVoltar44(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
 
 
