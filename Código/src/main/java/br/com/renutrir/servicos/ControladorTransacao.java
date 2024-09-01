@@ -1,9 +1,5 @@
 package br.com.renutrir.servicos;
 
-import br.com.renutrir.model.Transacao;
-
-import java.util.List;
-
 public class ControladorTransacao {
 
 
@@ -13,6 +9,8 @@ public class ControladorTransacao {
     private boolean validarValor(double valor) {
          return (valor < VALOR_MINIMO || valor > VALOR_MAXIMO);
     }
+
+}
 
 /*
     //PIX
