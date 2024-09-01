@@ -1940,6 +1940,24 @@ public class HelloController {
     }
 
 
+    //Tela 15 Certificados e pontuação
+
+    @FXML
+    private Button gerarCertificadoBotao;
+
+    @FXML
+    private Label labelInfoDoadorCertificado;
+
+    @FXML
+    void botaoVoltar15(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml","ReNutrir - Menu Doador");
+    }
+
+    @FXML
+    void botaoGerarCertificado(ActionEvent event) {
+
+    }
+
     //Tela 17 Perfil doador
 
     @FXML
@@ -2351,8 +2369,7 @@ public class HelloController {
         Optional<String> result = dialog.showAndWait();
         return result.map(Integer::parseInt).orElse(0);
     }
-
-
+    
 
     //Tela 22.1 Solicitar Dinheiro
 
@@ -2363,11 +2380,6 @@ public class HelloController {
     private TextField doacaoValorSolicitarField;
 
     @FXML
-    void botaoVoltar28(ActionEvent event) {
-
-    }
-
-    @FXML
     void solicitarConfValor(ActionEvent event) {
 
     }
@@ -2375,6 +2387,11 @@ public class HelloController {
     @FXML
     void fieldSolicitarDoacaoValor(ActionEvent event) {
 
+    }
+
+    @FXML
+    void botaoVoltar45() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
     }
 
 
@@ -2397,6 +2414,11 @@ public class HelloController {
 
     }
 
+    @FXML
+    void botaoVoltar46() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+    }
+
 
     //Tela 22.3 Solicitar Roupas
 
@@ -2416,6 +2438,12 @@ public class HelloController {
 
     }
 
+    @FXML
+    void botaoVoltar47() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+    }
+
+
     //Tela 22.4 Solicitar Móveis
 
     @FXML
@@ -2432,6 +2460,11 @@ public class HelloController {
     @FXML
     void fieldSolicitarDoacaoMoveis(ActionEvent event) {
 
+    }
+
+    @FXML
+    void botaoVoltar48() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
     }
 
 
@@ -2451,6 +2484,11 @@ public class HelloController {
     @FXML
     void fieldSolicitarDoacaoBebidas(ActionEvent event) {
 
+    }
+
+    @FXML
+    void botaoVoltar49() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
     }
 
 
@@ -2473,6 +2511,11 @@ public class HelloController {
 
     }
 
+    @FXML
+    void botaoVoltar50() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+    }
+
 
     //Tela 22.7 Solicitar Produtos de higiene pessoal
 
@@ -2490,6 +2533,11 @@ public class HelloController {
     @FXML
     void fieldSolicitarDoacaoProdHigene(ActionEvent event) {
 
+    }
+
+    @FXML
+    void botaoVoltar51() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
     }
 
 
