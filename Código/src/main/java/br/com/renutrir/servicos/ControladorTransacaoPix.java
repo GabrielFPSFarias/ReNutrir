@@ -5,11 +5,9 @@ import java.util.ArrayList;
 
 public class ControladorTransacaoPix {
 
-
-// Método para validar uma transação Pix
+    // Método para validar uma transação Pix
     public boolean validarTransacaoPix(TransacaoPix transacaoPix) {
-        return validarIdTransacao(transacaoPix) &&
-               validarValor(transacaoPix.getValorTransacao());
+        return validarIdTransacao(transacaoPix);
     }
 
     // Método para validar o ID da transação Pix
@@ -43,7 +41,6 @@ public class ControladorTransacaoPix {
         return idsDeTransacao.contains(idDeTransacaoInserido);
     }
 }
-
    
 
 //Abaixo está o código anterior
@@ -94,6 +91,6 @@ public class TransacaoPix {
           return true;
       }
 */
-}
+
 
 

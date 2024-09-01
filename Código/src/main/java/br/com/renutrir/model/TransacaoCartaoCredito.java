@@ -7,6 +7,10 @@ public class TransacaoCartaoCredito extends Transacao {
   String nomeTitular;
   String cvv;
 
+    public TransacaoCartaoCredito(double valorTransacao, Doador doador, Instituicao instituicao) {
+        super(valorTransacao, doador, instituicao);
+    }
+
     public String getNumeroCartao() {
         return numeroCartao;
     }

@@ -1,17 +1,42 @@
 package br.com.renutrir.servicos;
 
-public class ControladorTransacao {
+import br.com.renutrir.model.Transacao;
+import br.com.renutrir.model.TransacaoPix;
+import br.com.renutrir.model.TransacaoCartaoCredito;
+import br.com.renutrir.model.TransacaoCartaoDebito;
 
+public class ControladorTransacao {
 
     private static final double VALOR_MINIMO = 0.01;
     private static final double VALOR_MAXIMO = 1000000000.00;
 
-    private boolean validarValor(double valor) {
-         return (valor < VALOR_MINIMO || valor > VALOR_MAXIMO);
+    private ControladorTransacaoPix controladorPix = new ControladorTransacaoPix();
+    private ControladorTransacaoCartao controladorCartao = new ControladorTransacaoCartao();
+
+    // Método para validar qualquer transação, delegando para o controlador específico
+    public boolean validarTransacao(Transacao transacao) {
+        // Valida o valor da transação antes de delegar a validação específica
+        if (!validarValor(transacao.getValorTransacao())) {
+            return false;
+        }
+
+        if (transacao instanceof TransacaoPix) {
+            return controladorPix.validarTransacaoPix((TransacaoPix) transacao);
+        } else if (transacao instanceof TransacaoCartaoCredito) {
+            return controladorCartao.validarTransacaoCartaoCredito((TransacaoCartaoCredito) transacao);
+        } else if (transacao instanceof TransacaoCartaoDebito) {
+            return controladorCartao.validarTransacaoCartaoDebito((TransacaoCartaoDebito) transacao);
+        }
+
+        // Se o tipo de transação não for reconhecido, retorna falso
+        return false;
     }
 
+    // Método para validar o valor da transação
+    private boolean validarValor(double valor) {
+        return valor >= VALOR_MINIMO && valor <= VALOR_MAXIMO;
+    }
 }
-
 /*
     //PIX
 
@@ -420,5 +445,4 @@ public static boolean validarSenha(String senha) {
 
 
 */
-}     
 
