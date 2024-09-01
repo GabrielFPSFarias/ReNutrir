@@ -4,7 +4,7 @@ public class TransacaoPix extends Transacao {
     private String idTransacao;
 
     public TransacaoPix(double valorTransacao, String idTransacao, Doador doador, Instituicao instituicao) {
-        super(valorTransacao, doador, instituicao); 
+        super(valorTransacao, doador, instituicao);
         this.idTransacao = idTransacao;
     }
 
