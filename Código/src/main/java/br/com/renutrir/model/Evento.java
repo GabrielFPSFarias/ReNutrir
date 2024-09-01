@@ -111,4 +111,12 @@ public class Evento {
     public void setHorario(LocalTime horario) {
         this.horario = horario;
     }
+
+    private String nomeEventoParaEditar;
+
+
+    @Override
+    public String toString() {
+        return nome + " - " + data + " " + horario + " - " + tipo + " - " + local;
+    }
 }

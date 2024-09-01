@@ -22,7 +22,7 @@
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Eventos" textAlignment="CENTER" wrappingWidth="469.173828125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Editar Eventos" textAlignment="CENTER" wrappingWidth="469.173828125">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
@@ -44,7 +44,7 @@
    <bottom>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="72.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="voltarBotao" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar43" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
+            <Button fx:id="voltarBotao" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar44" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
                <VBox.margin>
                   <Insets right="10.0" />
                </VBox.margin>
@@ -72,8 +72,7 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Label fx:id="labelEventosLista" alignment="CENTER" prefHeight="324.0" prefWidth="484.0" text="Eventos criados" textAlignment="CENTER" />
-                  <TextArea fx:id="listaEventosArea" prefHeight="200.0" prefWidth="200.0" />
+                  <Label alignment="CENTER" prefHeight="324.0" prefWidth="484.0" text="Editar eventos" textAlignment="CENTER" />
                </children>
             </GridPane>
          </content>

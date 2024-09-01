@@ -5,6 +5,7 @@ import br.com.renutrir.repositorio.*;
 import br.com.renutrir.servicos.*;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.net.URL;
@@ -134,6 +136,7 @@ public class HelloController {
     public Button eventosBotao;
     public Button perfilBotao;
     public Button doacoesPendentesDoadorBotao;
+    private String nomeEventoParaEditar;
 
     public void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
         System.out.println("Clicou: " + fxmlArquivo);
@@ -1988,11 +1991,56 @@ public class HelloController {
     @FXML
     public void botaoListaEventosCriadosBotao(ActionEvent actionEvent) {
         realizarTrocaDeTela("/br/com/renutrir/20-2-lista-eventos.fxml","ReNutrir - Lista de Eventos");
+
+        PauseTransition pause = new PauseTransition(Duration.millis(500));
+        pause.setOnFinished(event -> atualizarListaEventos());
+        pause.play();
+
+        List<Evento> eventos = carregarEventosDoArquivo();
+        Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+
+        StringBuilder eventosTexto = new StringBuilder(); //cada evento está relacionado com a inst que o criou
+        for (Evento evento : eventos) {
+            if (evento.getNome().equals(instituicaoLogada.getNome())) {
+                eventosTexto.append(evento.toString()).append("\n");
+            }
+        }
+        listaEventosArea.setText(eventosTexto.toString());
     }
 
     @FXML
     void botaoEditarEvento(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/20-3-editar-eventos.fxml","ReNutrir - Lista de Eventos");
+        String nomeEventoSelecionado = nomeEventoField.getText(); // Pegue o nome ou outro identificador do evento a ser editado
+
+        List<Evento> eventos = carregarEventosDoArquivo();
+        Evento eventoParaEditar = eventos.stream()
+                .filter(e -> e.getNome().equals(nomeEventoSelecionado))
+                .findFirst()
+                .orElse(null);
+
+        if (eventoParaEditar != null) {
+            eventoParaEditar.setNome(nomeEventoField.getText());
+            eventoParaEditar.setData(LocalDate.parse(dataEventoField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            eventoParaEditar.setHorario(LocalTime.parse(horarioEventoField.getText(), DateTimeFormatter.ofPattern("HH:mm")));
+            eventoParaEditar.setLocal(endEventoField.getText());
+            eventoParaEditar.setTipo(tipoEventoField.getText());
+            eventoParaEditar.setDescricao(descricaoEventoField.getText());
+
+            salvarEventoNoArquivo((Evento) eventos); //salva as mudanças
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Evento Editado");
+            alert.setHeaderText(null);
+            alert.setContentText("O evento '" + nomeEventoParaEditar + "' foi editado com sucesso!");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Evento não encontrado.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -2165,12 +2213,36 @@ public class HelloController {
         realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
 
+    @FXML
+    private TextArea listaEventosArea;
+
+    private void atualizarListaEventos() {
+        if (listaEventosArea == null) {
+            System.err.println("Erro: listaEventosArea não foi inicializada.");
+            return;
+        }
+
+        List<Evento> eventos = carregarEventosDoArquivo();
+        Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+
+        StringBuilder eventosTexto = new StringBuilder();
+        for (Evento evento : eventos) {
+            if (evento.getNome().equals(instituicaoLogada.getNome())) {
+                eventosTexto.append(evento.toString()).append("\n");
+            }
+        }
+
+        listaEventosArea.setText(eventosTexto.toString());
+    }
+
+
     //Tela 20.3 Editar eventos criados pela instituição
 
     @FXML
     void botaoVoltar44(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
+
 
 
     //Tela 22 - Solicitar Doações (Instituição)

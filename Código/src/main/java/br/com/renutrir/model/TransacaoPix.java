@@ -1,6 +1,11 @@
-package br.com.renutir.model;
+package br.com.renutrir.model;
 
-public class TransacaoPix extends Transacao{
+import br.com.renutrir.model.Transacao;
 
+//
+public class TransacaoPix extends Transacao {
 
+    public TransacaoPix(double valorTransacao, String idTransacao, Doador doador, Instituicao instituicao) {
+        super(valorTransacao, idTransacao, doador, instituicao);
+    }
 }
