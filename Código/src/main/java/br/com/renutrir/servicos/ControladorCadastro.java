@@ -190,4 +190,100 @@ public class ControladorCadastro {
     }
     */
 }
-    
+/*
+package br.com.renutrir.servicos;
+
+import br.com.renutrir.model.*;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+public class ControladorCadastro {
+
+    public Conta cadastrarConta(String nome, String nomeUsuario, String email, String senha, String telefone, Endereco endereco) {
+        // Chama o método para validar os dados
+        if (!validarDados(nome, nomeUsuario, email, senha, telefone)) {
+            throw new IllegalArgumentException("Dados inválidos.");
+        }
+
+        Conta novaConta = new Conta();
+        novaConta.setNome(nome);
+        novaConta.setNomeUsuario(nomeUsuario);
+        novaConta.setEmail(email);
+        novaConta.setSenha(senha);
+        novaConta.setTelefone(telefone);
+        novaConta.setEndereco(endereco); //AINDA NÃO TEM CONTROLADOR
+
+        // Aqui dá pra adicionar o código para salvar a conta no banco de dados ou outro repositório
+
+        return novaConta;
+    }
+
+    private boolean validarDados(String nome, String nomeUsuario, String email, String senha, String telefone) {
+        boolean nomeValido = validarNome(nome);
+        boolean nomeUsuarioValido = validarNomeDeUsuario(nomeUsuario);
+        boolean emailValido = validarEmail(email);
+        boolean senhaValida = validarSenha(senha);
+        boolean telefoneValido = validarTelefone(telefone);
+
+        // Retorna true apenas se todos os campos forem válidos
+        return nomeValido && nomeUsuarioValido && emailValido && senhaValida && telefoneValido;
+    }
+
+    // Método de validação para o nome
+    public static boolean validarNome(String nome) {
+        if (nome == null || nome.isEmpty()) {
+            return false; // Nome inválido
+        }
+
+        String regex = "^[a-zA-Z]+(?: [a-zA-Z]+)*(?: '[a-zA-Z]+)*$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(nome);
+
+        return matcher.matches() && nome.length() >= 2;
+    }
+
+    // Método de validação para o nome de usuário
+    public static boolean validarNomeDeUsuario(String nomeUsuario) {
+        if (nomeUsuario == null || nomeUsuario.isEmpty()) {
+            return false; // Nome de usuário inválido
+        }
+
+        String regex = "^[a-zA-Z0-9]+([._-]?[a-zA-Z0-9]+)*$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(nomeUsuario);
+
+        return matcher.matches();
+    }
+
+    // Método de validação para o e-mail
+    public static boolean validarEmail(String email) {
+        String regex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
+    }
+
+    // Método de validação para a senha
+    public static boolean validarSenha(String senha) {
+        if (senha == null || senha.trim().isEmpty() || senha.length() < 4) {
+            return false; // Senha inválida
+        }
+
+        return true;
+    }
+
+    // Método de validação para o telefone
+    public static boolean validarTelefone(String telefone) {
+        if (telefone == null || telefone.trim().isEmpty()) {
+            return false; // Telefone inválido
+        }
+
+        String regex = "^\\+\\d{1,3}[\\s\\-]?\\(?\\d{1,4}\\)?[\\s\\-]?\\d{1,4}[\\s\\-]?\\d{1,4}[\\s\\-]?\\d{1,9}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(telefone);
+
+        return matcher.matches();
+    }
+}
+    */
