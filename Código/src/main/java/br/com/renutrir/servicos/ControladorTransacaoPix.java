@@ -2,21 +2,21 @@ package br.com.renutrir.servicos;
 
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Transacao;
-
 import java.util.ArrayList;
 
 public class ControladorTransacaoPix {
+
+    
     // Limite mínimo e máximo para valor de transação, exemplo fictício.
     private static final double VALOR_MINIMO = 0.01;
     private static final double VALOR_MAXIMO = 1000000000.00;
-
-    private Doador doador;
+    private Doador doador = Transacao.doador;
 
     public ControladorTransacaoPix(Doador doador) {
         this.doador = doador;
     }
 
-    public boolean validarTransacao(Transacao transacao) {
+    public boolean validarTransacaoPix(Transacao transacao) {
         return validarIdTransacao(transacao.getIdTransacao()) &&
                 validarValor(transacao.getValor());
     }
@@ -33,8 +33,8 @@ public class ControladorTransacaoPix {
         }
 
         // Verifica se o ID já foi utilizado
-        ArrayList<String> idsDeTransacao = new ArrayList<>(); // Substitua por uma lista real de IDs
-        if (identificarIdsDeTransacao(idsDeTransacao, idTransacao)) {
+        //ArrayList<String> idsDeTransacao = new ArrayList<>(); // Substitua por uma lista real de IDs
+        if (identificarIdsDeTransacao(Transacao.doador.idsDeTransacao, idTransacao)) {
             System.out.println("Esse ID de transação já foi utilizado pelo usuário.");
             return false;
         }
