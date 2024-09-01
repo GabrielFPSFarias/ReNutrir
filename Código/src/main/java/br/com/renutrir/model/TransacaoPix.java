@@ -4,13 +4,6 @@ public class TransacaoPix extends Transacao{
 
     private String idTransacao;
 
-     public double getValorTransacao() {
-        return valorTransacao;
-    }
-
-    public void setValorTransacao(double valorTransacao) {
-        this.valorTransacao = valorTransacao;
-    }
 
     // Getter e Setter para idTransacao
     public String getIdTransacao() {
