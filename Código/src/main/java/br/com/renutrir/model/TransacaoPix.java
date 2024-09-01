@@ -1,4 +1,4 @@
-package br.com.renutir.model;
+package br.com.renutrir.model;
 
 public class TransacaoPix extends Transacao{
 
