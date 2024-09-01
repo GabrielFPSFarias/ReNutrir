@@ -1,6 +1,6 @@
 package br.com.renutrir.model;
 
-public class TranscaoCartaoDebito extends TransacaoCartaoCredito{
+public class TransacaoCartaoDebito extends TransacaoCartaoCredito{
 
 String senha;
 
