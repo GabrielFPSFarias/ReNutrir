@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class IntencaoDoacao {
     private String tipoItem; // Valor, alimento, Roupas, Móveis, etc.
-    private String tipo;
+    private String item;
     private int quantidade;
     private LocalDateTime data;
     private String status;// Pendente, Aceita, Concluída
@@ -27,12 +27,12 @@ public class IntencaoDoacao {
         return doador;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getItem() {
+        return item;
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        this.item = tipo;
     }
 
     public void setDoador(Doador doador) {
@@ -47,14 +47,14 @@ public class IntencaoDoacao {
         this.instituicao = instituicao;
     }
 
-    public IntencaoDoacao(Doador doador, Instituicao instituicao, int quantidade, String tipoItem, String tipo) {
+    public IntencaoDoacao(Doador doador, Instituicao instituicao, int quantidade, String tipoItem, String item) {
         this.data = LocalDateTime.now();
         this.doador = doador;
         this.instituicao = instituicao;
         this.quantidade = quantidade;
         this.status = "Pendente";
         this.tipoItem = tipoItem;
-        this.tipo = tipo;
+        this.item = item;
     }
 
     // Getters e Setters

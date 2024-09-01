@@ -18,21 +18,6 @@ public class Doacao extends IntencaoDoacao {
 
     // Getters e Setters
 
-    public int getQuantidade() {
-        return getQuantidade();
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.setQuantidade(quantidade);
-    }
-
-    public LocalDateTime getData() {
-        return getData();
-    }
-
-    public void setData(LocalDateTime data) {
-        this.setData(data);
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
