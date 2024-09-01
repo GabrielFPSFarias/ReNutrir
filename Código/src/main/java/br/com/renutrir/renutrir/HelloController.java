@@ -2048,8 +2048,7 @@ public class HelloController {
             e.printStackTrace();
         }
     }
-
-
+    
     private void limparCamposEvento() {
         nomeEventoField.clear();
         dataEventoField.clear();
@@ -2058,7 +2057,6 @@ public class HelloController {
         tipoEventoField.clear();
     }
 
-    // Método para salvar o evento em um arquivo
     private void salvarEventoNoArquivo(Evento evento) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("eventos.txt", true))) {
             writer.write(evento.getNome() + ";" + evento.getData() + ";" + evento.getHorario() + ";" + evento.getLocal() + ";" + evento.getTipo());
