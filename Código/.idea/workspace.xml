@@ -5,35 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/TransacaoPix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/TransacaoPix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorTransacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorTransacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Certificado.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Conta.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Doacao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Doador.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Endereco.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Evento.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Instituicao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/IntencaoDoacao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/SolicitacaoDoacao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Transacao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/TransacaoCartaoCredito.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/TransacaoCartaoDebito.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/TransacaoPix.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Transporte.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Voluntario.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/VoluntarioTransportador.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/renutrir/HelloApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/renutrir/HelloController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorArquivo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorCadastro.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorCertificado.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorIntencaoDeDoacao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorPerfil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorTransacao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorTransacaoCartao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorTransacaoPix.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorTransporte.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/22-1-pix.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
