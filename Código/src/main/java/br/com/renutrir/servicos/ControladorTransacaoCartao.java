@@ -1,5 +1,6 @@
 package br.com.renutrir.servicos;
 
+import br.com.renutrir.model.TransacaoCartaoCredito;
 import br.com.renutrir.model.TransacaoCartaoDebito;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
