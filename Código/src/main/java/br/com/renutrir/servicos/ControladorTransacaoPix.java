@@ -1,6 +1,8 @@
 package br.com.renutrir.servicos;
 
 import java.util.ArrayList;
+
+import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Transacao;
 
 public class ControladorTransacaoPix {

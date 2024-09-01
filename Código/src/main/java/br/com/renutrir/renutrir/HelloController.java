@@ -1989,7 +1989,7 @@ public class HelloController {
 
     @FXML
     public void botaoCriarEvento() {
-        realizarTrocaDeTela("/br/com/renutrir/20-criar-eventos.fxml", "ReNutrir - Criar Evento");
+        realizarTrocaDeTela("/br/com/renutrir/20-1-detalhes-eventos.fxml", "ReNutrir - Criar Evento");
     }
 
     //Tela 20.1 - Detalhes Eventos
@@ -2015,6 +2015,9 @@ public class HelloController {
     @FXML
     private TextArea descricaoEventoField;
 
+    @FXML
+    public void botaoListaEventosCriadosBotao(ActionEvent actionEvent) {
+    }
 
     @FXML
     void botaoVoltar20(ActionEvent event) {
@@ -2312,6 +2315,7 @@ public class HelloController {
     public void SolicitarNovosVoluntariosBotao(ActionEvent actionEvent) {
         instituicaoAtual.solicitarVoluntarios();
     }
+
 
 
     //Próximos métodos
