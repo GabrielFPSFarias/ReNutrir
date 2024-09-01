@@ -1978,7 +1978,7 @@ public class HelloController {
     private Button listaEventosCriadosBotao;
 
     @FXML
-    void botaoListaEventosCriados(ActionEvent event) {
+    public void botaoListaEventosCriadosBotao(ActionEvent actionEvent) {
 
     }
 
@@ -2014,10 +2014,6 @@ public class HelloController {
 
     @FXML
     private TextArea descricaoEventoField;
-
-    @FXML
-    public void botaoListaEventosCriadosBotao(ActionEvent actionEvent) {
-    }
 
     @FXML
     void botaoVoltar20(ActionEvent event) {
