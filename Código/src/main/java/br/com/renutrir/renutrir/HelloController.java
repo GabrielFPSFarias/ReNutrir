@@ -1967,7 +1967,78 @@ public class HelloController {
         }
     }
 
-    //Tela 22 Solicitar Doações
+    //Tela 20 - Criar eventos
+
+    @FXML
+    private Button editarEventoBotao;
+
+    @FXML
+    private Button listaEventosCriadosBotao;
+
+    @FXML
+    void botaoListaEventosCriados(ActionEvent event) {
+
+    }
+
+    @FXML
+    void botaoEditarEvento(ActionEvent event) {
+
+    }
+
+    //Tela 20.1 - Detalhes Eventos
+
+    @FXML
+    private TextField horarioEventoField;
+
+    @FXML
+    private Button botaoSalvarCriarEvento;
+
+    @FXML
+    private TextField endEventoField;
+
+    @FXML
+    private TextField tipoEventoField;
+
+    @FXML
+    private TextField nomeEventoField;
+
+    @FXML
+    private TextField dataEventoField;
+
+    @FXML
+    void botaoVoltar20(ActionEvent event) {
+        realizarTrocaDeTela("br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+    }
+
+    @FXML
+    void salvarCriarEventoBotao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldNomeEvento(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldEndEvento(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldHorarioEvento(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldDataEvento(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldTipoEvento(ActionEvent event) {
+
+    }
 
 
     //Tela 22 - Solicitar Doações (Instituição)
@@ -2137,6 +2208,7 @@ public class HelloController {
     public void SolicitarNovosVoluntariosBotao(ActionEvent actionEvent) {
         instituicaoAtual.solicitarVoluntarios();
     }
+
 
     //Próximos métodos
 }

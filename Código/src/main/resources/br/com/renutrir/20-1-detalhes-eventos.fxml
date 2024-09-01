@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
@@ -13,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.renutrir.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.renutrir.HelloController">
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
@@ -53,7 +58,7 @@
    <center>
       <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0">
          <content>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="358.0" prefWidth="591.0" BorderPane.alignment="CENTER">
+            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="323.0" prefWidth="591.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="126.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="484.0" minWidth="301.0" prefWidth="465.0" />
@@ -74,18 +79,18 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button layoutX="293.0" layoutY="67.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Salvar e criar evento" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button fx:id="botaoSalvarCriarEvento" layoutX="293.0" layoutY="67.0" mnemonicParsing="false" onAction="#salvarCriarEventoBotao" prefHeight="30.0" prefWidth="226.0" text="Salvar e criar evento" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="nomeEventoField" onAction="#fieldNomeEvento" GridPane.columnIndex="1" />
+                  <TextField fx:id="endEventoField" onAction="#fieldEndEvento" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="horarioEventoField" onAction="#fieldHorarioEvento" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="dataEventoField" onAction="#fieldDataEvento" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do Evento:" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço do Evento:" GridPane.rowIndex="1" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Horário do Evento:" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data do Evento:" GridPane.rowIndex="3" />
-                  <TextField layoutX="236.0" layoutY="166.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="tipoEventoField" layoutX="236.0" layoutY="166.0" onAction="#fieldTipoEvento" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo do Evento:" GridPane.rowIndex="4" />
-                  <TextArea maxHeight="-Infinity" prefHeight="17.0" prefWidth="465.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextArea maxHeight="-Infinity" prefHeight="39.0" prefWidth="465.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição:" GridPane.rowIndex="5" />
                </children>
             </GridPane>
