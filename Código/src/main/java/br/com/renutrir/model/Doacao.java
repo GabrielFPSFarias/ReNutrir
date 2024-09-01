@@ -1,75 +1,43 @@
 package br.com.renutrir.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
-public class Doacao {
-    private String id;
-    private String descricao;
-    private int quantidade;
-    private String doadorId;
-    private String instituicaoId;
-    private Doador doador;
-    private Instituicao instituicao;
-    private LocalDate data;
+public class Doacao extends IntencaoDoacao {
 
-    public Doacao(String id, String descricao, int quantidade, String doadorId, String instituicaoId, Doador doador, Instituicao instituicao, LocalDate data) {
-        this.id = id;
-        this.descricao = descricao;
-        this.quantidade = quantidade;
-        this.doadorId = doadorId;
-        this.instituicaoId = instituicaoId;
-        this.doador = doador;
-        this.instituicao = instituicao;
-        this.data = data;
+    public Doacao(IntencaoDoacao doacao) {
+        super();
+        this.setData(LocalDateTime.now());
+        this.setDoador(doacao.getDoador());
+        this.setInstituicao(doacao.getInstituicao());
+        this.setQuantidade(doacao.getQuantidade());
+        this.setStatus("Concluída");
+        this.setTipoItem(doacao.getTipoItem());
+        this.setTipo(doacao.getTipo());
     }
 
     // Getters e Setters
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public int getQuantidade() {
-        return quantidade;
+        return getQuantidade();
     }
 
     public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+        this.setQuantidade(quantidade);
     }
 
-    public String getDoadorId() {
-        return doadorId;
+    public LocalDateTime getData() {
+        return getData();
     }
 
-    public void setDoadorId(String doadorId) {
-        this.doadorId = doadorId;
+    public void setData(LocalDateTime data) {
+        this.setData(data);
     }
-
-    public String getInstituicaoId() {
-        return instituicaoId;
-    }
-
-    public void setInstituicaoId(String instituicaoId) {
-        this.instituicaoId = instituicaoId;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IntencaoDoacao that = (Doacao) o;
+        return Objects.equals(getData(), that.getData()) && Objects.equals(getDoador(), that.getDoador()) && Objects.equals(getInstituicao(), that.getInstituicao());
     }
 }

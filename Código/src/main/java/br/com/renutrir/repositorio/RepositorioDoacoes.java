@@ -18,7 +18,7 @@ public class RepositorioDoacoes {
         doacoes.add(doacao);
     }
 
-    // Remove uma doação do repositório pelo ID
+    // Remove uma doação do repositório
     public boolean removerDoacao(Doacao doacao) {
         return doacoes.remove(doacao);
     }
@@ -26,17 +26,17 @@ public class RepositorioDoacoes {
     // Atualiza uma doação existente
     public void atualizarDoacao(Doacao doacao) {
         for (int i = 0; i < doacoes.size(); i++) {
-            if (doacoes.get(i).getId().equals(doacao.getId())) {
+            if (doacoes.get(i).equals(doacao)) {
                 doacoes.set(i, doacao);
                 break;
             }
         }
     }
 
-    // Busca uma doação pelo ID
-    public Doacao buscarDoacaoPorId(String id) {
+    // Busca uma doação
+    public Doacao buscarDoacao(Doacao d) {
         for (Doacao doacao : doacoes) {
-            if (doacao.getId().equals(id)) {
+            if (doacao.equals(d)) {
                 return doacao;
             }
         }

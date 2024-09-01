@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Doador extends Conta {
     private int nivel;
@@ -123,5 +124,17 @@ public class Doador extends Conta {
         int digito2 = (resto2 < 2) ? 0 : 11 - resto2;
 
         return (digito1 == cpfInt[9] && digito2 == cpfInt[10]);
+    }
+
+    public void doar(Instituicao instituicao) {
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Doador doador = (Doador) o;
+        return Objects.equals(cpf, doador.cpf);
     }
 }

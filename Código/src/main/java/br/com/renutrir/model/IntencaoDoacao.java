@@ -1,24 +1,60 @@
 package br.com.renutrir.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class IntencaoDoacao {
     private String tipoItem; // Valor, alimento, Roupas, Móveis, etc.
-    private String id;
-    private String descricao;
+    private String tipo;
     private int quantidade;
-    private LocalDate dataIntencao;
-    private String status; // Pendente, Aceita, Concluída
-    private String doadorId;
+    private LocalDateTime data;
+    private String status;// Pendente, Aceita, Concluída
+    private Doador doador;
+    private Instituicao instituicao;
 
-    public IntencaoDoacao(String tipoItem, String id, String descricao, int quantidade, LocalDate dataIntencao, String status, String doadorId) {
-        this.tipoItem = tipoItem;
-        this.id = id;
-        this.descricao = descricao;
+    public IntencaoDoacao() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IntencaoDoacao that = (IntencaoDoacao) o;
+        return Objects.equals(data, that.data) && Objects.equals(doador, that.doador) && Objects.equals(instituicao, that.instituicao);
+    }
+
+    public Doador getDoador() {
+        return doador;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setDoador(Doador doador) {
+        this.doador = doador;
+    }
+
+    public Instituicao getInstituicao() {
+        return instituicao;
+    }
+
+    public void setInstituicao(Instituicao instituicao) {
+        this.instituicao = instituicao;
+    }
+
+    public IntencaoDoacao(Doador doador, Instituicao instituicao, int quantidade, String tipoItem, String tipo) {
+        this.data = LocalDateTime.now();
+        this.doador = doador;
+        this.instituicao = instituicao;
         this.quantidade = quantidade;
-        this.dataIntencao = LocalDate.now();
         this.status = "Pendente";
-        this.doadorId = doadorId;
+        this.tipoItem = tipoItem;
+        this.tipo = tipo;
     }
 
     // Getters e Setters
@@ -30,28 +66,12 @@ public class IntencaoDoacao {
         this.tipoItem = tipoItem;
     }
 
-    public String getId() {
-        return id;
+    public LocalDateTime getData() {
+        return data;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public LocalDate getDataIntencao() {
-        return dataIntencao;
-    }
-
-    public void setDataIntencao(LocalDate dataIntencao) {
-        this.dataIntencao = dataIntencao;
+    public void setData(LocalDateTime data) {
+        this.data = data;
     }
 
     public int getQuantidade() {
@@ -68,13 +88,5 @@ public class IntencaoDoacao {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getDoadorId() {
-        return doadorId;
-    }
-
-    public void setDoadorId(String doadorId) {
-        this.doadorId = doadorId;
     }
 }
