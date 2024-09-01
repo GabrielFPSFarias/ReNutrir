@@ -2354,10 +2354,13 @@ public class HelloController {
 
 
 
-    //Tela 22.1 Solicitar PIX
+    //Tela 22.1 Solicitar Dinheiro
 
     @FXML
-    private Button confPixSolicitar;
+    private Button confValorSolicitar;
+
+    @FXML
+    private TextField doacaoValorSolicitarField;
 
     @FXML
     void botaoVoltar28(ActionEvent event) {
@@ -2365,7 +2368,127 @@ public class HelloController {
     }
 
     @FXML
-    void solicitarConfPix(ActionEvent event) {
+    void solicitarConfValor(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldSolicitarDoacaoValor(ActionEvent event) {
+
+    }
+
+
+    //Tela 22.2 Solicitar Alimentos
+
+    @FXML
+    private Button confAlimentosSolicitar;
+
+    @FXML
+    private TextField doacaoAlimentosSolicitarField;
+
+
+    @FXML
+    void solicitarConfAlimentos(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldSolicitarDoacaoAlimentos(ActionEvent event) {
+
+    }
+
+
+    //Tela 22.3 Solicitar Roupas
+
+    @FXML
+    private TextField doacaoRoupasSolicitarField;
+
+    @FXML
+    private Button confRoupasSolicitar;
+
+    @FXML
+    void solicitarConfRoupas(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldSolicitarDoacaoRoupas(ActionEvent event) {
+
+    }
+
+    //Tela 22.4 Solicitar Móveis
+
+    @FXML
+    private Button confMoveisSolicitar;
+
+    @FXML
+    private TextField doacaoMoveisSolicitarField;
+
+    @FXML
+    void solicitarConfMoveis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldSolicitarDoacaoMoveis(ActionEvent event) {
+
+    }
+
+
+    //Tela 22.5 Solicitar Bebidas
+
+    @FXML
+    private TextField doacaoBebidasSolicitarField;
+
+    @FXML
+    private Button confBebidasSolicitar;
+
+    @FXML
+    void solicitarConfBebidas(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldSolicitarDoacaoBebidas(ActionEvent event) {
+
+    }
+
+
+    //Tela 22.6 Solicitar Produtos de limpeza
+
+    @FXML
+    private TextField doacaoProdLimpezaSolicitarField;
+
+    @FXML
+    private Button confProdLimpezaSolicitar;
+
+
+    @FXML
+    void solicitarConfProdLimpeza(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldSolicitarDoacaoProdLimpeza(ActionEvent event) {
+
+    }
+
+
+    //Tela 22.7 Solicitar Produtos de higiene pessoal
+
+    @FXML
+    private Button confProdHigieneSolicitar;
+
+    @FXML
+    private TextField doacaoProdHigieneSolicitarField;
+
+    @FXML
+    void solicitarConfProdHigiene(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldSolicitarDoacaoProdHigene(ActionEvent event) {
 
     }
 
