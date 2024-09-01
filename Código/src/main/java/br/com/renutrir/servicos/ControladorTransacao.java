@@ -6,6 +6,14 @@ import java.util.List;
 
 public class ControladorTransacao {
 
+
+    private static final double VALOR_MINIMO = 0.01;
+    private static final double VALOR_MAXIMO = 1000000000.00;
+
+    private boolean validarValor(double valor) {
+         return (valor < VALOR_MINIMO || valor > VALOR_MAXIMO);
+    }
+
 /*
     //PIX
 
