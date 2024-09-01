@@ -25,8 +25,11 @@ import javafx.scene.text.*;
 
 import java.io.*;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class HelloController {
@@ -1103,10 +1106,6 @@ public class HelloController {
         realizarTrocaDeTela("/br/com/renutrir/12-confirmar-transporte.fxml", "ReNutrir - Confirmar Transportes");
     }
 
-    public void botaoCriarEvento(ActionEvent actionEvent) {
-        realizarTrocaDeTela("/br/com/renutrir/20-criar-eventos.fxml", "ReNutrir - Criar Eventos");
-    }
-
     public void botaoHistoricoDoacoes(ActionEvent actionEvent) {
         realizarTrocaDeTela("/br/com/renutrir/21-historico-doacoes.fxml", "ReNutrir - Histórico de Doações");
     }
@@ -1985,6 +1984,11 @@ public class HelloController {
 
     }
 
+    @FXML
+    public void botaoCriarEvento() {
+        realizarTrocaDeTela("/br/com/renutrir/20-1-detalhes-eventos.fxml", "ReNutrir - Criar Evento");
+    }
+
     //Tela 20.1 - Detalhes Eventos
 
     @FXML
@@ -2007,14 +2011,101 @@ public class HelloController {
 
     @FXML
     void botaoVoltar20(ActionEvent event) {
-        realizarTrocaDeTela("br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
 
     @FXML
     void salvarCriarEventoBotao(ActionEvent event) {
+        try {
+            String nome = nomeEventoField.getText();
+            String dataStr = dataEventoField.getText();
+            String horarioStr = horarioEventoField.getText();
+            String local = endEventoField.getText();
+            String tipo = tipoEventoField.getText();
 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime dataHora = LocalDateTime.parse(dataStr + " " + horarioStr, formatter);
+
+            Evento evento = new Evento(nome, dataHora.toLocalDate(), local, dataHora.toLocalTime(), tipo);
+            salvarEventoNoArquivo(evento);
+            limparCamposEvento();
+
+            //evento criado com sucesso
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Evento Criado");
+            alert.setHeaderText(null);
+            alert.setContentText("O evento '" + nome + "' foi criado com sucesso!");
+            alert.showAndWait();
+
+        } catch (DateTimeParseException e) {
+            //mostrar erro de formatação na data e hr
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro de Formato");
+            alert.setHeaderText("Formato de Data/Hora Inválido");
+            alert.setContentText("Por favor, insira a data e hora no formato 'dd/MM/yyyy HH:mm'.");
+            alert.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+
+    private void limparCamposEvento() {
+        nomeEventoField.clear();
+        dataEventoField.clear();
+        horarioEventoField.clear();
+        endEventoField.clear();
+        tipoEventoField.clear();
+    }
+
+    // Método para salvar o evento em um arquivo
+    private void salvarEventoNoArquivo(Evento evento) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("eventos.txt", true))) {
+            writer.write(evento.getNome() + ";" + evento.getData() + ";" + evento.getHorario() + ";" + evento.getLocal() + ";" + evento.getTipo());
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private List<Evento> carregarEventosDoArquivo() {
+        List<Evento> eventos = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("eventos.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split(";");
+                String nome = partes[0];
+                LocalDate data = LocalDate.parse(partes[1]);
+                String horario = partes[2];
+                String local = partes[3];
+                String tipo = partes[4];
+
+                Evento evento = new Evento(nome, data, local, LocalTime.parse(horario), tipo);
+                eventos.add(evento);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return eventos;
+    }
+
+    private void removerEventosPassados() {
+        List<Evento> eventosAtuais = carregarEventosDoArquivo();
+        LocalDateTime agora = LocalDateTime.now();
+
+        eventosAtuais.removeIf(evento -> evento.getData().atTime(evento.getHorario()).isBefore(agora));
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("eventos.txt"))) {
+            for (Evento evento : eventosAtuais) {
+                writer.write(evento.getNome() + ";" + evento.getData() + ";" + evento.getHorario() + ";" + evento.getLocal() + ";" + evento.getTipo());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Métodos relacionados aos campos de entrada
     @FXML
     void fieldNomeEvento(ActionEvent event) {
 

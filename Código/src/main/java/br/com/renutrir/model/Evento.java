@@ -1,6 +1,7 @@
 package br.com.renutrir.model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Evento {
@@ -11,12 +12,24 @@ public class Evento {
     private int quantidadeVoluntarios;
     private int doacoesEfetuadas;
     private int pessoasAtendidas;
+    private String tipo;
+    private LocalTime horario;
 
-    public Evento(String nome, LocalDate data, String local){
-        this.setNome(nome);
-        this.setData(data);
-        this.setLocal(local);
+    public Evento(String nome, LocalDate data, String local) {
+        this.nome = nome;
+        this.data = data;
+        this.local = local;
     }
+
+    public Evento(String nome, LocalDate data, String local, LocalTime horario, String tipo) {
+        this.nome = nome;
+        this.data = data;
+        this.local = local;
+        this.horario = horario;
+        this.tipo = tipo;
+    }
+
+    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -48,28 +61,44 @@ public class Evento {
     public void setDoacoes(List<Doacao> doacoes) {
         this.doacoes = doacoes;
     }
-    
-    public void setQuantidadeVoluntarios() {
-    	this.quantidadeVoluntarios = quantidadeVoluntarios;
-    }
-    
+
     public int getQuantidadeVoluntarios() {
-    	return quantidadeVoluntarios;
+        return quantidadeVoluntarios;
     }
-    
-    public void setDoacoesEfetuadas(){
-    	this.doacoesEfetuadas = doacoesEfetuadas;
+
+    public void setQuantidadeVoluntarios(int quantidadeVoluntarios) {
+        this.quantidadeVoluntarios = quantidadeVoluntarios;
     }
-    
-    public int getDoacoesEfetuadas(){
-    	return doacoesEfetuadas;
+
+    public int getDoacoesEfetuadas() {
+        return doacoesEfetuadas;
     }
-    
-    public void setPessoasAtendidas(){
-    	this.pessoasAtendidas = pessoasAtendidas;
+
+    public void setDoacoesEfetuadas(int doacoesEfetuadas) {
+        this.doacoesEfetuadas = doacoesEfetuadas;
     }
-    
-    public int getPessoasAtendidas(){
-    	return pessoasAtendidas;
+
+    public int getPessoasAtendidas() {
+        return pessoasAtendidas;
+    }
+
+    public void setPessoasAtendidas(int pessoasAtendidas) {
+        this.pessoasAtendidas = pessoasAtendidas;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public LocalTime getHorario() {
+        return horario;
+    }
+
+    public void setHorario(LocalTime horario) {
+        this.horario = horario;
     }
 }
