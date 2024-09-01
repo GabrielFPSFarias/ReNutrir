@@ -2303,73 +2303,39 @@ public class HelloController {
 
     @FXML
     void solicitarDinheiro(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/22-1-valores.fxml","ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void solicitarAlimentos(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Alimentos");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Alimentos");
-        solicitacao.salvarSolicitacaoEmArquivo();
+        realizarTrocaDeTela("/br/com/renutrir/22-2-alimentos.fxml","ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void solicitarRoupas(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Roupas");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Roupas");
-        solicitacao.salvarSolicitacaoEmArquivo();
+        realizarTrocaDeTela("/br/com/renutrir/22-3-roupas.fxml","ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void solicitarMoveis(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Móveis");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Móveis");
-        solicitacao.salvarSolicitacaoEmArquivo();
+        realizarTrocaDeTela("/br/com/renutrir/22-4-moveis.fxml","ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void solicitarBebidas(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Bebidas");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Bebidas");
-        solicitacao.salvarSolicitacaoEmArquivo();
+        realizarTrocaDeTela("/br/com/renutrir/22-5-bebidas.fxml","ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void solicitarProdutoLimpeza(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Produtos de Limpeza");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Produtos de Limpeza");
-        solicitacao.salvarSolicitacaoEmArquivo();
+        realizarTrocaDeTela("/br/com/renutrir/22-6-prod-limpeza.fxml","ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void solicitarItemHgiene(ActionEvent event) {
-        Instituicao instituicao = obterInstituicaoAtual();
-        int meta = solicitarMeta("Itens de Higiene");
-        SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(instituicao, meta, "Itens de Higiene");
-        solicitacao.salvarSolicitacaoEmArquivo();
+        realizarTrocaDeTela("/br/com/renutrir/22-7-higiene-pessoal.fxml","ReNutrir - Solicitar Doações");
     }
 
-    private Instituicao obterInstituicaoAtual() {
-        String identificador = getInstituicaoAtual().getNomeUsuario();
-        RepositorioContas repositorio = new RepositorioContas();
-        return repositorio.buscarInstituicaoPorEmailOuUsuario(identificador);
-    }
-
-    private int solicitarMeta(String tipoItem) {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Definir Meta de Doações");
-        dialog.setHeaderText("Solicitação de " + tipoItem);
-        dialog.setContentText("Por favor, insira a meta de doações:");
-
-        Optional<String> result = dialog.showAndWait();
-        return result.map(Integer::parseInt).orElse(0);
-    }
-    
 
     //Tela 22.1 Solicitar Dinheiro
 
