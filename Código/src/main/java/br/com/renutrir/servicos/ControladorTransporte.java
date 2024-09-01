@@ -41,8 +41,8 @@ public class ControladorTransporte {
   }
 
   private boolean validarDoacao(Doacao doacao) {
-    if (doacao.getDescricao() == null || doacao.getDescricao().isEmpty()) {
-      System.out.println("Descrição inválida.");
+    if (doacao.getItem() == null || doacao.getItem().isEmpty()) {
+      System.out.println("Item inválido.");
       return false;
     }
     if (doacao.getQuantidade() <= 0) {
