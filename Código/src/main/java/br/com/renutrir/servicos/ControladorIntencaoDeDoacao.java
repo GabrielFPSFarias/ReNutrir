@@ -63,7 +63,7 @@ public class ControladorIntencaoDeDoacao {
     }
 
     private boolean validarIntencaoDeDoacao(IntencaoDoacao intencao) {
-        if (intencao.Item() == null || intencao.getItem().isEmpty()) {
+        if (intencao.getItem() == null || intencao.getItem().isEmpty()) {
             System.out.println("Item inválido.");
             return false;
         }
