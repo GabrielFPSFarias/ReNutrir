@@ -1,6 +1,8 @@
 package br.com.renutrir.servicos;
 
 import br.com.renutrir.model.Certificado;
+import br.com.renutrir.model.Doador;
+import javafx.scene.control.Alert;
 
 public class ControladorCertificado {
 
@@ -26,5 +28,16 @@ public class ControladorCertificado {
         if (quantDoacoes < 50) {
             throw new IllegalArgumentException("O doador não pode receber o certificado, ainda tem menos de 50 doações efetuadas.");
         }
+    }
+
+    public void verificarProgressoParaCertificado(Doador doador) {
+        int doacoesRealizadas = doador.getCertificado().getQuantDoacoes();
+        int doacoesRestantes = Certificado.DOACOES_NECESSARIAS - doacoesRealizadas;
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Progresso para Certificado");
+        alert.setHeaderText(null);
+        alert.setContentText("Faltam " + doacoesRestantes + " doações para você conseguir o certificado.");
+        alert.showAndWait();
     }
 }

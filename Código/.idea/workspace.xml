@@ -11,10 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/Certificado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/Certificado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/IntencaoDoacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/IntencaoDoacao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioIntencaoDoacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioIntencaoDoacao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorCertificado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorCertificado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/07-10-doacao-concluida.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/07-10-doacao-concluida.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/IntencaoDoacao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/IntencaoDoacao.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

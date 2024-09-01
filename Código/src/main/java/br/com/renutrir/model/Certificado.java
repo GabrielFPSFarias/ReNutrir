@@ -3,15 +3,23 @@ package br.com.renutrir.model;
 import java.time.LocalDate;
 
 public class Certificado {
+    public static final int DOACOES_NECESSARIAS = 50 ;
     private String descricao;
     private LocalDate dataEmissao;
     private int quantDoacoes;
-    private static final int DOACOES_NECESSARIAS = 50;
 
     public Certificado(String descricao, LocalDate dataEmissao, int quantDoacoes) {
         this.descricao = descricao;
         this.dataEmissao = dataEmissao;
         this.quantDoacoes = quantDoacoes;
+    }
+
+    public Certificado(int quantDoacoes) {
+        this.quantDoacoes = quantDoacoes;
+    }
+
+    public void adicionarDoacao() {
+        this.quantDoacoes++;
     }
 
     public Certificado() {

@@ -2,6 +2,11 @@ package br.com.renutrir.repositorio;
 
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.IntencaoDoacao;
+import javafx.scene.control.Alert;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +14,6 @@ import java.util.List;
 public class RepositorioIntencaoDoacao {
 
     private List<IntencaoDoacao> intencoes;
-
-    public RepositorioIntencaoDoacao() {
-        this.intencoes = new ArrayList<>();
-    }
-
-    // Adiciona uma nova intenção de doação ao repositório
-    public void adicionarIntencao(IntencaoDoacao intencao) {
-        intencoes.add(intencao);
-    }
 
     // Remove uma intenção de doação do repositório pelo ID
     public boolean removerIntencao(IntencaoDoacao intencao) {
@@ -48,6 +44,42 @@ public class RepositorioIntencaoDoacao {
 
     // Retorna todas as intenções de doação
     public List<IntencaoDoacao> listarIntencoes() {
-        return new ArrayList<>(intencoes); // Retorna uma cópia da lista
+        return new ArrayList<>(intencoes); //Retorna lista das intençoes
+    }
+
+    public RepositorioIntencaoDoacao() {
+        this.intencoes = new ArrayList<>();
+    }
+
+    public void adicionarIntencao(IntencaoDoacao intencao) {
+        intencoes.add(intencao);
+        salvarIntencaoNoArquivo(intencao);
+    }
+
+    private void salvarIntencaoNoArquivo(IntencaoDoacao intencao) {
+        String nomeUsuario = intencao.getDoador().getNomeUsuario();
+
+        if (nomeUsuario == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nome de usuário não encontrado.");
+            return;
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/dados/intencoes.txt", true))) {
+            writer.write("Nome de Usuário: " + nomeUsuario + "\n");
+            writer.write("Item: " + intencao.getItem() + "\n");
+            writer.write("Quantidade: " + intencao.getQuantidade() + "\n");
+            writer.write("Data: " + intencao.getData() + "\n");
+            writer.write("\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.setHeaderText(null);
+        alert.showAndWait();
     }
 }

@@ -15,6 +15,9 @@ public class IntencaoDoacao {
     public IntencaoDoacao() {
     }
 
+    public IntencaoDoacao(Doador doador, String item, int i) {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

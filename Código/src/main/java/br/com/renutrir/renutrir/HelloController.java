@@ -1809,6 +1809,29 @@ public class HelloController {
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
     }
 
+
+    @FXML
+    private Button botaoRegistrarDoacao;
+
+    @FXML
+    private void registrarDoacao(ActionEvent event) {
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+
+        if (doador == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado. Certifique-se de que você está logado.");
+            return;
+        }
+
+        IntencaoDoacao intencao = new IntencaoDoacao(doador, "item", 1);
+
+        RepositorioIntencaoDoacao repositorio = new RepositorioIntencaoDoacao();
+        repositorio.adicionarIntencao(intencao);
+
+        ControladorCertificado controladorCertificado = new ControladorCertificado();
+        controladorCertificado.verificarProgressoParaCertificado(doador);
+    }
+
+
     //Tela 09 Seja Voluntário
 
     @FXML
