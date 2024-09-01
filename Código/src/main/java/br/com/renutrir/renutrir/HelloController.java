@@ -25,6 +25,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.*;
 import javafx.util.Duration;
 
+import javax.swing.text.Document;
 import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
@@ -1955,8 +1956,34 @@ public class HelloController {
 
     @FXML
     void botaoGerarCertificado(ActionEvent event) {
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+        Certificado certificado = doador.getCertificado();
 
+        if (certificado == null || !certificado.isCertificadoEmitido()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Certificado não disponível");
+            alert.setHeaderText(null);
+            alert.setContentText("O doador ainda não completou 50 doações.");
+            alert.showAndWait();
+        } else {
+            try {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Certificado gerado");
+                alert.setHeaderText(null);
+                alert.setContentText("O certificado foi gerado com sucesso.");
+                alert.showAndWait();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erro ao gerar certificado");
+                alert.setHeaderText(null);
+                alert.setContentText("Ocorreu um erro ao gerar o certificado.");
+                alert.showAndWait();
+            }
+        }
     }
+
+
 
     //Tela 17 Perfil doador
 

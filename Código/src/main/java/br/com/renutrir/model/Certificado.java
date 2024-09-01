@@ -8,15 +8,12 @@ public class Certificado {
     private int quantDoacoes;
     private static final int DOACOES_NECESSARIAS = 50;
 
-    // Construtor geral
     public Certificado(String descricao, LocalDate dataEmissao, int quantDoacoes) {
         this.descricao = descricao;
         this.dataEmissao = dataEmissao;
         this.quantDoacoes = quantDoacoes;
     }
 
-
-    // Construtor padrão
     public Certificado() {
         this.quantDoacoes = 0;
     }
@@ -53,25 +50,11 @@ public class Certificado {
         }
     }
 
-    //Controlador certificado?
-    
     private void emitirCertificado() {
         this.descricao = "Certificado concedido por atingir " + DOACOES_NECESSARIAS + " doações.";
         this.dataEmissao = LocalDate.now();
         System.out.println("Certificado emitido: " + this.descricao + " em " + this.dataEmissao);
     }
-
-    //Controlador certficado?
-
-    //Colocar o nome do doador?
-
-    public void adicionarDoacao() {
-        this.quantDoacoes++;
-        verificarEConcederCertificado();
-    }
-
-    //Controlador certficado?
-
 
     public boolean isCertificadoEmitido() {
         return this.dataEmissao != null;
