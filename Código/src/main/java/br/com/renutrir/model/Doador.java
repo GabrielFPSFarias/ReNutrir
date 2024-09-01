@@ -13,6 +13,27 @@ public class Doador extends Conta {
     private Certificado certificado;
     private String cpf;
     private float distanciaMaximaDeEntrega;
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public float getDistanciaMaximaDeEntrega() {
+        return distanciaMaximaDeEntrega;
+    }
+
+    public void setDistanciaMaximaDeEntrega(float distanciaMaximaDeEntrega) {
+        this.distanciaMaximaDeEntrega = distanciaMaximaDeEntrega;
+    }
+
+    public ArrayList<String> getIdsDeTransacao() {
+        return idsDeTransacao;
+    }
+
+    public void setIdsDeTransacao(ArrayList<String> idsDeTransacao) {
+        this.idsDeTransacao = idsDeTransacao;
+    }
+
     private ArrayList <String> idsDeTransacao;
 
     public Doador() {
@@ -33,9 +54,9 @@ public class Doador extends Conta {
         this.nivel = nivel;
     }
 
-    public void setCertificado(Certificado certificado) {
-        this.certificado = certificado;
-    }
+     public void setCertificado(Certificado certificado) {
+         this.certificado = certificado;
+     }
 
     public void setDataNascimento(LocalDate dataNascimento) {
         if (dataNascimento.isAfter(LocalDate.now())) {
@@ -48,9 +69,9 @@ public class Doador extends Conta {
         return this.nivel;
     }
 
-    public Certificado getCertificado() {
-        return this.certificado;
-    }
+      public Certificado getCertificado() {
+       return this.certificado;
+     }
 
     public int calcularIdade() {
         if (dataNascimento == null) {
@@ -71,14 +92,14 @@ public class Doador extends Conta {
         this.cpf = cpf;
     }
 
-    public void gerarDescricao() {
-        this.certificado.setDescricao("Certificado emitido para " + this.getNome() +
-                " em reconhecimento às suas " + this.certificado.getQuantDoacoes() + " doações.");
-    }
+   public void gerarDescricao() {
+       this.certificado.setDescricao("Certificado emitido para " + this.getNome() +
+               " em reconhecimento às suas " + this.certificado.getQuantDoacoes() + " doações.");
+   }
 
 
     private boolean CpfValidacao(String cpf) {
-        if (cpf == null || !cpf.matches("\\d{11}")) {
+        if ((cpf == null) || !cpf.matches("\\d{11}")) {
             return false;
         }
 
