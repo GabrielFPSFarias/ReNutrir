@@ -14,6 +14,7 @@ public class Evento {
     private int pessoasAtendidas;
     private String tipo;
     private LocalTime horario;
+    private String descricao;
 
     public Evento(String nome, LocalDate data, String local) {
         this.nome = nome;
@@ -21,15 +22,24 @@ public class Evento {
         this.local = local;
     }
 
-    public Evento(String nome, LocalDate data, String local, LocalTime horario, String tipo) {
+    public Evento(String nome, LocalDate data, String local, LocalTime horario, String tipo, String descricao) {
         this.nome = nome;
         this.data = data;
         this.local = local;
         this.horario = horario;
         this.tipo = tipo;
+        this.descricao = descricao;
     }
 
     // Getters e Setters
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public String getNome() {
         return nome;
     }

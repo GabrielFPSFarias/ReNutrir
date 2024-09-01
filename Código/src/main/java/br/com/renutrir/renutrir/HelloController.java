@@ -1969,6 +1969,9 @@ public class HelloController {
     //Tela 20 - Criar eventos
 
     @FXML
+    private Button criarEventosBotao;
+
+    @FXML
     private Button editarEventoBotao;
 
     @FXML
@@ -1986,7 +1989,7 @@ public class HelloController {
 
     @FXML
     public void botaoCriarEvento() {
-        realizarTrocaDeTela("/br/com/renutrir/20-1-detalhes-eventos.fxml", "ReNutrir - Criar Evento");
+        realizarTrocaDeTela("/br/com/renutrir/20-criar-eventos.fxml", "ReNutrir - Criar Evento");
     }
 
     //Tela 20.1 - Detalhes Eventos
@@ -2010,6 +2013,10 @@ public class HelloController {
     private TextField dataEventoField;
 
     @FXML
+    private TextArea descricaoEventoField;
+
+
+    @FXML
     void botaoVoltar20(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
@@ -2022,11 +2029,12 @@ public class HelloController {
             String horarioStr = horarioEventoField.getText();
             String local = endEventoField.getText();
             String tipo = tipoEventoField.getText();
+            String descricao = descricaoEventoField.getText();
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             LocalDateTime dataHora = LocalDateTime.parse(dataStr + " " + horarioStr, formatter);
 
-            Evento evento = new Evento(nome, dataHora.toLocalDate(), local, dataHora.toLocalTime(), tipo);
+            Evento evento = new Evento(nome, dataHora.toLocalDate(), local, dataHora.toLocalTime(), tipo, descricao);
             salvarEventoNoArquivo(evento);
             limparCamposEvento();
 
@@ -2048,18 +2056,19 @@ public class HelloController {
             e.printStackTrace();
         }
     }
-    
+
     private void limparCamposEvento() {
         nomeEventoField.clear();
         dataEventoField.clear();
         horarioEventoField.clear();
         endEventoField.clear();
         tipoEventoField.clear();
+        descricaoEventoField.clear();
     }
 
     private void salvarEventoNoArquivo(Evento evento) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("eventos.txt", true))) {
-            writer.write(evento.getNome() + ";" + evento.getData() + ";" + evento.getHorario() + ";" + evento.getLocal() + ";" + evento.getTipo());
+            writer.write(evento.getNome() + ";" + evento.getData() + ";" + evento.getHorario() + ";" + evento.getLocal() + ";" + evento.getTipo() + ";" + evento.getDescricao());
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -2077,8 +2086,9 @@ public class HelloController {
                 String horario = partes[2];
                 String local = partes[3];
                 String tipo = partes[4];
+                String descricao = partes[5];
 
-                Evento evento = new Evento(nome, data, local, LocalTime.parse(horario), tipo);
+                Evento evento = new Evento(nome, data, local, LocalTime.parse(horario), tipo, descricao);
                 eventos.add(evento);
             }
         } catch (IOException e) {
@@ -2126,6 +2136,11 @@ public class HelloController {
 
     @FXML
     void fieldTipoEvento(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldDescricaoEvento(ActionEvent event) {
 
     }
 
