@@ -8,46 +8,16 @@ public class IntencaoDoacao {
     private String item;
     private int quantidade;
     private LocalDateTime data;
-    private String status;// Pendente, Aceita, Concluída
+    private String status; // Pendente, Aceita, Concluída
     private Doador doador;
     private Instituicao instituicao;
 
     public IntencaoDoacao() {
+        // Construtor padrão
     }
 
-    public IntencaoDoacao(Doador doador, String item, int i) {
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        IntencaoDoacao that = (IntencaoDoacao) o;
-        return Objects.equals(data, that.data) && Objects.equals(doador, that.doador) && Objects.equals(instituicao, that.instituicao);
-    }
-
-    public Doador getDoador() {
-        return doador;
-    }
-
-    public String getItem() {
-        return item;
-    }
-
-    public void setTipo(String tipo) {
-        this.item = tipo;
-    }
-
-    public void setDoador(Doador doador) {
-        this.doador = doador;
-    }
-
-    public Instituicao getInstituicao() {
-        return instituicao;
-    }
-
-    public void setInstituicao(Instituicao instituicao) {
-        this.instituicao = instituicao;
+    public IntencaoDoacao(Doador doador, String item, int quantidade) {
+        this(doador, null, quantidade, null, item);
     }
 
     public IntencaoDoacao(Doador doador, Instituicao instituicao, int quantidade, String tipoItem, String item) {
@@ -55,9 +25,9 @@ public class IntencaoDoacao {
         this.doador = doador;
         this.instituicao = instituicao;
         this.quantidade = quantidade;
-        this.status = "Pendente";
         this.tipoItem = tipoItem;
         this.item = item;
+        this.status = "Pendente";
     }
 
     // Getters e Setters
@@ -91,5 +61,29 @@ public class IntencaoDoacao {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Doador getDoador() {
+        return doador;
+    }
+
+    public void setDoador(Doador doador) {
+        this.doador = doador;
+    }
+
+    public Instituicao getInstituicao() {
+        return instituicao;
+    }
+
+    public void setInstituicao(Instituicao instituicao) {
+        this.instituicao = instituicao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IntencaoDoacao that = (IntencaoDoacao) o;
+        return Objects.equals(data, that.data) && Objects.equals(doador, that.doador) && Objects.equals(instituicao, that.instituicao);
     }
 }
