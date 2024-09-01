@@ -4,7 +4,7 @@ public class Transacao {
 
     private Doador doador;
     private Instituicao instituicao;
-    private valorTransacao;
+    private double valorTransacao;
 
     //Construtor com todos os parâmetros
     public Transacao(double valorTransacao, Doador doador, Instituicao instituicao) {
