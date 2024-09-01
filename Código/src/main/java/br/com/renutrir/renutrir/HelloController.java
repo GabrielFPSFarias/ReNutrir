@@ -1966,6 +1966,14 @@ public class HelloController {
         }
     }
 
+    //Tela 19 - Menu Instituição
+
+    @FXML
+    public void botaoCriarEvento() {
+        realizarTrocaDeTela("/br/com/renutrir/20-criar-eventos.fxml", "ReNutrir - Criar Evento");
+    }
+
+
     //Tela 20 - Criar eventos
 
     @FXML
@@ -1988,8 +1996,11 @@ public class HelloController {
     }
 
     @FXML
-    public void botaoCriarEvento() {
-        realizarTrocaDeTela("/br/com/renutrir/20-1-detalhes-eventos.fxml", "ReNutrir - Criar Evento");
+    private Button criarNovoEventoBotao;
+
+    @FXML
+    public void botaoCriarNovoEvento() {
+        realizarTrocaDeTela("/br/com/renutrir/20-1-detalhes-eventos.fxml", "ReNutrir - Criar Novo Evento");
     }
 
     //Tela 20.1 - Detalhes Eventos
@@ -2014,6 +2025,7 @@ public class HelloController {
 
     @FXML
     private TextArea descricaoEventoField;
+
 
     @FXML
     void botaoVoltar20(ActionEvent event) {

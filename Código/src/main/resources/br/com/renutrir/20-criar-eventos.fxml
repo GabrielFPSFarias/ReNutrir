@@ -75,7 +75,7 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button fx:id="criarEventosBotao" mnemonicParsing="false" onAction="#botaoCriarEvento" prefHeight="30.0" prefWidth="226.0" text="Criar novo evento" textAlignment="CENTER" />
+                  <Button fx:id="criarNovoEventoBotao" mnemonicParsing="false" onAction="#botaoCriarNovoEvento" prefHeight="30.0" prefWidth="226.0" text="Criar novo evento" textAlignment="CENTER" />
                   <Button fx:id="listaEventosCriadosBotao" layoutX="293.0" layoutY="19.0" mnemonicParsing="false" onAction="#botaoListaEventosCriadosBotao" prefHeight="30.0" prefWidth="226.0" text="Lista de eventos criados" textAlignment="CENTER" GridPane.rowIndex="1" />
                   <Button fx:id="editarEventoBotao" layoutX="293.0" layoutY="67.0" mnemonicParsing="false" onAction="#botaoEditarEvento" prefHeight="30.0" prefWidth="226.0" text="Editar evento" textAlignment="CENTER" GridPane.rowIndex="2" />
                </children>
