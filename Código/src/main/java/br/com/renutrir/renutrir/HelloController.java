@@ -2202,7 +2202,6 @@ public class HelloController {
 
     }
 
-
     //Tela 20.2 Lista de eventos criados
 
     @FXML
