@@ -27,7 +27,7 @@ public class Voluntario extends Doador {
         this.disponibilidade = disponibilidade;
     }
 
-    public String getFuncaoVoluntariado() {
+    public String getFuncaoVoluntariado(String funcao) {
         return funcaoVoluntariado;
     }
 

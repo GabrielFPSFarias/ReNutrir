@@ -5,6 +5,7 @@ import br.com.renutrir.repositorio.*;
 import br.com.renutrir.servicos.*;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +29,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class HelloController implements Initializable{
+public class HelloController {
 
     private Doador doadorLogado;
 
@@ -1826,12 +1827,6 @@ public class HelloController implements Initializable{
     private CheckBox boxSegundaVoluntario;
 
     @FXML
-    private ComboBox<String> cboxFuncaoVoluntario;
-
-    @FXML
-    private ComboBox<String> cboxInstVinculada;
-
-    @FXML
     private Text exibirVoluntarioLabel;
 
     @FXML
@@ -1880,20 +1875,25 @@ public class HelloController implements Initializable{
     }
     */
 
-    private List<String> listaVoluntarios = new ArrayList<String>();
+    @FXML
+    private ComboBox<Voluntario> cboxFuncaoVoluntario;
 
-    private ObservableList<Voluntario> observableListVoluntarios;
+    @FXML
+    private ComboBox<Voluntario> cboxInstVinculada;
 
-    private ComboBox<Voluntario> voluntarioComboBox;
+    private List<Voluntario> listVoluntario = new ArrayList<>();
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        funcaoVoluntarioCbox();
-    }
+    private ObservableList<Voluntario> observableListVoluntario;
+
+    Voluntario instancia = new Voluntario();
 
     @FXML
     public void funcaoVoluntarioCbox () {
+        instancia.getFuncaoVoluntariado("Transportador de doações");
+        listVoluntario.add(instancia);
 
+        observableListVoluntario = FXCollections.observableArrayList(listVoluntario);
+        cboxFuncaoVoluntario.setItems(observableListVoluntario);
     }
 
     @FXML
