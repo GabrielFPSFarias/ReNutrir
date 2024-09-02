@@ -1833,6 +1833,7 @@ public class HelloController {
         }
 
         application.showAlertComProgresso();
+
         new Thread(() -> {
             try {
                 Thread.sleep(500);
@@ -1859,7 +1860,10 @@ public class HelloController {
                     return;
                 }
 
-                Platform.runLater(() -> showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi registrada com sucesso!"));
+                int doacoesConcluidas = contarDoacoes(doador);
+                int doacoesRestantes = ControladorCertificado.DOACOES_NECESSARIAS - doacoesConcluidas;
+                Platform.runLater(() -> showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi registrada com sucesso! " +
+                        "Faltam " + doacoesRestantes + " doações para alcançar a meta do certificado."));
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -1870,7 +1874,24 @@ public class HelloController {
     }
 
     private String obterItemSelecionado() {
-        return "Exemplo Item";
+        return "item";
+    }
+
+    private int contarDoacoes(Doador doador) {
+        int count = 0;
+        String nomeArquivo = "src/dados/" + doador.getNomeUsuario() + "_doacoes.txt";
+
+        File arquivo = new File(nomeArquivo);
+        if (arquivo.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+                while (reader.readLine() != null) {
+                    count++;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return count;
     }
 
     /*

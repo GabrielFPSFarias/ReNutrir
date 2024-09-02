@@ -93,7 +93,7 @@ public class RepositorioIntencaoDoacao {
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
-            return (int) reader.lines().count(); 
+            return (int) reader.lines().count();
         } catch (IOException e) {
             e.printStackTrace();
         }
