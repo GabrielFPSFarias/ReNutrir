@@ -2182,7 +2182,7 @@ public class HelloController {
     @FXML
     void botaoEditarEvento(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/20-3-editar-eventos.fxml","ReNutrir - Lista de Eventos");
-        String nomeEventoSelecionado = nomeEventoField.getText(); // Pegue o nome ou outro identificador do evento a ser editado
+        String nomeEventoSelecionado = nomeEventoField.getText();
 
         List<Evento> eventos = carregarEventosDoArquivo();
         Evento eventoParaEditar = eventos.stream()
