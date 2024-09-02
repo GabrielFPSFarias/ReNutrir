@@ -1,6 +1,7 @@
 package br.com.renutrir.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -91,5 +92,12 @@ public class IntencaoDoacao {
     public String getItem() {
         return item;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Doador: %s, Item: %s, Quantidade: %d, Data: %s, Status: %s",
+                doador.getNome(), item, quantidade, data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")), status);
+    }
+
 
 }

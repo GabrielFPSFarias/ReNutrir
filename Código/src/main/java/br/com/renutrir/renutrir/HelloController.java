@@ -1829,6 +1829,8 @@ public class HelloController {
 
         ControladorCertificado controladorCertificado = new ControladorCertificado();
         controladorCertificado.verificarProgressoParaCertificado(doador);
+
+        int doacoesRestantes = ControladorCertificado.DOACOES_NECESSARIAS - repositorio.contarDoacoes(doador); //decrementa a cada doacao
     }
 
 

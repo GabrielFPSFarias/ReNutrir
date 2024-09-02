@@ -1,4 +1,0 @@
-br.com.renutrir.model.IntencaoDoacao@73e04c73
-br.com.renutrir.model.IntencaoDoacao@51dde123
-br.com.renutrir.model.IntencaoDoacao@5497b187
-br.com.renutrir.model.IntencaoDoacao@178645c8

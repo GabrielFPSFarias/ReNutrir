@@ -4,10 +4,7 @@ import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.IntencaoDoacao;
 import javafx.scene.control.Alert;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +55,6 @@ public class RepositorioIntencaoDoacao {
         alert.showAndWait();
     }
 
-    private static final String CAMINHO_ARQUIVO = "src/dados/intencoes.txt";
-
     public void adicionarIntencao(IntencaoDoacao intencao) {
         try {
             salvarIntencaoNoArquivo(intencao);
@@ -69,7 +64,10 @@ public class RepositorioIntencaoDoacao {
     }
 
     private void salvarIntencaoNoArquivo(IntencaoDoacao intencao) throws IOException {
-        File arquivo = new File(CAMINHO_ARQUIVO);
+        String nomeUsuario = intencao.getDoador().getNomeUsuario();
+        String caminhoArquivo = "src/dados/" + nomeUsuario + "_intencoes.txt"; //usa nomeUsuario
+
+        File arquivo = new File(caminhoArquivo);
 
         File diretorio = arquivo.getParentFile();
         if (!diretorio.exists()) {
@@ -84,4 +82,23 @@ public class RepositorioIntencaoDoacao {
             writer.write(intencao.toString() + System.lineSeparator());
         }
     }
+
+    public int contarDoacoes(Doador doador) {
+        String nomeUsuario = doador.getNomeUsuario();
+        String caminhoArquivo = "src/dados/" + nomeUsuario + "_intencoes.txt";
+        File arquivo = new File(caminhoArquivo);
+
+        if (!arquivo.exists()) {
+            return 0;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+            return (int) reader.lines().count(); // Conta o número de linhas no arquivo
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
 }
