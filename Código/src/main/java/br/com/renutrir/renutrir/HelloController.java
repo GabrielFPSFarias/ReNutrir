@@ -20,6 +20,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
@@ -1243,13 +1245,106 @@ public class HelloController {
 
     @FXML
     void doarConfPix(ActionEvent event) {
+        String valorDoacao = fieldInserirValorPix.getText();
+        if (valorDoacao.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor para a doação.");
+            return;
+        }
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-1-1-pix-detalhes.fxml"));
+            Parent novaTela = loader.load();
+
+            HelloController novoControlador = loader.getController();
+            novoControlador.configurarTelaConfirmarPix(valorDoacao);
+
+            Stage stage = (Stage) confPixDoar.getScene().getWindow();
+            stage.setScene(new Scene(novaTela));
+            stage.setTitle("ReNutrir - Doar com Pix");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao carregar a tela de confirmação do PIX.");
+        }
     }
 
     @FXML
     void inserirValorPixField(ActionEvent event) {
 
     }
+
+    //Tela 07.1.1 Confirmar PIX
+
+    @FXML
+    private TextField fieldPixCopiaCola;
+
+    @FXML
+    private Text valorDoacaoPixLabel;
+
+    @FXML
+    private TextField fieldIdTransacaoPix;
+
+    @FXML
+    private Button finalPixDoar;
+
+    @FXML
+    private Button copiarPixPagar;
+
+    @FXML
+    void botaoVoltar53(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/07-1-pix.fxml","ReNutrir - Doar com Pix");
+    }
+
+    public void configurarTelaConfirmarPix(String valorDoacao) {
+        valorDoacaoPixLabel.setText("Valor: R$ " + valorDoacao);
+        fieldPixCopiaCola.setText(gerarCodigoPixAleatorio());
+    }
+
+    @FXML
+    void doarFinalPix(ActionEvent event) {
+        ProgressAlert progressAlert = new ProgressAlert();
+        progressAlert.start(new Stage());
+        progressAlert.showProgress(ProgressBar.INDETERMINATE_PROGRESS);
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000); // Simula uma tarefa de 2 segundos
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Platform.runLater(() -> progressAlert.hideProgress());
+        }).start();
+    }
+
+    @FXML
+    void pagarPixCopiar() {
+        String texto = fieldPixCopiaCola.getText();
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(texto);
+        clipboard.setContent(content);
+    }
+
+    private String gerarCodigoPixAleatorio() {
+        String[] codigos = {
+                "00020126870014BR.GOV.BCB.PIX0127renutrir@instituicao.com.br0234DoacaoparaInstituicoesReNutrir5204000053039865802BR5911ReNutrirSA6006Recife62070503***63049D25",
+                "00020126360014BR.GOV.BCB.PIX0127renutrir@instituicao.com.br0234DoacaoparaInstituicoesReNutrir5204000053039865802BR5911ReNutrir6006Olinda62070503***63049D25"
+        };
+        int indice = new Random().nextInt(codigos.length);
+        return codigos[indice];
+    }
+
+    @FXML
+    void pixCopiaColaField(ActionEvent event) {
+
+    }
+
+    @FXML
+    void idTransacaoPixField(ActionEvent event) {
+
+    }
+
+
 
     //Tela 07.2 Doar com cartão
 

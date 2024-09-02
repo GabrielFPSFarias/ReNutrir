@@ -16,6 +16,16 @@ public class Doacao extends IntencaoDoacao {
         this.setTipoItem(doacao.getItem());
     }
 
+    private static String valorDoacao;
+
+    public static void setValorDoacao(String valor) {
+        valorDoacao = valor;
+    }
+
+    public static String getValorDoacao() {
+        return valorDoacao;
+    }
+
     // Getters e Setters
 
     @Override
