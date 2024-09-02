@@ -56,6 +56,7 @@ public class HelloApplication extends Application {
         }).start();
     }
 
+
     private void initProgressWindow() {
         progressStage = new Stage();
         progressStage.setTitle("Progresso da Doação");
