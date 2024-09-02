@@ -52,6 +52,7 @@ public class ControladorCertificado {
         }
     }
 
+
     private void emitirCertificado(Doador doador) {
         String nomeArquivo = doador.getNomeUsuario() + "_certificado.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo))) {

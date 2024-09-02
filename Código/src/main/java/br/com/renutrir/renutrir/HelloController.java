@@ -1878,21 +1878,24 @@ public class HelloController {
         return "item";
     }
 
-    private int contarDoacoes(Doador doador) {
-        int count = 0;
-        String nomeArquivo = "src/dados/" + doador.getNomeUsuario() + "_doacoes.txt";
+    public int contarDoacoes(Doador doador) {
+        String nomeUsuario = doador.getNomeUsuario();
+        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.txt";
+        File arquivo = new File(caminhoArquivo);
 
-        File arquivo = new File(nomeArquivo);
-        if (arquivo.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
-                while (reader.readLine() != null) {
-                    count++;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (!arquivo.exists()) {
+            System.out.println("Arquivo não encontrado: " + caminhoArquivo);
+            return 0;
         }
-        return count;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+            int count = (int) reader.lines().count();
+            System.out.println("Número de doações: " + count);
+            return count;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     /*
@@ -2069,6 +2072,7 @@ public class HelloController {
 
         controladorCertificado.verificarProgressoParaCertificado(doador);
     }
+
 
     /*
     @FXML
