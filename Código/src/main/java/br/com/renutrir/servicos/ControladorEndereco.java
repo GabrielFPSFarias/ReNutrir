@@ -1,8 +1,8 @@
-public class EnderecoController {
+public class ControladorEndereco {
 
     private Endereco endereco;
 
-    public EnderecoController(Endereco endereco) {
+    public ControladorEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
