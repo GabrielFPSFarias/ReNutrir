@@ -45,6 +45,7 @@ public class ControladorCertificado {
 
         if (doacoesRestantes <= 0) {
             emitirCertificado(doador);
+            System.out.println("Emitir certificado para o doador.");
         } else {
             showAlert(Alert.AlertType.INFORMATION, "Progresso do Certificado",
                     "Faltam " + doacoesRestantes + " doações para você ganhar o certificado.");

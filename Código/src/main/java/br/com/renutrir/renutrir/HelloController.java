@@ -36,6 +36,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
+import static br.com.renutrir.servicos.ControladorCertificado.DOACOES_NECESSARIAS;
+
 public class HelloController {
 
     private Doador doadorLogado;
@@ -1860,7 +1862,7 @@ public class HelloController {
                 }
 
                 int doacoesConcluidas = contarDoacoes(doador);
-                int doacoesRestantes = ControladorCertificado.DOACOES_NECESSARIAS - doacoesConcluidas;
+                int doacoesRestantes = DOACOES_NECESSARIAS - doacoesConcluidas;
                 Platform.runLater(() -> showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi registrada com sucesso! " +
                         "Faltam " + doacoesRestantes + " doações para alcançar a meta do certificado."));
 
@@ -2063,6 +2065,15 @@ public class HelloController {
     @FXML
     void botaoGerarCertificado(ActionEvent event) {
         Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+        ControladorCertificado controladorCertificado = new ControladorCertificado();
+
+        controladorCertificado.verificarProgressoParaCertificado(doador);
+    }
+
+    /*
+    @FXML
+    void botaoGerarCertificado(ActionEvent event) {
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
         Certificado certificado = doador.getCertificado();
 
         if (certificado == null || !certificado.isCertificadoEmitido()) {
@@ -2088,7 +2099,7 @@ public class HelloController {
             }
         }
     }
-
+    */
 
 
     //Tela 17 Perfil doador
