@@ -6,6 +6,7 @@ import br.com.renutrir.servicos.*;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -1813,6 +1814,66 @@ public class HelloController {
     @FXML
     private Button botaoRegistrarDoacao;
 
+    private HelloApplication application = new HelloApplication();
+
+    @FXML
+    private void registrarDoacao(ActionEvent event) {
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+
+        if (doador == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado. Certifique-se de que você está logado.");
+            return;
+        }
+
+        String itemSelecionado = obterItemSelecionado();
+
+        if (itemSelecionado == null || itemSelecionado.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Item selecionado inválido.");
+            return;
+        }
+
+        application.showAlertComProgresso();
+        new Thread(() -> {
+            try {
+                Thread.sleep(500);
+
+                // Dados da doação
+                String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+                String status = "Concluída";
+                String doacaoInfo = "Doador: " + doador.getNomeUsuario() + ", Item: " + itemSelecionado + ", Quantidade: " + 1
+                        + ", Data: " + dataHora + ", Status: " + status;
+
+                File diretorio = new File("src/dados/");
+                if (!diretorio.exists()) {
+                    diretorio.mkdirs();
+                }
+
+                String nomeArquivo = "src/dados/" + doador.getNomeUsuario() + "_doacoes.txt";
+
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, true))) {
+                    writer.write(doacaoInfo);
+                    writer.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível registrar a doação."));
+                    return;
+                }
+
+                Platform.runLater(() -> showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi registrada com sucesso!"));
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                Platform.runLater(application::hideProgress);
+            }
+        }).start();
+    }
+
+    private String obterItemSelecionado() {
+        return "Exemplo Item";
+    }
+
+    /*
     @FXML
     private void registrarDoacao(ActionEvent event) {
         Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
@@ -1832,6 +1893,7 @@ public class HelloController {
 
         int doacoesRestantes = ControladorCertificado.DOACOES_NECESSARIAS - repositorio.contarDoacoes(doador); //decrementa a cada doacao
     }
+    */
 
 
     //Tela 09 Seja Voluntário

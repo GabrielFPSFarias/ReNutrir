@@ -1,6 +1,95 @@
 package br.com.renutrir.renutrir;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+
+import java.io.IOException;
+
+public class HelloApplication extends Application {
+
+    private Stage progressStage;
+    private ProgressBar progressBar;
+
+    private static HelloApplication instance;
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        instance = this;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/01-tela-inicial.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        stage.setTitle("ReNutrir");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    public static HelloApplication getInstance() {
+        return instance;
+    }
+
+    public void showAlertComProgresso() {
+        showProgress(0);
+
+        new Thread(() -> {
+            for (double progress = 0; progress <= 1.0; progress += 0.01) {
+                try {
+                    Thread.sleep(30); // Atualiza a cada 30 ms
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                final double currentProgress = progress;
+                Platform.runLater(() -> showProgress(currentProgress));
+            }
+
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Platform.runLater(this::hideProgress);
+        }).start();
+    }
+    private void initProgressWindow() {
+        progressStage = new Stage();
+        progressStage.setTitle("Progresso da Doação");
+
+        progressBar = new ProgressBar(0);
+        progressBar.setPrefWidth(300);
+
+        StackPane root = new StackPane(progressBar);
+        root.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(root, 400, 100);
+        progressStage.setScene(scene);
+    }
+
+    public void showProgress(double progress) {
+        Platform.runLater(() -> {
+            progressBar.setProgress(progress);
+            progressStage.show();
+        });
+    }
+
+    public void hideProgress() {
+        Platform.runLater(() -> progressStage.hide());
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}
+
+
+/*
+package br.com.renutrir.renutrir;
+
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -24,3 +113,4 @@ public class HelloApplication extends Application {
         launch();
     }
 }
+*/
