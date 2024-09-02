@@ -5,39 +5,31 @@ import java.util.ArrayList;
 
 public class ControladorTransacaoPix {
 
-    // Método para validar uma transação Pix
     public boolean validarTransacaoPix(TransacaoPix transacaoPix) {
         return validarIdTransacao(transacaoPix);
     }
 
-    // Método para validar o ID da transação Pix
     private boolean validarIdTransacao(TransacaoPix transacaoPix) {
         String idTransacao = transacaoPix.getIdTransacao();
         ArrayList<String> idsDeTransacao = transacaoPix.getDoador().getIdsDeTransacao();
 
-        // Verifica se o ID é nulo ou não possui 32 caracteres
         if (idTransacao == null || idTransacao.length() != 32) {
             return false;
         }
 
-        // Verifica se o ID contém apenas caracteres alfanuméricos
         if (!idTransacao.matches("[A-Za-z0-9]+")) {
             return false;
         }
 
-        // Verifica se o ID já foi utilizado pelo doador
         if (identificarIdsDeTransacao(idsDeTransacao, idTransacao)) {
             System.out.println("Esse ID de transação já foi utilizado pelo usuário.");
             return false;
         }
 
-        // Se passou todas as verificações, o ID é válido
         return true;
     }
 
-    // Método para identificar se o ID de transação já foi usado
     private boolean identificarIdsDeTransacao(ArrayList<String> idsDeTransacao, String idDeTransacaoInserido) {
-        // Verifica se o ID está na lista de IDs do Doador
         return idsDeTransacao.contains(idDeTransacaoInserido);
     }
 }
