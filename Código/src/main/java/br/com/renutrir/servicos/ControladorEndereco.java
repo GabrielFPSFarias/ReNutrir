@@ -1,3 +1,7 @@
+package br.com.renutrir.servicos;
+
+import br.com.renutrir.model.*;
+
 public class ControladorEndereco {
 
     private Endereco endereco;
@@ -53,3 +57,4 @@ public class ControladorEndereco {
     public String getReferencia() {
         return endereco.getReferencia();
     }
+}
