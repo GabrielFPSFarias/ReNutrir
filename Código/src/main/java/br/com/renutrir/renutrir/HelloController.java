@@ -2273,6 +2273,7 @@ public class HelloController {
             alert.setTitle("Evento Criado");
             alert.setHeaderText(null);
             alert.setContentText("O evento '" + nome + "' foi criado com sucesso!");
+            RepositorioEventos.adicionarEvento(evento);
             alert.showAndWait();
 
         } catch (DateTimeParseException e) {
