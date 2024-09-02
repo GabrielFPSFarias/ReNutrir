@@ -48,7 +48,6 @@ public class ControladorTransacaoCartao {
         return senha != null && senha.matches("\\d{4,6}");
     }
 
-    // Método para validar transações de cartão de débito
     public boolean validarTransacaoCartaoDebito(TransacaoCartaoDebito transacao) {
         return validarNumeroCartao(transacao) &&
                validarDataValidade(transacao) &&
@@ -57,7 +56,6 @@ public class ControladorTransacaoCartao {
                validarSenha(transacao);
     }
 
-    // Método para validar transações de cartão de crédito
     public boolean validarTransacaoCartaoCredito(TransacaoCartaoCredito transacao) {
         return validarNumeroCartao(transacao) &&
                validarDataValidade(transacao) &&
