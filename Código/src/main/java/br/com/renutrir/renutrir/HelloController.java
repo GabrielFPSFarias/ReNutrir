@@ -1838,7 +1838,6 @@ public class HelloController {
             try {
                 Thread.sleep(500);
 
-                // Dados da doação
                 String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
                 String status = "Concluída";
                 String doacaoInfo = "Doador: " + doador.getNomeUsuario() + ", Item: " + itemSelecionado + ", Quantidade: " + 1
@@ -2011,7 +2010,6 @@ public class HelloController {
     public void instVinculadaCbox () {
 
     }
-
 
     @FXML
     void segundaVoluntarioBox(ActionEvent event) {

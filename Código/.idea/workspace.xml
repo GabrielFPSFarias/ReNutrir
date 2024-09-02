@@ -10,12 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/ProgressAlert.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dados/daniel.filho_doacoes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/dados/daniel.filho_doacoes.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dados/daniel.filho_intencoes.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/renutrir/HelloApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/renutrir/HelloApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
