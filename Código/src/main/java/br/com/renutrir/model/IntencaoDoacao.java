@@ -15,7 +15,6 @@ public class IntencaoDoacao {
     private Instituicao instituicao;
 
     public IntencaoDoacao() {
-        // Construtor padrão
     }
 
     public IntencaoDoacao(Doador doador, String item, int quantidade) {
