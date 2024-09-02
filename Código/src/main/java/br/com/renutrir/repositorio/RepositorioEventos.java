@@ -27,7 +27,7 @@ public class RepositorioEventos {
     // Remove eventos passados
     public void atualizarEventos() {
         for (int i = 0; i < eventos.size(); i++) {
-            if (eventos.get(i).getData().isAfter(LocalDate.now())){
+            if (eventos.get(i).getData().isBefore(LocalDate.now())){
                 eventos.remove(eventos.get(i));
             }
         }
@@ -43,7 +43,7 @@ public class RepositorioEventos {
         return null;
     }
 
-    // retorna todas as doações
+    // retorna todos os Eventos
     public List<Evento> listarEventos() {
         return new ArrayList<>(eventos); // Retorna uma cópia da lista
     }
