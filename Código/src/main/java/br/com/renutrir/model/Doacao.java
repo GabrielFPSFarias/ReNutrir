@@ -13,7 +13,7 @@ public class Doacao extends IntencaoDoacao {
         this.setQuantidade(doacao.getQuantidade());
         this.setStatus("Concluída");
         this.setTipoItem(doacao.getTipoItem());
-        this.setTipo(doacao.getItem());
+        this.setTipoItem(doacao.getItem());
     }
 
     // Getters e Setters

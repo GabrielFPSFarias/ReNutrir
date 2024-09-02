@@ -2,6 +2,7 @@ package br.com.renutrir.model;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
 public class IntencaoDoacao {
     private String tipoItem; // Valor, alimento, Roupas, Móveis, etc.
@@ -86,4 +87,9 @@ public class IntencaoDoacao {
         IntencaoDoacao that = (IntencaoDoacao) o;
         return Objects.equals(data, that.data) && Objects.equals(doador, that.doador) && Objects.equals(instituicao, that.instituicao);
     }
+
+    public String getItem() {
+        return item;
+    }
+
 }
