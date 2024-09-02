@@ -13,9 +13,8 @@ public class ControladorTransacao {
     private ControladorTransacaoPix controladorPix = new ControladorTransacaoPix();
     private ControladorTransacaoCartao controladorCartao = new ControladorTransacaoCartao();
 
-    // Método para validar qualquer transação, delegando para o controlador específico
+    
     public boolean validarTransacao(Transacao transacao) {
-        // Valida o valor da transação antes de delegar a validação específica
         if (!validarValor(transacao.getValorTransacao())) {
             return false;
         }
@@ -28,11 +27,9 @@ public class ControladorTransacao {
             return controladorCartao.validarTransacaoCartaoDebito((TransacaoCartaoDebito) transacao);
         }
 
-        // Se o tipo de transação não for reconhecido, retorna falso
         return false;
     }
 
-    // Método para validar o valor da transação
     private boolean validarValor(double valor) {
         return valor >= VALOR_MINIMO && valor <= VALOR_MAXIMO;
     }
@@ -40,7 +37,6 @@ public class ControladorTransacao {
 /*
     //PIX
 
-    // Limite mínimo e máximo para valor de transação, exemplo fictício.
     private static final double VALOR_MINIMO = 0.01;
     private static final double VALOR_MAXIMO = 1000000.00;
 
@@ -54,19 +50,16 @@ public class ControladorTransacao {
         if (idTransacao == null || idTransacao.length() != 32) {
             return false;
         }
-
-        //Verifica se o ID contém apenas caracteres alfanuméricos
         if (!idTransacao.matches("[A-Za-z0-9]+")) {
             return false;
         }
 
-        //Verifica se o ID já foi utilizado
+       
         if (idsDeTransacao.contains(idTransacao)) {
             System.out.println("Esse ID de transação já foi utilizado.");
             return false;
         }
 
-        //Se passou todas as verificações, o ID é válido
         return true;
     }
 
@@ -88,7 +81,7 @@ public class ControladorTransacao {
 
 //PIXXXX
   
-      // Limite mínimo e máximo para valor de transação, exemplo fictício.
+      
       private static final double VALOR_MINIMO = 0.01;
       private static final double VALOR_MAXIMO = 1000000000.00;
   
@@ -98,25 +91,23 @@ public class ControladorTransacao {
       }
   
       public static boolean validarIdTransacao(String idTransacao) {
-        // Verifica se o ID é nulo ou não possui 32 caracteres
+        
         if (idTransacao == null || idTransacao.length() != 32) {
             return false;
         }
         
-        // Verifica se o ID contém apenas caracteres alfanuméricos
+        
         if (!idTransacao.matches("[A-Za-z0-9]+")) {
             return false;
         }
 
       if(identificarIdsDeTransacao(ArrayList idsDeTransacao, String idDeTransacaoInserido)){
 
-        //Escrever que esse ID de transação já foi utilizado pelo usuário
-
+        
         return false;
 
       }
         
-        // Se passou todas as verificações, o ID é válido
         return true;
      }
 
@@ -427,17 +418,15 @@ CÓDIGO 1
 @ VALIDAR SENHA
 
 public static boolean validarSenha(String senha) {
-        // Verificar se a senha é nula ou vazia
+        
         if (senha == null || senha.isEmpty()) {
             return false;
         }
 
-        // Verificar se a senha contém apenas números
+      
         if (!senha.matches("\\d+")) {
             return false;
         }
-
-        // Verificar o comprimento da senha (4 ou 6 dígitos)
         
         return senha.length() == 4 || senha.length() == 6;
     }
