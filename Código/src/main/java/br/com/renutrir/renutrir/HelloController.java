@@ -1863,8 +1863,13 @@ public class HelloController {
 
                 int doacoesConcluidas = contarDoacoes(doador);
                 int doacoesRestantes = DOACOES_NECESSARIAS - doacoesConcluidas;
-                Platform.runLater(() -> showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi registrada com sucesso! " +
-                        "Faltam " + doacoesRestantes + " doações para alcançar a meta do certificado."));
+                if (doacoesRestantes > 0) {
+                    Platform.runLater(() -> showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi registrada com sucesso! " +
+                            "Faltam " + doacoesRestantes + " doações para alcançar a meta do certificado."));
+                } else {
+                    Platform.runLater(() -> showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi registrada com sucesso! " +
+                            "Seu certificado já está disponível no menu doador."));
+                }
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
