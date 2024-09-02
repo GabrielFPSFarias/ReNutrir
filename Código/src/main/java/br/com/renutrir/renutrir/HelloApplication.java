@@ -17,24 +17,24 @@ public class HelloApplication extends Application {
     private ProgressBar progressBar;
 
     private static HelloApplication instance;
+    private ProgressAlert progressAlert;
 
     @Override
     public void start(Stage stage) throws IOException {
-        instance = this;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/01-tela-inicial.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         stage.setTitle("ReNutrir");
         stage.setScene(scene);
         stage.setResizable(false);
+
         stage.show();
     }
 
-    public static HelloApplication getInstance() {
-        return instance;
-    }
-
     public void showAlertComProgresso() {
-        showProgress(0);
+        if (progressStage == null) {
+            initProgressWindow();
+        }
+        progressStage.show();
 
         new Thread(() -> {
             for (double progress = 0; progress <= 1.0; progress += 0.01) {
@@ -44,7 +44,7 @@ public class HelloApplication extends Application {
                     e.printStackTrace();
                 }
                 final double currentProgress = progress;
-                Platform.runLater(() -> showProgress(currentProgress));
+                Platform.runLater(() -> progressBar.setProgress(currentProgress));
             }
 
             try {
@@ -55,6 +55,7 @@ public class HelloApplication extends Application {
             Platform.runLater(this::hideProgress);
         }).start();
     }
+
     private void initProgressWindow() {
         progressStage = new Stage();
         progressStage.setTitle("Progresso da Doação");
@@ -65,25 +66,36 @@ public class HelloApplication extends Application {
         StackPane root = new StackPane(progressBar);
         root.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(root, 400, 100);
+        Scene scene = new Scene(root, 400, 80);
         progressStage.setScene(scene);
     }
 
     public void showProgress(double progress) {
         Platform.runLater(() -> {
-            progressBar.setProgress(progress);
-            progressStage.show();
+            if (progressStage != null) {
+                progressBar.setProgress(progress);
+                progressStage.show();
+            }
         });
     }
 
     public void hideProgress() {
-        Platform.runLater(() -> progressStage.hide());
+        Platform.runLater(() -> {
+            if (progressStage != null) {
+                progressStage.hide();
+            }
+        });
+    }
+
+    public static HelloApplication getInstance() {
+        return instance;
     }
 
     public static void main(String[] args) {
         launch();
     }
 }
+
 
 
 /*
