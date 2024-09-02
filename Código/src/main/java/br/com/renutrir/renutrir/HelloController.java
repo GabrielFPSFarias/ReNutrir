@@ -1926,7 +1926,7 @@ public class HelloController {
     */
 
 
-    //Tela 09 Seja Voluntário
+     //Tela 09 Seja Voluntário
 
     @FXML
     private TextField fieldHoraInicialVoluntario;
@@ -1967,7 +1967,41 @@ public class HelloController {
     public void botaoQueroVoluntario() {
 
     }
+//-----------------------------------------------------------------------------------------------------------------------
+ @FXML
+private ComboBox<String> cboxFuncaoVoluntario;
 
+@FXML
+private ComboBox<String> cboxInstVinculada;
+
+private List<String> listFuncoesVoluntario = new ArrayList<>();
+
+@FXML
+public void funcaoVoluntarioCbox() {
+    listFuncoesVoluntario.clear(); // Limpa a lista para evitar duplicação
+    listFuncoesVoluntario.add("Transportador de doações");
+    listFuncoesVoluntario.add("Ajudante dos Eventos");
+
+    ObservableList<String> observableListFuncoes = FXCollections.observableArrayList(listFuncoesVoluntario);
+    cboxFuncaoVoluntario.setItems(observableListFuncoes);
+}
+
+@FXML
+public void instVinculadaCbox() {
+    cboxInstVinculada.getItems().clear();
+    try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivoInstituicoes))) {
+        String linha;
+        while ((linha = reader.readLine()) != null) {
+            if (linha.startsWith("Nome: ")) {
+                String nomeInstituicao = linha.substring(6).trim();
+                cboxInstVinculada.getItems().add(nomeInstituicao);
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+    
     /*
     @FXML
     public void instVinculadaCbox() {
@@ -1994,7 +2028,8 @@ public class HelloController {
         cboxFuncaoVoluntario.getItems().addAll("Transportador de Doações", "Ajudante dos Eventos");
     }
     */
-
+//---------------------------------------------------------------------------------
+    /*
     @FXML
     private ComboBox<Voluntario> cboxFuncaoVoluntario;
 
@@ -2005,8 +2040,8 @@ public class HelloController {
 
     private ObservableList<Voluntario> observableListVoluntario;
 
-    Voluntario instancia = new Voluntario();
-
+    Voluntario instancia = new Voluntario();*/
+/*
     @FXML
     public void funcaoVoluntarioCbox () {
         instancia.getFuncaoVoluntariado("Transportador de doações");
@@ -2015,12 +2050,12 @@ public class HelloController {
         observableListVoluntario = FXCollections.observableArrayList(listVoluntario);
         cboxFuncaoVoluntario.setItems(observableListVoluntario);
     }
-
-    @FXML
+*/
+   /* @FXML
     public void instVinculadaCbox () {
 
     }
-
+*/
     @FXML
     void segundaVoluntarioBox(ActionEvent event) {
 
