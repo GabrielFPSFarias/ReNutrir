@@ -13,12 +13,10 @@ public class RepositorioIntencaoDoacao {
 
     private List<IntencaoDoacao> intencoes;
 
-    // Remove uma intenção de doação do repositório pelo ID
-    public boolean removerIntencao(IntencaoDoacao intencao) {
+    public boolean removerIntencao(IntencaoDoacao intencao){
         return intencoes.remove(intencao);
     }
 
-    // Atualiza uma intenção de doação existente
     public void atualizarIntencao(IntencaoDoacao intencao) {
         for (int i = 0; i < intencoes.size(); i++) {
             if (intencoes.get(i).equals(intencao)) {
@@ -65,7 +63,7 @@ public class RepositorioIntencaoDoacao {
 
     private void salvarIntencaoNoArquivo(IntencaoDoacao intencao) throws IOException {
         String nomeUsuario = intencao.getDoador().getNomeUsuario();
-        String caminhoArquivo = "src/dados/" + nomeUsuario + "_intencoes.txt"; //usa nomeUsuario
+        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.txt"; //usa nomeUsuario
 
         File arquivo = new File(caminhoArquivo);
 
@@ -85,20 +83,23 @@ public class RepositorioIntencaoDoacao {
 
     public int contarDoacoes(Doador doador) {
         String nomeUsuario = doador.getNomeUsuario();
-        String caminhoArquivo = "src/dados/" + nomeUsuario + "_intencoes.txt";
+        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.txt";
         File arquivo = new File(caminhoArquivo);
 
         if (!arquivo.exists()) {
+            System.out.println("Arquivo não encontrado: " + caminhoArquivo);
             return 0;
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
-            return (int) reader.lines().count();
+            int count = (int) reader.lines().count();
+            System.out.println("Número de doações: " + count);
+            return count;
         } catch (IOException e) {
             e.printStackTrace();
+            return 0;
         }
-
-        return 0;
     }
+
 
 }

@@ -45,6 +45,7 @@ public class ControladorCertificado {
 
         if (doacoesRestantes <= 0) {
             emitirCertificado(doador);
+            System.out.println("Emitir certificado para o doador.");
         } else {
             showAlert(Alert.AlertType.INFORMATION, "Progresso do Certificado",
                     "Faltam " + doacoesRestantes + " doações para você ganhar o certificado.");
@@ -52,7 +53,7 @@ public class ControladorCertificado {
     }
 
     private void emitirCertificado(Doador doador) {
-        String nomeArquivo = doador.getNomeUsuario() + "_certificado.txt";
+        String nomeArquivo = "src/dados/" + doador.getNomeUsuario() + "_certificado.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo))) {
             writer.write("Certificado de Reconhecimento");
             writer.newLine();
