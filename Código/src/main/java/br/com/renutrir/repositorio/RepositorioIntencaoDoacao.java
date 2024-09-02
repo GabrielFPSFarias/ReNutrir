@@ -5,6 +5,7 @@ import br.com.renutrir.model.IntencaoDoacao;
 import javafx.scene.control.Alert;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -30,7 +31,6 @@ public class RepositorioIntencaoDoacao {
         }
     }
 
-    // Busca uma intenção de doação pelo ID
     public IntencaoDoacao buscarIntencao(Doador doador, LocalDateTime data) {
         for (IntencaoDoacao intencao : intencoes) {
             if (intencao.getDoador().equals(doador)) {
@@ -42,7 +42,6 @@ public class RepositorioIntencaoDoacao {
         return null;
     }
 
-    // Retorna todas as intenções de doação
     public List<IntencaoDoacao> listarIntencoes() {
         return new ArrayList<>(intencoes); //Retorna lista das intençoes
     }
@@ -51,35 +50,38 @@ public class RepositorioIntencaoDoacao {
         this.intencoes = new ArrayList<>();
     }
 
-    public void adicionarIntencao(IntencaoDoacao intencao) {
-        intencoes.add(intencao);
-        salvarIntencaoNoArquivo(intencao);
-    }
-
-    private void salvarIntencaoNoArquivo(IntencaoDoacao intencao) {
-        String nomeUsuario = intencao.getDoador().getNomeUsuario();
-
-        if (nomeUsuario == null) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Nome de usuário não encontrado.");
-            return;
-        }
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/dados/intencoes.txt", true))) {
-            writer.write("Nome de Usuário: " + nomeUsuario + "\n");
-            writer.write("Item: " + intencao.getItem() + "\n");
-            writer.write("Quantidade: " + intencao.getQuantidade() + "\n");
-            writer.write("Data: " + intencao.getData() + "\n");
-            writer.write("\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.setHeaderText(null);
         alert.showAndWait();
+    }
+
+    private static final String CAMINHO_ARQUIVO = "src/dados/intencoes.txt";
+
+    public void adicionarIntencao(IntencaoDoacao intencao) {
+        try {
+            salvarIntencaoNoArquivo(intencao);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void salvarIntencaoNoArquivo(IntencaoDoacao intencao) throws IOException {
+        File arquivo = new File(CAMINHO_ARQUIVO);
+
+        File diretorio = arquivo.getParentFile();
+        if (!diretorio.exists()) {
+            diretorio.mkdirs();
+        }
+
+        if (!arquivo.exists()) {
+            arquivo.createNewFile();
+        }
+
+        try (FileWriter writer = new FileWriter(arquivo, true)) {
+            writer.write(intencao.toString() + System.lineSeparator());
+        }
     }
 }

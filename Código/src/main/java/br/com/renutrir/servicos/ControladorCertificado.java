@@ -12,7 +12,7 @@ public class ControladorCertificado {
 
         Certificado certificado = new Certificado();
         certificado.setDescricao(descricao);
-        certificado.setDataEmissao(java.time.LocalDate.now()); // Data atual como data de emissão
+        certificado.setDataEmissao(java.time.LocalDate.now());
         certificado.setQuantDoacoes(quantDoacoes);
 
         return certificado;
@@ -25,13 +25,20 @@ public class ControladorCertificado {
     }
 
     private void validarQuantDoacoes(int quantDoacoes) {
-        if (quantDoacoes < 50) {
+        if (quantDoacoes < Certificado.DOACOES_NECESSARIAS) {
             throw new IllegalArgumentException("O doador não pode receber o certificado, ainda tem menos de 50 doações efetuadas.");
         }
     }
 
     public void verificarProgressoParaCertificado(Doador doador) {
-        int doacoesRealizadas = doador.getCertificado().getQuantDoacoes();
+        Certificado certificado = doador.getCertificado();
+
+        int doacoesRealizadas;
+        if (certificado != null) {
+            doacoesRealizadas = certificado.getQuantDoacoes();
+        } else {
+            doacoesRealizadas = 0;
+
         int doacoesRestantes = Certificado.DOACOES_NECESSARIAS - doacoesRealizadas;
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -40,4 +47,5 @@ public class ControladorCertificado {
         alert.setContentText("Faltam " + doacoesRestantes + " doações para você conseguir o certificado.");
         alert.showAndWait();
     }
+}
 }
