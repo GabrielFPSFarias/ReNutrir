@@ -25,6 +25,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
+import javafx.util.Callback;
 import javafx.util.Duration;
 
 import java.io.*;
@@ -86,7 +87,6 @@ public class HelloController {
     @FXML
     public TextField fieldUfIns;
     public CheckBox checarInstituicao;
-    public Button instituicoesDoacaoBotao;
     public Button doacoesSolicitadasBotao;
     public Button sejaVoluntarioBotao;
     public Button transportesDoacoesBotao;
@@ -873,8 +873,53 @@ public class HelloController {
     private Button doarAgoraBotao;
 
     @FXML
+    private ComboBox<Instituicao> selecionarInstituicaoCbox;
+
+    @FXML
+    private Button instituicoesDoacaoBotao;
+
+    private RepositorioInstituicao repositorioInstituicao;
+
+    public void configurarTela() {
+        repositorioInstituicao = new RepositorioInstituicao();
+        popularComboBoxInstituicoes();
+    }
+
+    private void popularComboBoxInstituicoes() {
+        List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
+        selecionarInstituicaoCbox.getItems().clear();
+        selecionarInstituicaoCbox.getItems().addAll(instituicoes);
+
+        selecionarInstituicaoCbox.setCellFactory(param -> new ListCell<Instituicao>() {
+            @Override
+            protected void updateItem(Instituicao item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "Instituição" : item.getNome());
+            }
+        });
+
+        selecionarInstituicaoCbox.setButtonCell(new ListCell<Instituicao>() {
+            @Override
+            protected void updateItem(Instituicao item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "Instituição" : item.getNome());
+            }
+        });
+    }
+
+
+    @FXML
     void botaoDoarAgora(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
+        configurarTela();
+    }
+
+    @FXML
+    void cboxSelecionarInstituicao(ActionEvent event) {
+        Instituicao instituicaoSelecionada = selecionarInstituicaoCbox.getValue();
+        if (instituicaoSelecionada != null) {
+            //colocar pra doar pra a inst selecionada
+        }
     }
 
 
@@ -2093,7 +2138,7 @@ public void instVinculadaCbox() {
         }
     }
 
-    
+
     //Tela 19 - Menu Instituição
 
     @FXML
