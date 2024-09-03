@@ -708,146 +708,6 @@ public class HelloController {
         }
     }
 
-    /*
-    private Instituicao buscarInstituicaoNoArquivo(String emailOuUsuario, String senha, String caminhoArquivo) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {
-            String linha;
-            Instituicao instituicao = null;
-            boolean instituicaoEncontrada = false;
-
-            String enderecoStr = null;
-            String bairro = null;
-            String numero = null;
-            String cidade = null;
-            String uf = null;
-            String complemento = null;
-            String referencia = null;
-
-            while ((linha = reader.readLine()) != null) {
-                if (linha.startsWith("Nome: ")) {
-                    if (instituicao == null) {
-                        instituicao = new Instituicao();
-                    }
-                    instituicao.setNome(linha.substring(6).trim());
-                } else if (linha.startsWith("Nome de Usuário: ") && instituicao != null) {
-                    String nomeUsuario = linha.substring(17).trim();
-                    if (nomeUsuario.equals(emailOuUsuario)) {
-                        instituicao.setNomeUsuario(nomeUsuario);
-                        instituicaoEncontrada = true;
-                    }
-                } else if (linha.startsWith("Email: ") && instituicao != null) {
-                    String email = linha.substring(7).trim();
-                    if (email.equals(emailOuUsuario)) {
-                        instituicao.setEmail(email);
-                        instituicaoEncontrada = true;
-                    }
-                } else if (linha.startsWith("Telefone: ") && instituicao != null) {
-                    instituicao.setTelefone(linha.substring(10).trim());
-                } else if (linha.startsWith("CNPJ: ") && instituicao != null) {
-                    instituicao.setCnpj(linha.substring(6).trim());
-                } else if (linha.startsWith("Endereço: ") && instituicao != null) {
-                    enderecoStr = linha.substring(10).trim();
-                } else if (linha.startsWith("Bairro: ") && instituicao != null) {
-                    bairro = linha.substring(8).trim();
-                } else if (linha.startsWith("Número: ") && instituicao != null) {
-                    numero = linha.substring(8).trim();
-                } else if (linha.startsWith("Cidade: ") && instituicao != null) {
-                    cidade = linha.substring(8).trim();
-                } else if (linha.startsWith("UF: ") && instituicao != null) {
-                    uf = linha.substring(4).trim();
-                } else if (linha.startsWith("Complemento: ") && instituicao != null) {
-                    complemento = linha.substring(13).trim();
-                } else if (linha.startsWith("Referência: ") && instituicao != null) {
-                    referencia = linha.substring(12).trim();
-                } else if (linha.startsWith("Senha: ") && instituicaoEncontrada && instituicao != null) {
-                    String senhaLida = linha.substring(7).trim();
-                    if (senhaLida.equals(senha)) {
-                        Endereco endereco = new Endereco(enderecoStr, bairro, numero, cidade, uf, complemento, referencia);
-                        instituicao.setEndereco(endereco);
-                        instituicao.setSenha(senhaLida); // Definir a senha após a verificação
-                        return instituicao;
-                    } else {
-                        instituicao = null; // Se a senha não estiver correta, a instituição é inválida
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null; // Retorna null se não encontrar a instituição
-    }
-    */
-
-    /*
-    private Doador buscarDoadorNoArquivo(String emailOuUsuario, String senha, String caminhoArquivo) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {
-            String linha;
-            Doador doador = null;
-            boolean doadorEncontrado = false;
-
-            String enderecoStr = null;
-            String bairro = null;
-            String numero = null;
-            String cidade = null;
-            String uf = null;
-            String complemento = null;
-            String referencia = null;
-
-            while ((linha = reader.readLine()) != null) {
-                if (linha.startsWith("Nome: ")) {
-                    if (doador == null) {
-                        doador = new Doador();
-                    }
-                    doador.setNome(linha.substring(6).trim());
-                } else if (linha.startsWith("Nome de Usuário: ") && doador != null) {
-                    String nomeUsuario = linha.substring(17).trim();
-                    if (nomeUsuario.equals(emailOuUsuario)) {
-                        doador.setNomeUsuario(nomeUsuario);
-                        doadorEncontrado = true;
-                    }
-                } else if (linha.startsWith("Email: ") && doador != null) {
-                    String email = linha.substring(7).trim();
-                    if (email.equals(emailOuUsuario)) {
-                        doador.setEmail(email);
-                        doadorEncontrado = true;
-                    }
-                } else if (linha.startsWith("Telefone: ") && doador != null) {
-                    doador.setTelefone(linha.substring(10).trim());
-                } else if (linha.startsWith("CPF: ") && doador != null) {
-                    doador.setCpf(linha.substring(5).trim());
-                } else if (linha.startsWith("Endereço: ") && doador != null) {
-                    enderecoStr = linha.substring(10).trim();
-                } else if (linha.startsWith("Bairro: ") && doador != null) {
-                    bairro = linha.substring(8).trim();
-                } else if (linha.startsWith("Número: ") && doador != null) {
-                    numero = linha.substring(8).trim();
-                } else if (linha.startsWith("Cidade: ") && doador != null) {
-                    cidade = linha.substring(8).trim();
-                } else if (linha.startsWith("UF: ") && doador != null) {
-                    uf = linha.substring(4).trim();
-                } else if (linha.startsWith("Complemento: ") && doador != null) {
-                    complemento = linha.substring(13).trim();
-                } else if (linha.startsWith("Referência: ") && doador != null) {
-                    referencia = linha.substring(12).trim();
-                } else if (linha.startsWith("Senha: ") && doadorEncontrado && doador != null) {
-                    String senhaLida = linha.substring(7).trim();
-                    if (senhaLida.equals(senha)) {
-                        Endereco endereco = new Endereco(enderecoStr, bairro, numero, cidade, uf, complemento, referencia);
-                        doador.setEndereco(endereco);
-                        doador.setSenha(senhaLida); // Definir a senha após a verificação
-                        return doador;
-                    } else {
-                        doador = null; //Se a senha não estiver correta, o doador é inválido
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null; //Retorna null se não encontrar o doador
-    }
-    */
-
     //Métodos de cadastro instituição
 
     public void ufInsField(ActionEvent actionEvent) {
@@ -2188,30 +2048,52 @@ public void instVinculadaCbox() {
     @FXML
     private Label exibirInfoDoadorLabel;
 
+    public static String formatarCPF(String cpf) {
+        if (cpf == null || cpf.length() != 11) {
+            return cpf;
+        }
+        return cpf.replaceAll(
+                "(\\d{3})(\\d{3})(\\d{3})(\\d{2})",
+                "$1.$2.$3-$4"
+        );
+    }
+
     public void exibirPerfilDoador() throws IOException {
+        System.out.println("Iniciando exibição do perfil do doador.");
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
 
         if (doadorLogado != null) {
+            String cpfFormatado = formatarCPF(doadorLogado.getCpf());
+
             String perfilDoador = String.format(
                     "Nome: %s\n" +
                             "Nome de Usuário: %s\n" +
                             "Telefone: %s\n" +
-                            "CPF: %s\n",
+                            "CPF: %s\n" +
+                            "Email: %s\n",
                     doadorLogado.getNome() != null ? doadorLogado.getNome() : "",
                     doadorLogado.getNomeUsuario() != null ? doadorLogado.getNomeUsuario() : "",
                     doadorLogado.getTelefone() != null ? doadorLogado.getTelefone() : "",
-                    doadorLogado.getCpf() != null ? doadorLogado.getCpf() : ""
+                    cpfFormatado,
+                    doadorLogado.getEmail() != null ? doadorLogado.getEmail() : ""
             );
 
-            System.out.println("Label: " + exibirInfoDoadorLabel);
-            System.out.println("Perfil: " + perfilDoador);
-
-            exibirInfoDoadorLabel.setText(perfilDoador);
+            System.out.println("Perfil do doador: " + perfilDoador);
+            if (exibirInfoDoadorLabel != null) {
+                exibirInfoDoadorLabel.setText(perfilDoador);
+            } else {
+                System.out.println("Não inicializou.");
+            }
         } else {
-            exibirInfoDoadorLabel.setText("Nenhum doador logado.");
+            if (exibirInfoDoadorLabel != null) {
+                exibirInfoDoadorLabel.setText("Nenhum doador logado.");
+            } else {
+                System.out.println("A label exibirInfoDoadorLabel não está inicializada.");
+            }
         }
     }
 
+    
     //Tela 19 - Menu Instituição
 
     @FXML

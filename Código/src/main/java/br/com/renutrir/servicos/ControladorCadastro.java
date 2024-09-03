@@ -1,6 +1,19 @@
 package br.com.renutrir.servicos;
 
 import br.com.renutrir.model.*;
+import br.com.renutrir.repositorio.RepositorioDoador;
+import br.com.renutrir.repositorio.RepositorioInstituicao;
+import br.com.renutrir.sessao.SessaoDoador;
+import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -138,6 +151,5 @@ public class ControladorCadastro {
             throw new IllegalArgumentException("O número de telefone é inválido. Ele deve estar no formato internacional.");
         }
     }
-
 }
 
