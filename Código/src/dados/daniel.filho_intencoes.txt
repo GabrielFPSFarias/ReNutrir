@@ -1,8 +1,0 @@
-Doador: Daniel Filho, Item: item, Quantidade: 1, Data: 02/09/2024 05:25:18, Status: Pendente
-Doador: Daniel Filho, Item: item, Quantidade: 1, Data: 02/09/2024 05:25:25, Status: Pendente
-Doador: Daniel Filho, Item: item, Quantidade: 1, Data: 02/09/2024 05:25:30, Status: Pendente
-Doador: Daniel Filho, Item: item, Quantidade: 1, Data: 02/09/2024 05:26:39, Status: Pendente
-Doador: Daniel Filho, Item: item, Quantidade: 1, Data: 02/09/2024 05:27:17, Status: Pendente
-Doador: Daniel Filho, Item: item, Quantidade: 1, Data: 02/09/2024 05:27:45, Status: Pendente
-Doador: Daniel Filho, Item: item, Quantidade: 1, Data: 02/09/2024 05:30:12, Status: Pendente
-Doador: Daniel Filho, Item: item, Quantidade: 1, Data: 02/09/2024 05:30:45, Status: Pendente
