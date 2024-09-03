@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,9 +27,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.*;
 import javafx.util.Duration;
 
-import javax.swing.text.Document;
 import java.io.*;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -1765,12 +1762,81 @@ public class HelloController {
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
     }
 
-
     @FXML
     private Button botaoRegistrarDoacao;
 
     private HelloApplication application = new HelloApplication();
 
+    @FXML
+    private void registrarDoacao(ActionEvent event) {
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+
+        if (doador == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado. Certifique-se de que você está logado.");
+            return;
+        }
+
+        String itemSelecionado = obterItemSelecionado();
+
+        if (itemSelecionado == null || itemSelecionado.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Item selecionado inválido.");
+            return;
+        }
+
+        application.showAlertComProgresso();
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(500);
+
+                String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+                String status = "Concluída";
+
+                Doacao doacao = new Doacao(doador.getNomeUsuario(), itemSelecionado, 1, dataHora, status);
+
+                RepositorioDoacoes repositorioDoacoes = new RepositorioDoacoes();
+                repositorioDoacoes.adicionarDoacao(doacao);
+
+                salvarDoacoesEmArquivo(repositorioDoacoes);
+
+                int doacoesConcluidas = contarDoacoes(doador);
+                int doacoesRestantes = DOACOES_NECESSARIAS - doacoesConcluidas;
+                if (doacoesRestantes > 0) {
+                    Platform.runLater(() -> showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi registrada com sucesso! " +
+                            "Faltam " + doacoesRestantes + " doações para alcançar a meta do certificado."));
+                } else {
+                    Platform.runLater(() -> showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi registrada com sucesso! " +
+                            "Seu certificado já está disponível no menu doador."));
+                }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                Platform.runLater(application::hideProgress);
+            }
+        }).start();
+    }
+
+    private void salvarDoacoesEmArquivo(RepositorioDoacoes repositorioDoacoes) {
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+
+        if (doadorLogado == null) {
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Nenhum doador está logado."));
+            return;
+        }
+
+        String nomeUsuario = doadorLogado.getNomeUsuario();
+        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.dat";
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(caminhoArquivo))) {
+            oos.writeObject(repositorioDoacoes.listarDoacoes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar as doações."));
+        }
+    }
+
+    /*
     @FXML
     private void registrarDoacao(ActionEvent event) {
         Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
@@ -1831,11 +1897,50 @@ public class HelloController {
             }
         }).start();
     }
+    */
 
     private String obterItemSelecionado() {
         return "item";
     }
 
+    public int contarDoacoes(Doador doador) {
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+
+        if (doadorLogado == null) {
+            System.out.println("Nenhum doador está logado.");
+            return 0;
+        }
+
+        String nomeUsuario = doadorLogado.getNomeUsuario();
+        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.dat";
+        File arquivo = new File(caminhoArquivo);
+
+        if (!arquivo.exists()) {
+            System.out.println("Arquivo não encontrado: " + caminhoArquivo);
+            return 0;
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
+            @SuppressWarnings("unchecked")
+            List<Doacao> doacoes = (List<Doacao>) ois.readObject();
+
+            int count = 0;
+            for (Doacao doacao : doacoes) {
+                if (doacao.getNomeDoador().equals(nomeUsuario)) {
+                    count++;
+                }
+            }
+
+            System.out.println("Número de doações: " + count);
+            return count;
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    /*
     public int contarDoacoes(Doador doador) {
         String nomeUsuario = doador.getNomeUsuario();
         String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.txt";
@@ -1855,28 +1960,7 @@ public class HelloController {
             return 0;
         }
     }
-
-    /*
-    @FXML
-    private void registrarDoacao(ActionEvent event) {
-        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
-
-        if (doador == null) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado. Certifique-se de que você está logado.");
-            return;
-        }
-
-        IntencaoDoacao intencao = new IntencaoDoacao(doador, "item", 1);
-
-        RepositorioIntencaoDoacao repositorio = new RepositorioIntencaoDoacao();
-        repositorio.adicionarIntencao(intencao);
-
-        ControladorCertificado controladorCertificado = new ControladorCertificado();
-        controladorCertificado.verificarProgressoParaCertificado(doador);
-
-        int doacoesRestantes = ControladorCertificado.DOACOES_NECESSARIAS - repositorio.contarDoacoes(doador); //decrementa a cada doacao
-    }
-    */
+     */
 
 
      //Tela 09 Seja Voluntário
