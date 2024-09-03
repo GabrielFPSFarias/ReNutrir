@@ -1,11 +1,14 @@
 package br.com.renutrir.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Doador extends Conta {
+public class Doador extends Conta implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int nivel;
     private LocalDate dataNascimento;
     private Certificado certificado;

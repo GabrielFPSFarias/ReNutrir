@@ -1,11 +1,14 @@
 package br.com.renutrir.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 
-public class Instituicao extends Conta {
+public class Instituicao extends Conta implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String cnpj;
     private LocalDate dataFundacao;
     private double distanciaMaximaDeColeta;

@@ -1,6 +1,10 @@
 package br.com.renutrir.model;
 
-public class Conta {
+import java.io.Serializable;
+
+public class Conta implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String nome;
     private String nomeUsuario;
     private String email;

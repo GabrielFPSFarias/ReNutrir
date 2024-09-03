@@ -19,7 +19,7 @@ public class RepositorioInstituicao {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivoInstituicao))) {
             return (List<Instituicao>) ois.readObject();
         } catch (FileNotFoundException e) {
-            return new ArrayList<>(); //nn existe
+            return new ArrayList<>();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -40,7 +40,21 @@ public class RepositorioInstituicao {
     }
 
     public Optional<Instituicao> buscarInstituicaoPorCnpj(String cnpj) {
-        return instituicoes.stream().filter(i -> i.getCnpj().equals(cnpj)).findFirst();
+        return instituicoes.stream()
+                .filter(i -> i.getCnpj() != null && i.getCnpj().equals(cnpj))
+                .findFirst();
+    }
+
+    public Optional<Instituicao> buscarInstituicaoPorEmail(String email) {
+        return instituicoes.stream()
+                .filter(i -> i.getEmail() != null && i.getEmail().equalsIgnoreCase(email))
+                .findFirst();
+    }
+
+    public Optional<Instituicao> buscarInstituicaoPorNomeUsuario(String nomeUsuario) {
+        return instituicoes.stream()
+                .filter(i -> i.getNomeUsuario() != null && i.getNomeUsuario().equalsIgnoreCase(nomeUsuario))
+                .findFirst();
     }
 
     public void atualizarInstituicao(Instituicao instituicaoAtualizada) {
@@ -53,7 +67,7 @@ public class RepositorioInstituicao {
     }
 
     public void removerInstituicao(String cnpj) {
-        instituicoes.removeIf(i -> i.getCnpj().equals(cnpj));
+        instituicoes.removeIf(i -> i.getCnpj() != null && i.getCnpj().equals(cnpj));
         salvarInstituicoes();
     }
 

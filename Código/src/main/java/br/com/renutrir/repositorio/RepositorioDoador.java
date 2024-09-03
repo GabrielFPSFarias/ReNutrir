@@ -15,11 +15,15 @@ public class RepositorioDoador {
         doadores = carregarDoadores();
     }
 
+    @SuppressWarnings("unchecked")
     private List<Doador> carregarDoadores() {
+        File file = new File(arquivoDoador);
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivoDoador))) {
             return (List<Doador>) ois.readObject();
-        } catch (FileNotFoundException e) {
-            return new ArrayList<>(); // Arquivo ainda não existe, retorna lista vazia
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -40,7 +44,22 @@ public class RepositorioDoador {
     }
 
     public Optional<Doador> buscarDoadorPorCpf(String cpf) {
-        return doadores.stream().filter(d -> d.getCpf().equals(cpf)).findFirst();
+        return doadores.stream()
+                .filter(d -> d.getNomeUsuario() != null && d.getNomeUsuario().equalsIgnoreCase(cpf))
+                .findFirst();
+    }
+
+    public Optional<Doador> buscarDoadorPorNomeUsuario(String nomeUsuario) {
+        return doadores.stream()
+                .filter(d -> d.getNomeUsuario() != null && d.getNomeUsuario().equalsIgnoreCase(nomeUsuario))
+                .findFirst();
+    }
+
+
+    public Optional<Doador> buscarDoadorPorEmail(String email) {
+        return doadores.stream()
+                .filter(d -> d.getEmail() != null && d.getEmail().equalsIgnoreCase(email))
+                .findFirst();
     }
 
     public void atualizarDoador(Doador doadorAtualizado) {
