@@ -3,6 +3,15 @@ package br.com.renutrir.servicos;
 public class ControladorLogin{
 
     @FXML
+    private TextField loginEmailField;
+
+    @FXML
+    private PasswordField loginSenhaField;
+
+    @FXML
+    private Button loginEntrarBotao;
+
+    @FXML
     public void botaoLoginEntrar() {
         String emailOuUsuario = loginEmailField.getText();
         String senha = loginSenhaField.getText();
