@@ -1,255 +1,191 @@
 package br.com.renutrir.servicos;
 
-import br.com.renutrir.renutrir.HelloController;
+import br.com.renutrir.model.Doador;
+import br.com.renutrir.model.Instituicao;
+import br.com.renutrir.sessao.SessaoDoador;
+import br.com.renutrir.sessao.SessaoInstituicao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class ControladorSolicitacaoDoacao {
-    HelloController helloController = new HelloController();
 
-    //Botão voltar
+    public TextField doacaoProdLimpezaSolicitarField;
+    public Button confProdLimpezaSolicitar;
+    public Button confProdHigieneSolicitar;
+    public TextField doacaoProdHigieneSolicitarField;
+    public Button confBebidasSolicitar;
+    public TextField doacaoBebidasSolicitarField;
+    public Button confMoveisSolicitar;
+    public TextField doacaoMoveisSolicitarField;
+    public Button confRoupasSolicitar;
+    public TextField doacaoRoupasSolicitarField;
+    public Button confAlimentosSolicitar;
+    public TextField doacaoAlimentosSolicitarField;
+    public TextField doacaoValorSolicitarField;
+    public Button confValorSolicitar;
     @FXML
-    public Button voltarBotao;
+    public Button voltarBotao, bebidasSolicitar, itemHigienerSolicitar, produtoLimpezaSolicitar, roupasSolicitar, moveisSolicitar, dinheiroSolicitar, alimentosSolicitar;
 
     @FXML
-    public void botaoVoltar22() {
-        System.out.println("Instituição");
-        Stage stage = (Stage) voltarBotao.getScene().getWindow();
-        helloController.trocarTela(stage, "/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+    public void solicitarDinheiro(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/22-1-valores.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
-    void botaoVoltar45() {
-        System.out.println("Solicitar Doações");
-        Stage stage = (Stage) voltarBotao.getScene().getWindow();
-        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
-    }
-
-    @FXML
-    void botaoVoltar46() {
-        System.out.println("Solicitar Doações");
-        Stage stage = (Stage) voltarBotao.getScene().getWindow();
-        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
-    }
-
-    @FXML
-    void botaoVoltar47() {
-        System.out.println("Solicitar Doações");
-        Stage stage = (Stage) voltarBotao.getScene().getWindow();
-        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
-    }
-
-    @FXML
-    void botaoVoltar48() {
-        System.out.println("Solicitar Doações");
-        Stage stage = (Stage) voltarBotao.getScene().getWindow();
-        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
-    }
-
-    @FXML
-    void botaoVoltar49() {
-        System.out.println("Solicitar Doações");
-        Stage stage = (Stage) voltarBotao.getScene().getWindow();
-        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
-    }
-
-    @FXML
-    void botaoVoltar50() {
-        System.out.println("Solicitar Doações");
-        Stage stage = (Stage) voltarBotao.getScene().getWindow();
-        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
-    }
-
-    @FXML
-    void botaoVoltar51() {
-        System.out.println("Solicitar Doações");
-        Stage stage = (Stage) voltarBotao.getScene().getWindow();
-        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
-    }
-
-
-    //Botões Solicitações
-    @FXML
-    private Button bebidasSolicitar;
-
-    @FXML
-    private Button itemHigienerSolicitar;
-
-    @FXML
-    private Button produtoLimpezaSolicitar;
-
-    @FXML
-    private Button roupasSolicitar;
-
-    @FXML
-    private Button moveisSolicitar;
-
-    @FXML
-    private Button dinheiroSolicitar;
-
-    @FXML
-    private Button alimentosSolicitar;
-
-    //Métodos Solicitações
-    @FXML
-    void solicitarDinheiro(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-1-valores.fxml","ReNutrir - Solicitar Doações");
-    }
-
-    @FXML
-    void solicitarAlimentos(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-2-alimentos.fxml","ReNutrir - Solicitar Doações");
+    public void solicitarAlimentos(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/22-2-alimentos.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void solicitarRoupas(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-3-roupas.fxml","ReNutrir - Solicitar Doações");
+        realizarTrocaDeTela("/br/com/renutrir/22-3-roupas.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void solicitarMoveis(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-4-moveis.fxml","ReNutrir - Solicitar Doações");
+        realizarTrocaDeTela("/br/com/renutrir/22-4-moveis.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void solicitarBebidas(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-5-bebidas.fxml","ReNutrir - Solicitar Doações");
+        realizarTrocaDeTela("/br/com/renutrir/22-5-bebidas.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void solicitarProdutoLimpeza(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-6-prod-limpeza.fxml","ReNutrir - Solicitar Doações");
+        realizarTrocaDeTela("/br/com/renutrir/22-6-prod-limpeza.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void solicitarItemHgiene(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-7-higiene-pessoal.fxml","ReNutrir - Solicitar Doações");
-    }
-    //Tela 22-1 Solicitar valores
-
-    @FXML
-    private Button confValorSolicitar;
-
-    @FXML
-    private TextField doacaoValorSolicitarField;
-
-    @FXML
-    void solicitarConfValor(ActionEvent event) {
-
+        realizarTrocaDeTela("/br/com/renutrir/22-7-higiene-pessoal.fxml", "ReNutrir - Solicitar Doações");
     }
 
-    @FXML
-    void fieldSolicitarDoacaoValor(ActionEvent event) {
+    private void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
+        System.out.println("Clicou: " + fxmlArquivo);
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        trocarTela(stage, fxmlArquivo, titulo);
 
+        if (fxmlArquivo.equals("/br/com/renutrir/03-login.fxml")){
+            SessaoDoador.getInstancia().limparSessao();
+            SessaoInstituicao.getInstancia().limparSessao();
+        } else {
+            Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+            if (doadorLogado != null) {
+                System.out.println("Doador logado: " + doadorLogado.getNome()); //testar
+            }
+
+            Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+            if (instituicaoLogada != null) {
+                System.out.println("Instituição logada: " + instituicaoLogada.getNome()); //testar tbm
+            }
+        }
     }
 
-    //Tela 22-2 Solicitar Alimentos
+    public void trocarTela(Stage stage, String fxmlFile, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
 
-    @FXML
-    private Button confAlimentosSolicitar;
+            if (fxmlFile.equals("/br/com/renutrir/03-login.fxml")) {
+                SessaoDoador.getInstancia().limparSessao();
+                //se for a tela de login, limpa a sessão.
+            }
 
-    @FXML
-    private TextField doacaoAlimentosSolicitarField;
-
-
-    @FXML
-    void solicitarConfAlimentos(ActionEvent event) {
-
+            stage.setScene(new Scene(root, 800, 500));
+            stage.setTitle(title);
+            stage.setResizable(false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @FXML
-    void fieldSolicitarDoacaoAlimentos(ActionEvent event) {
-
-    }
-    //Tela 22-3 Solicitar Roupas
-
-    @FXML
-    private TextField doacaoRoupasSolicitarField;
-
-    @FXML
-    private Button confRoupasSolicitar;
-
-    @FXML
-    void solicitarConfRoupas(ActionEvent event) {
-
+    public void botaoVoltar22(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Menu Instituição");
     }
 
     @FXML
-    void fieldSolicitarDoacaoRoupas(ActionEvent event) {
-
-    }
-    //Tela 22-4 Solicitar Móveis
-
-    @FXML
-    private Button confMoveisSolicitar;
-
-    @FXML
-    private TextField doacaoMoveisSolicitarField;
-
-    @FXML
-    void solicitarConfMoveis(ActionEvent event) {
-
+    void botaoVoltar45() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
     }
 
     @FXML
-    void fieldSolicitarDoacaoMoveis(ActionEvent event) {
-
-    }
-//Tela 22.5 Solicitar Bebidas
-
-    @FXML
-    private TextField doacaoBebidasSolicitarField;
-
-    @FXML
-    private Button confBebidasSolicitar;
-
-    @FXML
-    void solicitarConfBebidas(ActionEvent event) {
-
+    void botaoVoltar46() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
     }
 
     @FXML
-    void fieldSolicitarDoacaoBebidas(ActionEvent event) {
-
-    }
-
-
-    //Tela 22-6 Solicitar Produtos de limpeza
-
-    @FXML
-    private TextField doacaoProdLimpezaSolicitarField;
-
-    @FXML
-    private Button confProdLimpezaSolicitar;
-
-
-    @FXML
-    void solicitarConfProdLimpeza(ActionEvent event) {
-
+    void botaoVoltar47() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
     }
 
     @FXML
-    void fieldSolicitarDoacaoProdLimpeza(ActionEvent event) {
-
-    }
-
-    //Tela 22-7 Solicitar Produtos de higiene pessoal
-
-    @FXML
-    private Button confProdHigieneSolicitar;
-
-    @FXML
-    private TextField doacaoProdHigieneSolicitarField;
-
-    @FXML
-    void solicitarConfProdHigiene(ActionEvent event) {
-
+    void botaoVoltar48() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
     }
 
     @FXML
-    void fieldSolicitarDoacaoProdHigene(ActionEvent event) {
+    void botaoVoltar49() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+    }
+
+    @FXML
+    void botaoVoltar50() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+    }
+
+    @FXML
+    void botaoVoltar51() {
+        realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+    }
+
+    public void fieldSolicitarDoacaoProdHigene(ActionEvent actionEvent) {
+    }
+
+    public void solicitarConfProdHigiene(ActionEvent actionEvent) {
+    }
+
+    public void solicitarConfProdLimpeza(ActionEvent actionEvent) {
+    }
+
+    public void fieldSolicitarDoacaoProdLimpeza(ActionEvent actionEvent) {
+    }
+
+    public void solicitarConfBebidas(ActionEvent actionEvent) {
+    }
+
+    public void fieldSolicitarDoacaoBebidas(ActionEvent actionEvent) {
+    }
+
+    public void solicitarConfMoveis(ActionEvent actionEvent) {
+    }
+
+    public void fieldSolicitarDoacaoMoveis(ActionEvent actionEvent) {
+    }
+
+    public void solicitarConfRoupas(ActionEvent actionEvent) {
+    }
+
+    public void fieldSolicitarDoacaoRoupas(ActionEvent actionEvent) {
+    }
+
+    public void solicitarConfAlimentos(ActionEvent actionEvent) {
+    }
+
+    public void fieldSolicitarDoacaoAlimentos(ActionEvent actionEvent) {
+    }
+
+    public void solicitarConfValor(ActionEvent actionEvent) {
+    }
+
+    public void fieldSolicitarDoacaoValor(ActionEvent actionEvent) {
     }
 }

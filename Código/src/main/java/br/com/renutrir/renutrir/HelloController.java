@@ -1925,9 +1925,23 @@ public class HelloController implements Initializable {
         instituicaoAtual = instituicao;
     }
 
+    //Tela 22
+
+    private ControladorSolicitacaoDoacao controladorSolicitacaoDoacao = new ControladorSolicitacaoDoacao();
+
     @FXML
     public void botaoVoltar40() {
         realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Menu Instituição");
+    }
+
+    @FXML
+    void solicitarDinheiro(ActionEvent event) {
+        controladorSolicitacaoDoacao.solicitarDinheiro(event);
+    }
+
+    @FXML
+    void solicitarAlimentos(ActionEvent event) {
+        controladorSolicitacaoDoacao.solicitarAlimentos(event);
     }
 
     //Tela 23 Perfil Instituição
