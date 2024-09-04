@@ -251,6 +251,5 @@ public class ControladorSolicitacaoDoacao {
 
     @FXML
     void fieldSolicitarDoacaoProdHigene(ActionEvent event) {
-
     }
 }
