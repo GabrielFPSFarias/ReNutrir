@@ -11,6 +11,7 @@ import br.com.renutrir.main.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -32,6 +33,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.awt.*;
 import java.util.List;
+import java.util.Random;
+
 import br.com.renutrir.renutrir.HelloController;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
@@ -39,96 +42,7 @@ import br.com.renutrir.sessao.SessaoInstituicao;
 public class ControladorIntencaoDeDoacao {
 
     private HelloController helloController;
-/*
-    private HelloController hc;
-    private RepositorioIntencaoDoacao repositorioIntencaoDoacao;
 
-    @FXML
-    private Button doarAgoraBotao;
-
-    @FXML
-    void botaoDoarAgora(ActionEvent event) {
-        hc.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
-    }
-
-    @FXML
-    private ComboBox<String> escolherInstituicaoDoarCbox;
-
-    private RepositorioInstituicao repositorioInstituicao;
-
-    @FXML
-    public void initialize() {
-        repositorioInstituicao = new RepositorioInstituicao();
-        carregarInstituicoesNaComboBox();
-    }
-
-    private void carregarInstituicoesNaComboBox() {
-        List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
-        if (instituicoes.isEmpty()) {
-            System.out.println("Nenhuma instituição encontrada no arquivo.");
-        }
-        for (Instituicao instituicao : instituicoes) {
-            System.out.println("Adicionando instituição: " + instituicao.getNome());
-            escolherInstituicaoDoarCbox.getItems().add(instituicao.getNome());
-        }
-    }
-
-    @FXML
-    void cboxEscolherInstituicaoDoar(ActionEvent event) {
-
-    }
-    @FXML
-    public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
-        hc.realizarTrocaDeTela("/br/com/renutrir/06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
-    }
-
-    public ControladorIntencaoDeDoacao(HelloController hc) {
-        this.repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
-        this.hc = hc;
-    }
-
-    public List<IntencaoDoacao> listarIntencoes() {
-        return repositorioIntencaoDoacao.listarIntencoes();
-    }
-
-    public void criarIntencaoDeDoacao(IntencaoDoacao intencao) {
-        if (validarIntencaoDeDoacao(intencao)) {
-            repositorioIntencaoDoacao.adicionarIntencao(intencao);
-            System.out.println("Intenção de doação criada com sucesso!");
-        } else {
-            System.out.println("Falha ao criar intenção de doação: dados inválidos.");
-        }
-    }
-
-
-    public void atualizarIntencaoDeDoacao(IntencaoDoacao intencao) {
-        if (validarIntencaoDeDoacao(intencao)) {
-            repositorioIntencaoDoacao.atualizarIntencao(intencao);
-            System.out.println("Intenção de doação atualizada com sucesso!");
-        } else {
-            System.out.println("Falha ao atualizar intenção de doação: dados inválidos.");
-        }
-    }
-
-    public void removerIntencaoDeDoacao(IntencaoDoacao intencao) {
-        repositorioIntencaoDoacao.removerIntencao(intencao);
-        System.out.println("Intenção de doação removida com sucesso!");
-    }
-
-    private boolean validarIntencaoDeDoacao(IntencaoDoacao intencao) {
-        if (intencao.getItem() == null || intencao.getItem().isEmpty()) {
-            System.out.println("Item inválido.");
-            return false;
-        }
-        if (intencao.getQuantidade() <= 0) {
-            System.out.println("Quantidade inválida.");
-            return false;
-        }
-        // espaço para mais validações..
-
-        return true;
-    }
-*/
     private ControladorTelas controladorTelas;
 
     public void setControladorTelas(ControladorTelas controladorTelas) {
@@ -247,7 +161,7 @@ public class ControladorIntencaoDeDoacao {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-1-1-pix-detalhes.fxml"));
             Parent novaTela = loader.load();
 
-            HelloController novoControlador = loader.getController();
+            ControladorIntencaoDeDoacao novoControlador = loader.getController();
             novoControlador.configurarTelaConfirmarPix(valorDoacao);
 
             Stage stage = (Stage) confPixDoar.getScene().getWindow();
@@ -256,8 +170,22 @@ public class ControladorIntencaoDeDoacao {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao carregar a tela de confirmação do PIX.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao carregar a tela de confirmação do PIX.");
         }
+    }
+
+    private String gerarCodigoPixAleatorio() {
+        String[] codigos = {
+                "00020126870014BR.GOV.BCB.PIX0127renutrir@instituicao.com.br0234DoacaoparaInstituicoesReNutrir5204000053039865802BR5911ReNutrirSA6006Recife62070503***63049D25",
+                "00020126360014BR.GOV.BCB.PIX0127renutrir@instituicao.com.br0234DoacaoparaInstituicoesReNutrir5204000053039865802BR5911ReNutrir6006Olinda62070503***63049D25"
+        };
+        int indice = new Random().nextInt(codigos.length);
+        return codigos[indice];
+    }
+
+    public void configurarTelaConfirmarPix(String valorDoacao) {
+        valorDoacaoPixLabel.setText("Valor: R$ " + valorDoacao);
+        fieldPixCopiaCola.setText(gerarCodigoPixAleatorio());
     }
 
     @FXML
@@ -340,14 +268,14 @@ public class ControladorIntencaoDeDoacao {
     void doarCartaoDebito(ActionEvent event) {
         String valor = fieldInserirValorCartao.getText();
         realizarTrocaDeTela("/br/com/renutrir/07-2-2-c-debito.fxml", "ReNutrir - Doar com Débito");
-        valorDoacaoExibirDeb.setText("Valor: R$ " + valor);
+        //valorDoacaoExibirDeb.setText("Valor: R$ " + valor);
     }
 
     @FXML
     void doarCartaoCredito(ActionEvent event) {
         String valor = fieldInserirValorCartao.getText();
         realizarTrocaDeTela("/br/com/renutrir/07-2-1-c-credito.fxml", "ReNutrir - Doar com Crédito");
-        valorDoacaoCreExibir.setText("Valor: R$ " + valor);
+        //valorDoacaoCreExibir.setText("Valor: R$ " + valor);
     }
 
     @FXML
@@ -903,7 +831,6 @@ public class ControladorIntencaoDeDoacao {
 
         String itemSelecionado = obterItemSelecionado();
 
-        // Mostra a barra de progresso
         ProgressAlert progressAlert = new ProgressAlert();
         progressAlert.start(new Stage());
         progressAlert.showProgress();
@@ -919,14 +846,11 @@ public class ControladorIntencaoDeDoacao {
 
                 RepositorioDoacoes repositorioDoacoes = new RepositorioDoacoes();
                 repositorioDoacoes.adicionarDoacao(doacao);
+                salvarDoacoesEmArquivo(repositorioDoacoes);
 
                 Platform.runLater(() -> {
-                    if (helloController != null) {
-                        helloController.salvarDoacoesEmArquivo(repositorioDoacoes);
-                        helloController.verificarProgressoParaCertificado(doador);
-                    }
+                    verificarProgressoParaCertificado(doador);
 
-                    // Após 1 segundo de progresso, mostrar que a doação foi feita com sucesso
                     progressAlert.hideProgress();
                     showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi realizada com sucesso!");
                 });
@@ -935,6 +859,30 @@ public class ControladorIntencaoDeDoacao {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    public void salvarDoacoesEmArquivo(RepositorioDoacoes repositorioDoacoes) {
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+
+        if (doadorLogado == null) {
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Nenhum doador está logado."));
+            return;
+        }
+
+        String nomeUsuario = doadorLogado.getNomeUsuario();
+        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.dat";
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(caminhoArquivo))) {
+            oos.writeObject(repositorioDoacoes.listarDoacoes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar as doações."));
+        }
+    }
+
+    public void verificarProgressoParaCertificado(Doador doador) {
+        ControladorCertificado controladorCertificado = new ControladorCertificado();
+        controladorCertificado.verificarProgressoParaCertificado(doador);
     }
 
     public void setInformacoesDoacao(String doadorNome, String tipoDoacao, int quantidade, String item, LocalDateTime dataHora) {
@@ -995,3 +943,94 @@ public class ControladorIntencaoDeDoacao {
     }
 
 }
+
+/*
+    private HelloController hc;
+    private RepositorioIntencaoDoacao repositorioIntencaoDoacao;
+
+    @FXML
+    private Button doarAgoraBotao;
+
+    @FXML
+    void botaoDoarAgora(ActionEvent event) {
+        hc.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
+    }
+
+    @FXML
+    private ComboBox<String> escolherInstituicaoDoarCbox;
+
+    private RepositorioInstituicao repositorioInstituicao;
+
+    @FXML
+    public void initialize() {
+        repositorioInstituicao = new RepositorioInstituicao();
+        carregarInstituicoesNaComboBox();
+    }
+
+    private void carregarInstituicoesNaComboBox() {
+        List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
+        if (instituicoes.isEmpty()) {
+            System.out.println("Nenhuma instituição encontrada no arquivo.");
+        }
+        for (Instituicao instituicao : instituicoes) {
+            System.out.println("Adicionando instituição: " + instituicao.getNome());
+            escolherInstituicaoDoarCbox.getItems().add(instituicao.getNome());
+        }
+    }
+
+    @FXML
+    void cboxEscolherInstituicaoDoar(ActionEvent event) {
+
+    }
+    @FXML
+    public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
+        hc.realizarTrocaDeTela("/br/com/renutrir/06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
+    }
+
+    public ControladorIntencaoDeDoacao(HelloController hc) {
+        this.repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+        this.hc = hc;
+    }
+
+    public List<IntencaoDoacao> listarIntencoes() {
+        return repositorioIntencaoDoacao.listarIntencoes();
+    }
+
+    public void criarIntencaoDeDoacao(IntencaoDoacao intencao) {
+        if (validarIntencaoDeDoacao(intencao)) {
+            repositorioIntencaoDoacao.adicionarIntencao(intencao);
+            System.out.println("Intenção de doação criada com sucesso!");
+        } else {
+            System.out.println("Falha ao criar intenção de doação: dados inválidos.");
+        }
+    }
+
+
+    public void atualizarIntencaoDeDoacao(IntencaoDoacao intencao) {
+        if (validarIntencaoDeDoacao(intencao)) {
+            repositorioIntencaoDoacao.atualizarIntencao(intencao);
+            System.out.println("Intenção de doação atualizada com sucesso!");
+        } else {
+            System.out.println("Falha ao atualizar intenção de doação: dados inválidos.");
+        }
+    }
+
+    public void removerIntencaoDeDoacao(IntencaoDoacao intencao) {
+        repositorioIntencaoDoacao.removerIntencao(intencao);
+        System.out.println("Intenção de doação removida com sucesso!");
+    }
+
+    private boolean validarIntencaoDeDoacao(IntencaoDoacao intencao) {
+        if (intencao.getItem() == null || intencao.getItem().isEmpty()) {
+            System.out.println("Item inválido.");
+            return false;
+        }
+        if (intencao.getQuantidade() <= 0) {
+            System.out.println("Quantidade inválida.");
+            return false;
+        }
+        // espaço para mais validações..
+
+        return true;
+    }
+*/
