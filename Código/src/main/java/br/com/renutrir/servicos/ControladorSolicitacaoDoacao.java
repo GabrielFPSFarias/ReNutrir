@@ -17,19 +17,20 @@ public class ControladorSolicitacaoDoacao {
     public void botaoVoltar22() {
         helloController.realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
+
     @FXML
     void botaoVoltar45() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void botaoVoltar46() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void botaoVoltar47() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
