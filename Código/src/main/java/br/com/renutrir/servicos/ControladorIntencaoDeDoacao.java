@@ -129,6 +129,16 @@ public class ControladorIntencaoDeDoacao {
         return true;
     }
 */
+    private ControladorTelas controladorTelas;
+
+    public void setControladorTelas(ControladorTelas controladorTelas) {
+        this.controladorTelas = controladorTelas;
+    }
+
+    public void setHelloController(HelloController helloController) {
+        this.helloController = helloController;
+    }
+
     //Label
     @FXML
     private Label valorDoacaoExibirDeb; //label da tela 07-2-2
@@ -169,47 +179,47 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     public void botaoVoltar7() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Doações Solicitadas");
+        realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Doações Solicitadas");
     }
 
     @FXML
     void doarPix(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-1-pix.fxml", "ReNutrir - Doar com PIX");
+        realizarTrocaDeTela("/br/com/renutrir/07-1-pix.fxml", "ReNutrir - Doar com PIX");
     }
 
     @FXML
     void doarCartao(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
+        realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
     }
 
     @FXML
     void doarAlimentos(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-3-alimentos.fxml", "ReNutrir - Doar Alimentos");
+        realizarTrocaDeTela("/br/com/renutrir/07-3-alimentos.fxml", "ReNutrir - Doar Alimentos");
     }
 
     @FXML
     void doarRoupas(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-5-roupas.fxml", "ReNutrir - Doar Roupas");
+        realizarTrocaDeTela("/br/com/renutrir/07-5-roupas.fxml", "ReNutrir - Doar Roupas");
     }
 
     @FXML
     void doarMoveis(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-7-moveis.fxml", "ReNutrir - Doar Móveis");
+        realizarTrocaDeTela("/br/com/renutrir/07-7-moveis.fxml", "ReNutrir - Doar Móveis");
     }
 
     @FXML
     void doarBebidas(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-4-bebidas.fxml", "ReNutrir - Doar Bebidas");
+        realizarTrocaDeTela("/br/com/renutrir/07-4-bebidas.fxml", "ReNutrir - Doar Bebidas");
     }
 
     @FXML
     void doarProdutoLimpeza(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-6-produtos-limpeza.fxml", "ReNutrir - Doar");
+        realizarTrocaDeTela("/br/com/renutrir/07-6-produtos-limpeza.fxml", "ReNutrir - Doar Produtos de Limpeza");
     }
 
     @FXML
-    void doarItemHgiene(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-8-higiene-pessoal.fxml", "ReNutrir - Doar");
+    public void doarItemHgiene(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/07-8-higiene-pessoal.fxml", "ReNutrir - Doar Itens de Higiene Pessoal");
     }
 
     //Tela 07-1
@@ -222,14 +232,14 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     void botaoVoltar29(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
     void doarConfPix(ActionEvent event) {
         String valorDoacao = fieldInserirValorPix.getText();
         if (valorDoacao.isEmpty()) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor para a doação.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor para a doação.");
             return;
         }
 
@@ -259,7 +269,7 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     void botaoVoltar53(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-1-pix.fxml","ReNutrir - Doar com Pix");
+        realizarTrocaDeTela("/br/com/renutrir/07-1-pix.fxml","ReNutrir - Doar com Pix");
     }
 
     @FXML
@@ -923,6 +933,53 @@ public class ControladorIntencaoDeDoacao {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    public void trocarTela(Stage stage, String fxmlFile, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+
+            if (fxmlFile.equals("/br/com/renutrir/03-login.fxml")) {
+                SessaoDoador.getInstancia().limparSessao();
+                //se for a tela de login, limpa a sessão.
+            }
+
+            stage.setScene(new Scene(root, 800, 500));
+            stage.setTitle(title);
+            stage.setResizable(false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
+        System.out.println("Clicou: " + fxmlArquivo);
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        trocarTela(stage, fxmlArquivo, titulo);
+
+        if (fxmlArquivo.equals("/br/com/renutrir/03-login.fxml")){
+            SessaoDoador.getInstancia().limparSessao();
+            SessaoInstituicao.getInstancia().limparSessao();
+        } else {
+            Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+            if (doadorLogado != null) {
+                System.out.println("Doador logado: " + doadorLogado.getNome()); //testar
+            }
+
+            Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+            if (instituicaoLogada != null) {
+                System.out.println("Instituição logada: " + instituicaoLogada.getNome()); //testar tbm
+            }
+        }
     }
 
 }

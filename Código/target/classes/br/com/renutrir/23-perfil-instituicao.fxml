@@ -74,7 +74,7 @@
                </padding>
                <children>
                   <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Excluir conta dessa instituição" textAlignment="CENTER" GridPane.rowIndex="2" />
-                  <Label fx:id="exibirInfoInstLabel" alignment="CENTER" prefHeight="181.0" prefWidth="378.0" text="Exibir informações da instituição" textAlignment="CENTER">
+                  <Label fx:id="exibirInfoInstLabel" alignment="CENTER" prefHeight="181.0" prefWidth="536.0" text="Exibir informações da instituição" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
