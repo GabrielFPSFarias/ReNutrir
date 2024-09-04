@@ -26,13 +26,22 @@ import java.lang.reflect.Field;
 import java.util.Optional;
 import java.awt.*;
 import java.util.List;
+import br.com.renutrir.renutrir.HelloController;
+import br.com.renutrir.sessao.SessaoDoador;
+import br.com.renutrir.sessao.SessaoInstituicao;
 
 public class ControladorIntencaoDeDoacao {
 
+    private HelloController hc;
     private RepositorioIntencaoDoacao repositorioIntencaoDoacao;
 
-    public ControladorIntencaoDeDoacao() {
+    public ControladorIntencaoDeDoacao(HelloController hc) {
         this.repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+        this.hc = hc;
+    }
+
+    public List<IntencaoDoacao> listarIntencoes() {
+        return repositorioIntencaoDoacao.listarIntencoes();
     }
 
     public void criarIntencaoDeDoacao(IntencaoDoacao intencao) {
@@ -44,9 +53,6 @@ public class ControladorIntencaoDeDoacao {
         }
     }
 
-    public List<IntencaoDoacao> listarIntencoes() {
-        return repositorioIntencaoDoacao.listarIntencoes();
-    }
 
     public void atualizarIntencaoDeDoacao(IntencaoDoacao intencao) {
         if (validarIntencaoDeDoacao(intencao)) {
