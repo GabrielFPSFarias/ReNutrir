@@ -1,8 +1,9 @@
 package br.com.renutrir.servicos;
 
+import  br.com.renutrir.renutrir.HelloController;
+
 public class ControladorLogin{
 
-    /*
     @FXML
     private TextField loginEmailField;
 
@@ -11,6 +12,11 @@ public class ControladorLogin{
 
     @FXML
     private Button loginEntrarBotao;
+
+    HelloController hc = new HelloController;
+
+    hc.realizarTrocaDeTela(String fxmlArquivo, String titulo);
+    hc.trocarTela(Stage stage, String fxmlFile, String title);
 
     @FXML
     public void botaoLoginEntrar() {
@@ -43,6 +49,15 @@ public class ControladorLogin{
         }
     }
 
-     */
+    @FXML
+    public void botaoLogin() {
+        System.out.println("Login");
+        Stage stage = (Stage) loginBotao.getScene().getWindow();
+        trocarTela(stage, "/br/com/renutrir/03-login.fxml", "ReNutrir - Login");
+    }
+
+    public void validarLogin(){
+
+    }
 
 }
