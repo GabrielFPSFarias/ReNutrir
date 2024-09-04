@@ -55,7 +55,6 @@ public class HelloController implements Initializable {
     @FXML
     public TextField fieldUfIns;
     public CheckBox checarInstituicao;
-    public Button instituicoesDoacaoBotao;
     public Button doacoesSolicitadasBotao;
     public Button sejaVoluntarioBotao;
     public Button transportesDoacoesBotao;
@@ -565,10 +564,6 @@ public class HelloController implements Initializable {
         // Implementação necessária
     }
 
-    public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
-        realizarTrocaDeTela("/br/com/renutrir/06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
-    }
-
     public void botaoDoacoesSolicitadas(ActionEvent actionEvent) {
         realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
     }
@@ -642,6 +637,37 @@ public class HelloController implements Initializable {
     @FXML
     void botaoDoarAgora(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
+    }
+
+    @FXML
+    private ComboBox<String> escolherInstituicaoDoarCbox;
+
+    private RepositorioInstituicao repositorioInstituicao;
+
+    @FXML
+    public void initialize() {
+        repositorioInstituicao = new RepositorioInstituicao();
+        carregarInstituicoesNaComboBox();
+    }
+
+    private void carregarInstituicoesNaComboBox() {
+        List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
+        if (instituicoes.isEmpty()) {
+            System.out.println("Nenhuma instituição encontrada no arquivo.");
+        }
+        for (Instituicao instituicao : instituicoes) {
+            System.out.println("Adicionando instituição: " + instituicao.getNome());
+            escolherInstituicaoDoarCbox.getItems().add(instituicao.getNome());
+        }
+    }
+
+    @FXML
+    void cboxEscolherInstituicaoDoar(ActionEvent event) {
+
+    }
+    @FXML
+    public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
     }
 
 
