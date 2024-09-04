@@ -325,18 +325,6 @@ public class HelloController {
         trocarTela(stage, "/br/com/renutrir/02-cadastro-doador.fxml", "ReNutrir - Cadastro Doador");
     }
 
-    private boolean verificarCamposInstituicaoValidos(String email, String nomeUsuario, String cnpj) {
-        return email != null && !email.trim().isEmpty() &&
-                nomeUsuario != null && !nomeUsuario.trim().isEmpty() &&
-                cnpj != null && !cnpj.trim().isEmpty();
-    }
-
-    private boolean verificarCamposDoadorValidos(String email, String nomeUsuario, String cpf) {
-        return email != null && !email.trim().isEmpty() &&
-                nomeUsuario != null && !nomeUsuario.trim().isEmpty() &&
-                cpf != null && !cpf.trim().isEmpty();
-    }
-
     public void confirmarCadastro() {
         CadastroController cadastrarDoador = new CadastroController();
         cadastrarDoador.confirmarCadastro();
@@ -498,6 +486,7 @@ public class HelloController {
     @FXML
     private SessaoInstituicao sessaoInstituicao;
 
+    /*
     private Doador buscarDoadorNoRepositorio(String emailOuUsuario, String senha) {
         RepositorioDoador repositorioDoador = new RepositorioDoador();
 
@@ -562,6 +551,27 @@ public class HelloController {
             }
         }
     }
+     */
+
+    @FXML
+    public void botaoLoginEntrar() {
+        String emailOuUsuario = loginEmailField.getText();
+        String senha = loginSenhaField.getText();
+
+        if (emailOuUsuario.isEmpty() || senha.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "Por favor, preencha todos os campos.");
+            return;
+        }
+
+        ControladorLogin controladorLogin = new ControladorLogin(this);
+
+        if (checarInstituicao.isSelected()) {
+            controladorLogin.processarLogin(emailOuUsuario, senha, true);
+        } else {
+            controladorLogin.processarLogin(emailOuUsuario, senha, false);
+        }
+    }
+
 
     //Métodos de cadastro instituição
 
