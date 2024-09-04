@@ -2,6 +2,7 @@ package br.com.renutrir.servicos;
 
 public class ControladorLogin{
 
+    /*
     @FXML
     private TextField loginEmailField;
 
@@ -41,5 +42,7 @@ public class ControladorLogin{
             }
         }
     }
+
+     */
 
 }

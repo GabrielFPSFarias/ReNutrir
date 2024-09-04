@@ -8,21 +8,20 @@ import java.util.List;
 import java.util.Optional;
 
 public class RepositorioDoador {
-    private final String arquivoDoador = "src/dados/doadores.dat";
+    private static final String CAMINHO_ARQUIVO = "src/dados/doadores.dat";
     private List<Doador> doadores;
 
     public RepositorioDoador() {
         doadores = carregarDoadores();
     }
 
-    @SuppressWarnings("unchecked")
     private List<Doador> carregarDoadores() {
-        File file = new File(arquivoDoador);
+        File file = new File(CAMINHO_ARQUIVO);
         if (!file.exists()) {
             return new ArrayList<>();
         }
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivoDoador))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             return (List<Doador>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -30,8 +29,15 @@ public class RepositorioDoador {
         }
     }
 
-    private void salvarDoadores() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivoDoador))) {
+    public void salvarDoadores() {
+        File diretorio = new File("src/dados");
+        if (!diretorio.exists()) {
+            diretorio.mkdirs();
+        }
+
+        try (FileOutputStream fos = new FileOutputStream(new File(CAMINHO_ARQUIVO));
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+
             oos.writeObject(doadores);
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,7 +51,7 @@ public class RepositorioDoador {
 
     public Optional<Doador> buscarDoadorPorCpf(String cpf) {
         return doadores.stream()
-                .filter(d -> d.getNomeUsuario() != null && d.getNomeUsuario().equalsIgnoreCase(cpf))
+                .filter(d -> d.getCpf() != null && d.getCpf().equalsIgnoreCase(cpf))
                 .findFirst();
     }
 
@@ -54,7 +60,6 @@ public class RepositorioDoador {
                 .filter(d -> d.getNomeUsuario() != null && d.getNomeUsuario().equalsIgnoreCase(nomeUsuario))
                 .findFirst();
     }
-
 
     public Optional<Doador> buscarDoadorPorEmail(String email) {
         return doadores.stream()

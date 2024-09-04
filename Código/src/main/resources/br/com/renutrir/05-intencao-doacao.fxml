@@ -46,7 +46,7 @@
    <center>
       <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0">
          <content>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="315.0" prefWidth="591.0" BorderPane.alignment="CENTER">
+            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="287.0" prefWidth="591.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
               </columnConstraints>
@@ -66,9 +66,7 @@
                </padding>
                <children>
                   <Button fx:id="instituicoesDoacaoBotao" mnemonicParsing="false" onAction="#botaoInstituicoesDoacao" prefHeight="30.0" prefWidth="243.0" text="Instituições que precisam de doação" textAlignment="CENTER" />
-                  <Button fx:id="doarAgoraBotao" layoutX="284.0" layoutY="19.0" mnemonicParsing="false" onAction="#botaoDoarAgora" prefHeight="30.0" prefWidth="243.0" text="Doar agora" textAlignment="CENTER" GridPane.rowIndex="5" />
-                  <ComboBox fx:id="selecionarInstituicaoCbox" onAction="#cboxSelecionarInstituicao" prefHeight="33.0" prefWidth="221.0" promptText="Selecione aqui" GridPane.rowIndex="3" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Escolha a Instituição que irá ser destinada a sua doação" textAlignment="CENTER" wrappingWidth="409.99609375" GridPane.rowIndex="2" />
+                  <Button fx:id="doarAgoraBotao" layoutX="284.0" layoutY="19.0" mnemonicParsing="false" onAction="#botaoDoarAgora" prefHeight="30.0" prefWidth="243.0" text="Doar agora" textAlignment="CENTER" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </content>

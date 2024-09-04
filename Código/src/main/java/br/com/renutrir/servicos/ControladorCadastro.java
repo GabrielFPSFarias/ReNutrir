@@ -151,5 +151,6 @@ public class ControladorCadastro {
             throw new IllegalArgumentException("O número de telefone é inválido. Ele deve estar no formato internacional.");
         }
     }
+
 }
 

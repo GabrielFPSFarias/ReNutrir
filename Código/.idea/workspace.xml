@@ -10,10 +10,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/CadastroController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dados/daniel.filho_certificado.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dados/daniel.filho_doacoes.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioDoador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioDoador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioInstituicao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioInstituicao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorCadastro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorCadastro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/01-tela-inicial.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/01-tela-inicial.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/02-cadastro-doador.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/02-cadastro-doador.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/02-cadastro-instituicao.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/02-cadastro-instituicao.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/02-pre-cadastro.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/02-pre-cadastro.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/03-login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/03-login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/04-menu-doador.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/04-menu-doador.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/05-intencao-doacao.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/05-intencao-doacao.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/06-doacoes-solicitadas.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/06-doacoes-solicitadas.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/08-menu-voluntario.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/08-menu-voluntario.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/10-transportes-doacoes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/10-transportes-doacoes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/11-transportes-solicitados.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/11-transportes-solicitados.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/12-confirmar-transporte.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/12-confirmar-transporte.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/13-transportes-pendentes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/13-transportes-pendentes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/14-transportes-concluidos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/14-transportes-concluidos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/16-proximos-eventos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/16-proximos-eventos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/17-perfil-doador.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/17-perfil-doador.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/19-menu-instituicao.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/19-menu-instituicao.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/21-historico-doacoes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/21-historico-doacoes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/24-voluntarios.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/24-voluntarios.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/25-solicitar-voluntarios.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/25-solicitar-voluntarios.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/26-doacoes-pendentes-inst.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/26-doacoes-pendentes-inst.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/01-tela-inicial.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/01-tela-inicial.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/02-cadastro-doador.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/02-cadastro-doador.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/02-cadastro-instituicao.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/02-cadastro-instituicao.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/02-pre-cadastro.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/02-pre-cadastro.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/03-login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/03-login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/04-menu-doador.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/04-menu-doador.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/05-intencao-doacao.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/05-intencao-doacao.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/06-doacoes-solicitadas.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/06-doacoes-solicitadas.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/08-menu-voluntario.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/08-menu-voluntario.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/10-transportes-doacoes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/10-transportes-doacoes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/11-transportes-solicitados.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/11-transportes-solicitados.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/12-confirmar-transporte.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/12-confirmar-transporte.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/13-transportes-pendentes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/13-transportes-pendentes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/14-transportes-concluidos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/14-transportes-concluidos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/16-proximos-eventos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/16-proximos-eventos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/17-perfil-doador.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/17-perfil-doador.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/19-menu-instituicao.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/19-menu-instituicao.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/21-historico-doacoes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/21-historico-doacoes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/24-voluntarios.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/24-voluntarios.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/25-solicitar-voluntarios.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/25-solicitar-voluntarios.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/26-doacoes-pendentes-inst.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/26-doacoes-pendentes-inst.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/renutrir/HelloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/renutrir/HelloController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,26 +93,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Daniel Dionísio/Documents/GitHub/ReNutrir/ReNutrir/Código/src/main/resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Daniel Dionísio/Desktop/ReNutrir-main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.HelloApplication">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.com.renutrir.renutrir.HelloApplication" />

@@ -57,9 +57,9 @@
    <center>
       <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0">
          <content>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="287.0" prefWidth="591.0" BorderPane.alignment="CENTER">
+            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="287.0" prefWidth="591.0" BorderPane.alignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1000.0" minWidth="-Infinity" prefWidth="500.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints maxHeight="192.0" minHeight="10.0" prefHeight="192.0" vgrow="SOMETIMES" />
@@ -74,7 +74,7 @@
                </padding>
                <children>
                   <Button layoutX="293.0" layoutY="19.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Excluir minha conta" textAlignment="CENTER" GridPane.rowIndex="2" />
-                  <Label fx:id="exibirInfoDoadorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="190.0" prefWidth="438.0" text="Exibir informações do doador" textAlignment="CENTER">
+                  <Label fx:id="exibirInfoDoadorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="190.0" prefWidth="636.0" text="Exibir informações do doador" textAlignment="CENTER">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
