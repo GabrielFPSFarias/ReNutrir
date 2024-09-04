@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ControladorEventos {
-
+/*
 private HelloController hc;  
 
 ControladorEventos(HelloController hc){
@@ -266,5 +266,5 @@ private void removerEventosPassados() {
         }
     }
 
-
+*/
 }
