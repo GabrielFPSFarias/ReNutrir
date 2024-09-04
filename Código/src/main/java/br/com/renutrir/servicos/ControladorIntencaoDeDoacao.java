@@ -339,14 +339,14 @@ public class ControladorIntencaoDeDoacao {
     @FXML
     void doarCartaoDebito(ActionEvent event) {
         String valor = fieldInserirValorCartao.getText();
-        realizarTrocaDeTela("/br/com/renutrir/07-2-2-debito.fxml", "ReNutrir - Doar com Débito");
+        realizarTrocaDeTela("/br/com/renutrir/07-2-2-c-debito.fxml", "ReNutrir - Doar com Débito");
         valorDoacaoExibirDeb.setText("Valor: R$ " + valor);
     }
 
     @FXML
     void doarCartaoCredito(ActionEvent event) {
         String valor = fieldInserirValorCartao.getText();
-        realizarTrocaDeTela("/br/com/renutrir/07-2-1-credito.fxml", "ReNutrir - Doar com Crédito");
+        realizarTrocaDeTela("/br/com/renutrir/07-2-1-c-credito.fxml", "ReNutrir - Doar com Crédito");
         valorDoacaoCreExibir.setText("Valor: R$ " + valor);
     }
 
@@ -496,7 +496,7 @@ public class ControladorIntencaoDeDoacao {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
             Parent root = loader.load();
-            HelloController controlador = loader.getController();
+            ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeAlimento, dataHora);
 
             Stage stage = (Stage) botaoAlimentosDoar.getScene().getWindow();
@@ -540,7 +540,7 @@ public class ControladorIntencaoDeDoacao {
         String qtdBebida = fieldInserirQtdBebida.getText();
 
         if (nomeBebida.isEmpty() || qtdBebida.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos.");
             return;
         }
 
@@ -548,19 +548,19 @@ public class ControladorIntencaoDeDoacao {
         try {
             quantidade = Integer.parseInt(qtdBebida);
         } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "A quantidade deve ser um número válido.");
             return;
         }
 
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
-        String doadorNome = doadorLogado != null ? doadorLogado.getNome(): "Desconhecido";
+        String doadorNome = doadorLogado != null ? doadorLogado.getNome() : "Desconhecido";
         String tipoDoacao = "Bebidas";
         LocalDateTime dataHora = LocalDateTime.now();
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
             Parent root = loader.load();
-            HelloController controlador = loader.getController();
+            ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeBebida, dataHora);
 
             Stage stage = (Stage) botaoBebidaDoar.getScene().getWindow();
@@ -634,7 +634,7 @@ public class ControladorIntencaoDeDoacao {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
             Parent root = loader.load();
-            HelloController controlador = loader.getController();
+            ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeRoupa, dataHora);
 
             Stage stage = (Stage) botaoRoupaDoar.getScene().getWindow();
@@ -698,7 +698,7 @@ public class ControladorIntencaoDeDoacao {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
             Parent root = loader.load();
-            HelloController controlador = loader.getController();
+            ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeProdutoLimpeza, dataHora);
 
             Stage stage = (Stage) botaoProdLimpezaDoar.getScene().getWindow();
@@ -755,7 +755,7 @@ public class ControladorIntencaoDeDoacao {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
             Parent root = loader.load();
-            HelloController controlador = loader.getController();
+            ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, 1, nomeMovel, dataHora);
 
             Stage stage = (Stage) movelDoarBotao.getScene().getWindow();
@@ -919,14 +919,16 @@ public class ControladorIntencaoDeDoacao {
 
                 RepositorioDoacoes repositorioDoacoes = new RepositorioDoacoes();
                 repositorioDoacoes.adicionarDoacao(doacao);
-                helloController.salvarDoacoesEmArquivo(repositorioDoacoes);
 
                 Platform.runLater(() -> {
-                    helloController.verificarProgressoParaCertificado(doador);
+                    if (helloController != null) {
+                        helloController.salvarDoacoesEmArquivo(repositorioDoacoes);
+                        helloController.verificarProgressoParaCertificado(doador);
+                    }
 
                     // Após 1 segundo de progresso, mostrar que a doação foi feita com sucesso
                     progressAlert.hideProgress();
-                    helloController.showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi realizada com sucesso!");
+                    showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi realizada com sucesso!");
                 });
 
             } catch (InterruptedException e) {
@@ -934,6 +936,16 @@ public class ControladorIntencaoDeDoacao {
             }
         }).start();
     }
+
+    public void setInformacoesDoacao(String doadorNome, String tipoDoacao, int quantidade, String item, LocalDateTime dataHora) {
+        String dataHoraFormatada = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        exibirInfoDoacaoLabel.setText(String.format(
+                "Doador: %s\nData e hora: %s\nTipo da doação: %s\nItem: %s\nQuantidade: %d",
+                doadorNome, dataHoraFormatada, tipoDoacao, item, quantidade));
+
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+    }
+
 
     public void trocarTela(Stage stage, String fxmlFile, String title) {
         try {
