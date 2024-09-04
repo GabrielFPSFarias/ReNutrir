@@ -35,6 +35,45 @@ public class ControladorIntencaoDeDoacao {
     private HelloController hc;
     private RepositorioIntencaoDoacao repositorioIntencaoDoacao;
 
+    @FXML
+    private Button doarAgoraBotao;
+
+    @FXML
+    void botaoDoarAgora(ActionEvent event) {
+        hc.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
+    }
+
+    @FXML
+    private ComboBox<String> escolherInstituicaoDoarCbox;
+
+    private RepositorioInstituicao repositorioInstituicao;
+
+    @FXML
+    public void initialize() {
+        repositorioInstituicao = new RepositorioInstituicao();
+        carregarInstituicoesNaComboBox();
+    }
+
+    private void carregarInstituicoesNaComboBox() {
+        List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
+        if (instituicoes.isEmpty()) {
+            System.out.println("Nenhuma instituição encontrada no arquivo.");
+        }
+        for (Instituicao instituicao : instituicoes) {
+            System.out.println("Adicionando instituição: " + instituicao.getNome());
+            escolherInstituicaoDoarCbox.getItems().add(instituicao.getNome());
+        }
+    }
+
+    @FXML
+    void cboxEscolherInstituicaoDoar(ActionEvent event) {
+
+    }
+    @FXML
+    public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
+        hc.realizarTrocaDeTela("/br/com/renutrir/06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
+    }
+
     public ControladorIntencaoDeDoacao(HelloController hc) {
         this.repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
         this.hc = hc;
