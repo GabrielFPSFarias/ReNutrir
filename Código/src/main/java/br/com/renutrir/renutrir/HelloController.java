@@ -295,7 +295,7 @@ public class HelloController implements Initializable {
     }
 
     public void confirmarCadastro() {
-        CadastroController cadastrarDoador = new CadastroController();
+        ControladorCadastro cadastrarDoador = new ControladorCadastro();
         cadastrarDoador.confirmarCadastro();
     }
 
@@ -309,7 +309,7 @@ public class HelloController implements Initializable {
 
     @FXML
     public void confirmarCadastroIns() {
-        CadastroController cadastrarInstituicao = new CadastroController();
+        ControladorCadastro cadastrarInstituicao = new ControladorCadastro();
         cadastrarInstituicao.confirmarCadastroIns();
     }
 

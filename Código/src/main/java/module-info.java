@@ -6,7 +6,7 @@ module br.com.renutrir.renutrir {
 
     opens br.com.renutrir.renutrir to javafx.graphics, javafx.fxml;
     opens br.com.renutrir.servicos to javafx.graphics, javafx.fxml;
-    exports br.com.renutrir.servicos to javafx.graphics, javafx.fxml;
     exports br.com.renutrir.renutrir;
+    exports br.com.renutrir.servicos;
 }
 
