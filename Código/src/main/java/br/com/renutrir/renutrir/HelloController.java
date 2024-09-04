@@ -1410,7 +1410,7 @@ public class HelloController implements Initializable {
         }).start();
     }
 
-    private void salvarDoacoesEmArquivo(RepositorioDoacoes repositorioDoacoes) {
+    public void salvarDoacoesEmArquivo(RepositorioDoacoes repositorioDoacoes) {
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
 
         if (doadorLogado == null) {
@@ -1447,7 +1447,7 @@ public class HelloController implements Initializable {
         }
     }
 
-    private void verificarProgressoParaCertificado(Doador doador) {
+    public void verificarProgressoParaCertificado(Doador doador) {
         ControladorCertificado controladorCertificado = new ControladorCertificado();
         controladorCertificado.verificarProgressoParaCertificado(doador);
     }
