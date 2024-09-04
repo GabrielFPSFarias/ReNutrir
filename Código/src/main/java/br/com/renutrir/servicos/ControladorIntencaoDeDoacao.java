@@ -339,14 +339,14 @@ public class ControladorIntencaoDeDoacao {
     @FXML
     void doarCartaoDebito(ActionEvent event) {
         String valor = fieldInserirValorCartao.getText();
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-2-2-debito.fxml", "ReNutrir - Doar com Débito");
+        realizarTrocaDeTela("/br/com/renutrir/07-2-2-debito.fxml", "ReNutrir - Doar com Débito");
         valorDoacaoExibirDeb.setText("Valor: R$ " + valor);
     }
 
     @FXML
     void doarCartaoCredito(ActionEvent event) {
         String valor = fieldInserirValorCartao.getText();
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-2-1-credito.fxml", "ReNutrir - Doar com Crédito");
+        realizarTrocaDeTela("/br/com/renutrir/07-2-1-credito.fxml", "ReNutrir - Doar com Crédito");
         valorDoacaoCreExibir.setText("Valor: R$ " + valor);
     }
 
@@ -359,7 +359,7 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     void botaoVoltar31(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
+        realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
     }
 
     @FXML
@@ -400,7 +400,7 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     void botaoVoltar32(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
+        realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
     }
 
     @FXML
@@ -464,7 +464,7 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     void botaoVoltar33(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -476,7 +476,7 @@ public class ControladorIntencaoDeDoacao {
         String qtdAlimento = fieldInserirQtdAlimento.getText();
 
         if (nomeAlimento.isEmpty() || qtdAlimento.isEmpty()) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro de Validação", "Por favor, preencha todos os campos.");
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "Por favor, preencha todos os campos.");
             return;
         }
 
@@ -484,7 +484,7 @@ public class ControladorIntencaoDeDoacao {
         try {
             quantidade = Integer.parseInt(qtdAlimento);
         } catch (NumberFormatException e) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro de Validação", "A quantidade deve ser um número válido.");
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "A quantidade deve ser um número válido.");
             return;
         }
 
@@ -504,7 +504,7 @@ public class ControladorIntencaoDeDoacao {
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
         }
     }
 
@@ -522,7 +522,7 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     void botaoVoltar34(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -540,7 +540,7 @@ public class ControladorIntencaoDeDoacao {
         String qtdBebida = fieldInserirQtdBebida.getText();
 
         if (nomeBebida.isEmpty() || qtdBebida.isEmpty()) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
             return;
         }
 
@@ -548,7 +548,7 @@ public class ControladorIntencaoDeDoacao {
         try {
             quantidade = Integer.parseInt(qtdBebida);
         } catch (NumberFormatException e) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
             return;
         }
 
@@ -568,7 +568,7 @@ public class ControladorIntencaoDeDoacao {
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
         }
     }
 
@@ -586,7 +586,7 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     void botaoVoltar35(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -614,7 +614,7 @@ public class ControladorIntencaoDeDoacao {
         String qtdRoupa = fieldInserirQtdRoupa.getText();
 
         if (nomeRoupa.isEmpty() || qtdRoupa.isEmpty()) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
             return;
         }
 
@@ -622,7 +622,7 @@ public class ControladorIntencaoDeDoacao {
         try {
             quantidade = Integer.parseInt(qtdRoupa);
         } catch (NumberFormatException e) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
             return;
         }
 
@@ -642,7 +642,7 @@ public class ControladorIntencaoDeDoacao {
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
         }
     }
 
@@ -650,7 +650,7 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     void botaoVoltar36(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -678,7 +678,7 @@ public class ControladorIntencaoDeDoacao {
         String qtdProdutoLimpeza = fieldInserirQtdLimpeza.getText();
 
         if (nomeProdutoLimpeza.isEmpty() || qtdProdutoLimpeza.isEmpty()) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos.");
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos.");
             return;
         }
 
@@ -686,7 +686,7 @@ public class ControladorIntencaoDeDoacao {
         try {
             quantidade = Integer.parseInt(qtdProdutoLimpeza);
         } catch (NumberFormatException e) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro de validação", "Quantidade inválida. Por favor, insira um número válido.");
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Quantidade inválida. Por favor, insira um número válido.");
             return;
         }
 
@@ -706,7 +706,7 @@ public class ControladorIntencaoDeDoacao {
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
         }
     }
 
@@ -714,7 +714,7 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     void botaoVoltar37(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -743,7 +743,7 @@ public class ControladorIntencaoDeDoacao {
         String tipoMovel = selecionarTipoMovelBox.getValue() != null ? selecionarTipoMovelBox.getValue() : "";
 
         if (nomeMovel.isEmpty() || tipoMovel.isEmpty()) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos.");
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos.");
             return;
         }
 
@@ -763,7 +763,7 @@ public class ControladorIntencaoDeDoacao {
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
         }
     }
 
@@ -771,7 +771,7 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     void botaoVoltar38(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
@@ -799,7 +799,7 @@ public class ControladorIntencaoDeDoacao {
         String qtdProdutoHigiene = fieldInserirQtdHigiene.getText();
 
         if (nomeProdutoHigiene.isEmpty() || qtdProdutoHigiene.isEmpty()) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos.");
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos.");
             return;
         }
 
@@ -807,7 +807,7 @@ public class ControladorIntencaoDeDoacao {
         try {
             quantidade = Integer.parseInt(qtdProdutoHigiene);
         } catch (NumberFormatException e) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro de validação", "Quantidade inválida. Por favor, insira um número válido.");
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Quantidade inválida. Por favor, insira um número válido.");
             return;
         }
 
@@ -827,7 +827,7 @@ public class ControladorIntencaoDeDoacao {
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
         }
     }
 
@@ -835,7 +835,7 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     void botaoVoltar39(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
     }
 
     //Tela 07-10
@@ -851,7 +851,7 @@ public class ControladorIntencaoDeDoacao {
         String infoDoacao = exibirInfoDoacaoLabel.getText();
 
         if (infoDoacao.isEmpty()) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma informação para salvar.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma informação para salvar.");
             return;
         }
 
@@ -863,10 +863,10 @@ public class ControladorIntencaoDeDoacao {
         if (file != null) {
             try (FileWriter writer = new FileWriter(file)) {
                 writer.write(infoDoacao);
-                helloController.showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Comprovante salvo com sucesso!");
+                showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Comprovante salvo com sucesso!");
             } catch (IOException e) {
                 e.printStackTrace();
-                helloController.showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar o comprovante.");
+                showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar o comprovante.");
             }
         }
     }
@@ -897,7 +897,7 @@ public class ControladorIntencaoDeDoacao {
         Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
 
         if (doador == null) {
-            helloController.showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado. Certifique-se de que você está logado.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado. Certifique-se de que você está logado.");
             return;
         }
 
