@@ -58,7 +58,7 @@
     <center>
         <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0">
             <content>
-                <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="442.0" prefWidth="591.0" BorderPane.alignment="CENTER">
+                <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="388.0" prefWidth="591.0" BorderPane.alignment="CENTER">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
                     </columnConstraints>
@@ -70,7 +70,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <BorderPane.margin>
                         <Insets bottom="40.0" top="-40.0" />
@@ -79,9 +78,9 @@
                         <Insets left="100.0" right="-100.0" />
                     </padding>
                     <children>
-                        <Button fx:id="queroVoluntarioBotao" mnemonicParsing="false" onAction="#botaoQueroVoluntario" prefHeight="30.0" prefWidth="226.0" text="Quero ser voluntário" textAlignment="CENTER" GridPane.rowIndex="7" />
+                        <Button fx:id="queroVoluntarioBotao" mnemonicParsing="false" onAction="#botaoQueroVoluntario" prefHeight="30.0" prefWidth="226.0" text="Quero ser voluntário" textAlignment="CENTER" GridPane.rowIndex="6" />
                         <Text fx:id="exibirVoluntarioLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Você está no menu para se tornar um voluntário do projeto ReNutrir" textAlignment="CENTER" wrappingWidth="443.31640625" />
-                        <ComboBox fx:id="cboxFuncaoVoluntario" prefHeight="27.0" prefWidth="225.0" promptText="Função de Voluntário" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="cboxFuncaoVoluntario" onAction="#funcaoVoluntarioCbox" prefHeight="27.0" prefWidth="225.0" promptText="Função de Voluntário" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dias de disponibilidade:" GridPane.rowIndex="1" />
                         <GridPane maxWidth="-Infinity" prefHeight="108.0" prefWidth="343.0" GridPane.rowIndex="2">
                             <columnConstraints>
@@ -105,7 +104,7 @@
                                 <CheckBox fx:id="boxSabadoVoluntario" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="250.0" layoutY="15.0" mnemonicParsing="false" onAction="#sabadoVoluntarioBox" prefHeight="17.0" prefWidth="138.0" text="Sábado" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                             </children>
                         </GridPane>
-                        <ComboBox fx:id="cboxInstVinculada" onAction="#instVinculadaCbox" prefHeight="27.0" prefWidth="225.0" promptText="Instituição Vinculada" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                  <Label fx:id="nomeInstituicaoParaVoluntario" text="Você aceita ser voluntário da Instituição" GridPane.rowIndex="5" />
                     </children>
                 </GridPane>
             </content>

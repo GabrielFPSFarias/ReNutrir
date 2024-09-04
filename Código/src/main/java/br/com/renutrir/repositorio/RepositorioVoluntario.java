@@ -12,7 +12,7 @@ public class RepositorioVoluntario {
         funcoesVoluntario = carregarFuncoesVoluntario();
     }
 
-    private List<String> carregarFuncoesVoluntario() {
+    public List<String> carregarFuncoesVoluntario() {
         File file = new File(CAMINHO_ARQUIVO);
         if (!file.exists()) {
             return new ArrayList<>();

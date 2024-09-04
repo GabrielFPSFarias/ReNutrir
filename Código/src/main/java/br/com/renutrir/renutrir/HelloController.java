@@ -1473,18 +1473,27 @@ public class HelloController implements Initializable {
     @FXML
     private ComboBox<String> cboxInstVinculada;
 
+    /*
     ObservableList<String> listaFuncaoVoluntario = FXCollections.observableArrayList(
             "Transportador de Doações", "Auxiliar de Eventos"
     );
+
+     */
 
     private void configurarComboBox() {
         if (cboxFuncaoVoluntario == null) {
             System.out.println("cboxFuncaoVoluntario está null");
             return;
+        } if (cboxInstVinculada == null) {
+            System.out.println("cboxInstVinculada está null");
+            return;
         }
 
+        /*
         cboxFuncaoVoluntario.setItems(listaFuncaoVoluntario);
         cboxFuncaoVoluntario.setValue(listaFuncaoVoluntario.get(0));
+         */
+        carregarFuncoesVoluntarios();
         carregarInstituicoes();
     }
 
@@ -1492,6 +1501,22 @@ public class HelloController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarComboBox();
+    }
+
+    private void carregarFuncoesVoluntarios() {
+        ObservableList<String> funcoesVoluntarios = FXCollections.observableArrayList();
+
+        RepositorioVoluntario repositorioVoluntario = new RepositorioVoluntario();
+        List<String> funcaoVoluntario = repositorioVoluntario.carregarFuncoesVoluntario();
+
+        funcoesVoluntarios.addAll(funcaoVoluntario);
+
+        if (funcoesVoluntarios.isEmpty()) {
+            cboxFuncaoVoluntario.setItems(FXCollections.observableArrayList("Nenhuma função disponível"));
+        } else {
+            cboxFuncaoVoluntario.setItems(funcoesVoluntarios);
+        }
+        cboxFuncaoVoluntario.setValue(cboxFuncaoVoluntario.getItems().get(0));
     }
 
     private void carregarInstituicoes() {
