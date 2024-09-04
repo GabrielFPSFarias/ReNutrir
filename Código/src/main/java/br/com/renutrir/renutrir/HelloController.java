@@ -596,7 +596,7 @@ public class HelloController implements Initializable {
         carregarInstituicoesNaComboBox();
     }
 
-    private void carregarInstituicoesNaComboBox() {
+    private ObservableList<String> carregarInstituicoesNaComboBox() {
         List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
         if (instituicoes.isEmpty()) {
             System.out.println("Nenhuma instituição encontrada no arquivo.");
@@ -605,6 +605,7 @@ public class HelloController implements Initializable {
             System.out.println("Adicionando instituição: " + instituicao.getNome());
             escolherInstituicaoDoarCbox.getItems().add(instituicao.getNome());
         }
+        return null;
     }
 
     @FXML
@@ -618,8 +619,6 @@ public class HelloController implements Initializable {
 
 
     //Tela 07 - Intenção Doação (Doador)
-
-    /*
 
     @FXML
     private Button alimentosDoar;
@@ -1411,7 +1410,7 @@ public class HelloController implements Initializable {
         }).start();
     }
 
-    public void salvarDoacoesEmArquivo(RepositorioDoacoes repositorioDoacoes) {
+    private void salvarDoacoesEmArquivo(RepositorioDoacoes repositorioDoacoes) {
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
 
         if (doadorLogado == null) {
@@ -1448,12 +1447,11 @@ public class HelloController implements Initializable {
         }
     }
 
-    public void verificarProgressoParaCertificado(Doador doador) {
+    private void verificarProgressoParaCertificado(Doador doador) {
         ControladorCertificado controladorCertificado = new ControladorCertificado();
         controladorCertificado.verificarProgressoParaCertificado(doador);
     }
 
-*/
 
     //Tela 09 Seja Voluntário
 
@@ -1464,12 +1462,10 @@ public class HelloController implements Initializable {
     private Text exibirVoluntarioLabel;
 
     @FXML
-    private CheckBox boxSegundaVoluntario, boxTercaVoluntario, boxQuartaVoluntario, boxQuintaVoluntario,boxSextaVoluntario, boxSabadoVoluntario, boxDomingoVoluntario;
+    private CheckBox boxSegundaVoluntario, boxTercaVoluntario, boxQuartaVoluntario, boxQuintaVoluntario, boxSextaVoluntario, boxSabadoVoluntario, boxDomingoVoluntario;
 
     @FXML
     private Button queroVoluntarioBotao;
-
-    private String caminhoArquivoInstituicoes = "/src/dados/instituicoes.dat";
 
     @FXML
     private ComboBox<String> cboxFuncaoVoluntario;
@@ -1477,23 +1473,49 @@ public class HelloController implements Initializable {
     @FXML
     private ComboBox<String> cboxInstVinculada;
 
-    @FXML
-    private Text labelFuncaoSelecionada;
-
     ObservableList<String> listaFuncaoVoluntario = FXCollections.observableArrayList(
             "Transportador de Doações", "Auxiliar de Eventos"
     );
 
+    private void configurarComboBox() {
+        if (cboxFuncaoVoluntario == null) {
+            System.out.println("cboxFuncaoVoluntario está null");
+            return;
+        }
+
+        cboxFuncaoVoluntario.setItems(listaFuncaoVoluntario);
+        cboxFuncaoVoluntario.setValue(listaFuncaoVoluntario.get(0));
+        carregarInstituicoes();
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if (cboxFuncaoVoluntario != null) {
-            cboxFuncaoVoluntario.setItems(listaFuncaoVoluntario);
-        }
+        configurarComboBox();
     }
+
+    private void carregarInstituicoes() {
+        ObservableList<String> listaInstituicoes = FXCollections.observableArrayList();
+
+        RepositorioInstituicao repositorioInstituicao = new RepositorioInstituicao();
+        List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
+
+        for (Instituicao instituicao : instituicoes) {
+            listaInstituicoes.add(instituicao.getNome());
+        }
+
+        if (listaInstituicoes.isEmpty()) {
+            cboxInstVinculada.setItems(FXCollections.observableArrayList("Nenhuma instituição disponível"));
+        } else {
+            cboxInstVinculada.setItems(listaInstituicoes);
+        }
+        cboxInstVinculada.setValue(cboxInstVinculada.getItems().get(0));
+    }
+
 
     @FXML
     public void funcaoVoluntarioCbox() {
-        labelFuncaoSelecionada.setText(cboxFuncaoVoluntario.getValue());
+
     }
 
     @FXML
