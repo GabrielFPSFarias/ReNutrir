@@ -1,5 +1,6 @@
 package br.com.renutrir.model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Voluntario extends Doador {
@@ -8,15 +9,15 @@ public class Voluntario extends Doador {
     private String funcaoVoluntariado; // o cargo que o voluntário vai cumprir
     private String instituicaoVinculada; // refere-se à instituição a que o voluntário está prestando serviço
 
-    public Voluntario() {
-    }
-    
     public Voluntario(String nome, String email, String telefone, String disponibilidade,
                       String funcaoVoluntariado, Instituicao instituicaoVinculada) {
         super(nome, email, telefone);
         this.disponibilidade = disponibilidade;
         this.funcaoVoluntariado = funcaoVoluntariado;
         this.instituicaoVinculada = String.valueOf(instituicaoVinculada);
+    }
+
+    public Voluntario(String tipoVoluntario) {
     }
 
     public String getDisponibilidade() {
@@ -83,6 +84,19 @@ public class Voluntario extends Doador {
 
     public void voluntariar(){
 
+    }
+
+    //Listar os tipos de voluntários
+
+    private ArrayList<Voluntario> volunt = new ArrayList<>();
+
+    public Voluntario() {
+        volunt.add(new Voluntario("Transportador de Doações"));
+        volunt.add(new Voluntario("Auxiliar de Eventos"));
+    }
+
+    public ArrayList<Voluntario> todos() {
+        return volunt;
     }
 }
 

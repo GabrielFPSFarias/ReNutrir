@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,6 +29,7 @@ import javafx.scene.text.*;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -37,51 +39,18 @@ import java.util.*;
 
 import static br.com.renutrir.servicos.ControladorCertificado.DOACOES_NECESSARIAS;
 
-public class HelloController {
+public class HelloController implements Initializable {
 
     private Doador doadorLogado;
 
     @FXML
-    public TextField fieldEmailIns;
+    public TextField fieldEmailIns, fieldCnpjIns, fieldNomeIns, fieldInsCep, fieldUserNomeIns, fieldTelefoneIns;
 
     @FXML
-    public TextField fieldCnpjIns;
+    public TextField fieldEnderecoIns, fieldRefIns, fieldBairroIns, fieldCidadeIns, fieldNumeroIns, fieldCompIns;
 
     @FXML
-    public TextField fieldNomeIns;
-
-    @FXML
-    public TextField fieldInsCep;
-
-    @FXML
-    public TextField fieldUserNomeIns;
-
-    @FXML
-    public PasswordField fieldSenhaIns;
-
-    @FXML
-    public PasswordField fieldConfSenhaIns;
-
-    @FXML
-    public TextField fieldTelefoneIns;
-
-    @FXML
-    public TextField fieldEnderecoIns;
-
-    @FXML
-    public TextField fieldRefIns;
-
-    @FXML
-    public TextField fieldBairroIns;
-
-    @FXML
-    public TextField fieldCidadeIns;
-
-    @FXML
-    public TextField fieldNumeroIns;
-
-    @FXML
-    public TextField fieldCompIns;
+    public PasswordField fieldSenhaIns, fieldConfSenhaIns;
 
     @FXML
     public TextField fieldUfIns;
@@ -1539,44 +1508,18 @@ public class HelloController {
     //Tela 09 Seja Voluntário
 
     @FXML
-    private TextField fieldHoraInicialVoluntario;
-
-    @FXML
-    private CheckBox boxQuintaVoluntario;
-
-    @FXML
-    private CheckBox boxQuartaVoluntario;
-
-    @FXML
-    private CheckBox boxSextaVoluntario;
-
-    @FXML
-    private TextField fieldHoraFinalVoluntario;
-
-    @FXML
-    private CheckBox boxSegundaVoluntario;
+    private TextField fieldHoraInicialVoluntario, fieldHoraFinalVoluntario;
 
     @FXML
     private Text exibirVoluntarioLabel;
 
     @FXML
-    private CheckBox boxTercaVoluntario;
-
-    @FXML
-    private CheckBox boxSabadoVoluntario;
-
-    @FXML
-    private CheckBox boxDomingoVoluntario;
+    private CheckBox boxSegundaVoluntario, boxTercaVoluntario, boxQuartaVoluntario, boxQuintaVoluntario,boxSextaVoluntario, boxSabadoVoluntario, boxDomingoVoluntario;
 
     @FXML
     private Button queroVoluntarioBotao;
 
-    private String caminhoArquivoInstituicoes = "/src/dados/arquivo1.txt";
-
-    @FXML
-    public void botaoQueroVoluntario() {
-
-    }
+    private String caminhoArquivoInstituicoes = "/src/dados/instituicoes.dat";
 
     @FXML
     private ComboBox<String> cboxFuncaoVoluntario;
@@ -1584,32 +1527,33 @@ public class HelloController {
     @FXML
     private ComboBox<String> cboxInstVinculada;
 
-    private List<String> listFuncoesVoluntario = new ArrayList<>();
+    @FXML
+    private Text labelFuncaoSelecionada;
+
+    ObservableList<String> listaFuncaoVoluntario = FXCollections.observableArrayList(
+            "Transportador de Doações", "Auxiliar de Eventos"
+    );
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        if (cboxFuncaoVoluntario != null) {
+            cboxFuncaoVoluntario.setItems(listaFuncaoVoluntario);
+        }
+    }
 
     @FXML
     public void funcaoVoluntarioCbox() {
-        // listFuncoesVoluntario.clear();
-        listFuncoesVoluntario.add("Transportador de doações");
-        listFuncoesVoluntario.add("Ajudante dos Eventos");
-
-        ObservableList<String> observableListFuncoes = FXCollections.observableArrayList(listFuncoesVoluntario);
-        cboxFuncaoVoluntario.setItems(observableListFuncoes);
+        labelFuncaoSelecionada.setText(cboxFuncaoVoluntario.getValue());
     }
 
     @FXML
     public void instVinculadaCbox() {
-        cboxInstVinculada.getItems().clear();
-        try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivoInstituicoes))) {
-            String linha;
-            while ((linha = reader.readLine()) != null) {
-                if (linha.startsWith("Nome: ")) {
-                    String nomeInstituicao = linha.substring(6).trim();
-                    cboxInstVinculada.getItems().add(nomeInstituicao);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    }
+
+    @FXML
+    public void botaoQueroVoluntario() {
+
     }
 
     @FXML
