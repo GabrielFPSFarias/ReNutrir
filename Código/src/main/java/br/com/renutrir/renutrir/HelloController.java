@@ -37,8 +37,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-import static br.com.renutrir.servicos.ControladorCertificado.DOACOES_NECESSARIAS;
-
 public class HelloController implements Initializable {
 
     private Doador doadorLogado;
@@ -760,7 +758,7 @@ public class HelloController implements Initializable {
     void doarFinalPix(ActionEvent event) {
         ProgressAlert progressAlert = new ProgressAlert();
         progressAlert.start(new Stage());
-        progressAlert.showProgress(ProgressBar.INDETERMINATE_PROGRESS);
+        progressAlert.showProgress();
 
         new Thread(() -> {
             try {
@@ -1366,7 +1364,7 @@ public class HelloController implements Initializable {
     @FXML
     private Button botaoRegistrarDoacao;
 
-    private HelloApplication application = new HelloApplication();
+    HelloApplication application = new HelloApplication();
 
     @FXML
     private void registrarDoacao(ActionEvent event) {
@@ -1379,12 +1377,10 @@ public class HelloController implements Initializable {
 
         String itemSelecionado = obterItemSelecionado();
 
-        if (itemSelecionado == null || itemSelecionado.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Item selecionado inválido.");
-            return;
-        }
-
-        application.showAlertComProgresso();
+        // Mostra a barra de progresso
+        ProgressAlert progressAlert = new ProgressAlert();
+        progressAlert.start(new Stage());
+        progressAlert.showProgress();
 
         new Thread(() -> {
             try {
@@ -1397,23 +1393,18 @@ public class HelloController implements Initializable {
 
                 RepositorioDoacoes repositorioDoacoes = new RepositorioDoacoes();
                 repositorioDoacoes.adicionarDoacao(doacao);
-
                 salvarDoacoesEmArquivo(repositorioDoacoes);
 
-                int doacoesConcluidas = contarDoacoes(doador);
-                int doacoesRestantes = DOACOES_NECESSARIAS - doacoesConcluidas;
-                if (doacoesRestantes > 0) {
-                    Platform.runLater(() -> showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi registrada com sucesso! " +
-                            "Faltam " + doacoesRestantes + " doações para alcançar a meta do certificado."));
-                } else {
-                    Platform.runLater(() -> showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi registrada com sucesso! " +
-                            "Seu certificado já está disponível no menu doador."));
-                }
+                Platform.runLater(() -> {
+                    verificarProgressoParaCertificado(doador);
+
+                    // Após 1 segundo de progresso, mostrar que a doação foi feita com sucesso
+                    progressAlert.hideProgress();
+                    showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi realizada com sucesso!");
+                });
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            } finally {
-                Platform.runLater(application::hideProgress);
             }
         }).start();
     }
@@ -1438,45 +1429,28 @@ public class HelloController implements Initializable {
     }
 
     private String obterItemSelecionado() {
-        return "item";
-    }
-
-    public int contarDoacoes(Doador doador) {
-        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
-
-        if (doadorLogado == null) {
-            System.out.println("Nenhum doador está logado.");
-            return 0;
-        }
-
-        String nomeUsuario = doadorLogado.getNomeUsuario();
-        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.dat";
-        File arquivo = new File(caminhoArquivo);
-
-        if (!arquivo.exists()) {
-            System.out.println("Arquivo não encontrado: " + caminhoArquivo);
-            return 0;
-        }
-
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
-            @SuppressWarnings("unchecked")
-            List<Doacao> doacoes = (List<Doacao>) ois.readObject();
-
-            int count = 0;
-            for (Doacao doacao : doacoes) {
-                if (doacao.getNomeDoador().equals(nomeUsuario)) {
-                    count++;
-                }
-            }
-
-            System.out.println("Número de doações: " + count);
-            return count;
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return 0;
+        if (fieldInserirNomeAlimento != null && !fieldInserirNomeAlimento.getText().isEmpty()) {
+            return fieldInserirNomeAlimento.getText();
+        } else if (fieldInserirNomeBebida != null && !fieldInserirNomeBebida.getText().isEmpty()) {
+            return fieldInserirNomeBebida.getText();
+        } else if (fieldInserirNomeRoupa != null && !fieldInserirNomeRoupa.getText().isEmpty()) {
+            return fieldInserirNomeRoupa.getText();
+        } else if (fieldInserirProdLimpeza != null && !fieldInserirProdLimpeza.getText().isEmpty()) {
+            return fieldInserirProdLimpeza.getText();
+        } else if (fieldInserirNomeMovel != null && !fieldInserirNomeMovel.getText().isEmpty()) {
+            return fieldInserirNomeMovel.getText();
+        } else if (fieldInserirProdHigiene != null && !fieldInserirProdHigiene.getText().isEmpty()) {
+            return fieldInserirProdHigiene.getText();
+        } else {
+            return null;
         }
     }
+
+    private void verificarProgressoParaCertificado(Doador doador) {
+        ControladorCertificado controladorCertificado = new ControladorCertificado();
+        controladorCertificado.verificarProgressoParaCertificado(doador);
+    }
+
 
 
     //Tela 09 Seja Voluntário

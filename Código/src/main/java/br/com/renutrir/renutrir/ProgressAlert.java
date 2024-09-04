@@ -32,9 +32,21 @@ public class ProgressAlert extends Application {
         stage.setScene(scene);
     }
 
-    public void showProgress(double progress) {
-        progressBar.setProgress(progress);
+    public void showProgress() {
         stage.show();
+        new Thread(() -> {
+            for (int i = 0; i <= 100; i++) {
+                double progress = i / 100.0;
+                Platform.runLater(() -> progressBar.setProgress(progress));
+
+                try {
+                    Thread.sleep(10); // Atualiza o progresso a cada 10 ms
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            Platform.runLater(() -> stage.hide());
+        }).start();
     }
 
     public void hideProgress() {

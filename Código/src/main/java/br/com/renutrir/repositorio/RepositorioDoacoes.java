@@ -10,14 +10,20 @@ import java.util.List;
 
 public class RepositorioDoacoes {
 
-    Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
-    String nomeUsuario = doadorLogado.getNomeUsuario();
-
+    private Doador doadorLogado;
+    private String nomeUsuario;
+    private String arquivoDoacoes;
     private List<Doacao> doacoes;
-    private final String arquivoDoacoes = "src/dados/"+ nomeUsuario +"doacoes.dat";
 
     public RepositorioDoacoes() {
-        this.doacoes = carregarDoacoes();
+        this.doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+        if (doadorLogado != null) {
+            this.nomeUsuario = doadorLogado.getNomeUsuario();
+            this.arquivoDoacoes = "src/dados/" + nomeUsuario + "_doacoes.dat";
+            this.doacoes = carregarDoacoes();
+        } else {
+            this.doacoes = new ArrayList<>();
+        }
     }
 
     private List<Doacao> carregarDoacoes() {
@@ -75,7 +81,7 @@ public class RepositorioDoacoes {
     }
 
     public List<Doacao> listarDoacoes() {
-        return new ArrayList<>(doacoes); // Retorna uma cópia da lista
+        return new ArrayList<>(doacoes);
     }
 }
 

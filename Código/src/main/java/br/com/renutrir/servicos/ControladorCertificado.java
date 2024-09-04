@@ -2,7 +2,8 @@ package br.com.renutrir.servicos;
 
 import br.com.renutrir.model.Certificado;
 import br.com.renutrir.model.Doador;
-import br.com.renutrir.repositorio.RepositorioIntencaoDoacao;
+import br.com.renutrir.repositorio.RepositorioDoacoes;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 
 import java.io.BufferedWriter;
@@ -33,23 +34,25 @@ public class ControladorCertificado {
     }
 
     private void validarQuantDoacoes(int quantDoacoes) {
-        if (quantDoacoes < Certificado.DOACOES_NECESSARIAS) {
-            throw new IllegalArgumentException("O doador não pode receber o certificado, ainda tem menos de 50 doações efetuadas.");
+        if (quantDoacoes < DOACOES_NECESSARIAS) {
+            throw new IllegalArgumentException("O doador não pode receber o certificado, ainda tem menos de " + DOACOES_NECESSARIAS + " doações efetuadas.");
         }
     }
 
     public void verificarProgressoParaCertificado(Doador doador) {
-        RepositorioIntencaoDoacao repositorio = new RepositorioIntencaoDoacao();
-        int doacoesRealizadas = repositorio.contarDoacoes(doador);
-        int doacoesRestantes = DOACOES_NECESSARIAS - doacoesRealizadas;
+        Platform.runLater(() -> {
+            RepositorioDoacoes repositorio = new RepositorioDoacoes();
+            int doacoesRealizadas = repositorio.listarDoacoes().size();
+            int doacoesRestantes = DOACOES_NECESSARIAS - doacoesRealizadas;
 
-        if (doacoesRestantes <= 0) {
-            emitirCertificado(doador);
-            System.out.println("Emitir certificado para o doador.");
-        } else {
-            showAlert(Alert.AlertType.INFORMATION, "Progresso do Certificado",
-                    "Faltam " + doacoesRestantes + " doações para você ganhar o certificado.");
-        }
+            if (doacoesRestantes <= 0) {
+                emitirCertificado(doador);
+                showAlert(Alert.AlertType.INFORMATION, "Certificado Disponível", "Seu certificado já está disponível.");
+            } else {
+                showAlert(Alert.AlertType.INFORMATION, "Progresso do Certificado",
+                        "Faltam " + doacoesRestantes + " doações para você ganhar o certificado.");
+            }
+        });
     }
 
     private void emitirCertificado(Doador doador) {
@@ -77,14 +80,8 @@ public class ControladorCertificado {
             writer.write("ReNutrir");
             writer.newLine();
             writer.write("=============================");
-            writer.newLine();
-
-            showAlert(Alert.AlertType.INFORMATION, "Certificado Emitido",
-                    "O certificado foi emitido com sucesso!");
-
         } catch (IOException e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível emitir o certificado.");
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao salvar o certificado."));
         }
     }
 
@@ -95,4 +92,3 @@ public class ControladorCertificado {
         alert.showAndWait();
     }
 }
-
