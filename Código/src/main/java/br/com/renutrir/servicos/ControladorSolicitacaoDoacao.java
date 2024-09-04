@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class ControladorSolicitacaoDoacao {
     HelloController helloController = new HelloController();
@@ -15,43 +16,60 @@ public class ControladorSolicitacaoDoacao {
 
     @FXML
     public void botaoVoltar22() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+        System.out.println("Instituição");
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        helloController.trocarTela(stage, "/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
 
     @FXML
     void botaoVoltar45() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
+        System.out.println("Solicitar Doações");
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void botaoVoltar46() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
+        System.out.println("Solicitar Doações");
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void botaoVoltar47() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
+        System.out.println("Solicitar Doações");
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void botaoVoltar48() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+        System.out.println("Solicitar Doações");
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void botaoVoltar49() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+        System.out.println("Solicitar Doações");
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void botaoVoltar50() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+        System.out.println("Solicitar Doações");
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
     }
 
     @FXML
     void botaoVoltar51() {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+        System.out.println("Solicitar Doações");
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        helloController.trocarTela(stage, "/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
     }
+
 
     //Botões Solicitações
     @FXML
@@ -233,7 +251,5 @@ public class ControladorSolicitacaoDoacao {
 
     @FXML
     void fieldSolicitarDoacaoProdHigene(ActionEvent event) {
-
     }
 }
-//oi
