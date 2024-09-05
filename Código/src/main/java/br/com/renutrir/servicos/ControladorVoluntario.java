@@ -1,15 +1,14 @@
 package br.com.renutrir.servicos;
 
-import br.com.renutrir.model.*;
-import br.com.renutrir.renutrir.ProgressAlert;
-import br.com.renutrir.repositorio.RepositorioIntencaoDoacao;
-import javafx.application.Platform;
+import br.com.renutrir.model.Doador;
+import br.com.renutrir.model.Instituicao;
+import br.com.renutrir.renutrir.HelloController;
+import br.com.renutrir.repositorio.RepositorioInstituicao;
+import br.com.renutrir.repositorio.RepositorioVoluntario;
+import br.com.renutrir.sessao.SessaoDoador;
+import br.com.renutrir.sessao.SessaoInstituicao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import br.com.renutrir.repositorio.*;
-import br.com.renutrir.servicos.*;
-import br.com.renutrir.main.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,31 +17,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.control.*;
-import java.io.*;
-import java.lang.reflect.Field;
-import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Optional;
-import java.awt.*;
-import java.util.List;
-import java.util.Random;
-import java.util.ResourceBundle;
-import br.com.renutrir.sessao.*;
 
-import br.com.renutrir.renutrir.HelloController;
-import br.com.renutrir.sessao.SessaoDoador;
-import br.com.renutrir.sessao.SessaoInstituicao;
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class ControladorVoluntario implements Initializable {
 
@@ -263,10 +249,18 @@ public class ControladorVoluntario implements Initializable {
         }
     }
 
+    private Map<String, Parent> telas = new HashMap<>();
+
     public void trocarTela(Stage stage, String fxmlFile, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
+            Parent root = null;
+            if (this.telas.get(fxmlFile) == null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+                root = loader.load();
+                this.telas.put(fxmlFile, root);
+            } else {
+                root = this.telas.get(fxmlFile);
+            }
 
             if (fxmlFile.equals("/br/com/renutrir/03-login.fxml")) {
                 SessaoDoador.getInstancia().limparSessao();
