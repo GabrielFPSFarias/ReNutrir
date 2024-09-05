@@ -7,11 +7,18 @@ import br.com.renutrir.repositorio.RepositorioDoador;
 import br.com.renutrir.repositorio.RepositorioInstituicao;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Optional;
 
-public class ControladorLogin {
+public class ControladorLogin extends HelloController {
 
     private HelloController hc;
 
@@ -58,20 +65,64 @@ public class ControladorLogin {
             Instituicao instituicao = buscarInstituicaoNoRepositorio(emailOuUsuario, senha);
             if (instituicao != null) {
                 SessaoInstituicao.getInstancia().setInstituicaoLogada(instituicao); // Salva a instituição que fez login
-                hc.showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Instituição!");
-                hc.realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+                showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Instituição!");
+                realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
             } else {
-                hc.showAlert(Alert.AlertType.ERROR, "Erro de Login", "E-mail, nome de usuário ou senha inválidos para instituição.");
+                showAlert(Alert.AlertType.ERROR, "Erro de Login", "E-mail, nome de usuário ou senha inválidos para instituição.");
             }
         } else {
             Doador doador = buscarDoadorNoRepositorio(emailOuUsuario, senha);
             if (doador != null) {
                 SessaoDoador.getInstancia().setDoadorLogado(doador); // Salva o doador que fez login
-                hc.showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Doador!");
-                hc.realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+                showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Doador!");
+                realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
             } else {
-                hc.showAlert(Alert.AlertType.ERROR, "Erro de Login", "E-mail, nome de usuário ou senha inválidos para doador.");
+                showAlert(Alert.AlertType.ERROR, "Erro de Login", "E-mail, nome de usuário ou senha inválidos para doador.");
             }
+        }
+    }
+
+    @FXML
+    public Button voltarBotao;
+
+    public void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        trocarTela(stage, fxmlArquivo, titulo);
+
+        if (fxmlArquivo.equals("/br/com/renutrir/03-login.fxml")) {
+            SessaoDoador.getInstancia().limparSessao();
+            SessaoInstituicao.getInstancia().limparSessao();
+        } else {
+            Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+            if (doadorLogado != null) {
+                System.out.println("Doador logado: " + doadorLogado.getNome()); // Testar
+            }
+
+            Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+            if (instituicaoLogada != null) {
+                System.out.println("Instituição logada: " + instituicaoLogada.getNome()); // Testar também
+            }
+        }
+    }
+
+    public void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public void trocarTela(Stage stage, String fxmlFile, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+
+            stage.setScene(new Scene(root, 800, 500));
+            stage.setTitle(title);
+            stage.setResizable(false);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

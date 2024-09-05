@@ -52,8 +52,8 @@ public class HelloApplication extends Application {
         controladorLogin.setHelloController(helloController);*/
 
         //Tela 04 - Menu Doador
-        FXMLLoader menuDoadorLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/04-menu-doador.fxml"));
-        Parent menuDoadorRoot = menuDoadorLoader.load();
+        //FXMLLoader menuDoadorLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/04-menu-doador.fxml"));
+        //Parent menuDoadorRoot = menuDoadorLoader.load();
         /*ControladorVoluntario controladorVoluntario = menuDoadorLoader.getController();
         controladorVoluntario.setHelloController(helloController);*/
 
