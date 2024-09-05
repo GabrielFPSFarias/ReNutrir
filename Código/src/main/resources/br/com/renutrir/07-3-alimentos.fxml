@@ -29,7 +29,7 @@
                   <Insets bottom="10.0" top="20.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirme a sua doação com ALIMENTOS" textAlignment="CENTER" wrappingWidth="469.1875">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirme a sua intenção de doação com ALIMENTOS" textAlignment="CENTER" wrappingWidth="469.1875">
                <VBox.margin>
                   <Insets />
                </VBox.margin>

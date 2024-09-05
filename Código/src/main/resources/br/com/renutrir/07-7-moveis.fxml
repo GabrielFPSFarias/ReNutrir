@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.servicos.ControladorIntencaoDeDoacao">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.servicos.ControladorIntencaoDeDoacao">
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
@@ -30,7 +30,7 @@
                   <Insets bottom="10.0" top="20.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirme a sua doação com MÓVEIS" textAlignment="CENTER" wrappingWidth="469.1875">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirme a sua intenção de doação com MÓVEIS" textAlignment="CENTER" wrappingWidth="469.1875">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
