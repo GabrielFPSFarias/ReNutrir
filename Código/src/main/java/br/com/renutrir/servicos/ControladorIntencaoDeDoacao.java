@@ -747,7 +747,7 @@ public class ControladorIntencaoDeDoacao {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
             Parent root = loader.load();
-            HelloController controlador = loader.getController();
+            ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeProdutoHigiene, dataHora);
 
             Stage stage = (Stage) botaoProdHigieneDoar.getScene().getWindow();
