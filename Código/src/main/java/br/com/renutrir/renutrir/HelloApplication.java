@@ -39,6 +39,7 @@ public class HelloApplication extends Application {
 
         //Tela 09 - Seja Voluntário
         FXMLLoader voluntarioLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/09-seja-voluntario.fxml"));
+        Parent voluntarioRoot = voluntarioLoader.load();
         ControladorVoluntario controladorVoluntario = voluntarioLoader.getController();
         controladorVoluntario.setHelloController(helloController);
 
@@ -47,6 +48,7 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+    
     public void showAlertComProgresso() {
         if (progressStage == null) {
             initProgressWindow();
