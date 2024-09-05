@@ -62,8 +62,7 @@ public class RepositorioIntencaoDoacao {
     }
 
     private void salvarIntencaoNoArquivo(IntencaoDoacao intencao) throws IOException {
-        String nomeUsuario = intencao.getDoador().getNomeUsuario();
-        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.dat"; //usa nomeUsuario
+        String caminhoArquivo = "src/dados/intencoes.dat";
 
         File arquivo = new File(caminhoArquivo);
 

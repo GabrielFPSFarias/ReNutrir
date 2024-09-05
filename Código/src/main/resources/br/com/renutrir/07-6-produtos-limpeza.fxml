@@ -80,9 +80,9 @@
                </padding>
                <children>
                   <Button fx:id="botaoProdLimpezaDoar" mnemonicParsing="false" onAction="#doarProdLimpezaBotao" prefHeight="30.0" prefWidth="226.0" text="Doar PRODUTOS DE LIMPEZA" textAlignment="CENTER" GridPane.rowIndex="7" />
-                  <TextField fx:id="fieldInserirProdLimpeza" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirProdLimpezaField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="2" />
+                  <TextField fx:id="fieldInserirNomeItem" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirProdLimpezaField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite o produto de limpeza que deseja doar:" GridPane.rowIndex="1" />
-                  <TextField fx:id="fieldInserirQtdLimpeza" layoutX="294.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirQtdLimpezaField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="5" />
+                  <TextField fx:id="fieldInserirQtdItem" layoutX="294.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirQtdLimpezaField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="5" />
                   <Text layoutX="314.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digite a quantidade:" GridPane.rowIndex="4" />
                </children>
             </GridPane>

@@ -81,7 +81,7 @@
                </padding>
                <children>
                   <Button fx:id="movelDoarBotao" mnemonicParsing="false" onAction="#botaoDoarMovel" prefHeight="30.0" prefWidth="226.0" text="Doar MÓVEL" textAlignment="CENTER" GridPane.rowIndex="7" />
-                  <TextField fx:id="fieldInserirNomeMovel" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirNomeMovelField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="2" />
+                  <TextField fx:id="fieldInserirNomeItem" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirNomeMovelField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite o móvel que deseja doar:" GridPane.rowIndex="1" />
                   <ComboBox fx:id="selecionarTipoMovelBox" onAction="#boxSelecionarTipoMovel" prefHeight="25.0" prefWidth="230.0" promptText="Novo/Usado" GridPane.rowIndex="4" />
                </children>

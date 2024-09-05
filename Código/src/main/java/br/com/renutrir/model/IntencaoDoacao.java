@@ -3,7 +3,6 @@ package br.com.renutrir.model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-import java.util.Optional;
 
 public class IntencaoDoacao {
     private String tipoItem; // Valor, alimento, Roupas, Móveis, etc.
@@ -13,6 +12,9 @@ public class IntencaoDoacao {
     private String status; // Pendente, Aceita, Concluída
     private Doador doador;
     private Instituicao instituicao;
+    private String nomeInstituicao;
+    private String nomeItem;
+    private LocalDateTime dataHora;
 
     public IntencaoDoacao() {
     }
@@ -29,6 +31,13 @@ public class IntencaoDoacao {
         this.tipoItem = tipoItem;
         this.item = item;
         this.status = "Pendente";
+    }
+
+    public IntencaoDoacao(String nomeInstituicao, String nomeItem, int quantidade, LocalDateTime dataHora) {
+        this.nomeInstituicao = nomeInstituicao;
+        this.nomeItem = nomeItem;
+        this.quantidade = quantidade;
+        this.dataHora = LocalDateTime.now();
     }
 
     // Getters e Setters

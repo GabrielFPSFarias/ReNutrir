@@ -115,6 +115,10 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     //Tela 07 Botões
 
     @FXML
+    public TextField fieldInserirNomeItem;
+    public TextField fieldInserirQtdItem;
+
+    @FXML
     public Button voltarBotao;
 
     @FXML
@@ -452,8 +456,10 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void doarAlimentosBotao(ActionEvent actionEvent) {
-        String nomeAlimento = fieldInserirNomeAlimento.getText();
-        String qtdAlimento = fieldInserirQtdAlimento.getText();
+        String nomeAlimento;
+        nomeAlimento = fieldInserirNomeItem.getText();
+        String qtdAlimento;
+        qtdAlimento = fieldInserirQtdItem.getText();
 
         if (nomeAlimento.isEmpty() || qtdAlimento.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erro de Validação", "Por favor, preencha todos os campos.");
@@ -516,8 +522,8 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void doarBebidaBotao(ActionEvent event) {
-        String nomeBebida = fieldInserirNomeBebida.getText();
-        String qtdBebida = fieldInserirQtdBebida.getText();
+        String nomeBebida = fieldInserirNomeItem.getText();
+        String qtdBebida = fieldInserirQtdItem.getText();
 
         if (nomeBebida.isEmpty() || qtdBebida.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos.");
@@ -590,8 +596,8 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void doarRoupaBotao(ActionEvent event) {
-        String nomeRoupa = fieldInserirNomeRoupa.getText();
-        String qtdRoupa = fieldInserirQtdRoupa.getText();
+        String nomeRoupa = fieldInserirNomeItem.getText();
+        String qtdRoupa = fieldInserirQtdItem.getText();
 
         if (nomeRoupa.isEmpty() || qtdRoupa.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos");
@@ -654,8 +660,8 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void doarProdLimpezaBotao(ActionEvent event) {
-        String nomeProdutoLimpeza = fieldInserirProdLimpeza.getText();
-        String qtdProdutoLimpeza = fieldInserirQtdLimpeza.getText();
+        String nomeProdutoLimpeza = fieldInserirNomeItem.getText();
+        String qtdProdutoLimpeza = fieldInserirQtdItem.getText();
 
         if (nomeProdutoLimpeza.isEmpty() || qtdProdutoLimpeza.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos.");
@@ -719,7 +725,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     @FXML
     void botaoDoarMovel(ActionEvent event) {
         selecionarTipoMovelBox.getItems().addAll("Novo", "Usado");
-        String nomeMovel = fieldInserirNomeMovel.getText();
+        String nomeMovel = fieldInserirNomeItem.getText();
         String tipoMovel = selecionarTipoMovelBox.getValue() != null ? selecionarTipoMovelBox.getValue() : "";
 
         if (nomeMovel.isEmpty() || tipoMovel.isEmpty()) {
@@ -775,8 +781,8 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void doarProdHigieneBotao(ActionEvent event) {
-        String nomeProdutoHigiene = fieldInserirProdHigiene.getText();
-        String qtdProdutoHigiene = fieldInserirQtdHigiene.getText();
+        String nomeProdutoHigiene = fieldInserirNomeItem.getText();
+        String qtdProdutoHigiene = fieldInserirQtdItem.getText();
 
         if (nomeProdutoHigiene.isEmpty() || qtdProdutoHigiene.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos.");
@@ -797,10 +803,10 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         LocalDateTime dataHora = LocalDateTime.now();
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-10-doacao-concluida.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-9-intencao-concluida.fxml"));
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
-            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeProdutoHigiene, dataHora);
+            controlador.setIntencaoDoacao(doadorNome, tipoDoacao, quantidade, dataHora);
 
             Stage stage = (Stage) botaoProdHigieneDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Doação Concluída");
@@ -814,9 +820,52 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     //Tela 07-9
 
     @FXML
+    private Button salvarIntencaoDoacaoBotao;
+
+    @FXML
+    private Label exibirEnderecoInstituicaoLabel;
+
+    @FXML
+    private Label exibirIntencaoDoacaoLabel;
+
+    @FXML
     void botaoVoltar39(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
     }
+
+    @FXML
+    void botaoSalvarIntencaoDoacao(ActionEvent event) {
+        String nomeInstituicao = exibirEnderecoInstituicaoLabel.getText();
+        String nomeItem = fieldInserirNomeItem.getText();
+        String quantidadeStr = fieldInserirQtdItem.getText();
+        LocalDateTime dataHora = LocalDateTime.now();
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+        int quantidade;
+
+        if (nomeInstituicao.isEmpty() || nomeItem.isEmpty() || quantidadeStr.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos corretamente.");
+            return;
+        }
+
+        try {
+            quantidade = Integer.parseInt(quantidadeStr);
+            if (quantidade <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Erro de validação", "A quantidade deve ser maior que zero.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Quantidade inválida. Por favor, insira um número válido.");
+            return;
+        }
+
+        IntencaoDoacao novaIntencao = new IntencaoDoacao(nomeInstituicao, nomeItem, quantidade, dataHora);
+        RepositorioIntencaoDoacao repositorio = new RepositorioIntencaoDoacao();
+        repositorio.adicionarIntencao(novaIntencao);
+
+        showAlert(Alert.AlertType.INFORMATION, "Sucesso", "A intenção de doação foi salva com sucesso! Realize a sua doação dentro dos próximos 7 dias.");
+    }
+
+
 
     //Tela 07-10
 
@@ -945,6 +994,17 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
     }
+
+    public void setIntencaoDoacao(String nomeDoador, String tipoDoacao, int quantidade, LocalDateTime dataHora) {
+        if (exibirIntencaoDoacaoLabel != null) {
+            String texto = String.format("Doador: %s\nData e hora: %s\nTipo da doação: %s\nQuantidade: %d",
+                    nomeDoador, dataHora, tipoDoacao, quantidade);
+            exibirIntencaoDoacaoLabel.setText(texto);
+        } else {
+            System.out.println("exibirIntencaoDoacaoLabel é null");
+        }
+    }
+
 
 
     public void trocarTela(Stage stage, String fxmlFile, String title) {

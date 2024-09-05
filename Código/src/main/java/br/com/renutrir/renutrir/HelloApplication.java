@@ -84,8 +84,8 @@ public class HelloApplication extends Application {
         //Tela 09 - Seja Voluntário
         FXMLLoader voluntarioLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/09-seja-voluntario.fxml"));
         Parent voluntarioRoot = voluntarioLoader.load();
-        /*ControladorVoluntario controladorVoluntario = voluntarioLoader.getController();
-        controladorVoluntario.setHelloController(helloController);*/
+        ControladorVoluntario controladorVoluntario = voluntarioLoader.getController();
+        controladorVoluntario.setHelloController(helloController);
 
         //Tela 10 - Transportes Doações
         FXMLLoader transportesDoacoesLoader = new FXMLLoader(getClass().getResource( "/br/com/renutrir/10-transportes-doacoes.fxml"));

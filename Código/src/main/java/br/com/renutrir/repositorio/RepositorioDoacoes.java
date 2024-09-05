@@ -2,6 +2,7 @@ package br.com.renutrir.repositorio;
 
 import br.com.renutrir.model.Doacao;
 import br.com.renutrir.model.Doador;
+import br.com.renutrir.model.IntencaoDoacao;
 import br.com.renutrir.sessao.SessaoDoador;
 
 import java.io.*;
@@ -50,6 +51,26 @@ public class RepositorioDoacoes {
             oos.writeObject(doacoes);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void salvarDoacaoNoArquivo(IntencaoDoacao intencao) throws IOException {
+        String nomeUsuario = intencao.getDoador().getNomeUsuario();
+        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.dat"; //usa nomeUsuario
+
+        File arquivo = new File(caminhoArquivo);
+
+        File diretorio = arquivo.getParentFile();
+        if (!diretorio.exists()) {
+            diretorio.mkdirs();
+        }
+
+        if (!arquivo.exists()) {
+            arquivo.createNewFile();
+        }
+
+        try (FileWriter writer = new FileWriter(arquivo, true)) {
+            writer.write(intencao.toString() + System.lineSeparator());
         }
     }
 
