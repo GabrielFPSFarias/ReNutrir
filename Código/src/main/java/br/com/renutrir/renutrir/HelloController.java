@@ -1697,12 +1697,14 @@ public class HelloController {
     private static Instituicao instituicaoAtual;
 
 
+
     public static Instituicao getInstituicaoAtual() {
         return instituicaoAtual;
     }
 
     public static void setInstituicaoAtual(Instituicao instituicao) {
         instituicaoAtual = instituicao;
+
     }
 
     //Tela 22
@@ -1770,7 +1772,7 @@ public class HelloController {
     @FXML
     private TextField inserirFuncaoVoluntario;
 
-    private RepositorioVoluntario repositorioVoluntario = new RepositorioVoluntario();
+    public RepositorioVoluntario repositorioVoluntario = new RepositorioVoluntario();
 
     @FXML
     void botaoCriarFuncaoVoluntario(ActionEvent event) {
