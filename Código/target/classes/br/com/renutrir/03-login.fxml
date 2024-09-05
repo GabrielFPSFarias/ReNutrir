@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.renutrir.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.servicos.ControladorLogin">
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
@@ -37,8 +37,8 @@
    <bottom>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="72.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="voltarBotao" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar3" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
-               <VBox.margin>
+             <Button fx:id="voltarBotao" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar3" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
+             <VBox.margin>
                   <Insets right="10.0" />
                </VBox.margin>
             </Button>

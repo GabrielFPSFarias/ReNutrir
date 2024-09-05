@@ -40,14 +40,14 @@ public class HelloApplication extends Application {
         HelloController helloController = telaInicialLoader.getController();
 
         //Tela 02 - Pre Cadastro
-        FXMLLoader preCadastroLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/02-pre-cadastro.fxml"));
-        Parent preCadastroRoot = preCadastroLoader.load();
+        //FXMLLoader preCadastroLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/02-pre-cadastro.fxml"));
+        //Parent preCadastroRoot = preCadastroLoader.load();
         /*ControladorVoluntario controladorVoluntario = preCadastroLoader.getController();
         controladorVoluntario.setHelloController(helloController)*/
 
         //Tela 03 - Login
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource( "/br/com/renutrir/03-login.fxml"));
-        Parent loginRoot = loginLoader.load();
+        //FXMLLoader loginLoader = new FXMLLoader(getClass().getResource( "/br/com/renutrir/03-login.fxml"));
+        //Parent loginRoot = loginLoader.<Parent>load();
         /*ControladorLogin controladorLogin = loginLoader.getController();
         controladorLogin.setHelloController(helloController);*/
 
