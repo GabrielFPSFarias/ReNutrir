@@ -1346,143 +1346,6 @@ public class HelloController {
     }
 
 
-    //Tela 09 Seja Voluntário
-
-/*  @FXML
-    private TextField fieldHoraInicialVoluntario, fieldHoraFinalVoluntario;
-
-    @FXML
-    private Text exibirVoluntarioLabel;
-
-    @FXML
-    private CheckBox boxSegundaVoluntario, boxTercaVoluntario, boxQuartaVoluntario, boxQuintaVoluntario, boxSextaVoluntario, boxSabadoVoluntario, boxDomingoVoluntario;
-
-    @FXML
-    private Button queroVoluntarioBotao;
-
-    @FXML
-    private ComboBox<String> cboxFuncaoVoluntario;
-
-    @FXML
-    private ComboBox<String> cboxInstVinculada;
-*/
-
-    /*
-    ObservableList<String> listaFuncaoVoluntario = FXCollections.observableArrayList(
-            "Transportador de Doações", "Auxiliar de Eventos"
-    );
-
-     */
-
-/*  private void configurarComboBox() {
-        if (cboxFuncaoVoluntario == null) {
-            System.out.println("cboxFuncaoVoluntario está null");
-            return;
-        } if (cboxInstVinculada == null) {
-            System.out.println("cboxInstVinculada está null");
-            return;
-        }
-*/
-        /*
-        cboxFuncaoVoluntario.setItems(listaFuncaoVoluntario);
-        cboxFuncaoVoluntario.setValue(listaFuncaoVoluntario.get(0));
-         */
-/*       carregarFuncoesVoluntarios();
-        carregarInstituicoes();
-    }
-*/
-
- /*   @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        configurarComboBox();
-    }
-/*
-    private void carregarFuncoesVoluntarios() {
-        ObservableList<String> funcoesVoluntarios = FXCollections.observableArrayList();
-
-        RepositorioVoluntario repositorioVoluntario = new RepositorioVoluntario();
-        List<String> funcaoVoluntario = repositorioVoluntario.carregarFuncoesVoluntario();
-
-        funcoesVoluntarios.addAll(funcaoVoluntario);
-
-        if (funcoesVoluntarios.isEmpty()) {
-            cboxFuncaoVoluntario.setItems(FXCollections.observableArrayList("Nenhuma função disponível"));
-        } else {
-            cboxFuncaoVoluntario.setItems(funcoesVoluntarios);
-        }
-        cboxFuncaoVoluntario.setValue(cboxFuncaoVoluntario.getItems().get(0));
-    }
-*/
- /*   private void carregarInstituicoes() {
-        ObservableList<String> listaInstituicoes = FXCollections.observableArrayList();
-
-        RepositorioInstituicao repositorioInstituicao = new RepositorioInstituicao();
-        List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
-
-        for (Instituicao instituicao : instituicoes) {
-            listaInstituicoes.add(instituicao.getNome());
-        }
-
-        if (listaInstituicoes.isEmpty()) {
-            cboxInstVinculada.setItems(FXCollections.observableArrayList("Nenhuma instituição disponível"));
-        } else {
-            cboxInstVinculada.setItems(listaInstituicoes);
-        }
-        cboxInstVinculada.setValue(cboxInstVinculada.getItems().get(0));
-    }
-*/
-
-/*    @FXML
-    public void funcaoVoluntarioCbox() {
-
-    }
-
-    @FXML
-    public void instVinculadaCbox() {
-
-    }
-
-    @FXML
-    public void botaoQueroVoluntario() {
-
-    }
-*/
-/*    @FXML
-    void segundaVoluntarioBox(ActionEvent event) {
-
-    }
-
-    @FXML
-    void domingoVoluntarioBox(ActionEvent event) {
-
-    }
-
-    @FXML
-    void tercaVoluntarioBox(ActionEvent event) {
-
-    }
-
-    @FXML
-    void quartaVoluntarioBox(ActionEvent event) {
-
-    }
-
-    @FXML
-    void quintaVoluntarioBox(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sextaVoluntarioBox(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sabadoVoluntarioBox(ActionEvent event) {
-
-    }
-*/
-
     //Tela 15 Certificados e pontuação
 
     @FXML
@@ -1834,12 +1697,14 @@ public class HelloController {
     private static Instituicao instituicaoAtual;
 
 
+
     public static Instituicao getInstituicaoAtual() {
         return instituicaoAtual;
     }
 
     public static void setInstituicaoAtual(Instituicao instituicao) {
         instituicaoAtual = instituicao;
+
     }
 
     //Tela 22
@@ -1907,7 +1772,7 @@ public class HelloController {
     @FXML
     private TextField inserirFuncaoVoluntario;
 
-    private RepositorioVoluntario repositorioVoluntario = new RepositorioVoluntario();
+    public RepositorioVoluntario repositorioVoluntario = new RepositorioVoluntario();
 
     @FXML
     void botaoCriarFuncaoVoluntario(ActionEvent event) {

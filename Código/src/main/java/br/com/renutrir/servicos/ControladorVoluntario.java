@@ -38,6 +38,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import br.com.renutrir.sessao.*;
 
 import br.com.renutrir.renutrir.HelloController;
 import br.com.renutrir.sessao.SessaoDoador;
@@ -45,6 +46,9 @@ import br.com.renutrir.sessao.SessaoInstituicao;
 
 public class ControladorVoluntario implements Initializable {
 
+    SessaoInstituicao sessaoInstituicao;
+
+    public Button botaoSolicitarNovosVoluntarios;
     private HelloController hc;
 
     private ControladorTelas controladorTelas;
@@ -274,4 +278,47 @@ public class ControladorVoluntario implements Initializable {
         }
     }
 
+    //Tela 24
+
+    @FXML
+    public void botaoVoltar24() {
+        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+    }
+
+    @FXML
+    private TextField inserirFuncaoVoluntario;
+
+    public Button solicitarVoluntariosBotao;
+
+    @FXML
+    private Button criarFuncaorVoluntarioBotao;
+
+    public void botaoSolicitarVoluntarios(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/25-solicitar-voluntarios.fxml", "ReNutrir - Solicitar Voluntários");
+    }
+
+    @FXML
+    void botaoCriarFuncaoVoluntario(ActionEvent event) {
+        String funcao = inserirFuncaoVoluntario.getText();
+
+        if (funcao != null && !funcao.trim().isEmpty()) {
+            hc.repositorioVoluntario.adicionarFuncao(funcao);
+            hc.showAlert(Alert.AlertType.INFORMATION, "Função criada!", "Função de voluntário '" + funcao + "' foi adicionada com sucesso!");
+        } else {
+            hc.showAlert(Alert.AlertType.ERROR, "Erro", "A função de voluntário não foi criada");
+        }
+    }
+
+    //Tela 25
+
+    @FXML
+    void botaoVoltar58() {
+
+        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml","ReNutrir - Menu Instituição");
+    }
+
+    public void SolicitarNovosVoluntariosBotao(ActionEvent actionEvent) {
+        SessaoInstituicao.getInstancia().getInstituicaoLogada();
+        HelloController.getInstituicaoAtual().solicitarVoluntarios();
+    }
 }
