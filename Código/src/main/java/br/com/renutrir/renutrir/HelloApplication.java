@@ -43,12 +43,12 @@ public class HelloApplication extends Application {
         ControladorVoluntario controladorVoluntario = voluntarioLoader.getController();
         controladorVoluntario.setHelloController(helloController);
 
-        // Define a tela inicial ao iniciar
+        //define a tela que começa
         stage.setScene(scene);
         stage.show();
     }
 
-    
+
     public void showAlertComProgresso() {
         if (progressStage == null) {
             initProgressWindow();

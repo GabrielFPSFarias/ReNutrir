@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.renutrir.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.renutrir.HelloController">
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
@@ -66,6 +67,9 @@
                <children>
                   <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Nossos voluntários" textAlignment="CENTER" />
                   <Button fx:id="solicitarVoluntariosBotao" layoutX="293.0" layoutY="19.0" mnemonicParsing="false" onAction="#botaoSolicitarVoluntarios" prefHeight="30.0" prefWidth="226.0" text="Solicitar voluntários" textAlignment="CENTER" GridPane.rowIndex="1" />
+                  <Button fx:id="criarFuncaorVoluntarioBotao" layoutX="293.0" layoutY="67.0" mnemonicParsing="false" onAction="#botaoCriarFuncaoVoluntario" prefHeight="30.0" prefWidth="226.0" text="Criar função de voluntário" textAlignment="CENTER" GridPane.rowIndex="5" />
+                  <TextField fx:id="inserirFuncaoVoluntario" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="272.0" GridPane.rowIndex="4" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Se deseja criar uma nova função para aqueles doadores que desejam se tornar voluntários, digite o nome da função e clique para criar." textAlignment="CENTER" wrappingWidth="382.080078125" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </content>

@@ -1897,6 +1897,29 @@ public class HelloController {
         doadorLogado = null;
     }
 
+    //Tela 24 Voluntários (inst)
+
+
+    @FXML
+    private Button criarFuncaorVoluntarioBotao;
+
+    @FXML
+    private TextField inserirFuncaoVoluntario;
+
+    private RepositorioVoluntario repositorioVoluntario = new RepositorioVoluntario();
+
+    @FXML
+    void botaoCriarFuncaoVoluntario(ActionEvent event) {
+        String funcao = inserirFuncaoVoluntario.getText();
+
+        if (funcao != null && !funcao.trim().isEmpty()) {
+            repositorioVoluntario.adicionarFuncao(funcao);
+            showAlert(Alert.AlertType.INFORMATION, "Função criada!", "Função de voluntário '" + funcao + "' foi adicionada com sucesso!");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Erro", "A função de voluntário não foi criada");
+        }
+    }
+
 
     //Tela 25 Solicitar Voluntários
 
