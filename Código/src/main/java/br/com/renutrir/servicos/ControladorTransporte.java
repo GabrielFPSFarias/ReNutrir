@@ -3,6 +3,7 @@ package br.com.renutrir.servicos;
 import br.com.renutrir.model.Doacao;
 import br.com.renutrir.repositorio.RepositorioDoacoes;
 
+import javax.swing.*;
 import java.util.List;
 
 public class ControladorTransporte {
@@ -10,6 +11,9 @@ public class ControladorTransporte {
   private RepositorioDoacoes repositorioDoacoes;
 
   public ControladorTransporte() {
+  }
+
+  public ControladorTransporte(Action action) {
     this.repositorioDoacoes = new RepositorioDoacoes();
   }
 

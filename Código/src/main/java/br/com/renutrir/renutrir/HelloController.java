@@ -387,23 +387,10 @@ public class HelloController {
 
     }
 
-    //Tela de login
-
-    public void fieldLoginEmail() {
-
-    }
-
-    public void fieldLoginSenha() {
-
-    }
+    //Tela de login (TEMPORÁRIO)
 
     @FXML
-    private SessaoDoador sessaoDoador;
-    @FXML
-    private SessaoInstituicao sessaoInstituicao;
-
-    @FXML
-    public void botaoLoginEntrar() {
+    public void botaoLoginEntrar(ActionEvent event) {
         String emailOuUsuario = loginEmailField.getText();
         String senha = loginSenhaField.getText();
 
@@ -412,13 +399,79 @@ public class HelloController {
             return;
         }
 
-        ControladorLogin controladorLogin = new ControladorLogin(this);
+        boolean isInstituicao = false;
+        processarLogin(emailOuUsuario, senha, isInstituicao);
 
-        if (checarInstituicao.isSelected()) {
-            controladorLogin.processarLogin(emailOuUsuario, senha, true);
-        } else {
-            controladorLogin.processarLogin(emailOuUsuario, senha, false);
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+    }
+
+    public Doador buscarDoadorNoRepositorio(String emailOuUsuario, String senha) {
+        RepositorioDoador repositorioDoador = new RepositorioDoador();
+
+        Optional<Doador> doadorOpt = repositorioDoador.buscarDoadorPorEmail(emailOuUsuario);
+        if (!doadorOpt.isPresent()) {
+            doadorOpt = repositorioDoador.buscarDoadorPorNomeUsuario(emailOuUsuario);
         }
+
+        if (doadorOpt.isPresent()) {
+            Doador doador = doadorOpt.get();
+            if (doador.getSenha().equals(senha)) {
+                return doador;
+            }
+        }
+        return null;
+    }
+
+    public Instituicao buscarInstituicaoNoRepositorio(String emailOuUsuario, String senha) {
+        RepositorioInstituicao repositorioInstituicao = new RepositorioInstituicao();
+
+        Optional<Instituicao> instituicaoOpt = repositorioInstituicao.buscarInstituicaoPorEmail(emailOuUsuario);
+        if (!instituicaoOpt.isPresent()) {
+            instituicaoOpt = repositorioInstituicao.buscarInstituicaoPorNomeUsuario(emailOuUsuario);
+        }
+
+        if (instituicaoOpt.isPresent()) {
+            Instituicao instituicao = instituicaoOpt.get();
+            if (instituicao.getSenha().equals(senha)) {
+                return instituicao;
+            }
+        }
+        return null;
+    }
+
+    @FXML
+    public void botaoVoltar3(ActionEvent actionEvent) {
+        Stage stageAtual = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        realizarTrocaDeTela("/br/com/renutrir/01-tela-inicial.fxml", "ReNutrir");
+    }
+
+    public void processarLogin(String emailOuUsuario, String senha, boolean isInstituicao) {
+        if (isInstituicao) {
+            Instituicao instituicao = buscarInstituicaoNoRepositorio(emailOuUsuario, senha);
+            if (instituicao != null) {
+                SessaoInstituicao.getInstancia().setInstituicaoLogada(instituicao);
+                showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Instituição!");
+                realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Erro de Login", "E-mail, nome de usuário ou senha inválidos para instituição.");
+            }
+        } else {
+            Doador doador = buscarDoadorNoRepositorio(emailOuUsuario, senha);
+            if (doador != null) {
+                SessaoDoador.getInstancia().setDoadorLogado(doador);
+                showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Doador!");
+                realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Erro de Login", "E-mail, nome de usuário ou senha inválidos para doador.");
+            }
+        }
+    }
+
+    public void fieldLoginEmail(ActionEvent actionEvent) {
+
+    }
+
+    public void fieldLoginSenha(ActionEvent actionEvent) {
     }
 
 
