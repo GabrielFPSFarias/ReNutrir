@@ -69,9 +69,8 @@ public class Voluntario extends Doador {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Voluntario)) return false;
+        if (!(o instanceof Voluntario that)) return false;
         if (!super.equals(o)) return false;
-        Voluntario that = (Voluntario) o;
         return Objects.equals(disponibilidade, that.disponibilidade) &&
                 Objects.equals(funcaoVoluntariado, that.funcaoVoluntariado) &&
                 Objects.equals(instituicaoVinculada, that.instituicaoVinculada);

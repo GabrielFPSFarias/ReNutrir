@@ -1345,7 +1345,7 @@ public class HelloController implements Initializable {
 
     //Tela 09 Seja Voluntário
 
-    @FXML
+/*  @FXML
     private TextField fieldHoraInicialVoluntario, fieldHoraFinalVoluntario;
 
     @FXML
@@ -1362,6 +1362,7 @@ public class HelloController implements Initializable {
 
     @FXML
     private ComboBox<String> cboxInstVinculada;
+*/
 
     /*
     ObservableList<String> listaFuncaoVoluntario = FXCollections.observableArrayList(
@@ -1370,7 +1371,7 @@ public class HelloController implements Initializable {
 
      */
 
-    private void configurarComboBox() {
+/*  private void configurarComboBox() {
         if (cboxFuncaoVoluntario == null) {
             System.out.println("cboxFuncaoVoluntario está null");
             return;
@@ -1378,21 +1379,21 @@ public class HelloController implements Initializable {
             System.out.println("cboxInstVinculada está null");
             return;
         }
-
+*/
         /*
         cboxFuncaoVoluntario.setItems(listaFuncaoVoluntario);
         cboxFuncaoVoluntario.setValue(listaFuncaoVoluntario.get(0));
          */
-        carregarFuncoesVoluntarios();
+/*       carregarFuncoesVoluntarios();
         carregarInstituicoes();
     }
+*/
 
-
-    @Override
+ /*   @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarComboBox();
     }
-
+/*
     private void carregarFuncoesVoluntarios() {
         ObservableList<String> funcoesVoluntarios = FXCollections.observableArrayList();
 
@@ -1408,8 +1409,8 @@ public class HelloController implements Initializable {
         }
         cboxFuncaoVoluntario.setValue(cboxFuncaoVoluntario.getItems().get(0));
     }
-
-    private void carregarInstituicoes() {
+*/
+ /*   private void carregarInstituicoes() {
         ObservableList<String> listaInstituicoes = FXCollections.observableArrayList();
 
         RepositorioInstituicao repositorioInstituicao = new RepositorioInstituicao();
@@ -1426,9 +1427,9 @@ public class HelloController implements Initializable {
         }
         cboxInstVinculada.setValue(cboxInstVinculada.getItems().get(0));
     }
+*/
 
-
-    @FXML
+/*    @FXML
     public void funcaoVoluntarioCbox() {
 
     }
@@ -1442,8 +1443,8 @@ public class HelloController implements Initializable {
     public void botaoQueroVoluntario() {
 
     }
-
-    @FXML
+*/
+/*    @FXML
     void segundaVoluntarioBox(ActionEvent event) {
 
     }
@@ -1477,7 +1478,7 @@ public class HelloController implements Initializable {
     void sabadoVoluntarioBox(ActionEvent event) {
 
     }
-
+*/
 
     //Tela 15 Certificados e pontuação
 

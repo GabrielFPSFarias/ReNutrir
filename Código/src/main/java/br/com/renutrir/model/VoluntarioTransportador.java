@@ -1,6 +1,6 @@
 package br.com.renutrir.model;
 
-public class VoluntarioTransportador extends Voluntario{
+public class VoluntarioTransportador extends Voluntario {
     private static int limiteEntregas;
 
     public VoluntarioTransportador(String tipoVoluntario) {
