@@ -401,8 +401,6 @@ public class HelloController {
 
         boolean isInstituicao = false;
         processarLogin(emailOuUsuario, senha, isInstituicao);
-
-        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
     }
 
     public Doador buscarDoadorNoRepositorio(String emailOuUsuario, String senha) {
