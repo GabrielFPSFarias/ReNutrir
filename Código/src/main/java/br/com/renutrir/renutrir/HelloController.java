@@ -37,8 +37,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-public class HelloController implements Initializable {
+public class HelloController {
 
+    public Button instituicoesDoacaoBotao;
     private Doador doadorLogado;
 
     @FXML
@@ -584,14 +585,14 @@ public class HelloController implements Initializable {
     void botaoDoarAgora(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
     }
-
+/*
     @FXML
     private ComboBox<String> escolherInstituicaoDoarCbox;
 
     private RepositorioInstituicao repositorioInstituicao;
 
     @FXML
-    public void initialize() {
+    public void initialize(URL url, ResourceBundle rb) {
         repositorioInstituicao = new RepositorioInstituicao();
         carregarInstituicoesNaComboBox();
     }
@@ -612,11 +613,12 @@ public class HelloController implements Initializable {
     void cboxEscolherInstituicaoDoar(ActionEvent event) {
 
     }
+
+ */
     @FXML
     public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
         realizarTrocaDeTela("/br/com/renutrir/06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
     }
-
 
     //Tela 07.1.1 Confirmar PIX
 

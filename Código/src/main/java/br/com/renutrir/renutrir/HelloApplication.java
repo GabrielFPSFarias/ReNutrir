@@ -1,32 +1,49 @@
 package br.com.renutrir.renutrir;
 
+import br.com.renutrir.servicos.ControladorVoluntario;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
+import javax.imageio.IIOParam;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
 
     private Stage progressStage;
     private ProgressBar progressBar;
-
     private static HelloApplication instance;
     private ProgressAlert progressAlert;
 
+    public static HelloApplication getInstance() {
+        return instance;
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
+        instance = this;
+
+        //Tela inicial
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/01-tela-inicial.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         stage.setTitle("ReNutrir");
         stage.setScene(scene);
         stage.setResizable(false);
+        HelloController helloController = fxmlLoader.getController();
 
+        //Tela 09 - Seja Voluntário
+        FXMLLoader voluntarioLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/09-seja-voluntario.fxml"));
+        ControladorVoluntario controladorVoluntario = voluntarioLoader.getController();
+        controladorVoluntario.setHelloController(helloController);
+
+        // Define a tela inicial ao iniciar
+        stage.setScene(scene);
         stage.show();
     }
 
@@ -86,10 +103,6 @@ public class HelloApplication extends Application {
                 progressStage.hide();
             }
         });
-    }
-
-    public static HelloApplication getInstance() {
-        return instance;
     }
 
     public static void main(String[] args) {

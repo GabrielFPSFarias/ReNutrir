@@ -42,21 +42,25 @@ import java.util.ResourceBundle;
 import br.com.renutrir.renutrir.HelloController;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
-public class ControladorVoluntario {
+
+public class ControladorVoluntario implements Initializable {
 
     private HelloController hc;
 
     private ControladorTelas controladorTelas;
 
-    public void setControladorTelas(ControladorTelas controladorTelas) {
-        this.controladorTelas = controladorTelas;
-    }
+    @FXML
+    public Button sejaVoluntarioBotao;
+    public Button transportesDoacoesBotao;
+    public Button transportesPendentesBotao;
+    public Button transportesConcluidosBotao;
 
     public void setHelloController(HelloController hc) {
         this.hc = hc;
     }
 
-
+    @FXML
+    public Button voltarBotao;
 
     @FXML
     private TextField fieldHoraInicialVoluntario, fieldHoraFinalVoluntario;
@@ -99,7 +103,6 @@ public class ControladorVoluntario {
         carregarFuncoesVoluntarios();
         carregarInstituicoes();
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -189,6 +192,91 @@ public class ControladorVoluntario {
     @FXML
     void sabadoVoluntarioBox(ActionEvent event) {
 
+    }
+
+    @FXML
+    void botaoDoarAgora(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
+    }
+
+    @FXML
+    public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
+    }
+
+    public void botaoVoltar9(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/08-menu-voluntario.fxml", "ReNutrir - Voluntario");
+    }
+
+    public void botaoDoacoesSolicitadas(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
+    }
+
+    public void botaoSejaVoluntario(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/09-seja-voluntario.fxml", "ReNutrir - Seja Voluntario");
+    }
+
+    public void botaoTransportesDoacoes(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/10-transportes-doacoes.fxml", "ReNutrir - Transportes");
+    }
+
+    public void botaoTransportesPendentes(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/13-transportes-pendentes.fxml", "ReNutrir - Transportes Pendentes");
+    }
+
+    public void botaoTransportesConcluidos(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/14-transportes-concluidos.fxml", "ReNutrir - Transportes Concluidos");
+    }
+
+    public void botaoTransportesSolicitados(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/11-transportes-solicitados.fxml", "ReNutrir - Transportes Solicitados");
+    }
+
+    public void botaoConfirmarTransportes(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/12-confirmar-transporte.fxml", "ReNutrir - Confirmar Transportes");
+    }
+
+    public void botaoVoltar8(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+    }
+
+    public void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
+        System.out.println("Clicou: " + fxmlArquivo);
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        trocarTela(stage, fxmlArquivo, titulo);
+
+        if (fxmlArquivo.equals("/br/com/renutrir/03-login.fxml")){
+            SessaoDoador.getInstancia().limparSessao();
+            SessaoInstituicao.getInstancia().limparSessao();
+        } else {
+            Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+            if (doadorLogado != null) {
+                System.out.println("Doador logado: " + doadorLogado.getNome()); //testar
+            }
+
+            Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+            if (instituicaoLogada != null) {
+                System.out.println("Instituição logada: " + instituicaoLogada.getNome()); //testar tbm
+            }
+        }
+    }
+
+    public void trocarTela(Stage stage, String fxmlFile, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+
+            if (fxmlFile.equals("/br/com/renutrir/03-login.fxml")) {
+                SessaoDoador.getInstancia().limparSessao();
+                //se for a tela de login, limpa a sessão.
+            }
+
+            stage.setScene(new Scene(root, 800, 500));
+            stage.setTitle(title);
+            stage.setResizable(false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
