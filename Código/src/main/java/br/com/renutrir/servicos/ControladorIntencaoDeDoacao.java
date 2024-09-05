@@ -304,7 +304,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void botaoVoltar30(ActionEvent event) {
-        helloController.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
