@@ -4,6 +4,8 @@ import br.com.renutrir.model.*;
 import br.com.renutrir.renutrir.ProgressAlert;
 import br.com.renutrir.repositorio.RepositorioIntencaoDoacao;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import br.com.renutrir.repositorio.*;
 import br.com.renutrir.servicos.*;
@@ -28,18 +30,20 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.awt.*;
 import java.util.List;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 import br.com.renutrir.renutrir.HelloController;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
 
-public class ControladorIntencaoDeDoacao {
+public class ControladorIntencaoDeDoacao implements Initializable {
 
     private HelloController helloController;
 
@@ -51,6 +55,54 @@ public class ControladorIntencaoDeDoacao {
 
     public void setHelloController(HelloController helloController) {
         this.helloController = helloController;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (escolherInstituicaoDoarCbox == null) {
+            System.out.println("escolherInstituicaoDoarCbox está null");
+            return;
+        }
+        carregarInstituicoes();
+    }
+
+    //Tela 05 - Intenção de doação
+
+    @FXML
+    public Button instituicoesDoacaoBotao, doarAgoraBotao;
+    public ComboBox escolherInstituicaoDoarCbox;
+
+    public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
+    }
+
+    public void botaoDoarAgora(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
+    }
+
+    public void cboxEscolherInstituicaoDoar(ActionEvent actionEvent) {
+    }
+
+    public void botaoVoltar5() {
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+    }
+
+
+    private void carregarInstituicoes() {
+        ObservableList<String> listaInstituicoes = FXCollections.observableArrayList();
+
+        RepositorioInstituicao repositorioInstituicao = new RepositorioInstituicao();
+        List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
+
+        for (Instituicao instituicao : instituicoes) {
+            listaInstituicoes.add(instituicao.getNome());
+        }
+
+        if (listaInstituicoes.isEmpty()) {
+            escolherInstituicaoDoarCbox.setItems(FXCollections.observableArrayList("Nenhuma instituição disponível"));
+        } else {
+            escolherInstituicaoDoarCbox.setItems(listaInstituicoes);
+        }
+        escolherInstituicaoDoarCbox.setValue(escolherInstituicaoDoarCbox.getItems().get(0));
     }
 
     //Label
@@ -941,6 +993,8 @@ public class ControladorIntencaoDeDoacao {
             }
         }
     }
+
+
 
 }
 

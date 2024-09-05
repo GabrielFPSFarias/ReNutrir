@@ -95,11 +95,6 @@ public class ControladorVoluntario implements Initializable {
             System.out.println("cboxInstVinculada está null");
             return;
         }
-
-        /*
-        cboxFuncaoVoluntario.setItems(listaFuncaoVoluntario);
-        cboxFuncaoVoluntario.setValue(listaFuncaoVoluntario.get(0));
-         */
         carregarFuncoesVoluntarios();
         carregarInstituicoes();
     }

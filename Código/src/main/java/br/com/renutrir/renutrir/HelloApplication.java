@@ -1,5 +1,6 @@
 package br.com.renutrir.renutrir;
 
+import br.com.renutrir.servicos.ControladorIntencaoDeDoacao;
 import br.com.renutrir.servicos.ControladorVoluntario;
 import javafx.application.Application;
 import javafx.application.Platform;

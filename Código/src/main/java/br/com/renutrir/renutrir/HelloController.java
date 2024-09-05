@@ -40,6 +40,7 @@ import java.util.*;
 public class HelloController {
 
     public Button instituicoesDoacaoBotao;
+    public ComboBox escolherInstituicaoDoarCbox;
     private Doador doadorLogado;
 
     @FXML
@@ -1946,6 +1947,9 @@ public class HelloController {
     @FXML
     void botaoVoltar59() {
         realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml","ReNutrir - Menu Instituição");
+    }
+
+    public void cboxEscolherInstituicaoDoar(ActionEvent actionEvent) {
     }
 
     //Próximos métodos

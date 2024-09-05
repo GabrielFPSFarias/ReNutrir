@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.renutrir.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.servicos.ControladorIntencaoDeDoacao">
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
@@ -66,7 +66,7 @@
                <children>
                   <Button fx:id="instituicoesDoacaoBotao" mnemonicParsing="false" onAction="#botaoInstituicoesDoacao" prefHeight="30.0" prefWidth="243.0" text="Instituições que precisam de doação" textAlignment="CENTER" GridPane.rowIndex="4" />
                   <Button fx:id="doarAgoraBotao" layoutX="284.0" layoutY="19.0" mnemonicParsing="false" onAction="#botaoDoarAgora" prefHeight="30.0" prefWidth="243.0" text="Doar agora" textAlignment="CENTER" GridPane.rowIndex="3" />
-                  <ComboBox fx:id="escolherInstituicaoDoarCbox" onAction="#cboxEscolherInstituicaoDoar" prefHeight="30.0" prefWidth="244.0" promptText="Escolher Instituição" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="escolherInstituicaoDoarCbox" onAction="#cboxEscolherInstituicaoDoar" prefHeight="25.0" prefWidth="244.0" promptText="Escolher Instituição" GridPane.rowIndex="2" />
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="66.0" prefWidth="408.0" text="Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação. Escolha abaixo a instituição beneficiária." textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />
