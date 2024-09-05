@@ -390,7 +390,19 @@ public class HelloController {
     //Tela de login (TEMPORÁRIO)
 
     @FXML
-    public void botaoLoginEntrar(ActionEvent event) {
+    private SessaoDoador sessaoDoador;
+    @FXML
+    private SessaoInstituicao sessaoInstituicao;
+
+    @FXML
+    public void fieldLoginSenha(ActionEvent actionEvent) {
+    }
+    @FXML
+    public void fieldLoginEmail(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void botaoLoginEntrar() {
         String emailOuUsuario = loginEmailField.getText();
         String senha = loginSenhaField.getText();
 
@@ -399,8 +411,11 @@ public class HelloController {
             return;
         }
 
-        boolean isInstituicao = false;
-        processarLogin(emailOuUsuario, senha, isInstituicao);
+        if (checarInstituicao.isSelected()) {
+            processarLogin(emailOuUsuario, senha, true);
+        } else {
+            processarLogin(emailOuUsuario, senha, false);
+        }
     }
 
     public Doador buscarDoadorNoRepositorio(String emailOuUsuario, String senha) {
@@ -437,17 +452,11 @@ public class HelloController {
         return null;
     }
 
-    @FXML
-    public void botaoVoltar3(ActionEvent actionEvent) {
-        Stage stageAtual = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        realizarTrocaDeTela("/br/com/renutrir/01-tela-inicial.fxml", "ReNutrir");
-    }
-
     public void processarLogin(String emailOuUsuario, String senha, boolean isInstituicao) {
         if (isInstituicao) {
             Instituicao instituicao = buscarInstituicaoNoRepositorio(emailOuUsuario, senha);
             if (instituicao != null) {
-                SessaoInstituicao.getInstancia().setInstituicaoLogada(instituicao);
+                SessaoInstituicao.getInstancia().setInstituicaoLogada(instituicao); // Salva a instituição que fez login
                 showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Instituição!");
                 realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
             } else {
@@ -456,7 +465,7 @@ public class HelloController {
         } else {
             Doador doador = buscarDoadorNoRepositorio(emailOuUsuario, senha);
             if (doador != null) {
-                SessaoDoador.getInstancia().setDoadorLogado(doador);
+                SessaoDoador.getInstancia().setDoadorLogado(doador); // Salva o doador que fez login
                 showAlert(Alert.AlertType.INFORMATION, "Login Bem-Sucedido", "Bem-vindo, Doador!");
                 realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
             } else {
@@ -464,14 +473,6 @@ public class HelloController {
             }
         }
     }
-
-    public void fieldLoginEmail(ActionEvent actionEvent) {
-
-    }
-
-    public void fieldLoginSenha(ActionEvent actionEvent) {
-    }
-
 
     //Métodos de cadastro instituição
 
@@ -1867,6 +1868,7 @@ public class HelloController {
 
     public void cboxEscolherInstituicaoDoar(ActionEvent actionEvent) {
     }
+
 
     //Próximos métodos
 }
