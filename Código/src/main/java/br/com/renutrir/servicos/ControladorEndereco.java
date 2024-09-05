@@ -4,6 +4,9 @@ import br.com.renutrir.model.*;
 
 public class ControladorEndereco {
 
+    public ControladorEndereco() {
+    }
+
     private Endereco endereco;
 
     public ControladorEndereco(Endereco endereco) {

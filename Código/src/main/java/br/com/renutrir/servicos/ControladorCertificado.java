@@ -13,6 +13,9 @@ import java.time.LocalDate;
 
 public class ControladorCertificado {
 
+    public ControladorCertificado() {
+    }
+
     public static final int DOACOES_NECESSARIAS = 50;
 
     public Certificado criarCertificado(String descricao, int quantDoacoes) {

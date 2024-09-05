@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
 
 public class ControladorTransacaoCartao {
 
+    public ControladorTransacaoCartao() {
+    }
+
     public boolean validarNumeroCartao(TransacaoCartaoCredito transacao) {
         String numeroCartao = transacao.getNumeroCartao();
         return numeroCartao != null && !numeroCartao.isEmpty() && numeroCartao.matches("\\d+") && verificarLuhn(numeroCartao);

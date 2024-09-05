@@ -9,7 +9,10 @@ import java.io.IOException;
 
 public class ControladorPerfil {
 
-    //Perfil Doador
+    public ControladorPerfil() {
+    }
+
+//Perfil Doador
 
     @FXML
     private Label labelNome;

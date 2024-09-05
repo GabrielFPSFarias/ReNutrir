@@ -20,6 +20,9 @@ public class ControladorCadastro extends HelloController {
 
     private HelloController helloController;
 
+    public ControladorCadastro() {
+    }
+
     // Variáveis do Cadastro Doador
     @FXML private TextField fieldNome;
     @FXML private TextField fieldUserNome;

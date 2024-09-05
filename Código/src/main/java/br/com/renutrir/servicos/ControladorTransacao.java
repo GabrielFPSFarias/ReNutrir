@@ -7,6 +7,9 @@ import br.com.renutrir.model.TransacaoCartaoDebito;
 
 public class ControladorTransacao {
 
+    public ControladorTransacao() {
+    }
+
     private static final double VALOR_MINIMO = 0.01;
     private static final double VALOR_MAXIMO = 1000000000.00;
 

@@ -17,6 +17,9 @@ import java.io.IOException;
 
 public class ControladorSolicitacaoDoacao {
 
+    public ControladorSolicitacaoDoacao() {
+    }
+
     public TextField doacaoProdLimpezaSolicitarField;
     public Button confProdLimpezaSolicitar;
     public Button confProdHigieneSolicitar;

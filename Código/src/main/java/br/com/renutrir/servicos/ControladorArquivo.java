@@ -12,6 +12,8 @@ public class ControladorArquivo {
         this.caminho = caminho;
     }
 
+    public ControladorArquivo(){}
+
     public boolean criarDiretorios() {
         File file = new File(caminho).getParentFile();
         if (file != null && !file.exists()) {

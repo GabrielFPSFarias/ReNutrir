@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 public class ControladorTransacaoPix {
 
+    public ControladorTransacaoPix() {
+    }
+
     public boolean validarTransacaoPix(TransacaoPix transacaoPix) {
         return validarIdTransacao(transacaoPix);
     }

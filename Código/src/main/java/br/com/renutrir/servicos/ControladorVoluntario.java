@@ -46,6 +46,9 @@ import br.com.renutrir.sessao.SessaoInstituicao;
 
 public class ControladorVoluntario implements Initializable {
 
+    public ControladorVoluntario() {
+    }
+
     SessaoInstituicao sessaoInstituicao;
 
     public Button botaoSolicitarNovosVoluntarios;

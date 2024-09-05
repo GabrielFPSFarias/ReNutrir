@@ -17,6 +17,9 @@ import java.io.IOException;
 
 public class ControladorDoacoesPendentes {
 
+    public ControladorDoacoesPendentes() {
+    }
+
     public void trocarTela(Stage stage, String fxmlFile, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));

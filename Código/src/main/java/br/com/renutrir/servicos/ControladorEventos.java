@@ -17,6 +17,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ControladorEventos {
+    public ControladorEventos() {
+    }
 /*
 private HelloController hc;  
 

@@ -45,6 +45,9 @@ import br.com.renutrir.sessao.SessaoInstituicao;
 
 public class ControladorIntencaoDeDoacao implements Initializable {
 
+    public ControladorIntencaoDeDoacao() {
+    }
+
     private HelloController helloController;
 
     private ControladorTelas controladorTelas;
