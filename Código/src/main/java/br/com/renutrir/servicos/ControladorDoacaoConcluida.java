@@ -213,9 +213,29 @@ public class ControladorDoacaoConcluida {
     @FXML
     private TextField fieldInserirSenhaCre;
 
+    public void receberDadosCartaoCredito(String titular, String numeroCartao, String senha) {
+        exibirInfoDoacaoCartao.setText("Titular: " + titular + "\nNúmero do Cartão: " + numeroCartao);
+    }
+
     @FXML
     void doarCredito(ActionEvent event) {
+        String titular = fieldInserirNomeTitularCre.getText();
+        String numeroCartao = fieldInserirNumCredito.getText();
+        String senha = fieldInserirSenhaCre.getText();
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-2-3-transacao-cartao.fxml"));
+        try {
+            Parent root = loader.load();
+
+            ControladorDoacaoConcluida controller = loader.getController();
+            controller.receberDadosCartaoCredito(titular, numeroCartao, senha);
+
+            Stage stage = (Stage) creditoDoar.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -269,9 +289,29 @@ public class ControladorDoacaoConcluida {
         realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
     }
 
+    public void receberDadosCartao(String titular, String numeroCartao, String senha) {
+        exibirInfoDoacaoCartao.setText("Titular: " + titular + "\nNúmero do Cartão: " + numeroCartao);
+    }
+
     @FXML
     void doarDebito(ActionEvent event) {
+        String titular = fieldInserirTitularDeb.getText();
+        String numeroCartao = fieldInserirNumDebito.getText();
+        String senha = fieldInserirSenhaDeb.getText();
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-2-3-transacao-cartao.fxml"));
+        try {
+            Parent root = loader.load();
+
+            ControladorDoacaoConcluida controller = loader.getController();
+            controller.receberDadosCartao(titular, numeroCartao, senha);
+
+            Stage stage = (Stage) debitoDoar.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
