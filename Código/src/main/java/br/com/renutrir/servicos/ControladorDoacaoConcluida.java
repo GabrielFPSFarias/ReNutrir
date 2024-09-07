@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -163,18 +164,18 @@ public class ControladorDoacaoConcluida {
     @FXML
     private TextField fieldInserirValorCartao;
 
+    private String valorDoacao;
+
     @FXML
     void doarCartaoDebito(ActionEvent event) {
-        String valor = fieldInserirValorCartao.getText();
-        realizarTrocaDeTela("/br/com/renutrir/07-2-2-c-debito.fxml", "ReNutrir - Doar com Débito");
-        //valorDoacaoExibirDeb.setText("Valor: R$ " + valor);
+        valorDoacao = fieldInserirValorCartao.getText();  // Captura o valor do campo de texto
+        realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-2-c-debito.fxml", "ReNutrir - Doar com Débito");
     }
 
     @FXML
     void doarCartaoCredito(ActionEvent event) {
-        String valor = fieldInserirValorCartao.getText();
-        realizarTrocaDeTela("/br/com/renutrir/07-2-1-c-credito.fxml", "ReNutrir - Doar com Crédito");
-        //valorDoacaoCreExibir.setText("Valor: R$ " + valor);
+        valorDoacao = fieldInserirValorCartao.getText();  // Captura o valor do campo de texto
+        realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-c-credito.fxml", "ReNutrir - Doar com Crédito");
     }
 
     @FXML
@@ -193,11 +194,21 @@ public class ControladorDoacaoConcluida {
     private Button creditoDoar;
 
     @FXML
+    private Label valorDoacaoCreExibir;
+
+    @FXML
+    private TextField fieldInserirNomeTitularCre;
+
+    @FXML
+    private TextField fieldInserirNumCredito;
+
+    @FXML
+    private TextField fieldInserirSenhaCre;
+
+    @FXML
     void doarCredito(ActionEvent event) {
 
     }
-    @FXML
-    private TextField fieldInserirNomeTitularCre;
 
     @FXML
     void inserirNomeTitularCreField(ActionEvent event) {
@@ -208,22 +219,42 @@ public class ControladorDoacaoConcluida {
     void exibirValorDoacaoCre(ActionEvent event) {
 
     }
-    @FXML
-    private TextField fieldInserirNumCredito;
 
     @FXML
     void inserirNumCreditoField(ActionEvent event) {
 
     }
-    @FXML
-    private TextField fieldInserirSenhaCre;
 
     @FXML
     void inserirSenhaCreField(ActionEvent event) {
 
     }
 
+    public void initializeCredito(String valorDoacao) {
+        valorDoacaoCreExibir.setText("Valor: R$ " + valorDoacao);
+    }
+
+    public void initializeDebito(String valorDoacao) {
+        valorDoacaoExibirDeb.setText("Valor: R$ " + valorDoacao);
+    }
+
     //Tela 07-2-2
+
+    @FXML
+    private Label valorDoacaoExibirDeb;
+
+    @FXML
+    private TextField fieldInserirSenhaDeb;
+
+    @FXML
+    private TextField fieldInserirNumDebito;
+
+    @FXML
+    private Button debitoDoar;
+
+    @FXML
+    private TextField fieldInserirTitularDeb;
+
 
     @FXML
     void botaoVoltar32(ActionEvent event) {
@@ -231,15 +262,9 @@ public class ControladorDoacaoConcluida {
     }
 
     @FXML
-    private Button debitoDoar;
-
-    @FXML
     void doarDebito(ActionEvent event) {
 
     }
-
-    @FXML
-    private TextField fieldInserirTitularDeb;
 
     @FXML
     void inserirTitularDebField(ActionEvent event) {
@@ -252,15 +277,9 @@ public class ControladorDoacaoConcluida {
     }
 
     @FXML
-    private TextField fieldInserirNumDebito;
-
-    @FXML
     void inserirNumDebitoField(ActionEvent event) {
 
     }
-
-    @FXML
-    private TextField fieldInserirSenhaDeb;
 
     @FXML
     void inserirSenhaDebField(ActionEvent event) {
@@ -327,5 +346,31 @@ public class ControladorDoacaoConcluida {
             }
         }
     }
+    
+    public void realizarTrocaDeTelaCartao(String caminhoFXML, String titulo) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
+            Parent root = loader.load();
+
+            if (caminhoFXML.contains("07-2-1-c-credito.fxml")) {
+                ControladorDoacaoConcluida controlador = loader.getController();
+                controlador.initializeCredito(valorDoacao);
+            }
+
+            if (caminhoFXML.contains("07-2-2-c-debito.fxml")) {
+                ControladorDoacaoConcluida controlador = loader.getController();
+                controlador.initializeDebito(valorDoacao);
+            }
+
+            Stage stage = (Stage) fieldInserirValorCartao.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle(titulo);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

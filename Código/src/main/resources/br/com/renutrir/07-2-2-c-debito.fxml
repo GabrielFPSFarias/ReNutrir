@@ -85,13 +85,16 @@
                   <Button fx:id="debitoDoar" mnemonicParsing="false" onAction="#doarDebito" prefHeight="30.0" prefWidth="226.0" text="Doar com cartão de DÉBITO" textAlignment="CENTER" GridPane.rowIndex="11" />
                   <TextField fx:id="fieldInserirTitularDeb" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirTitularDebField" prefHeight="25.0" prefWidth="452.0" GridPane.rowIndex="4" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="2" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Valor da doação:" wrappingWidth="162.8984375" GridPane.rowIndex="1" />
-                  <Text fx:id="valorDoacaoExibirDeb" fill="RED" onDragDetected="#exibirValorDoacao" strokeType="OUTSIDE" strokeWidth="0.0" text="//%d, valor" textAlignment="RIGHT" wrappingWidth="156.08984375" GridPane.rowIndex="1" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite o nome do titular do cartão:" GridPane.rowIndex="3" />
                   <TextField fx:id="fieldInserirNumDebito" layoutX="180.0" layoutY="127.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirNumDebitoField" prefHeight="25.0" prefWidth="452.0" GridPane.rowIndex="6" />
                   <Text layoutX="314.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digite os números do cartão:" GridPane.rowIndex="5" />
                   <Text layoutX="329.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digite a senha do cartão:" GridPane.rowIndex="7" />
                   <TextField fx:id="fieldInserirSenhaDeb" layoutX="180.0" layoutY="139.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirSenhaDebField" prefHeight="25.0" prefWidth="452.0" GridPane.rowIndex="8" />
+                  <Label fx:id="valorDoacaoExibirDeb" alignment="CENTER" contentDisplay="CENTER" onDragDetected="#exibirValorDoacao" prefHeight="26.0" prefWidth="248.0" text="Valor" textAlignment="CENTER" textFill="RED" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
          </content>
