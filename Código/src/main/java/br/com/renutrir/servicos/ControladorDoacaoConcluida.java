@@ -168,14 +168,22 @@ public class ControladorDoacaoConcluida {
 
     @FXML
     void doarCartaoDebito(ActionEvent event) {
-        valorDoacao = fieldInserirValorCartao.getText();  // Captura o valor do campo de texto
-        realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-2-c-debito.fxml", "ReNutrir - Doar com Débito");
+        valorDoacao = fieldInserirValorCartao.getText();
+        if (valorDoacao == null || valorDoacao.trim().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "Por favor, insira um valor para a doação.");
+        } else {
+            realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-d-debito.fxml", "ReNutrir - Doar com Débito");
+        }
     }
 
     @FXML
     void doarCartaoCredito(ActionEvent event) {
-        valorDoacao = fieldInserirValorCartao.getText();  // Captura o valor do campo de texto
-        realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-c-credito.fxml", "ReNutrir - Doar com Crédito");
+        valorDoacao = fieldInserirValorCartao.getText();
+        if (valorDoacao == null || valorDoacao.trim().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "Por favor, insira um valor para a doação.");
+        } else {
+            realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-c-credito.fxml", "ReNutrir - Doar com Crédito");
+        }
     }
 
     @FXML
@@ -346,7 +354,7 @@ public class ControladorDoacaoConcluida {
             }
         }
     }
-    
+
     public void realizarTrocaDeTelaCartao(String caminhoFXML, String titulo) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
