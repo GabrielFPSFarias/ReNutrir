@@ -15,6 +15,11 @@ public class Instituicao extends Conta implements Serializable {
     private LocalDateTime horarioFuncionamento;
     private LocalDateTime horarioColeta;
     private boolean PrecisaVoluntario;
+    private String endereco;
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 
     public Evento criarEvento(String nome, LocalDate data, String local) {
         return new Evento(nome, data, local);

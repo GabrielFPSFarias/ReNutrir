@@ -21,9 +21,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class ControladorDoacaoConcluida {
+
+     @FXML
+     private Text valorDoacaoPixLabel;
+     @FXML
+     private Text enderecoInstituicaoLabel;
 
 
     //Tela 07-1
@@ -33,6 +40,10 @@ public class ControladorDoacaoConcluida {
 
     @FXML
     private TextField fieldInserirValorPix;
+
+    private Instituicao obterInstituicaoPorNome(String nome) {
+        return new Instituicao();
+    }
 
     @FXML
     void botaoVoltar29(ActionEvent event) {
@@ -99,9 +110,6 @@ public class ControladorDoacaoConcluida {
 
     @FXML
     private TextField fieldPixCopiaCola;
-
-    @FXML
-    private Text valorDoacaoPixLabel;
 
     @FXML
     private TextField fieldIdTransacaoPix;

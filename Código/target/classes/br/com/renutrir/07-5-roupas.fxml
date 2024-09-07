@@ -79,8 +79,8 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button fx:id="botaoRoupaDoar" mnemonicParsing="false" onAction="#doarRoupaBotao" prefHeight="30.0" prefWidth="226.0" text="Doar ROUPAS" textAlignment="CENTER" GridPane.rowIndex="7" />
-                  <TextField fx:id="botaoItemDoarIntencao" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirNomeRoupaField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="2" />
+                  <Button fx:id="botaoItemDoar" mnemonicParsing="false" onAction="#doarRoupaBotao" prefHeight="30.0" prefWidth="226.0" text="Doar ROUPAS" textAlignment="CENTER" GridPane.rowIndex="7" />
+                  <TextField fx:id="fieldItemDoarIntencao" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirNomeRoupaField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite a(s) roupa(s) que deseja doar:" GridPane.rowIndex="1" />
                   <TextField fx:id="fieldInserirQtdItem" layoutX="294.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirQtdRoupaField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="5" />
                   <Text layoutX="314.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digite a quantidade:" GridPane.rowIndex="4" />
