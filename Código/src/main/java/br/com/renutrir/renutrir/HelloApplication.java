@@ -39,6 +39,7 @@ public class HelloApplication extends Application {
         stage.setResizable(false);
         HelloController helloController = telaInicialLoader.getController();
 
+        /*
         //Tela 02 - Pre Cadastro
         //FXMLLoader preCadastroLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/02-pre-cadastro.fxml"));
         //Parent preCadastroRoot = preCadastroLoader.load();
@@ -56,30 +57,30 @@ public class HelloApplication extends Application {
         //Parent menuDoadorRoot = menuDoadorLoader.load();
         /*ControladorVoluntario controladorVoluntario = menuDoadorLoader.getController();
         controladorVoluntario.setHelloController(helloController);*/
-
+        /*
         //Tela 05 - Intenção Doação
         FXMLLoader intencaoDoacaoLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/05-intencao-doacao.fxml"));
         Parent intencaoDoacaoRoot = intencaoDoacaoLoader.load();
         /*ControladorVoluntario controladorVoluntario = intencaoDoacaoLoader.getController();
-        controladorVoluntario.setHelloController(helloController);*/
+        controladorVoluntario.setHelloController(helloController);
 
         //Tela 06 - Doações Solicitadas
         FXMLLoader doacoesSolicitadasLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/06-doacoes-solicitadas.fxml"));
         Parent doacoesSolicitadasRoot = doacoesSolicitadasLoader.load();
         /*ControladorVoluntario controladorVoluntario = doacoesSolicitadasLoader.getController();
-        controladorVoluntario.setHelloController(helloController);*/
+        controladorVoluntario.setHelloController(helloController);
 
         //Tela 07 - Confirmar Doação
         FXMLLoader confirmarDoacaoLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-confirmar-doacao.fxml"));
         Parent confirmarDoacaoRoot = confirmarDoacaoLoader.load();
         /*ControladorVoluntario controladorVoluntario = confirmarDoacaoLoader.getController();
-        controladorVoluntario.setHelloController(helloController);*/
+        controladorVoluntario.setHelloController(helloController);
 
         //Tela 08 - Menu Voluntário
         FXMLLoader menuVoluntarioLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/08-menu-voluntario.fxml"));
         Parent menuVoluntarioRoot = menuVoluntarioLoader.load();
         /*ControladorVoluntario controladorVoluntario = menuVoluntarioLoader.getController();
-        controladorVoluntario.setHelloController(helloController);*/
+        controladorVoluntario.setHelloController(helloController);
 
         //Tela 09 - Seja Voluntário
         FXMLLoader voluntarioLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/09-seja-voluntario.fxml"));
@@ -154,7 +155,7 @@ public class HelloApplication extends Application {
         //Tela 26 -
         FXMLLoader doacoesPendentesInstituicaoLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/26-doacoes-pendentes-inst.fxml"));
         Parent doacoesPendendentesInstituicaoRoot = doacoesPendentesInstituicaoLoader.load();
-
+        */
 
         //define a tela que começa
         stage.setScene(scene);
