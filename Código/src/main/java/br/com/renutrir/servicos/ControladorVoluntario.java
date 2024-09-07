@@ -215,9 +215,6 @@ public class ControladorVoluntario implements Initializable {
         }
     }
 
-
-
-
     public void botaoTransportesDoacoes(ActionEvent actionEvent) {
         realizarTrocaDeTela("/br/com/renutrir/10-transportes-doacoes.fxml", "ReNutrir - Transportes");
     }
