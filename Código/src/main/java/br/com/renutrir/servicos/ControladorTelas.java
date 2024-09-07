@@ -1,16 +1,40 @@
 package br.com.renutrir.servicos;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import br.com.renutrir.renutrir.HelloController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class ControladorTelas {
     private static ControladorTelas instance;
     private Stage primaryStage;
+
+    private Map<String, Scene> cenas = new HashMap<>();
+    private Stage stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public void fecharTelaAtual() {
+        if (stage != null) {
+            stage.close();
+        }
+    }
 
     //controlador geral
     private Scene mainScene;
@@ -1041,8 +1065,13 @@ public class ControladorTelas {
         this.primaryStage = primaryStage;
     }
 
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
     public void trocarTela(Scene novaCena) {
         primaryStage.setScene(novaCena);
         primaryStage.show();
     }
+
 }

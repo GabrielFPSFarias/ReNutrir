@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -21,6 +22,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -73,12 +75,6 @@ public class ControladorVoluntario implements Initializable {
     @FXML
     private ComboBox<String> cboxInstVinculada;
 
-    /*
-    ObservableList<String> listaFuncaoVoluntario = FXCollections.observableArrayList(
-            "Transportador de Doações", "Auxiliar de Eventos"
-    );
-
-     */
 
     private void configurarComboBox() {
         if (cboxFuncaoVoluntario == null) {
@@ -200,9 +196,27 @@ public class ControladorVoluntario implements Initializable {
         realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
     }
 
+    @FXML
     public void botaoSejaVoluntario(ActionEvent actionEvent) {
-        realizarTrocaDeTela("/br/com/renutrir/09-seja-voluntario.fxml", "ReNutrir - Seja Voluntario");
+        try {
+            Stage dialog = new Stage();
+            dialog.setScene(ControladorTelas.getInstance().getSejaVoluntarioScene());
+            dialog.setResizable(false);
+            dialog.setTitle("Seja Voluntário");
+            dialog.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.showAndWait();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Erro");
+            alert.setContentText(e.getMessage());
+            alert.show();
+        }
     }
+
+
+
 
     public void botaoTransportesDoacoes(ActionEvent actionEvent) {
         realizarTrocaDeTela("/br/com/renutrir/10-transportes-doacoes.fxml", "ReNutrir - Transportes");
@@ -310,7 +324,6 @@ public class ControladorVoluntario implements Initializable {
 
     @FXML
     void botaoVoltar58() {
-
         realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml","ReNutrir - Menu Instituição");
     }
 
