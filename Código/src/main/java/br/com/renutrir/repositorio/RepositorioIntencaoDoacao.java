@@ -111,5 +111,14 @@ public class RepositorioIntencaoDoacao {
         }
     }
 
+    private static Instituicao instituicaoSelecionada;
+
+    public static Instituicao getInstituicaoSelecionada() {
+        return instituicaoSelecionada;
+    }
+
+    public static void setInstituicaoSelecionada(Instituicao instituicao) {
+        instituicaoSelecionada = instituicao;
+    }
 
 }

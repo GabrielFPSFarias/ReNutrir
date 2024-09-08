@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.servicos.ControladorIntencaoDeDoacao">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.servicos.ControladorIntencaoDeDoacao">
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
@@ -48,14 +48,15 @@
          <content>
             <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="287.0" prefWidth="591.0" BorderPane.alignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
+                <ColumnConstraints />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="102.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="126.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="38.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <BorderPane.margin>
                   <Insets bottom="40.0" top="-40.0" />
@@ -64,14 +65,14 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button fx:id="instituicoesDoacaoBotao" mnemonicParsing="false" onAction="#botaoInstituicoesDoacao" prefHeight="30.0" prefWidth="243.0" text="Instituições que precisam de doação" textAlignment="CENTER" GridPane.rowIndex="4" />
-                  <Button fx:id="doarAgoraBotao" layoutX="284.0" layoutY="19.0" mnemonicParsing="false" onAction="#botaoDoarAgora" prefHeight="30.0" prefWidth="243.0" text="Doar agora" textAlignment="CENTER" GridPane.rowIndex="3" />
-                  <ComboBox fx:id="escolherInstituicaoDoarCbox" onAction="#cboxEscolherInstituicaoDoar" prefHeight="25.0" prefWidth="244.0" promptText="Escolher Instituição" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="66.0" prefWidth="408.0" text="Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação. Escolha abaixo a instituição beneficiária." textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+                  <Button fx:id="instituicoesDoacaoBotao" mnemonicParsing="false" onAction="#botaoInstituicoesDoacao" prefHeight="30.0" prefWidth="243.0" text="Instituições que precisam de doação" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Button fx:id="doarAgoraBotao" layoutX="284.0" layoutY="19.0" mnemonicParsing="false" onAction="#botaoDoarAgora" prefHeight="30.0" prefWidth="243.0" text="Doar agora" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="instituicaoNomeLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="66.0" prefWidth="408.0" text="Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação. Escolha abaixo a instituição beneficiária." textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
+                  <ListView fx:id="instituicoesListView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="109.0" prefWidth="415.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>

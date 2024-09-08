@@ -1,4 +1,4 @@
-
+package br.com.renutrir.servicos;
 /*package br.com.renutrir.servicos;
 
 import br.com.renutrir.model.Instituicao;
@@ -45,7 +45,6 @@ public class ControladorListaInstituicoes implements Initializable {
     }
 }
 */
-package br.com.renutrir.servicos;
 
         import br.com.renutrir.renutrir.DetalhesInstituicao;
         import br.com.renutrir.repositorio.RepositorioContas;

@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import br.com.renutrir.servicos.ControladorListaInstituicoes;
 
 public class ControladorTelas {
     private static ControladorTelas instance;

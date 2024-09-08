@@ -43,7 +43,7 @@ import br.com.renutrir.renutrir.HelloController;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
 
-public class ControladorIntencaoDeDoacao implements Initializable {
+public class ControladorIntencaoDeDoacao {
 
     @FXML
     public Button botaoItemDoar;
@@ -51,6 +51,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     public TextField fieldInserirQtdItem;
 
     public ControladorIntencaoDeDoacao() {
+        repositorioInstituicao = new RepositorioInstituicao();
     }
 
     private HelloController helloController;
@@ -65,56 +66,69 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         this.helloController = helloController;
     }
 
+    @FXML
+    private Button doarAgoraBotao;
+
+    @FXML
+    private Label instituicaoNomeLabel;
+
+    @FXML
+    private ListView<String> instituicoesListView;
+
+    private RepositorioInstituicao repositorioInstituicao;
+
+    @FXML
+    private void initialize() {
+        carregarInstituicoes();
+        atualizarLabelInstituicao();
+    }
+
     private void carregarInstituicoes() {
-        ObservableList<String> listaInstituicoes = FXCollections.observableArrayList();
+        if (instituicoesListView != null) {
+            List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
+            List<String> nomesInstituicoes = instituicoes.stream()
+                    .map(Instituicao::getNome)
+                    .toList();
 
-        RepositorioInstituicao repositorioInstituicao = new RepositorioInstituicao();
-        List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
-
-        for (Instituicao instituicao : instituicoes) {
-            listaInstituicoes.add(instituicao.getNome());
-        }
-
-        escolherInstituicaoDoarCbox.setItems(listaInstituicoes);
-        String instituicaoInicial = "Instituição José de Sá";
-        if (listaInstituicoes.contains(instituicaoInicial)) {
-            escolherInstituicaoDoarCbox.setValue(instituicaoInicial);
-        } else if (!listaInstituicoes.isEmpty()) {
-            escolherInstituicaoDoarCbox.setValue(listaInstituicoes.get(0));
+            instituicoesListView.setItems(FXCollections.observableArrayList(nomesInstituicoes));
+            instituicoesListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal != null) {
+                    repositorioInstituicao.buscarInstituicaoPorNome(newVal).ifPresent(inst -> RepositorioIntencaoDoacao.setInstituicaoSelecionada(inst));
+                }
+            });
         } else {
-            escolherInstituicaoDoarCbox.setValue("Nenhuma instituição disponível");
+            System.err.println("instituicoesListView é null!");
         }
     }
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (escolherInstituicaoDoarCbox == null) {
-            System.out.println("escolherInstituicaoDoarCbox está null");
-            return;
+    private void atualizarLabelInstituicao() {
+        Instituicao instituicao = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+        if (instituicao != null) {
+            this.instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação. Doação para a " + instituicao.getNome());
+        } else {
+            this.instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação. Escolha abaixo a instituição beneficiária.");
         }
-        carregarInstituicoes();
     }
 
     //Tela 05 - Intenção de doação
 
     @FXML
-    public Button instituicoesDoacaoBotao, doarAgoraBotao;
-    public ComboBox escolherInstituicaoDoarCbox;
+    public Button instituicoesDoacaoBotao;
 
+    @FXML
+    public void botaoDoarAgora(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
+    }
+
+    @FXML
+    public void botaoVoltar5() {
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
+    }
+
+    @FXML
     public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
     }
 
-    public void botaoDoarAgora(ActionEvent actionEvent) {
-        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
-    }
-
-    public void cboxEscolherInstituicaoDoar(ActionEvent actionEvent) {
-    }
-
-    public void botaoVoltar5() {
-        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
-    }
 
     //Label
     @FXML
