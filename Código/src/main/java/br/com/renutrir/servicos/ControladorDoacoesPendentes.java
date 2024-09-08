@@ -6,10 +6,12 @@ import br.com.renutrir.model.IntencaoDoacao;
 import br.com.renutrir.repositorio.RepositorioIntencaoDoacao;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,9 +20,12 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class ControladorDoacoesPendentes {
+public class ControladorDoacoesPendentes implements Initializable {
 
     public void trocarTela(Stage stage, String fxmlFile, String title) {
         try {
@@ -71,16 +76,19 @@ public class ControladorDoacoesPendentes {
     }
 
     @FXML
-    private ComboBox <IntencaoDoacao> CBoxDPendentes;
+    private ComboBox <String> CBoxDPendentes;
 
-public void preencherCBoxDPendentes(RepositorioIntencaoDoacao repositorioIntencaoDoacao, Instituicao instituicao) {
-    CBoxDPendentes.getItems().clear();
-    ArrayList<IntencaoDoacao> intencoes = repositorioIntencaoDoacao.intencoesPorInst(instituicao);
+public void preencherCBoxDPendentes() {
+    RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+
+    CBoxDPendentes.getItems().add("Selecione uma Intenção");
+    List<IntencaoDoacao> intencoes = repositorioIntencaoDoacao.getIntencoes();
     if(!intencoes.isEmpty()){
         for (IntencaoDoacao intencaoDoacao : intencoes) {
-            CBoxDPendentes.getItems().add(intencaoDoacao);
+            CBoxDPendentes.getItems().add(intencaoDoacao.toString());
         }
     }
+    CBoxDPendentes.getItems().add("Teste");
     }
 
     public Button exibirIDoacaoBotao;
@@ -104,5 +112,10 @@ public void preencherCBoxDPendentes(RepositorioIntencaoDoacao repositorioIntenca
     public Label dataHoraIntencaoLabelF;
 
     public void botaoDoacaoRecebidaF(ActionEvent actionEvent) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        CBoxDPendentes.setItems(FXCollections.observableArrayList("Selecione uma Intenção"));
     }
 }
