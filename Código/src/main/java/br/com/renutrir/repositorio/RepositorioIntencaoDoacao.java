@@ -12,20 +12,50 @@ import java.util.List;
 
 public class RepositorioIntencaoDoacao {
 
-    public List<IntencaoDoacao> getIntencoes() {
-        return intencoes;
-    }
-
+    private final String arquivoIntencao = "src/dados/intencoes-de-doacao.dat";
     private List<IntencaoDoacao> intencoes;
 
-    public boolean removerIntencao(IntencaoDoacao intencao){
-        return intencoes.remove(intencao);
+    public RepositorioIntencaoDoacao() {
+        intencoes = carregarIntencoes();
+    }
+
+    private List<IntencaoDoacao> carregarIntencoes() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivoIntencao))) {
+            return (List<IntencaoDoacao>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            return new ArrayList<>();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private void salvarIntencoes() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivoIntencao))) {
+            oos.writeObject(intencoes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void adicionarIntencao(IntencaoDoacao intencao) {
+        intencoes.add(intencao);
+        salvarIntencoes();
+    }
+
+    public boolean removerIntencao(IntencaoDoacao intencao) {
+        boolean removido = intencoes.remove(intencao);
+        if (removido) {
+            salvarIntencoes();
+        }
+        return removido;
     }
 
     public void atualizarIntencao(IntencaoDoacao intencao) {
         for (int i = 0; i < intencoes.size(); i++) {
             if (intencoes.get(i).equals(intencao)) {
                 intencoes.set(i, intencao);
+                salvarIntencoes();
                 break;
             }
         }
@@ -33,86 +63,25 @@ public class RepositorioIntencaoDoacao {
 
     public IntencaoDoacao buscarIntencao(Doador doador, LocalDateTime data) {
         for (IntencaoDoacao intencao : intencoes) {
-            if (intencao.getDoador().equals(doador)) {
-                if (intencao.getData().equals(data)) {
-                    return intencao;
-                }
+            if (intencao.getDoador().equals(doador) && intencao.getData().equals(data)) {
+                return intencao;
             }
         }
         return null;
     }
 
-    public ArrayList<IntencaoDoacao> intencoesPorInst(Instituicao instituicao){
-        ArrayList<IntencaoDoacao> intencoes = new ArrayList<>();
-        for(IntencaoDoacao intencao : this.intencoes){
-            if(intencao.getInstituicao().equals(instituicao)){
-                intencoes.add(intencao);
+    public ArrayList<IntencaoDoacao> intencoesPorInst(Instituicao instituicao) {
+        ArrayList<IntencaoDoacao> intencoesInst = new ArrayList<>();
+        for (IntencaoDoacao intencao : intencoes) {
+            if (intencao.getInstituicao().equals(instituicao)) {
+                intencoesInst.add(intencao);
             }
         }
-        return intencoes;
+        return intencoesInst;
     }
 
     public List<IntencaoDoacao> listarIntencoes() {
-        return new ArrayList<>(intencoes); //Retorna lista das intençoes
-    }
-
-    public RepositorioIntencaoDoacao() {
-        this.intencoes = new ArrayList<>();
-    }
-
-    public void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.setHeaderText(null);
-        alert.showAndWait();
-    }
-
-    public void adicionarIntencao(IntencaoDoacao intencao) {
-        try {
-            salvarIntencaoNoArquivo(intencao);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void salvarIntencaoNoArquivo(IntencaoDoacao intencao) throws IOException {
-        String caminhoArquivo = "src/dados/intencoes.dat";
-
-        File arquivo = new File(caminhoArquivo);
-
-        File diretorio = arquivo.getParentFile();
-        if (!diretorio.exists()) {
-            diretorio.mkdirs();
-        }
-
-        if (!arquivo.exists()) {
-            arquivo.createNewFile();
-        }
-
-        try (FileWriter writer = new FileWriter(arquivo, true)) {
-            writer.write(intencao.toString() + System.lineSeparator());
-        }
-    }
-
-    public int contarDoacoes(Doador doador) {
-        String nomeUsuario = doador.getNomeUsuario();
-        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.dat";
-        File arquivo = new File(caminhoArquivo);
-
-        if (!arquivo.exists()) {
-            System.out.println("Arquivo não encontrado: " + caminhoArquivo);
-            return 0;
-        }
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
-            int count = (int) reader.lines().count();
-            System.out.println("Número de doações: " + count);
-            return count;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return 0;
-        }
+        return new ArrayList<>(intencoes);
     }
 
     public boolean instRecebe(Instituicao instituicao) {
