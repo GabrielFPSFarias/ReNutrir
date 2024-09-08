@@ -179,7 +179,7 @@ public class ControladorDoacaoConcluida {
                 if (valor <= 0) {
                     showAlert(Alert.AlertType.ERROR, "Erro", "O valor da doação deve ser maior que R$ 0.");
                 } else {
-                    realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-c-debito.fxml", "ReNutrir - Doar com Débito");
+                    realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-2-c-debito.fxml", "ReNutrir - Doar com Débito");
                 }
             } catch (NumberFormatException e) {
                 showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor numérico válido.");
