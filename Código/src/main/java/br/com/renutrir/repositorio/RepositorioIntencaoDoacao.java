@@ -12,6 +12,10 @@ import java.util.List;
 
 public class RepositorioIntencaoDoacao {
 
+    public List<IntencaoDoacao> getIntencoes() {
+        return intencoes;
+    }
+
     private List<IntencaoDoacao> intencoes;
 
     public boolean removerIntencao(IntencaoDoacao intencao){
@@ -111,5 +115,12 @@ public class RepositorioIntencaoDoacao {
         }
     }
 
-
+    public boolean instRecebe(Instituicao instituicao) {
+        for(IntencaoDoacao intencao : this.intencoes){
+            if(intencao.getInstituicao().equals(instituicao)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

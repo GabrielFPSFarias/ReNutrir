@@ -54,6 +54,7 @@ public class HelloController {
         }
     };*/
 
+    public ControladorDoacoesPendentes controladorDoacoesPendentes = new ControladorDoacoesPendentes();
     public Button instituicoesDoacaoBotao;
     public ComboBox escolherInstituicaoDoarCbox;
     private Doador doadorLogado;
@@ -639,7 +640,6 @@ public class HelloController {
     }
 
     public void botaoDoacoesPendentesInstituicao(ActionEvent actionEvent) {
-
         realizarTrocaDeTela("/br/com/renutrir/26-doacoes-pendentes-inst.fxml", "ReNutrir - Doações Pendentes");
     }
 
