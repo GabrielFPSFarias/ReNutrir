@@ -17,6 +17,14 @@ import java.io.IOException;
 
 public class ControladorSolicitacaoDoacao {
 
+    @FXML
+    public TextField doacaoAlimentosItemField;
+    public TextField doacaoRoupasItemField;
+    public TextField doacaoMoveisItemField;
+    public TextField doacaoBebidasItemField;
+    public TextField doacaoProdLimpezaItemField;
+    public TextField doacaoProdHigieneItemField;
+
     public ControladorSolicitacaoDoacao() {
     }
 
@@ -190,5 +198,23 @@ public class ControladorSolicitacaoDoacao {
     }
 
     public void fieldSolicitarDoacaoValor(ActionEvent actionEvent) {
+    }
+
+    public void fieldItemDoacaoAlimentos(ActionEvent actionEvent) {
+    }
+
+    public void fieldItemDoacaoRoupas(ActionEvent actionEvent) {
+    }
+
+    public void fieldItemDoacaoMoveis(ActionEvent actionEvent) {
+    }
+
+    public void fieldItemDoacaoBebidas(ActionEvent actionEvent) {
+    }
+
+    public void fieldItemDoacaoProdLimpeza(ActionEvent actionEvent) {
+    }
+
+    public void fieldItemDoacaoProdHigene(ActionEvent actionEvent) {
     }
 }

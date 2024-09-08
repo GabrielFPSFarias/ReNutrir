@@ -80,8 +80,10 @@
                </padding>
                <children>
                   <Button fx:id="confRoupasSolicitar" mnemonicParsing="false" onAction="#solicitarConfRoupas" prefHeight="30.0" prefWidth="226.0" text="Solicitar roupas" textAlignment="CENTER" GridPane.rowIndex="6" />
-                  <TextField fx:id="doacaoRoupasSolicitarField" maxWidth="-Infinity" onAction="#fieldSolicitarDoacaoRoupas" prefHeight="25.0" prefWidth="233.0" GridPane.rowIndex="3" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite em reais a meta de arrecadação para doações de Roupas" textAlignment="CENTER" wrappingWidth="261.517578125" GridPane.rowIndex="2" />
+                  <TextField fx:id="doacaoRoupasSolicitarField" maxWidth="-Infinity" onAction="#fieldSolicitarDoacaoRoupas" prefHeight="25.0" prefWidth="233.0" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite a meta de arrecadação para doações de Roupas:" textAlignment="CENTER" wrappingWidth="261.517578125" GridPane.rowIndex="1" />
+                  <Text layoutX="275.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digite o nome da roupa desejada:" textAlignment="CENTER" wrappingWidth="261.517578125" GridPane.rowIndex="3" />
+                  <TextField fx:id="doacaoRoupasItemField" layoutX="289.0" layoutY="90.0" maxWidth="-Infinity" onAction="#fieldItemDoacaoRoupas" prefHeight="25.0" prefWidth="233.0" GridPane.rowIndex="4" />
                </children>
             </GridPane>
          </content>

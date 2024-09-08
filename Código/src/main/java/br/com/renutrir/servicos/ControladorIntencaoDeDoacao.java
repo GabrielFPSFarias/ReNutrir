@@ -140,7 +140,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
 
             if (instituicaoSelecionada != null) {
-                controlador.instituicaoLabel.setText("Você está doando para a: " + instituicaoSelecionada.getNome());
+                controlador.instituicaoLabel.setText("Você está doando para a " + instituicaoSelecionada.getNome());
             } else {
                 controlador.instituicaoLabel.setText("Nenhuma instituição selecionada.");
             }

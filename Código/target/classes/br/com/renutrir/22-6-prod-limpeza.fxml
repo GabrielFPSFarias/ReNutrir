@@ -81,7 +81,7 @@
                <children>
                   <Button fx:id="confProdLimpezaSolicitar" mnemonicParsing="false" onAction="#solicitarConfProdLimpeza" prefHeight="30.0" prefWidth="226.0" text="Solicitar produtos de limpeza" textAlignment="CENTER" GridPane.rowIndex="6" />
                   <TextField fx:id="doacaoProdLimpezaSolicitarField" maxWidth="-Infinity" onAction="#fieldSolicitarDoacaoProdLimpeza" prefHeight="25.0" prefWidth="233.0" GridPane.rowIndex="3" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite em reais a meta de arrecadação para doações de Produtos de Limpeza:" textAlignment="CENTER" wrappingWidth="261.517578125" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite a meta de arrecadação para doações de Produtos de Limpeza:" textAlignment="CENTER" wrappingWidth="261.517578125" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>
