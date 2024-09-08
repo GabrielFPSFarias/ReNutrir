@@ -115,5 +115,12 @@ public class RepositorioIntencaoDoacao {
         }
     }
 
-
+    public boolean instRecebe(Instituicao instituicao) {
+        for(IntencaoDoacao intencao : this.intencoes){
+            if(intencao.getInstituicao().equals(instituicao)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
