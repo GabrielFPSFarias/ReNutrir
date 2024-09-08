@@ -61,9 +61,10 @@
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="227.0" minHeight="10.0" prefHeight="222.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="227.0" minHeight="10.0" prefHeight="196.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="73.0" minHeight="3.0" prefHeight="38.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <BorderPane.margin>
                   <Insets bottom="40.0" top="-40.0" />
@@ -77,7 +78,8 @@
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Button fx:id="botaoRegistrarDoacao" layoutX="293.0" layoutY="287.0" mnemonicParsing="false" onAction="#registrarDoacao" prefHeight="30.0" prefWidth="226.0" text="Registrar doação" textAlignment="CENTER" GridPane.rowIndex="1" />
+                  <Button fx:id="botaoRegistrarDoacao" layoutX="293.0" layoutY="287.0" mnemonicParsing="false" onAction="#registrarDoacao" prefHeight="30.0" prefWidth="226.0" text="Registrar doação" textAlignment="CENTER" GridPane.rowIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Primeiro salve seu comprovante (opcional) e depois registre sua doação." textAlignment="CENTER" wrappingWidth="509.587890625" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </content>
