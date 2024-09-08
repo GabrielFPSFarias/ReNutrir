@@ -31,6 +31,8 @@ import javafx.scene.control.*;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -81,8 +83,19 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        RepositorioInstituicao repositorioInstituicao = new RepositorioInstituicao();
+
+        instituicoesListView.setCellFactory(listView -> new ListCell<Instituicao>() {
+            @Override
+            protected void updateItem(Instituicao item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNome());
+            }
+        });
+
         if (instituicoesListView != null) {
-            carregarInstituicoes();
+            List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
+            instituicoesListView.getItems().addAll(instituicoes);
         } else {
             System.err.println("instituicoesListView é null!");
         }
@@ -91,7 +104,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação.");
         }
     }
-
+    
     private void carregarInstituicoes() {
         if (instituicoesListView != null) {
             List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
