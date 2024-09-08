@@ -76,19 +76,21 @@ public class ControladorDoacoesPendentes implements Initializable {
     }
 
     @FXML
-    private ComboBox <String> CBoxDPendentes;
+    private ComboBox <IntencaoDoacao> CBoxDPendentes;
 
-public void preencherCBoxDPendentes() {
+public void preencherCBoxDPendentes(Instituicao instituicao) {
     RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
-
-    CBoxDPendentes.getItems().add("Selecione uma Intenção");
+    if(repositorioIntencaoDoacao.instRecebe(instituicao)){
+        CBoxDPendentes.getItems().clear();
     List<IntencaoDoacao> intencoes = repositorioIntencaoDoacao.getIntencoes();
-    if(!intencoes.isEmpty()){
+    if(!intencoes.isEmpty()) {
         for (IntencaoDoacao intencaoDoacao : intencoes) {
-            CBoxDPendentes.getItems().add(intencaoDoacao.toString());
+            if (intencaoDoacao.getInstituicao() == instituicao) {
+                CBoxDPendentes.getItems().add(intencaoDoacao);
+            }
         }
     }
-    CBoxDPendentes.getItems().add("Teste");
+    }
     }
 
     public Button exibirIDoacaoBotao;
@@ -116,6 +118,8 @@ public void preencherCBoxDPendentes() {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        CBoxDPendentes.setItems(FXCollections.observableArrayList("Selecione uma Intenção"));
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao();
+        intencaoDoacao.setDoador(null);
+        CBoxDPendentes.setItems(FXCollections.observableArrayList(intencaoDoacao));
     }
 }

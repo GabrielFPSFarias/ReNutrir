@@ -115,14 +115,12 @@ public class RepositorioIntencaoDoacao {
         }
     }
 
-    private static Instituicao instituicaoSelecionada;
-
-    public static Instituicao getInstituicaoSelecionada() {
-        return instituicaoSelecionada;
+    public boolean instRecebe(Instituicao instituicao) {
+        for(IntencaoDoacao intencao : this.intencoes){
+            if(intencao.getInstituicao().equals(instituicao)){
+                return true;
+            }
+        }
+        return false;
     }
-
-    public static void setInstituicaoSelecionada(Instituicao instituicao) {
-        instituicaoSelecionada = instituicao;
-    }
-
 }
