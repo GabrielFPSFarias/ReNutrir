@@ -169,22 +169,45 @@ public class ControladorDoacaoConcluida {
     @FXML
     void doarCartaoDebito(ActionEvent event) {
         valorDoacao = fieldInserirValorCartao.getText();
+
         if (valorDoacao == null || valorDoacao.trim().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR,"Erro", "Por favor, insira um valor para a doação.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor para a doação.");
         } else {
-            realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-d-debito.fxml", "ReNutrir - Doar com Débito");
+            valorDoacao = valorDoacao.replace(",", ".");
+            try {
+                double valor = Double.parseDouble(valorDoacao);
+                if (valor <= 0) {
+                    showAlert(Alert.AlertType.ERROR, "Erro", "O valor da doação deve ser maior que R$ 0.");
+                } else {
+                    realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-c-debito.fxml", "ReNutrir - Doar com Débito");
+                }
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor numérico válido.");
+            }
         }
     }
 
     @FXML
     void doarCartaoCredito(ActionEvent event) {
         valorDoacao = fieldInserirValorCartao.getText();
+
         if (valorDoacao == null || valorDoacao.trim().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR,"Erro", "Por favor, insira um valor para a doação.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor para a doação.");
         } else {
-            realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-c-credito.fxml", "ReNutrir - Doar com Crédito");
+            valorDoacao = valorDoacao.replace(",", ".");
+            try {
+                double valor = Double.parseDouble(valorDoacao);
+                if (valor <= 0) {
+                    showAlert(Alert.AlertType.ERROR, "Erro", "O valor da doação deve ser maior que R$ 0.");
+                } else {
+                    realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-c-credito.fxml", "ReNutrir - Doar com Crédito");
+                }
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor numérico válido.");
+            }
         }
     }
+
 
     @FXML
     void inserirValorCartaoField(ActionEvent event) {
@@ -213,7 +236,7 @@ public class ControladorDoacaoConcluida {
     @FXML
     private TextField fieldInserirSenhaCre;
 
-    public void receberDadosCartaoCredito(String titular, String numeroCartao, String senha) {
+    public void receberDadosCartaoCredito(String titular, String numeroCartao, String senha, String valorDoacaoCred) {
         exibirInfoDoacaoCartao.setText("Titular: " + titular + "\nNúmero do Cartão: " + numeroCartao);
     }
 
@@ -222,13 +245,28 @@ public class ControladorDoacaoConcluida {
         String titular = fieldInserirNomeTitularCre.getText();
         String numeroCartao = fieldInserirNumCredito.getText();
         String senha = fieldInserirSenhaCre.getText();
+        String valorDoacao = valorDoacaoCreExibir.getText();
+
+        if (titular.isEmpty() || numeroCartao.isEmpty() || senha.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "Todos os campos devem ser preenchidos.");
+            return;
+        }
+
+        if (numeroCartao.length() != 16) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "O número do cartão deve ter 16 dígitos.");
+            return;
+        }
+
+        if (senha.length() < 4 || senha.length() > 8) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "A senha deve ter entre 4 e 8 dígitos.");
+            return;
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-2-3-transacao-cartao.fxml"));
         try {
             Parent root = loader.load();
-
             ControladorDoacaoConcluida controller = loader.getController();
-            controller.receberDadosCartaoCredito(titular, numeroCartao, senha);
+            controller.receberDadosCartao(titular, numeroCartao, senha, valorDoacao);
 
             Stage stage = (Stage) creditoDoar.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -237,6 +275,7 @@ public class ControladorDoacaoConcluida {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void inserirNomeTitularCreField(ActionEvent event) {
@@ -289,8 +328,9 @@ public class ControladorDoacaoConcluida {
         realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
     }
 
-    public void receberDadosCartao(String titular, String numeroCartao, String senha) {
+    public void receberDadosCartao(String titular, String numeroCartao, String senha, String valorDoacao) {
         exibirInfoDoacaoCartao.setText("Titular: " + titular + "\nNúmero do Cartão: " + numeroCartao);
+        valorDoacaoCartaoLabel.setText(valorDoacao);
     }
 
     @FXML
@@ -298,13 +338,28 @@ public class ControladorDoacaoConcluida {
         String titular = fieldInserirTitularDeb.getText();
         String numeroCartao = fieldInserirNumDebito.getText();
         String senha = fieldInserirSenhaDeb.getText();
+        String valorDoacao = valorDoacaoExibirDeb.getText();
+
+        if (titular.isEmpty() || numeroCartao.isEmpty() || senha.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "Todos os campos devem ser preenchidos.");
+            return;
+        }
+
+        if (numeroCartao.length() != 16) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "O número do cartão deve ter 16 dígitos.");
+            return;
+        }
+
+        if (senha.length() < 4 || senha.length() > 8) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "A senha deve ter entre 4 e 8 dígitos.");
+            return;
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-2-3-transacao-cartao.fxml"));
         try {
             Parent root = loader.load();
-
             ControladorDoacaoConcluida controller = loader.getController();
-            controller.receberDadosCartao(titular, numeroCartao, senha);
+            controller.receberDadosCartao(titular, numeroCartao, senha, valorDoacao);
 
             Stage stage = (Stage) debitoDoar.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -313,6 +368,7 @@ public class ControladorDoacaoConcluida {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void inserirTitularDebField(ActionEvent event) {
@@ -339,7 +395,24 @@ public class ControladorDoacaoConcluida {
     @FXML
     public Button finalCartaoDoar;
 
+    @FXML
     public void doarFinalCartao(ActionEvent actionEvent) {
+        ProgressAlert progressAlert = new ProgressAlert();
+        progressAlert.start(new Stage());
+        progressAlert.showProgress();
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(4000); //4 segundos
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater(() -> {
+                progressAlert.hideProgress();
+                realizarTrocaDeTela("/br/com/renutrir/07-10-doacao-concluida.fxml", "ReNutrir - Doação Concluída");
+            });
+        }).start();
     }
 
     @FXML
