@@ -17,6 +17,7 @@ public class RepositorioIntencaoDoacao {
 
     public RepositorioIntencaoDoacao() {
         intencoes = carregarIntencoes();
+
     }
 
     private List<IntencaoDoacao> carregarIntencoes() {
