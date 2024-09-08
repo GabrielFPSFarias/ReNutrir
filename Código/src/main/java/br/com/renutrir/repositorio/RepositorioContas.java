@@ -25,7 +25,7 @@ public class RepositorioContas {
     private Map<String, Instituicao> contasPorNomeInstituicao;
     private Map<String, Instituicao> contasEmailInstituicao;
 
-    private ArrayList<String> listaDeNomesInstituicoes = new ArrayList<>(instituicoesPorNomeUsuario.keySet());
+    private ArrayList<String> listaDeNomesInstituicoes;
 
     public ArrayList<String> getListaDeNomesInstituicoes() {
         return listaDeNomesInstituicoes;
@@ -44,7 +44,11 @@ public class RepositorioContas {
         this.contasPorCnpj = new HashMap<>();
         this.contasPorNomeInstituicao = new HashMap<>();
         this.contasEmailInstituicao = new HashMap<>();
+        this.listaDeNomesInstituicoes = new ArrayList<>(instituicoesPorNomeUsuario.keySet());
+
     }
+
+
 
     public boolean adicionarDoador(Doador doador) {
         if (doadoresPorEmail.containsKey(doador.getEmail())) {

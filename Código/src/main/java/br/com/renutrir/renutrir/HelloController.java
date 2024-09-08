@@ -44,9 +44,6 @@ import javafx.scene.control.SelectionMode;
 
 
 public class HelloController {
-    RepositorioContas contas = new RepositorioContas();
-
-    ListView<String> lv = new ListView<>();
 
   /*  lv.getItems().addAll(FXCollections.observableArrayList(contas.getListaDeNomesInstituicoes()));
 
