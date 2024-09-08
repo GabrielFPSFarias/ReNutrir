@@ -404,23 +404,44 @@ public class ControladorDoacaoConcluida {
 
     @FXML
     public void doarFinalCartao(ActionEvent actionEvent) {
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+        if (doador == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado.");
+            return;
+        }
+
+        String doadorNome = doador.getNome();
+        String tipoDoacao = "Cartão";
+        LocalDateTime dataHora = LocalDateTime.now();
+
         ProgressAlert progressAlert = new ProgressAlert();
         progressAlert.start(new Stage());
         progressAlert.showProgress();
 
         new Thread(() -> {
-            try {
-                Thread.sleep(4000); //4 segundos
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            for (int i = 0; i <= 100; i++) {
+                double progress = i / 100.0;
+                Platform.runLater(() -> progressAlert.updateProgress(progress));
 
-            Platform.runLater(() -> {
-                progressAlert.hideProgress();
-                realizarTrocaDeTela("/br/com/renutrir/07-10-doacao-concluida.fxml", "ReNutrir - Doação Concluída");
-            });
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if (progress >= 1.0) {
+                    Platform.runLater(() -> {
+                        progressAlert.hideProgress();
+
+                        realizarTrocaDeTelaComInfo("/br/com/renutrir/07-10-doacao-concluida.fxml", "ReNutrir - Doação Concluída", doadorNome, tipoDoacao, dataHora);
+                    });
+                    break;
+                }
+            }
         }).start();
     }
+
+
 
     @FXML
     public Text exibirInstituicaoDestinadaCartao;
@@ -429,7 +450,6 @@ public class ControladorDoacaoConcluida {
     public Button voltarBotao;
 
     //07.10
-
 
     @FXML
     public Label exibirInfoDoacaoLabel;
@@ -503,6 +523,7 @@ public class ControladorDoacaoConcluida {
 
                     progressAlert.hideProgress();
                     showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi realizada com sucesso!");
+                    realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
                 });
 
             } catch (InterruptedException e) {
@@ -535,13 +556,12 @@ public class ControladorDoacaoConcluida {
         controladorCertificado.verificarProgressoParaCertificado(doador);
     }
 
-    public void setInformacoesDoacao(String doadorNome, String tipoDoacao, int quantidade, String item, LocalDateTime dataHora) {
+    public void setInformacoesDoacao(String doadorNome, String tipoDoacao, LocalDateTime dataHora) {
         String dataHoraFormatada = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         exibirInfoDoacaoLabel.setText(String.format(
-                "Doador: %s\nData e hora: %s\nTipo da doação: %s\nItem: %s\nQuantidade: %d",
-                doadorNome, dataHoraFormatada, tipoDoacao, item, quantidade));
-
-        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+                "Doador: %s\nData e hora: %s\nTipo da doação: %s",
+                doadorNome, dataHoraFormatada, tipoDoacao
+        ));
     }
 
     @FXML
@@ -618,6 +638,24 @@ public class ControladorDoacaoConcluida {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void realizarTrocaDeTelaComInfo(String caminhoFXML, String titulo, String doadorNome, String tipoDoacao, LocalDateTime dataHora) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
+            Parent root = loader.load();
+
+            ControladorDoacaoConcluida controlador = loader.getController();
+            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, dataHora);
+
+            Stage stage = (Stage) finalCartaoDoar.getScene().getWindow();
+            stage.setTitle(titulo);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível trocar a tela.");
         }
     }
 
