@@ -84,12 +84,12 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Para pagar com PIX copia e cola:" GridPane.rowIndex="1" />
                   <Text layoutX="319.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Após o pagamento realizado, cole aqui a ID da transação:" GridPane.rowIndex="4" />
                   <TextField fx:id="fieldIdTransacaoPix" layoutX="166.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#idTransacaoPixField" prefHeight="51.0" prefWidth="480.0" GridPane.rowIndex="5" />
-                  <Text fx:id="valorDoacaoPixLabel" layoutX="319.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valor da doação" textAlignment="CENTER" wrappingWidth="274.296875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
                   <Button fx:id="copiarPixPagar" layoutX="293.0" layoutY="283.0" mnemonicParsing="false" onAction="#pagarPixCopiar" prefHeight="30.0" prefWidth="226.0" text="Copiar código pix" textAlignment="CENTER" GridPane.rowIndex="3" />
+                  <Label fx:id="valorDoacaoPixLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="285.0" text="Valor da doação" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
          </content>

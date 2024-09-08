@@ -74,4 +74,11 @@ public class RepositorioInstituicao {
     public List<Instituicao> listarInstituicoes() {
         return new ArrayList<>(instituicoes);
     }
+
+    public Optional<Instituicao> buscarInstituicaoPorNome(String nome) {
+        return instituicoes.stream()
+                .filter(i -> i.getNome() != null && i.getNome().equals(nome))
+                .findFirst();
+    }
+
 }
