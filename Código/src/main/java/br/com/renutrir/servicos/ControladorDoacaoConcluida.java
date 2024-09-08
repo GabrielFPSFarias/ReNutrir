@@ -1,8 +1,10 @@
 package br.com.renutrir.servicos;
 
+import br.com.renutrir.model.Doacao;
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Instituicao;
 import br.com.renutrir.renutrir.ProgressAlert;
+import br.com.renutrir.repositorio.RepositorioDoacoes;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
 import javafx.application.Platform;
@@ -19,9 +21,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -420,6 +427,127 @@ public class ControladorDoacaoConcluida {
     public Text exibirInfoDoacaoCartao;
     public Text valorDoacaoCartaoLabel;
     public Button voltarBotao;
+
+    //07.10
+
+
+    @FXML
+    public Label exibirInfoDoacaoLabel;
+
+    @FXML
+    private Button salvarComprovanteBotao;
+
+    @FXML
+    void botaoSalvarComprovante(ActionEvent event) {
+        String infoDoacao = exibirInfoDoacaoLabel.getText();
+
+        if (infoDoacao.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma informação para salvar.");
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Salvar Comprovante de Doação");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+
+        File file = fileChooser.showSaveDialog(((Stage) salvarComprovanteBotao.getScene().getWindow()));
+        if (file != null) {
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write(infoDoacao);
+                showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Comprovante salvo com sucesso!");
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar o comprovante.");
+            }
+        }
+    }
+
+    @FXML
+    private Button botaoRegistrarDoacao;
+
+    private String obterItemSelecionado() {
+        String itemSelecionado = "Cartão";
+        return itemSelecionado;
+    }
+
+    @FXML
+    private void registrarDoacao(ActionEvent event) {
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+
+        if (doador == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado. Certifique-se de que você está logado.");
+            return;
+        }
+
+        String itemSelecionado = obterItemSelecionado();
+
+        ProgressAlert progressAlert = new ProgressAlert();
+        progressAlert.start(new Stage());
+        progressAlert.showProgress();
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(500);
+
+                String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+                String status = "Concluída";
+
+                Doacao doacao = new Doacao(doador.getNomeUsuario(), itemSelecionado, 1, dataHora, status);
+
+                RepositorioDoacoes repositorioDoacoes = new RepositorioDoacoes();
+                repositorioDoacoes.adicionarDoacao(doacao);
+                salvarDoacoesEmArquivo(repositorioDoacoes);
+
+                Platform.runLater(() -> {
+                    verificarProgressoParaCertificado(doador);
+
+                    progressAlert.hideProgress();
+                    showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi realizada com sucesso!");
+                });
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    public void salvarDoacoesEmArquivo(RepositorioDoacoes repositorioDoacoes) {
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+
+        if (doadorLogado == null) {
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Nenhum doador está logado."));
+            return;
+        }
+
+        String nomeUsuario = doadorLogado.getNomeUsuario();
+        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.dat";
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(caminhoArquivo))) {
+            oos.writeObject(repositorioDoacoes.listarDoacoes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar as doações."));
+        }
+    }
+
+    public void verificarProgressoParaCertificado(Doador doador) {
+        ControladorCertificado controladorCertificado = new ControladorCertificado();
+        controladorCertificado.verificarProgressoParaCertificado(doador);
+    }
+
+    public void setInformacoesDoacao(String doadorNome, String tipoDoacao, int quantidade, String item, LocalDateTime dataHora) {
+        String dataHoraFormatada = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        exibirInfoDoacaoLabel.setText(String.format(
+                "Doador: %s\nData e hora: %s\nTipo da doação: %s\nItem: %s\nQuantidade: %d",
+                doadorNome, dataHoraFormatada, tipoDoacao, item, quantidade));
+
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+    }
+
+    @FXML
+    void botaoVoltar39(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
+    }
 
     public void trocarTela(Stage stage, String fxmlFile, String title) {
         try {
