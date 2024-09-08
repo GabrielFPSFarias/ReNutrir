@@ -287,7 +287,7 @@ public class ControladorTelas {
 
             //05.5 - Lista de Instituições
             fxmlLoader = new FXMLLoader();
-            Pane listaInstituicoesPane = fxmlLoader.load(getClass().getResource("/br/com/renutrir/05.5-lista-instituicoes.fxml").openStream());
+            Pane listaInstituicoesPane = fxmlLoader.load(getClass().getResource("/br/com/renutrir/05.5-lista-instituicoes1.fxml").openStream());
             this.listaInstituicoesScene = new Scene(listaInstituicoesPane);
             this.controladorListaInstituicoes = fxmlLoader.getController();
 

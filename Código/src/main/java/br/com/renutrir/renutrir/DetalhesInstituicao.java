@@ -1,24 +1,30 @@
 package br.com.renutrir.renutrir;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import br.com.renutrir.repositorio.RepositorioContas;
+import br.com.renutrir.model.Instituicao;
 
 public class DetalhesInstituicao {
 
-    public static void showDetalhes(String instituicaoNome) {
+    // Simulando o repositório ou banco de dados que contém os detalhes da instituição
+     RepositorioContas repositorioInstituicoes = new RepositorioContas();
 
-        Stage detalhesStage = new Stage();
-        detalhesStage.setTitle("Detalhes da Instituição");
+    public String getDetalhes(String nomeUsuario) {
 
-        Label detalhesLabel = new Label("Informações sobre " + instituicaoNome + ":\n\nAqui vão os detalhes da instituição.");
+        // Buscar a instituição pelo nome no repositório
+        Instituicao instituicao = repositorioInstituicoes.buscarInstituicaoPorEmailOuUsuario(nomeUsuario);
 
-        VBox layout = new VBox(10, detalhesLabel);
-        layout.setStyle("-fx-padding: 20px;");
+        // Verificar se a instituição foi encontrada
+        if (instituicao != null) {
+            // Montar uma string com os detalhes da instituição
+            StringBuilder detalhes = new StringBuilder();
+            detalhes.append("Nome: ").append(instituicao.getNome()).append("\n");
+            detalhes.append("Endereço: ").append(instituicao.getEndereco()).append("\n");
+           // detalhes.append("Contato: ").append(instituicao.getContato()).append("\n");
+            //detalhes.append("Descrição: ").append(instituicao.getDescricao()).append("\n");
 
-        Scene scene = new Scene(layout, 350, 150);
-        detalhesStage.setScene(scene);
-        detalhesStage.show();
+            return detalhes.toString();
+        } else {
+            return "Detalhes da instituição não encontrados.";
+        }
     }
 }
