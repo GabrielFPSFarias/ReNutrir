@@ -1,8 +1,10 @@
 package br.com.renutrir.servicos;
 
+import br.com.renutrir.model.Doacao;
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Instituicao;
 import br.com.renutrir.renutrir.ProgressAlert;
+import br.com.renutrir.repositorio.RepositorioDoacoes;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
 import javafx.application.Platform;
@@ -19,9 +21,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -60,26 +67,50 @@ public class ControladorDoacaoConcluida {
     @FXML
     private void doarConfPix(ActionEvent event) {
         String valorDoacao = fieldInserirValorPix.getText();
+
         if (valorDoacao.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor para a doação.");
             return;
         }
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-1-1-pix-detalhes.fxml"));
-            Parent novaTela = loader.load();
 
-            ControladorDoacaoConcluida novoControlador = loader.getController();
-            novoControlador.configurarTelaConfirmarPix(valorDoacao);
-
-            Stage stage = (Stage) confPixDoar.getScene().getWindow();
-            stage.setScene(new Scene(novaTela));
-            stage.setTitle("ReNutrir - Doar com Pix");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao carregar a tela de confirmação do PIX.");
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+        if (doador == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado. Certifique-se de que você está logado.");
+            return;
         }
+
+        String doadorNome = doador.getNomeUsuario();
+        String tipoDoacao = "PIX";
+        LocalDateTime dataHora = LocalDateTime.now();
+
+        ProgressAlert progressAlert = new ProgressAlert();
+        progressAlert.start(new Stage());
+        progressAlert.showProgress();
+
+        new Thread(() -> {
+            for (int i = 0; i <= 100; i++) {
+                double progress = i / 100.0;
+                Platform.runLater(() -> progressAlert.updateProgress(progress));
+
+                try {
+                    Thread.sleep(10); // Simulação do progresso
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if (progress >= 1.0) {
+                    Platform.runLater(() -> {
+                        progressAlert.hideProgress();
+
+                        realizarTrocaDeTelaComInfoPix("/br/com/renutrir/07-10-doacao-concluida.fxml",
+                                "ReNutrir - Doação Concluída", doadorNome, tipoDoacao, valorDoacao, dataHora);
+                    });
+                    break;
+                }
+            }
+        }).start();
     }
+
 
     @FXML
     private String gerarCodigoPixAleatorio() {
@@ -116,18 +147,41 @@ public class ControladorDoacaoConcluida {
     private TextField fieldIdTransacaoPix;
 
     @FXML
-    void doarFinalPix(ActionEvent event) {
+    public void doarFinalPix(ActionEvent actionEvent) {
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+        if (doador == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado.");
+            return;
+        }
+
+        String doadorNome = doador.getNome();
+        String tipoDoacao = "PIX";
+        LocalDateTime dataHora = LocalDateTime.now();
+
         ProgressAlert progressAlert = new ProgressAlert();
         progressAlert.start(new Stage());
         progressAlert.showProgress();
 
         new Thread(() -> {
-            try {
-                Thread.sleep(2000); // Simula uma tarefa de 2 segundos
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            for (int i = 0; i <= 100; i++) {
+                double progress = i / 100.0;
+                Platform.runLater(() -> progressAlert.updateProgress(progress));
+
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if (progress >= 1.0) {
+                    Platform.runLater(() -> {
+                        progressAlert.hideProgress();
+
+                        realizarTrocaDeTelaComInfo("/br/com/renutrir/07-10-doacao-concluida.fxml", "ReNutrir - Doação Concluída", doadorNome, tipoDoacao, dataHora);
+                    });
+                    break;
+                }
             }
-            Platform.runLater(() -> progressAlert.hideProgress());
         }).start();
     }
 
@@ -169,22 +223,45 @@ public class ControladorDoacaoConcluida {
     @FXML
     void doarCartaoDebito(ActionEvent event) {
         valorDoacao = fieldInserirValorCartao.getText();
+
         if (valorDoacao == null || valorDoacao.trim().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR,"Erro", "Por favor, insira um valor para a doação.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor para a doação.");
         } else {
-            realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-d-debito.fxml", "ReNutrir - Doar com Débito");
+            valorDoacao = valorDoacao.replace(",", ".");
+            try {
+                double valor = Double.parseDouble(valorDoacao);
+                if (valor <= 0) {
+                    showAlert(Alert.AlertType.ERROR, "Erro", "O valor da doação deve ser maior que R$ 0.");
+                } else {
+                    realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-2-c-debito.fxml", "ReNutrir - Doar com Débito");
+                }
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor numérico válido.");
+            }
         }
     }
 
     @FXML
     void doarCartaoCredito(ActionEvent event) {
         valorDoacao = fieldInserirValorCartao.getText();
+
         if (valorDoacao == null || valorDoacao.trim().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR,"Erro", "Por favor, insira um valor para a doação.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor para a doação.");
         } else {
-            realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-c-credito.fxml", "ReNutrir - Doar com Crédito");
+            valorDoacao = valorDoacao.replace(",", ".");
+            try {
+                double valor = Double.parseDouble(valorDoacao);
+                if (valor <= 0) {
+                    showAlert(Alert.AlertType.ERROR, "Erro", "O valor da doação deve ser maior que R$ 0.");
+                } else {
+                    realizarTrocaDeTelaCartao("/br/com/renutrir/07-2-1-c-credito.fxml", "ReNutrir - Doar com Crédito");
+                }
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor numérico válido.");
+            }
         }
     }
+
 
     @FXML
     void inserirValorCartaoField(ActionEvent event) {
@@ -213,7 +290,7 @@ public class ControladorDoacaoConcluida {
     @FXML
     private TextField fieldInserirSenhaCre;
 
-    public void receberDadosCartaoCredito(String titular, String numeroCartao, String senha) {
+    public void receberDadosCartaoCredito(String titular, String numeroCartao, String senha, String valorDoacaoCred) {
         exibirInfoDoacaoCartao.setText("Titular: " + titular + "\nNúmero do Cartão: " + numeroCartao);
     }
 
@@ -222,13 +299,28 @@ public class ControladorDoacaoConcluida {
         String titular = fieldInserirNomeTitularCre.getText();
         String numeroCartao = fieldInserirNumCredito.getText();
         String senha = fieldInserirSenhaCre.getText();
+        String valorDoacao = valorDoacaoCreExibir.getText();
+
+        if (titular.isEmpty() || numeroCartao.isEmpty() || senha.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "Todos os campos devem ser preenchidos.");
+            return;
+        }
+
+        if (numeroCartao.length() != 16) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "O número do cartão deve ter 16 dígitos.");
+            return;
+        }
+
+        if (senha.length() < 4 || senha.length() > 8) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "A senha deve ter entre 4 e 8 dígitos.");
+            return;
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-2-3-transacao-cartao.fxml"));
         try {
             Parent root = loader.load();
-
             ControladorDoacaoConcluida controller = loader.getController();
-            controller.receberDadosCartaoCredito(titular, numeroCartao, senha);
+            controller.receberDadosCartao(titular, numeroCartao, senha, valorDoacao);
 
             Stage stage = (Stage) creditoDoar.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -237,6 +329,7 @@ public class ControladorDoacaoConcluida {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void inserirNomeTitularCreField(ActionEvent event) {
@@ -289,8 +382,9 @@ public class ControladorDoacaoConcluida {
         realizarTrocaDeTela("/br/com/renutrir/07-2-cartao.fxml", "ReNutrir - Doar com Cartão");
     }
 
-    public void receberDadosCartao(String titular, String numeroCartao, String senha) {
+    public void receberDadosCartao(String titular, String numeroCartao, String senha, String valorDoacao) {
         exibirInfoDoacaoCartao.setText("Titular: " + titular + "\nNúmero do Cartão: " + numeroCartao);
+        valorDoacaoCartaoLabel.setText(valorDoacao);
     }
 
     @FXML
@@ -298,13 +392,28 @@ public class ControladorDoacaoConcluida {
         String titular = fieldInserirTitularDeb.getText();
         String numeroCartao = fieldInserirNumDebito.getText();
         String senha = fieldInserirSenhaDeb.getText();
+        String valorDoacao = valorDoacaoExibirDeb.getText();
+
+        if (titular.isEmpty() || numeroCartao.isEmpty() || senha.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "Todos os campos devem ser preenchidos.");
+            return;
+        }
+
+        if (numeroCartao.length() != 16) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "O número do cartão deve ter 16 dígitos.");
+            return;
+        }
+
+        if (senha.length() < 4 || senha.length() > 8) {
+            showAlert(Alert.AlertType.ERROR,"Erro", "A senha deve ter entre 4 e 8 dígitos.");
+            return;
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-2-3-transacao-cartao.fxml"));
         try {
             Parent root = loader.load();
-
             ControladorDoacaoConcluida controller = loader.getController();
-            controller.receberDadosCartao(titular, numeroCartao, senha);
+            controller.receberDadosCartao(titular, numeroCartao, senha, valorDoacao);
 
             Stage stage = (Stage) debitoDoar.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -313,6 +422,7 @@ public class ControladorDoacaoConcluida {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void inserirTitularDebField(ActionEvent event) {
@@ -339,14 +449,180 @@ public class ControladorDoacaoConcluida {
     @FXML
     public Button finalCartaoDoar;
 
+    @FXML
     public void doarFinalCartao(ActionEvent actionEvent) {
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+        if (doador == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado.");
+            return;
+        }
+
+        String doadorNome = doador.getNome();
+        String tipoDoacao = "Cartão";
+        LocalDateTime dataHora = LocalDateTime.now();
+
+        ProgressAlert progressAlert = new ProgressAlert();
+        progressAlert.start(new Stage());
+        progressAlert.showProgress();
+
+        new Thread(() -> {
+            for (int i = 0; i <= 100; i++) {
+                double progress = i / 100.0;
+                Platform.runLater(() -> progressAlert.updateProgress(progress));
+
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if (progress >= 1.0) {
+                    Platform.runLater(() -> {
+                        progressAlert.hideProgress();
+
+                        realizarTrocaDeTelaComInfo("/br/com/renutrir/07-10-doacao-concluida.fxml", "ReNutrir - Doação Concluída", doadorNome, tipoDoacao, dataHora);
+                    });
+                    break;
+                }
+            }
+        }).start();
     }
+
+
 
     @FXML
     public Text exibirInstituicaoDestinadaCartao;
     public Text exibirInfoDoacaoCartao;
     public Text valorDoacaoCartaoLabel;
     public Button voltarBotao;
+
+    //07.10
+
+    @FXML
+    public Label exibirInfoDoacaoLabel;
+
+    @FXML
+    private Button salvarComprovanteBotao;
+
+    @FXML
+    void botaoSalvarComprovante(ActionEvent event) {
+        String infoDoacao = exibirInfoDoacaoLabel.getText();
+
+        if (infoDoacao.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma informação para salvar.");
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Salvar Comprovante de Doação");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+
+        File file = fileChooser.showSaveDialog(((Stage) salvarComprovanteBotao.getScene().getWindow()));
+        if (file != null) {
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write(infoDoacao);
+                showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Comprovante salvo com sucesso!");
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar o comprovante.");
+            }
+        }
+    }
+
+    @FXML
+    private Button botaoRegistrarDoacao;
+
+    private String obterItemSelecionado() {
+        String itemSelecionado = "Cartão";
+        return itemSelecionado;
+    }
+
+    @FXML
+    private void registrarDoacao(ActionEvent event) {
+        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
+
+        if (doador == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado. Certifique-se de que você está logado.");
+            return;
+        }
+
+        String itemSelecionado = obterItemSelecionado();
+
+        ProgressAlert progressAlert = new ProgressAlert();
+        progressAlert.start(new Stage());
+        progressAlert.showProgress();
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(500);
+
+                String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+                String status = "Concluída";
+
+                Doacao doacao = new Doacao(doador.getNomeUsuario(), itemSelecionado, 1, dataHora, status);
+
+                RepositorioDoacoes repositorioDoacoes = new RepositorioDoacoes();
+                repositorioDoacoes.adicionarDoacao(doacao);
+                salvarDoacoesEmArquivo(repositorioDoacoes);
+
+                Platform.runLater(() -> {
+                    verificarProgressoParaCertificado(doador);
+
+                    progressAlert.hideProgress();
+                    showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi realizada com sucesso!");
+                    realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
+                });
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    public void salvarDoacoesEmArquivo(RepositorioDoacoes repositorioDoacoes) {
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+
+        if (doadorLogado == null) {
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Nenhum doador está logado."));
+            return;
+        }
+
+        String nomeUsuario = doadorLogado.getNomeUsuario();
+        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.dat";
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(caminhoArquivo))) {
+            oos.writeObject(repositorioDoacoes.listarDoacoes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar as doações."));
+        }
+    }
+
+    public void verificarProgressoParaCertificado(Doador doador) {
+        ControladorCertificado controladorCertificado = new ControladorCertificado();
+        controladorCertificado.verificarProgressoParaCertificado(doador);
+    }
+
+    public void setInformacoesDoacao(String doadorNome, String tipoDoacao, LocalDateTime dataHora) {
+        String dataHoraFormatada = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        exibirInfoDoacaoLabel.setText(String.format(
+                "Doador: %s\nData e hora: %s\nTipo da doação: %s",
+                doadorNome, dataHoraFormatada, tipoDoacao
+        ));
+    }
+
+    public void setInformacoesDoacaoPix(String doadorNome, String tipoDoacao, String valorDoacao, LocalDateTime dataHora) {
+        String dataHoraFormatada = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        exibirInfoDoacaoLabel.setText(String.format(
+                "Doador: %s\nData e hora: %s\nTipo da doação: %s\nValor doado: R$ %s",
+                doadorNome, dataHoraFormatada, tipoDoacao, valorDoacao
+        ));
+    }
+
+    @FXML
+    void botaoVoltar39(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
+    }
 
     public void trocarTela(Stage stage, String fxmlFile, String title) {
         try {
@@ -419,6 +695,43 @@ public class ControladorDoacaoConcluida {
             e.printStackTrace();
         }
     }
+
+    public void realizarTrocaDeTelaComInfo(String caminhoFXML, String titulo, String doadorNome, String tipoDoacao, LocalDateTime dataHora) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
+            Parent root = loader.load();
+
+            ControladorDoacaoConcluida controlador = loader.getController();
+            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, dataHora);
+
+            Stage stage = (Stage) finalCartaoDoar.getScene().getWindow();
+            stage.setTitle(titulo);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível trocar a tela.");
+        }
+    }
+
+    public void realizarTrocaDeTelaComInfoPix(String caminhoFXML, String titulo, String doadorNome, String tipoDoacao, String valorDoacao, LocalDateTime dataHora) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
+            Parent root = loader.load();
+
+            ControladorDoacaoConcluida controlador = loader.getController();
+            controlador.setInformacoesDoacaoPix(doadorNome, tipoDoacao, valorDoacao, dataHora);
+
+            Stage stage = (Stage) confPixDoar.getScene().getWindow();
+            stage.setTitle(titulo);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível trocar a tela.");
+        }
+    }
+
 
 
 }
