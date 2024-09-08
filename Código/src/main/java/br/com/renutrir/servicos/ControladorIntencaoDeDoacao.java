@@ -305,8 +305,10 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     void doarAlimentosBotao(ActionEvent actionEvent) {
         String nomeItem = fieldItemDoarIntencao.getText();
         String qtdItem = fieldInserirQtdItem.getText();
-        String instituicaoEscolhida = "Instituição José de Sá";
-
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+        RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Alimentos", nomeItem);
+        repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
         int quantidade;
         try {
             quantidade = Integer.parseInt(qtdItem);
@@ -374,7 +376,10 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     void doarBebidaBotao(ActionEvent actionEvent) {
         String nomeItem = fieldItemDoarIntencao.getText();
         String qtdItem = fieldInserirQtdItem.getText();
-        String instituicaoEscolhida = "Instituição José de Sá";
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+        RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Bebidas", nomeItem);
+        repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
 
         int quantidade;
         try {
@@ -449,7 +454,10 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     void doarRoupaBotao(ActionEvent actionEvent) {
         String nomeItem = fieldItemDoarIntencao.getText();
         String qtdItem = fieldInserirQtdItem.getText();
-        String instituicaoEscolhida = "Instituição José de Sá";
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+        RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Roupas", nomeItem);
+        repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
 
         int quantidade;
         try {
@@ -514,7 +522,10 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     void doarProdLimpezaBotao(ActionEvent actionEvent) {
         String nomeItem = fieldItemDoarIntencao.getText();
         String qtdItem = fieldInserirQtdItem.getText();
-        String instituicaoEscolhida = "Instituição José de Sá";
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+        RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Produtos de Limpeza", nomeItem);
+        repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
 
         int quantidade;
         try {
@@ -578,12 +589,14 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     @FXML
     void botaoDoarMovel(ActionEvent actionEvent) {
         String nomeItem = fieldItemDoarIntencao.getText();
-        String qtdItem = String.valueOf(1);
-        String instituicaoEscolhida = "Instituição José de Sá";
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+        RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, 1, "Móveis", nomeItem);
+        repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
 
         int quantidade;
         try {
-            quantidade = Integer.parseInt(qtdItem);
+            quantidade = 1;
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Erro de Validação", "A quantidade deve ser um número válido.");
             return;
@@ -644,7 +657,10 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     void doarProdHigieneBotao(ActionEvent actionEvent) {
         String nomeItem = fieldItemDoarIntencao.getText();
         String qtdItem = fieldInserirQtdItem.getText();
-        String instituicaoEscolhida = "Instituição José de Sá";
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+        RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Produtos de Higiene", nomeItem);
+        repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
 
         int quantidade;
         try {

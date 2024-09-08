@@ -75,4 +75,8 @@ public class Conta implements Serializable {
         this.telefone = telefone;
     }
 
+    @Override
+    public String toString(){
+        return getNome();
+    }
 }
