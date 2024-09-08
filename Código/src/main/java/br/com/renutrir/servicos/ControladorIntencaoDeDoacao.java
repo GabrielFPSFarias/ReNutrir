@@ -81,13 +81,17 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        repositorioInstituicao = new RepositorioInstituicao();
-        carregarInstituicoes();
+        if (instituicoesListView != null) {
+            carregarInstituicoes();
+        } else {
+            System.err.println("instituicoesListView é null!");
+        }
 
         if (RepositorioIntencaoDoacao.getInstituicaoSelecionada() == null) {
-            instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação. Escolha abaixo a instituição beneficiária.");
+            instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação.");
         }
     }
+
 
     private void carregarInstituicoes() {
         if (instituicoesListView != null) {
@@ -126,26 +130,27 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     @FXML
     public void botaoDoarAgora(ActionEvent actionEvent) {
         try {
-            realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-confirmar-doacao.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) doarAgoraBotao.getScene().getWindow();
+            stage.setTitle("ReNutrir - Confirmar Doação");
+            stage.setScene(new Scene(root));
 
-            if (instituicaoLabel == null) {
-                System.err.println("instituicaoLabel é null.");
-                instituicaoLabel = new Label();
-            }
-
+            ControladorIntencaoDeDoacao controlador = loader.getController();
             Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
 
             if (instituicaoSelecionada != null) {
-                instituicaoLabel.setText("Você está doando para a: " + instituicaoSelecionada.getNome());
+                controlador.instituicaoLabel.setText("Você está doando para a: " + instituicaoSelecionada.getNome());
             } else {
-                instituicaoLabel.setText("Nenhuma instituição selecionada.");
+                controlador.instituicaoLabel.setText("Nenhuma instituição selecionada.");
             }
-        } catch (Exception e) {
+            stage.show();
+
+        } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Erro ao atualizar o Label de instituição: " + e.getMessage());
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
         }
     }
-
 
     @FXML
     public void botaoVoltar5() {

@@ -86,7 +86,7 @@
                   <Button fx:id="bebidasDoar" layoutX="293.0" layoutY="98.0" mnemonicParsing="false" onAction="#doarBebidas" prefHeight="30.0" prefWidth="226.0" text="Bebidas" textAlignment="CENTER" GridPane.rowIndex="3" />
                   <Button fx:id="produtoLimpezaDoar" layoutX="293.0" layoutY="238.0" mnemonicParsing="false" onAction="#doarProdutoLimpeza" prefHeight="30.0" prefWidth="226.0" text="Produtos de limpeza" textAlignment="CENTER" GridPane.rowIndex="5" />
                   <Button fx:id="itemHigienerDoar" layoutX="293.0" layoutY="259.0" mnemonicParsing="false" onAction="#doarItemHgiene" prefHeight="30.0" prefWidth="226.0" text="Itens de higiene pessoal" textAlignment="CENTER" GridPane.rowIndex="6" />
-                  <Label fx:id="instituicaoLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="270.0" text="Instituição Selecionada" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="8">
+                  <Label fx:id="instituicaoLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="480.0" text="Instituição Selecionada" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="8">
                      <font>
                         <Font name="Segoe UI Semibold" size="14.0" />
                      </font>
