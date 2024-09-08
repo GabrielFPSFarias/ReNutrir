@@ -1,6 +1,7 @@
 package br.com.renutrir.repositorio;
 
 import br.com.renutrir.model.Doador;
+import br.com.renutrir.model.Instituicao;
 import br.com.renutrir.model.IntencaoDoacao;
 import javafx.scene.control.Alert;
 
@@ -35,6 +36,16 @@ public class RepositorioIntencaoDoacao {
             }
         }
         return null;
+    }
+
+    public ArrayList<IntencaoDoacao> intencoesPorInst(Instituicao instituicao){
+        ArrayList<IntencaoDoacao> intencoes = new ArrayList<>();
+        for(IntencaoDoacao intencao : this.intencoes){
+            if(intencao.getInstituicao().equals(instituicao)){
+                intencoes.add(intencao);
+            }
+        }
+        return intencoes;
     }
 
     public List<IntencaoDoacao> listarIntencoes() {

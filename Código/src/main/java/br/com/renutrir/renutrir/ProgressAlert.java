@@ -49,6 +49,11 @@ public class ProgressAlert extends Application {
         }).start();
     }
 
+    public void updateProgress(double progress) {
+        progressBar.setProgress(progress);
+    }
+
+
     public void hideProgress() {
         stage.hide();
     }

@@ -642,6 +642,7 @@ public class HelloController {
     }
 
     public void botaoDoacoesPendentesInstituicao(ActionEvent actionEvent) {
+
         realizarTrocaDeTela("/br/com/renutrir/26-doacoes-pendentes-inst.fxml", "ReNutrir - Doações Pendentes");
     }
 

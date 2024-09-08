@@ -57,6 +57,10 @@ public class Endereco implements Serializable {
                 "Complemento: " + complemento + ", " +
                 "Referência: " + referencia;
     }
+
+    public String getEnderecoCompleto() {
+        return String.format("%s, %s - %s, %s - %s, %s", endereco, numero, bairro, cidade, uf, referencia);
+    }
 }
 
 /*
