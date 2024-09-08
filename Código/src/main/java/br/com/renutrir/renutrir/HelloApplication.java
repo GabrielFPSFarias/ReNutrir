@@ -5,6 +5,7 @@ import br.com.renutrir.servicos.ControladorLogin;
 import br.com.renutrir.servicos.ControladorVoluntario;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+
 
 import javax.imageio.IIOParam;
 import java.io.IOException;
@@ -23,20 +25,24 @@ public class HelloApplication extends Application {
     private static HelloApplication instance;
     private ProgressAlert progressAlert;
 
+
+
     public static HelloApplication getInstance() {
         return instance;
     }
 
+
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
         instance = this;
+
 
         //Tela inicial
         FXMLLoader telaInicialLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/01-tela-inicial.fxml"));
         Scene scene = new Scene(telaInicialLoader.load(), 800, 500);
-        stage.setTitle("ReNutrir");
-        stage.setScene(scene);
-        stage.setResizable(false);
+        primaryStage.setTitle("ReNutrir");
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         HelloController helloController = telaInicialLoader.getController();
 
         /*
@@ -158,8 +164,8 @@ public class HelloApplication extends Application {
         */
 
         //define a tela que começa
-        stage.setScene(scene);
-        stage.show();
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public void showAlertComProgresso() {

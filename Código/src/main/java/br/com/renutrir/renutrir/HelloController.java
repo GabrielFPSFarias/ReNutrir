@@ -37,7 +37,25 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
+import javafx.scene.layout.VBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Cell;
+import javafx.scene.control.SelectionMode;
+
+
 public class HelloController {
+    RepositorioContas contas = new RepositorioContas();
+
+    ListView<String> lv = new ListView<>();
+
+  /*  lv.getItems().addAll(FXCollections.observableArrayList(contas.getListaDeNomesInstituicoes()));
+
+     listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue != null) {
+            // Abrir a nova janela com os detalhes da instituição
+            DetalhesInstituicao.showDetalhes(newValue);
+        }
+    };*/
 
     public Button instituicoesDoacaoBotao;
     public ComboBox escolherInstituicaoDoarCbox;
@@ -129,6 +147,8 @@ public class HelloController {
             }
         }
     }
+
+
 
     @FXML
     public void botaoVoltar() {

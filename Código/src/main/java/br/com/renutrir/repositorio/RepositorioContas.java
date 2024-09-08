@@ -2,10 +2,10 @@ package br.com.renutrir.repositorio;
 
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Instituicao;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.ArrayList;
 
 public class RepositorioContas {
 
@@ -24,6 +24,12 @@ public class RepositorioContas {
     private Map<String, Instituicao> contasPorCnpj;
     private Map<String, Instituicao> contasPorNomeInstituicao;
     private Map<String, Instituicao> contasEmailInstituicao;
+
+    private ArrayList<String> listaDeNomesInstituicoes = new ArrayList<>(instituicoesPorNomeUsuario.keySet());
+
+    public ArrayList<String> getListaDeNomesInstituicoes() {
+        return listaDeNomesInstituicoes;
+    }
 
     public RepositorioContas() {
         this.doadoresPorEmail = new HashMap<>();
@@ -176,4 +182,7 @@ public class RepositorioContas {
         return true;
     }
 
+    public Map<String, Instituicao> getContasPorNomeInstituicao() {
+        return contasPorNomeInstituicao;
+    }
 }
