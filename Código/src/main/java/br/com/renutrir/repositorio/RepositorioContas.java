@@ -2,10 +2,8 @@ package br.com.renutrir.repositorio;
 
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Instituicao;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.ArrayList;
+
+import java.util.*;
 
 public class RepositorioContas {
 
@@ -25,12 +23,6 @@ public class RepositorioContas {
     private Map<String, Instituicao> contasPorNomeInstituicao;
     private Map<String, Instituicao> contasEmailInstituicao;
 
-    private ArrayList<String> listaDeNomesInstituicoes;
-
-    public ArrayList<String> getListaDeNomesInstituicoes() {
-        return listaDeNomesInstituicoes;
-    }
-
     public RepositorioContas() {
         this.doadoresPorEmail = new HashMap<>();
         this.doadoresPorNomeUsuario = new HashMap<>();
@@ -44,10 +36,12 @@ public class RepositorioContas {
         this.contasPorCnpj = new HashMap<>();
         this.contasPorNomeInstituicao = new HashMap<>();
         this.contasEmailInstituicao = new HashMap<>();
-        this.listaDeNomesInstituicoes = new ArrayList<>(instituicoesPorNomeUsuario.keySet());
 
     }
 
+    public List<Instituicao> getListaNomeInstituicoes() {
+        return new ArrayList<>(contasPorNomeInstituicao.values());
+    }
 
 
     public boolean adicionarDoador(Doador doador) {
@@ -186,7 +180,4 @@ public class RepositorioContas {
         return true;
     }
 
-    public Map<String, Instituicao> getContasPorNomeInstituicao() {
-        return contasPorNomeInstituicao;
-    }
 }

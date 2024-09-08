@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -23,7 +24,7 @@
                         <Insets bottom="10.0" left="70.0" top="20.0" />
                     </VBox.margin>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de instituições" textAlignment="CENTER" wrappingWidth="188.1875">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de Instituições" textAlignment="CENTER" wrappingWidth="188.1875">
                     <VBox.margin>
                         <Insets left="50.0" />
                     </VBox.margin>
@@ -36,38 +37,35 @@
     </top>
 
     <center>
-        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="433.0" prefWidth="800.0">
             <children>
-                <ScrollPane prefHeight="400.0" prefWidth="600.0" fitToWidth="true">
+                <ScrollPane fitToWidth="true" layoutX="14.0" layoutY="-47.0" prefHeight="400.0" prefWidth="289.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="10.0">
                     <content>
-                        <VBox alignment="CENTER">
-                            <children>
-                                <ListView fx:id="instituicaoListView" prefHeight="319.0" prefWidth="400.0" />
-                            </children>
-                            <VBox.margin>
-                                <Insets top="20.0" />
-                            </VBox.margin>
-                        </VBox>
+                        <ListView fx:id="instituicaoListView" prefHeight="399.0" prefWidth="130.0" />
                     </content>
                 </ScrollPane>
+
+                <!-- Label para mostrar detalhes da instituição -->
+                <Label fx:id="instituicaoDetalhesLabel" layoutX="412.0" layoutY="6.0" prefHeight="305.0" prefWidth="358.0" text="Selecione uma instituição para ver os detalhes" AnchorPane.leftAnchor="412.0" AnchorPane.rightAnchor="30.0" wrapText="true">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
             </children>
-            <VBox.margin>
-                <Insets top="20.0" bottom="20.0" />
-            </VBox.margin>
-        </VBox>
+        </AnchorPane>
     </center>
 
     <bottom>
-        <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="72.0" BorderPane.alignment="BOTTOM_LEFT">
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="72.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="voltarBotao71" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar71" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
+                <Button fx:id="voltarBotao71" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#voltarBotao71" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
                     <VBox.margin>
                         <Insets left="10.0" />
                     </VBox.margin>
                 </Button>
             </children>
             <BorderPane.margin>
-                <Insets bottom="10.0" top="10.0" />
+                <Insets bottom="10.0" left="720.0" top="10.0" />
             </BorderPane.margin>
         </VBox>
     </bottom>
