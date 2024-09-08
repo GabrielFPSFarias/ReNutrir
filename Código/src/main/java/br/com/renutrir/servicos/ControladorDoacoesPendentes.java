@@ -2,23 +2,25 @@ package br.com.renutrir.servicos;
 
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Instituicao;
+import br.com.renutrir.model.IntencaoDoacao;
+import br.com.renutrir.repositorio.RepositorioIntencaoDoacao;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ControladorDoacoesPendentes {
-
-    public ControladorDoacoesPendentes() {
-    }
 
     public void trocarTela(Stage stage, String fxmlFile, String title) {
         try {
@@ -68,6 +70,22 @@ public class ControladorDoacoesPendentes {
         realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml","ReNutrir - Menu Instituição");
     }
 
+    @FXML
+    private ComboBox <IntencaoDoacao> CBoxDPendentes;
+
+public void preencherCBoxDPendentes(RepositorioIntencaoDoacao repositorioIntencaoDoacao, Instituicao instituicao) {
+    CBoxDPendentes.getItems().clear();
+    ArrayList<IntencaoDoacao> intencoes = repositorioIntencaoDoacao.intencoesPorInst(instituicao);
+    if(!intencoes.isEmpty()){
+        for (IntencaoDoacao intencaoDoacao : intencoes) {
+            CBoxDPendentes.getItems().add(intencaoDoacao);
+        }
+    }
+    }
+
+    public Button exibirIDoacaoBotao;
+    public void botaoExibirIDoacao(ActionEvent actionEvent) {
+    }
     //Tela 26-1
 
     @FXML
@@ -87,5 +105,4 @@ public class ControladorDoacoesPendentes {
 
     public void botaoDoacaoRecebidaF(ActionEvent actionEvent) {
     }
-
 }
