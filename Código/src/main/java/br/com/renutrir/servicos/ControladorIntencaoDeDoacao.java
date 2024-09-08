@@ -573,7 +573,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     @FXML
     void botaoDoarMovel(ActionEvent actionEvent) {
         String nomeItem = fieldItemDoarIntencao.getText();
-        String qtdItem = fieldInserirQtdItem.getText();
+        String qtdItem = String.valueOf(1);
         String instituicaoEscolhida = "Instituição José de Sá";
 
         int quantidade;
