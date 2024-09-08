@@ -103,4 +103,8 @@ public class RepositorioIntencaoDoacao {
     public static void setInstituicaoSelecionada(Instituicao instituicao) {
         instituicaoSelecionada = instituicao;
     }
+
+    public List<IntencaoDoacao> getIntencoes() {
+        return intencoes;
+    }
 }
