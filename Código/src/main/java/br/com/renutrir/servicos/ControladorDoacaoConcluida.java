@@ -11,7 +11,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -36,10 +35,7 @@ import java.util.Random;
 public class ControladorDoacaoConcluida {
 
      @FXML
-     private Text valorDoacaoPixLabel;
-     @FXML
      private Text enderecoInstituicaoLabel;
-
 
     //Tela 07-1
 
@@ -59,17 +55,21 @@ public class ControladorDoacaoConcluida {
     }
 
     @FXML
-    public void configurarTelaConfirmarPix(String valorDoacao) {
-        valorDoacaoPixLabel.setText("Valor: R$ " + valorDoacao);
-        fieldPixCopiaCola.setText(gerarCodigoPixAleatorio());
-    }
-
-    @FXML
     private void doarConfPix(ActionEvent event) {
         String valorDoacao = fieldInserirValorPix.getText();
-
         if (valorDoacao.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor para a doação.");
+            return;
+        }
+
+        try {
+            double valor = Double.parseDouble(valorDoacao);
+            if (valor <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "O valor da doação deve ser maior que R$ 0.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um valor numérico válido.");
             return;
         }
 
@@ -78,10 +78,6 @@ public class ControladorDoacaoConcluida {
             showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado. Certifique-se de que você está logado.");
             return;
         }
-
-        String doadorNome = doador.getNomeUsuario();
-        String tipoDoacao = "PIX";
-        LocalDateTime dataHora = LocalDateTime.now();
 
         ProgressAlert progressAlert = new ProgressAlert();
         progressAlert.start(new Stage());
@@ -93,7 +89,7 @@ public class ControladorDoacaoConcluida {
                 Platform.runLater(() -> progressAlert.updateProgress(progress));
 
                 try {
-                    Thread.sleep(10); // Simulação do progresso
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -101,9 +97,7 @@ public class ControladorDoacaoConcluida {
                 if (progress >= 1.0) {
                     Platform.runLater(() -> {
                         progressAlert.hideProgress();
-
-                        realizarTrocaDeTelaComInfoPix("/br/com/renutrir/07-10-doacao-concluida.fxml",
-                                "ReNutrir - Doação Concluída", doadorNome, tipoDoacao, valorDoacao, dataHora);
+                        realizarTrocaDeTelaComValor("/br/com/renutrir/07-1-1-pix-detalhes.fxml", "ReNutrir - Doar com PIX", valorDoacao);
                     });
                     break;
                 }
@@ -111,6 +105,16 @@ public class ControladorDoacaoConcluida {
         }).start();
     }
 
+    public void configurarTelaConfirmarPix(String valorDoacao) {
+        valorDoacaoPixLabel.setText("Valor: R$ " + valorDoacao);
+        fieldPixCopiaCola.setText(gerarCodigoPixAleatorio());
+    }
+
+    public void configurarTela(String nomeDoador, String tipoDoacao, LocalDateTime dataHora, String valorDoacao) {
+        exibirInfoDoacaoLabel.setText("Doador: " + nomeDoador + "\nTipo de Doação: " + tipoDoacao +
+                "\nData: " + dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) +
+                "\nValor: R$ " + valorDoacao);
+    }
 
     @FXML
     private String gerarCodigoPixAleatorio() {
@@ -141,13 +145,16 @@ public class ControladorDoacaoConcluida {
     private Button copiarPixPagar;
 
     @FXML
+    private Label valorDoacaoPixLabel;
+
+    @FXML
     private TextField fieldPixCopiaCola;
 
     @FXML
     private TextField fieldIdTransacaoPix;
 
     @FXML
-    public void doarFinalPix(ActionEvent actionEvent) {
+    private void doarFinalPix(ActionEvent event) {
         Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
         if (doador == null) {
             showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado.");
@@ -176,8 +183,8 @@ public class ControladorDoacaoConcluida {
                 if (progress >= 1.0) {
                     Platform.runLater(() -> {
                         progressAlert.hideProgress();
-
-                        realizarTrocaDeTelaComInfo("/br/com/renutrir/07-10-doacao-concluida.fxml", "ReNutrir - Doação Concluída", doadorNome, tipoDoacao, dataHora);
+                        realizarTrocaDeTelaComInfoPix("/br/com/renutrir/07-10-doacao-concluida.fxml",
+                                "ReNutrir - Doação Concluída", doadorNome, tipoDoacao, dataHora, valorDoacao);
                     });
                     break;
                 }
@@ -611,14 +618,6 @@ public class ControladorDoacaoConcluida {
         ));
     }
 
-    public void setInformacoesDoacaoPix(String doadorNome, String tipoDoacao, String valorDoacao, LocalDateTime dataHora) {
-        String dataHoraFormatada = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
-        exibirInfoDoacaoLabel.setText(String.format(
-                "Doador: %s\nData e hora: %s\nTipo da doação: %s\nValor doado: R$ %s",
-                doadorNome, dataHoraFormatada, tipoDoacao, valorDoacao
-        ));
-    }
-
     @FXML
     void botaoVoltar39(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
@@ -714,23 +713,46 @@ public class ControladorDoacaoConcluida {
         }
     }
 
-    public void realizarTrocaDeTelaComInfoPix(String caminhoFXML, String titulo, String doadorNome, String tipoDoacao, String valorDoacao, LocalDateTime dataHora) {
+    public void realizarTrocaDeTelaComValor(String caminhoFXML, String titulo, String valorDoacao) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
             Parent root = loader.load();
 
-            ControladorDoacaoConcluida controlador = loader.getController();
-            controlador.setInformacoesDoacaoPix(doadorNome, tipoDoacao, valorDoacao, dataHora);
+            if (caminhoFXML.contains("07-1-1-pix-detalhes.fxml")) {
+                ControladorDoacaoConcluida controlador = loader.getController();
+                controlador.configurarTelaConfirmarPix(valorDoacao);
+            }
 
-            Stage stage = (Stage) confPixDoar.getScene().getWindow();
+            Stage stage = (Stage) voltarBotao.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
             stage.setTitle(titulo);
-            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível trocar a tela.");
         }
     }
+
+    public void realizarTrocaDeTelaComInfoPix(String caminhoFXML, String titulo, String nomeDoador, String tipoDoacao, LocalDateTime dataHora, String valorDoacao) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
+            Parent root = loader.load();
+
+            if (caminhoFXML.contains("07-10-doacao-concluida.fxml")) {
+                ControladorDoacaoConcluida controlador = loader.getController();
+                controlador.configurarTela(nomeDoador, tipoDoacao, dataHora, valorDoacao);
+            }
+
+            Stage stage = (Stage) voltarBotao.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle(titulo);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 
