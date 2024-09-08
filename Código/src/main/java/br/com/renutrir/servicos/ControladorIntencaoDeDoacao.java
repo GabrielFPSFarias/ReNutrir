@@ -76,6 +76,9 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     private RepositorioInstituicao repositorioInstituicao;
 
+    @FXML
+    private Label instituicaoLabel;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         repositorioInstituicao = new RepositorioInstituicao();
@@ -122,8 +125,27 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     public void botaoDoarAgora(ActionEvent actionEvent) {
-        realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
+        try {
+            realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
+
+            if (instituicaoLabel == null) {
+                System.err.println("instituicaoLabel é null.");
+                instituicaoLabel = new Label();
+            }
+
+            Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+
+            if (instituicaoSelecionada != null) {
+                instituicaoLabel.setText("Você está doando para a: " + instituicaoSelecionada.getNome());
+            } else {
+                instituicaoLabel.setText("Nenhuma instituição selecionada.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Erro ao atualizar o Label de instituição: " + e.getMessage());
+        }
     }
+
 
     @FXML
     public void botaoVoltar5() {
@@ -170,7 +192,6 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     }
 
     //Tela 05 - Intenção de doação
-
 
 
     //Label
