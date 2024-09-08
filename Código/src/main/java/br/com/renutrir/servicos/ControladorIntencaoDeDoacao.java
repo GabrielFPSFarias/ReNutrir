@@ -83,19 +83,8 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        RepositorioInstituicao repositorioInstituicao = new RepositorioInstituicao();
-
-        instituicoesListView.setCellFactory(listView -> new ListCell<Instituicao>() {
-            @Override
-            protected void updateItem(Instituicao item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty || item == null ? "" : item.getNome());
-            }
-        });
-
         if (instituicoesListView != null) {
-            List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
-            instituicoesListView.getItems().addAll(instituicoes);
+            carregarInstituicoes();
         } else {
             System.err.println("instituicoesListView é null!");
         }
