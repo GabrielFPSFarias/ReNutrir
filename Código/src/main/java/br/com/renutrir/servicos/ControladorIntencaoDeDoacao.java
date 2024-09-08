@@ -43,7 +43,7 @@ import br.com.renutrir.renutrir.HelloController;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
 
-public class ControladorIntencaoDeDoacao {
+public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     public Button botaoItemDoar;
@@ -72,15 +72,14 @@ public class ControladorIntencaoDeDoacao {
     private Label instituicaoNomeLabel;
 
     @FXML
-    private ListView<String> instituicoesListView;
+    private ListView<Instituicao> instituicoesListView;
 
     private RepositorioInstituicao repositorioInstituicao;
 
-    @FXML
-    private void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
         repositorioInstituicao = new RepositorioInstituicao();
         carregarInstituicoes();
-        atualizarLabelInstituicao();
 
         if (RepositorioIntencaoDoacao.getInstituicaoSelecionada() == null) {
             instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação. Escolha abaixo a instituição beneficiária.");
@@ -90,15 +89,21 @@ public class ControladorIntencaoDeDoacao {
     private void carregarInstituicoes() {
         if (instituicoesListView != null) {
             List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
-            List<String> nomesInstituicoes = instituicoes.stream()
-                    .map(Instituicao::getNome)
-                    .toList();
+            ObservableList<Instituicao> instituicoesObservableList = FXCollections.observableArrayList(instituicoes);
 
-            instituicoesListView.setItems(FXCollections.observableArrayList(nomesInstituicoes));
-            instituicoesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            instituicoesListView.setItems(instituicoesObservableList);
+            instituicoesListView.setCellFactory(lv -> new ListCell<Instituicao>() {
+                @Override
+                protected void updateItem(Instituicao item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(empty ? null : item.getNome());
+                }
+            });
+
             instituicoesListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal != null) {
-                    repositorioInstituicao.buscarInstituicaoPorNome(newVal).ifPresent(inst -> RepositorioIntencaoDoacao.setInstituicaoSelecionada(inst));
+                    RepositorioIntencaoDoacao.setInstituicaoSelecionada(newVal);
+                    atualizarLabelInstituicao();
                 }
             });
         } else {
