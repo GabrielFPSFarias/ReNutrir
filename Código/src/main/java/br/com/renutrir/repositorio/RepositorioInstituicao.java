@@ -80,5 +80,4 @@ public class RepositorioInstituicao {
                 .filter(i -> i.getNome() != null && i.getNome().equals(nome))
                 .findFirst();
     }
-
 }
