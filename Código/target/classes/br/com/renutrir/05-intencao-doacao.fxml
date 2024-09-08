@@ -72,7 +72,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="instituicoesListView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="109.0" prefWidth="415.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ListView fx:id="instituicoesListView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="107.0" prefWidth="396.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>

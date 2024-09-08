@@ -58,16 +58,15 @@ public class ControladorIntencaoDeDoacao {
 
     private ControladorTelas controladorTelas;
 
-    public void setControladorTelas(ControladorTelas controladorTelas) {
-        this.controladorTelas = controladorTelas;
-    }
-
     public void setHelloController(HelloController helloController) {
         this.helloController = helloController;
     }
 
     @FXML
     private Button doarAgoraBotao;
+
+    @FXML
+    private Button instituicoesDoacaoBotao;
 
     @FXML
     private Label instituicaoNomeLabel;
@@ -79,8 +78,13 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     private void initialize() {
+        repositorioInstituicao = new RepositorioInstituicao();
         carregarInstituicoes();
         atualizarLabelInstituicao();
+
+        if (RepositorioIntencaoDoacao.getInstituicaoSelecionada() == null) {
+            instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação. Escolha abaixo a instituição beneficiária.");
+        }
     }
 
     private void carregarInstituicoes() {
@@ -91,6 +95,7 @@ public class ControladorIntencaoDeDoacao {
                     .toList();
 
             instituicoesListView.setItems(FXCollections.observableArrayList(nomesInstituicoes));
+            instituicoesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             instituicoesListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal != null) {
                     repositorioInstituicao.buscarInstituicaoPorNome(newVal).ifPresent(inst -> RepositorioIntencaoDoacao.setInstituicaoSelecionada(inst));
@@ -110,11 +115,6 @@ public class ControladorIntencaoDeDoacao {
         }
     }
 
-    //Tela 05 - Intenção de doação
-
-    @FXML
-    public Button instituicoesDoacaoBotao;
-
     @FXML
     public void botaoDoarAgora(ActionEvent actionEvent) {
         realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
@@ -127,7 +127,45 @@ public class ControladorIntencaoDeDoacao {
 
     @FXML
     public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
+
     }
+
+    @FXML
+    public void clearListView(ActionEvent event) {
+        instituicoesListView.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    public void selectAllListView(ActionEvent event) {
+        instituicoesListView.getSelectionModel().selectAll();
+    }
+
+    @FXML
+    public void selectFirstListView(ActionEvent event) {
+        instituicoesListView.getSelectionModel().selectFirst();
+    }
+
+    @FXML
+    public void selectLastListView(ActionEvent event) {
+        instituicoesListView.getSelectionModel().selectLast();
+    }
+
+    @FXML
+    public void selectNextListView(ActionEvent event) {
+        instituicoesListView.getSelectionModel().selectNext();
+    }
+
+    @FXML
+    public void selectPrevListView(ActionEvent event) {
+        instituicoesListView.getSelectionModel().selectPrevious();
+    }
+
+    public void setControladorTelas(ControladorTelas controladorTelas) {
+        this.controladorTelas = controladorTelas;
+    }
+
+    //Tela 05 - Intenção de doação
+
 
 
     //Label
