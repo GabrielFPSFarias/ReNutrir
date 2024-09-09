@@ -108,11 +108,38 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         colFaltam.setCellValueFactory(new PropertyValueFactory<>("faltam"));
     }
 
-    private void carregarEExibirSolicitacoes() {
-        List<SolicitacaoDoacao> solicitacoes = repositorioSolicitacaoDoacao.carregarSolicitacoes();
-        ObservableList<SolicitacaoDoacao> observableSolicitacoes = FXCollections.observableArrayList(solicitacoes);
-        tableViewDoacoesSolicitadas.setItems(observableSolicitacoes);
+    public void carregarEExibirSolicitacoes() {
+        List<SolicitacaoDoacao> solicitacoes = new ArrayList<>();
+
+        String SolicitacaoDoacao = RepositorioSolicitacaoDoacao.SOLICITACAO_DOACAO;
+        File arquivo = new File(SolicitacaoDoacao);
+
+        if (!arquivo.exists()) {
+            System.out.println("Arquivo de solicitações não encontrado.");
+            return;
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
+            Object obj;
+            while ((obj = ois.readObject()) != null) {
+                if (obj instanceof SolicitacaoDoacao) {
+                    solicitacoes.add((SolicitacaoDoacao) obj);
+                }
+            }
+        } catch (EOFException eof) {
+            System.out.println("Fim do arquivo alcançado.");
+        } catch (StreamCorruptedException sce) {
+            System.out.println("Erro no fluxo de entrada: " + sce.getMessage());
+            sce.printStackTrace();
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+
+        for (SolicitacaoDoacao solicitacao : solicitacoes) {
+            System.out.println(solicitacao);
+        }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -219,8 +246,11 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
             ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.configurarTabela();
-            controlador.inicializarDados();
             controlador.carregarEExibirSolicitacoes();
+            if(controlador.instituicaoNomeLabel == null) {
+                controlador.instituicaoNomeLabel = new Label();
+            }
+            controlador.instituicaoNomeLabel.setText("Instituição - TP Solicitação");
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -230,7 +260,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação para instituições.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela das solicitações das instituições.");
         }
     }
 

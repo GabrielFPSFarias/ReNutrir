@@ -8,15 +8,16 @@ import java.util.List;
 
 public class RepositorioSolicitacaoDoacao {
 
-    private static final String SOLICITACAO_DOACAO = "src/dados/solicitacoes_doacoes.dat";
+    public static final String SOLICITACAO_DOACAO = "src/dados/solicitacoes_doacoes.dat";
 
     public void salvarSolicitacao(SolicitacaoDoacao solicitacao) {
-        try (ObjectOutputStream oos = new AppendableObjectOutputStream(new FileOutputStream(SOLICITACAO_DOACAO, true))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SOLICITACAO_DOACAO, true))) {
             oos.writeObject(solicitacao);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     public List<SolicitacaoDoacao> carregarSolicitacoes() {
         List<SolicitacaoDoacao> solicitacoes = new ArrayList<>();
