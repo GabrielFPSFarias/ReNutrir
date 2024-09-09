@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -114,11 +115,14 @@ public class ControladorDoacoesPendentes implements Initializable {
         }
     }
 
+    @FXML
     public Button exibirIDoacaoBotao;
 
+    private IntencaoDoacao intencaoSelecionada;
     @FXML
     public void botaoExibirIDoacao(ActionEvent actionEvent) {
-        IntencaoDoacao intencaoSelecionada = CBoxDPendentes.getValue();
+        intencaoSelecionada = CBoxDPendentes.getSelectionModel().getSelectedItem();
+        System.out.println(intencaoSelecionada);
 
         if (intencaoSelecionada != null) {
             try {
@@ -136,10 +140,12 @@ public class ControladorDoacoesPendentes implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            setInformacoesItencaoDoacao();
         } else {
             System.out.println("Nenhuma intenção de doação selecionada.");
         }
     }
+
     //Tela 26-1
 
     @FXML
@@ -149,10 +155,26 @@ public class ControladorDoacoesPendentes implements Initializable {
 
     @FXML
     public Button doacaoRecebidaBotaoF;
-    public Label nomeDoadorLabelF;
-    public Label intencaoDoacaoLabelF;
-    public Label instDestinadaLabelF;
-    public Label dataHoraIntencaoLabelF;
+    public Label nomeDoadorLabelF = new Label();
+    public Label dataHoraIntencaoLabelF = new Label();
+    public Label itemDoadoLabelF = new Label();
+    public Label tipoDoacaoLabelF = new Label();
+
+    public void setInformacoesItencaoDoacao() {
+        IntencaoDoacao intencaoDoacao = intencaoSelecionada;
+        System.out.println(intencaoDoacao);
+        String UM;
+        switch (intencaoDoacao.getTipoItem()) {
+            case "Alimentos": UM = "Kg"; break;
+            case "Bebidas": UM = "L"; break;
+            default: UM = "x"; break;
+        }
+        String dataHoraFormatada = this.intencaoSelecionada.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        itemDoadoLabelF.setText(intencaoDoacao.getQuantidade() + UM + " " + intencaoDoacao.getItem());
+        tipoDoacaoLabelF.setText("Tipo: " + intencaoDoacao.getTipoItem());
+        nomeDoadorLabelF.setText("Doador: " + intencaoDoacao.getDoador().getNome());
+        dataHoraIntencaoLabelF.setText(dataHoraFormatada);
+    }
 
     @FXML
     public void botaoDoacaoRecebidaF(ActionEvent actionEvent) {
