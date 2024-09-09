@@ -134,6 +134,8 @@ package br.com.renutrir.repositorio;
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Instituicao;
 import br.com.renutrir.model.IntencaoDoacao;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 import java.io.*;

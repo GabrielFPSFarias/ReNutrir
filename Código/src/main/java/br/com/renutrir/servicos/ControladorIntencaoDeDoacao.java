@@ -90,9 +90,9 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     @FXML
     private TableColumn<SolicitacaoDoacao, String> colInstituicao;
     @FXML
-    private TableColumn<SolicitacaoDoacao, String> colItemSolicitado;
+    private TableColumn<SolicitacaoDoacao, String> colItem;
     @FXML
-    private TableColumn<SolicitacaoDoacao, Integer> colQuantidadeSolicitada;
+    private TableColumn<SolicitacaoDoacao, Integer> colQuantidade;
     @FXML
     private TableColumn<SolicitacaoDoacao, Integer> colFaltam;
 
@@ -101,46 +101,6 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         carregarEExibirSolicitacoes();
     }
 
-    private void configurarTabela() {
-        colInstituicao.setCellValueFactory(new PropertyValueFactory<>("instituicao"));
-        colItemSolicitado.setCellValueFactory(new PropertyValueFactory<>("itemSolicitado"));
-        colQuantidadeSolicitada.setCellValueFactory(new PropertyValueFactory<>("quantidadeSolicitada"));
-        colFaltam.setCellValueFactory(new PropertyValueFactory<>("faltam"));
-    }
-
-    public void carregarEExibirSolicitacoes() {
-        List<SolicitacaoDoacao> solicitacoes = new ArrayList<>();
-
-        String SolicitacaoDoacao = RepositorioSolicitacaoDoacao.SOLICITACAO_DOACAO;
-        File arquivo = new File(SolicitacaoDoacao);
-
-        if (!arquivo.exists()) {
-            System.out.println("Arquivo de solicitações não encontrado.");
-            return;
-        }
-
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
-            Object obj;
-            while ((obj = ois.readObject()) != null) {
-                if (obj instanceof SolicitacaoDoacao) {
-                    solicitacoes.add((SolicitacaoDoacao) obj);
-                }
-            }
-        } catch (EOFException eof) {
-            System.out.println("Fim do arquivo alcançado.");
-        } catch (StreamCorruptedException sce) {
-            System.out.println("Erro no fluxo de entrada: " + sce.getMessage());
-            sce.printStackTrace();
-        } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
-        }
-
-        for (SolicitacaoDoacao solicitacao : solicitacoes) {
-            System.out.println(solicitacao);
-        }
-    }
-
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if (instituicoesListView != null) {
@@ -148,54 +108,63 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         } else {
             instituicoesListView = new ListView<>();
             if (instituicoesListView == null) {
-                System.err.println("instituicoesListView é null!");
+                System.err.println("instituicoesListView é null");
             }
+        }
+        if (instituicaoNomeLabel == null){
+            instituicaoNomeLabel = new Label();
         }
 
         if (RepositorioIntencaoDoacao.getInstituicaoSelecionada() == null) {
             instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação.");
         }
-
+        inicializarDados();
     }
 
     private RepositorioSolicitacaoDoacao repositorioSolicitacaoDoacao = new RepositorioSolicitacaoDoacao();
 
-    public List<SolicitacaoDoacao> carregarSolicitacoes() {
-        List<SolicitacaoDoacao> solicitacoes = new ArrayList<>();
-
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/dados/solicitacoes_doacoes.dat"))) {
-            Object obj = ois.readObject();
-            System.out.println(obj.getClass().getName());
-        } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+    private void configurarTabela() {
+        if (colInstituicao == null){
+            colInstituicao = new TableColumn<>();
+        } if (colItem == null){
+            colItem = new TableColumn<>();
+        } if (colQuantidade == null){
+            colQuantidade = new TableColumn<>();
+        } if (colFaltam == null){
+            colFaltam = new TableColumn<>();
         }
 
-        return solicitacoes;
+        colInstituicao.setCellValueFactory(new PropertyValueFactory<>("instituicao"));
+        colItem.setCellValueFactory(new PropertyValueFactory<>("itemSolicitado"));
+        colQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        colFaltam.setCellValueFactory(new PropertyValueFactory<>("faltam"));
+    }
+
+    private void carregarEExibirSolicitacoes() {
+        List<SolicitacaoDoacao> solicitacoes = repositorioSolicitacaoDoacao.carregarSolicitacoes();
+        ObservableList<SolicitacaoDoacao> observableSolicitacoes = FXCollections.observableArrayList(solicitacoes);
+        tableViewDoacoesSolicitadas.setItems(observableSolicitacoes);
     }
 
     private void carregarInstituicoes() {
-        if (instituicoesListView != null) {
-            List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
-            ObservableList<Instituicao> instituicoesObservableList = FXCollections.observableArrayList(instituicoes);
+        List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
+        ObservableList<Instituicao> instituicoesObservableList = FXCollections.observableArrayList(instituicoes);
 
-            instituicoesListView.setItems(instituicoesObservableList);
-            instituicoesListView.setCellFactory(lv -> new ListCell<Instituicao>() {
-                @Override
-                protected void updateItem(Instituicao item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(empty ? null : item.getNome());
-                }
-            });
+        instituicoesListView.setItems(instituicoesObservableList);
+        instituicoesListView.setCellFactory(lv -> new ListCell<Instituicao>() {
+            @Override
+            protected void updateItem(Instituicao item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? null : item.getNome());
+            }
+        });
 
-            instituicoesListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-                if (newVal != null) {
-                    RepositorioIntencaoDoacao.setInstituicaoSelecionada(newVal);
-                    atualizarLabelInstituicao();
-                }
-            });
-        } else {
-            System.err.println("instituicoesListView é null!");
-        }
+        instituicoesListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                RepositorioIntencaoDoacao.setInstituicaoSelecionada(newVal);
+                atualizarLabelInstituicao();
+            }
+        });
     }
 
     private void atualizarLabelInstituicao() {

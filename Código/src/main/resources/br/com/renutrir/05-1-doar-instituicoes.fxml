@@ -58,8 +58,8 @@
                   <TableView fx:id="tableViewDoacoesSolicitadas" prefHeight="264.0" prefWidth="833.0" tableMenuButtonVisible="true">
                     <columns>
                       <TableColumn fx:id="colInstituicao" prefWidth="258.0" text="Instituição" />
-                      <TableColumn fx:id="colItemSolicitado" prefWidth="318.0" text="Item Solicitado" />
-                        <TableColumn fx:id="colQuantidadeSolicitada" prefWidth="113.0" text="Quantidade" />
+                      <TableColumn fx:id="colItem" prefWidth="318.0" text="Item Solicitado" />
+                        <TableColumn fx:id="colQuantidade" prefWidth="113.0" text="Quantidade" />
                         <TableColumn fx:id="colFaltam" prefWidth="102.0" text="Faltam" />
                     </columns>
                   </TableView>

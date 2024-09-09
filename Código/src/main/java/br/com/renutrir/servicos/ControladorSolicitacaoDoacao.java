@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ControladorSolicitacaoDoacao {
 
@@ -114,23 +115,44 @@ public class ControladorSolicitacaoDoacao {
     }
 
     private void salvarSolicitacao(String tipoItem, TextField itemField, TextField quantidadeField) {
-        try{
-            String item = itemField.getText();
-            int quantidade = Integer.parseInt(quantidadeField.getText());
-            Instituicao instituicao = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+        try {
+            String item = itemField.getText().trim();
+            String quantidadeText = quantidadeField.getText().trim();
 
+            if (item.isEmpty() || quantidadeText.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, preencha todos os campos.");
+                return;
+            }
+
+            int quantidade = Integer.parseInt(quantidadeText);
+
+            Instituicao instituicao = SessaoInstituicao.getInstancia().getInstituicaoLogada();
             if (instituicao != null) {
-                SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(tipoItem, item, quantidade, instituicao.getNome(), instituicao.getNomeUsuario());
+                SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(
+                        tipoItem,
+                        item,
+                        quantidade,
+                        instituicao.getNome(),
+                        instituicao.getNomeUsuario()
+                );
+
                 RepositorioSolicitacaoDoacao repositorio = new RepositorioSolicitacaoDoacao();
                 repositorio.salvarSolicitacao(solicitacao);
                 System.out.println("Solicitação salva: " + solicitacao);
-                showAlert(Alert.AlertType.INFORMATION, "Concluído!", "Solicitação de doação criada para os doadores");
+                showAlert(Alert.AlertType.INFORMATION, "Concluído!", "Solicitação de doação criada com sucesso!");
                 realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma instituição está logada.");
             }
+
         } catch (NumberFormatException e) {
-        showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um número válido na quantidade.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um número válido na quantidade.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Ocorreu um erro ao salvar a solicitação. Tente novamente.");
+            e.printStackTrace();
+        }
     }
-    }
+
 
     public void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
