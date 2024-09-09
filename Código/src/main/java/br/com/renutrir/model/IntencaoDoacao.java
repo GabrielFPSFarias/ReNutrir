@@ -1,10 +1,11 @@
 package br.com.renutrir.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class IntencaoDoacao {
+public class IntencaoDoacao implements Serializable {
     private String tipoItem; // Valor, alimento, Roupas, Móveis, etc.
     private String item;
     private int quantidade;
