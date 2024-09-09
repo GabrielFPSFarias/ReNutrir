@@ -80,33 +80,6 @@ public class ControladorDoacoesPendentes implements Initializable {
 
     @FXML
     public void preencherCBoxDPendentes() {
-        if(SessaoInstituicao.getInstancia().getInstituicaoLogada() != null){
-            Instituicao instituicao = SessaoInstituicao.getInstancia().getInstituicaoLogada();
-            System.out.println("Checando intenções para " + instituicao.getNome());
-            CBoxDPendentes = new ComboBox<IntencaoDoacao>();
-            RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
-            if(repositorioIntencaoDoacao.instRecebe(instituicao)){
-                CBoxDPendentes.getItems().clear();
-                List<IntencaoDoacao> intencoes = repositorioIntencaoDoacao.getIntencoes();
-                for (IntencaoDoacao intencaoDoacao : intencoes) {
-                System.out.println(intencaoDoacao);
-                    if (intencaoDoacao.getInstituicao().getNomeUsuario().equals(instituicao.getNomeUsuario())) {
-                        System.out.println("É para a instituição");
-                        CBoxDPendentes.getItems().add(intencaoDoacao);
-                        System.out.println(CBoxDPendentes.getItems());
-                    }
-                }
-            }
-            else{
-                IntencaoDoacao intencaoDoacao = new IntencaoDoacao();
-                intencaoDoacao.setDoador(null);
-                CBoxDPendentes.setItems(FXCollections.observableArrayList(intencaoDoacao));
-            }
-        }
-    }
-
-    /* ESSE É O QUE APARECE A INFO NA COMBOBOX
-    public void preencherCBoxDPendentes() {
         Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
 
         if (instituicaoLogada != null) {
@@ -126,13 +99,15 @@ public class ControladorDoacoesPendentes implements Initializable {
                 ObservableList<IntencaoDoacao> observableList = FXCollections.observableArrayList(intencoesFiltradas);
                 CBoxDPendentes.setItems(observableList);
             } else {
+                IntencaoDoacao intencaoDoacao = new IntencaoDoacao();
+                intencaoDoacao.setDoador(null);
+                CBoxDPendentes.setItems(FXCollections.observableArrayList(intencaoDoacao));
                 System.out.println("Nenhuma intenção de doação pendente para a instituição " + instituicaoLogada.getNome());
             }
         } else {
             System.out.println("Nenhuma instituição logada.");
         }
     }
-     */
 
     public Button exibirIDoacaoBotao;
     public void botaoExibirIDoacao(ActionEvent actionEvent) {
