@@ -1,8 +1,10 @@
 package br.com.renutrir.servicos;
 
+import br.com.renutrir.model.Doacao;
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Instituicao;
 import br.com.renutrir.model.IntencaoDoacao;
+import br.com.renutrir.repositorio.RepositorioDoacoes;
 import br.com.renutrir.repositorio.RepositorioIntencaoDoacao;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
@@ -118,6 +120,10 @@ public class ControladorDoacoesPendentes implements Initializable {
     @FXML
     public Button exibirIDoacaoBotao;
 
+    public IntencaoDoacao getIntencaoSelecionada() {
+        return intencaoSelecionada;
+    }
+
     private IntencaoDoacao intencaoSelecionada;
     @FXML
     public void botaoExibirIDoacao(ActionEvent actionEvent) {
@@ -161,7 +167,7 @@ public class ControladorDoacoesPendentes implements Initializable {
     public Label tipoDoacaoLabelF = new Label();
 
     public void setInformacoesItencaoDoacao() {
-        IntencaoDoacao intencaoDoacao = intencaoSelecionada;
+        IntencaoDoacao intencaoDoacao = this.intencaoSelecionada;
         System.out.println(intencaoDoacao);
         String UM;
         switch (intencaoDoacao.getTipoItem()) {
@@ -178,6 +184,13 @@ public class ControladorDoacoesPendentes implements Initializable {
 
     @FXML
     public void botaoDoacaoRecebidaF(ActionEvent actionEvent) {
+        IntencaoDoacao intencaoDoacao = this.getIntencaoSelecionada();
+        System.out.println(intencaoDoacao);
+        RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+        RepositorioDoacoes repositorioDoacoes = new RepositorioDoacoes();
+        repositorioIntencaoDoacao.removerIntencao(intencaoDoacao);
+        Doacao doacao = new Doacao(intencaoDoacao.getDoador(), intencaoDoacao.getInstituicao(), intencaoDoacao.getQuantidade(), intencaoDoacao.getTipoItem(), intencaoDoacao.getItem());
+        repositorioDoacoes.adicionarDoacao(doacao);
     }
 
     @Override

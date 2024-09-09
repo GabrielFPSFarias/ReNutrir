@@ -4,79 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Doacao implements Serializable {
+public class Doacao extends IntencaoDoacao {
     private static final long serialVersionUID = 1L;
 
-    private String nomeDoador;
-    private String item;
-    private int quantidade;
-    private String dataHora;
-    private String status;
-
-    public Doacao(String nomeDoador, String item, int quantidade, String dataHora, String status) {
-        this.nomeDoador = nomeDoador;
-        this.item = item;
-        this.quantidade = quantidade;
-        this.dataHora = dataHora;
-        this.status = status;
-    }
-
-    // Getters e Setters
-    public String getNomeDoador() {
-        return nomeDoador;
-    }
-
-    public void setNomeDoador(String nomeDoador) {
-        this.nomeDoador = nomeDoador;
-    }
-
-    public String getItem() {
-        return item;
-    }
-
-    public void setItem(String item) {
-        this.item = item;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public String getDataHora() {
-        return dataHora;
-    }
-
-    public void setDataHora(String dataHora) {
-        this.dataHora = dataHora;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Doacao doacao = (Doacao) o;
-        return quantidade == doacao.quantidade &&
-                Objects.equals(nomeDoador, doacao.nomeDoador) &&
-                Objects.equals(item, doacao.item) &&
-                Objects.equals(dataHora, doacao.dataHora) &&
-                Objects.equals(status, doacao.status);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nomeDoador, item, quantidade, dataHora, status);
+    public Doacao(Doador doador, Instituicao instituicao, int quantidade, String tipoItem, String item) {
+        super(doador, instituicao, quantidade, tipoItem, item);
+        this.setStatus("Concluída");
+        this.setData(LocalDateTime.now());
     }
 }
 
