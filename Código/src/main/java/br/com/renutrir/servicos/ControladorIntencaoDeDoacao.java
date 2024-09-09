@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -49,6 +50,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     public Button botaoItemDoar;
     public TextField fieldItemDoarIntencao;
     public TextField fieldInserirQtdItem;
+    public TableView tableViewDoacoesSolicitadas;
 
     public ControladorIntencaoDeDoacao() {
         repositorioInstituicao = new RepositorioInstituicao();
@@ -92,7 +94,6 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         }
     }
 
-
     private void carregarInstituicoes() {
         if (instituicoesListView != null) {
             List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
@@ -129,6 +130,13 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     public void botaoDoarAgora(ActionEvent actionEvent) {
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+
+        if (instituicaoSelecionada == null) {
+            showAlert(Alert.AlertType.WARNING, "Seleção Necessária", "Por favor, selecione uma instituição para prosseguir.");
+            return;
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-confirmar-doacao.fxml"));
             Parent root = loader.load();
@@ -137,15 +145,9 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             stage.setScene(new Scene(root));
 
             ControladorIntencaoDeDoacao controlador = loader.getController();
-            Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+            controlador.instituicaoLabel.setText("Você está doando para a " + instituicaoSelecionada.getNome());
 
-            if (instituicaoSelecionada != null) {
-                controlador.instituicaoLabel.setText("Você está doando para a " + instituicaoSelecionada.getNome());
-            } else {
-                controlador.instituicaoLabel.setText("Nenhuma instituição selecionada.");
-            }
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
@@ -159,8 +161,21 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/05-1-doar-instituicoes.fxml"));
+            Parent root = loader.load();
 
+            ControladorIntencaoDeDoacao controlador = loader.getController();
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @FXML
     public void clearListView(ActionEvent event) {
@@ -197,6 +212,13 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     }
 
     //Tela 05 - Intenção de doação
+
+
+    //Tela 05.1 - Lista Instituições que solicitaram doações
+
+    public void botaoVoltar75(ActionEvent actionEvent) {
+        realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
+    }
 
 
     //Label
@@ -242,7 +264,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     public void botaoVoltar7() {
-        realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Doações Solicitadas");
+        realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
     @FXML
