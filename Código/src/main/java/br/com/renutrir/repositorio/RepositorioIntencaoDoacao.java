@@ -238,4 +238,5 @@ public class RepositorioIntencaoDoacao {
     public List<IntencaoDoacao> getIntencoes() {
         return intencoes;
     }
+
 }
