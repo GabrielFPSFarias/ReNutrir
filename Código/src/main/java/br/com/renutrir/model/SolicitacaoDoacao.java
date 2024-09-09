@@ -10,6 +10,7 @@ public class SolicitacaoDoacao implements Serializable {
     private int quantidade;
     private String nomeInstituicao;
     private String nomeUsuario;
+    private int faltam;
 
     public SolicitacaoDoacao(String tipoItem, String item, int quantidade, String nomeInstituicao, String nomeUsuario) {
         this.tipoItem = tipoItem;
@@ -17,6 +18,7 @@ public class SolicitacaoDoacao implements Serializable {
         this.quantidade = quantidade;
         this.nomeInstituicao = nomeInstituicao;
         this.nomeUsuario = nomeUsuario;
+        this.faltam = quantidade;
     }
 
     // Getters e Setters
@@ -61,6 +63,14 @@ public class SolicitacaoDoacao implements Serializable {
         this.nomeUsuario = nomeUsuario;
     }
 
+    public int getFaltam() {
+        return faltam;
+    }
+
+    public void setFaltam(int faltam) {
+        this.faltam = faltam;
+    }
+
     @Override
     public String toString() {
         return "SolicitacaoDoacao{" +
@@ -69,9 +79,11 @@ public class SolicitacaoDoacao implements Serializable {
                 ", quantidade=" + quantidade +
                 ", nomeInstituicao='" + nomeInstituicao + '\'' +
                 ", nomeUsuario='" + nomeUsuario + '\'' +
+                ", faltam=" + faltam +
                 '}';
     }
 }
+
 
 /*
 package br.com.renutrir.model;

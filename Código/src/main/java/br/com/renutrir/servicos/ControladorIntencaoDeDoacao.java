@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
@@ -34,6 +35,7 @@ import java.lang.reflect.Field;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.awt.*;
 import java.util.List;
@@ -50,7 +52,9 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     public Button botaoItemDoar;
     public TextField fieldItemDoarIntencao;
     public TextField fieldInserirQtdItem;
-    public TableView tableViewDoacoesSolicitadas;
+
+    @FXML
+    private TableView<SolicitacaoDoacao> tableViewDoacoesSolicitadas = new TableView<>();
 
     public ControladorIntencaoDeDoacao() {
         repositorioInstituicao = new RepositorioInstituicao();
@@ -81,6 +85,15 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     @FXML
     private Label instituicaoLabel;
 
+    @FXML
+    private TableColumn<SolicitacaoDoacao, String> colInstituicao;
+    @FXML
+    private TableColumn<SolicitacaoDoacao, String> colItemSolicitado;
+    @FXML
+    private TableColumn<SolicitacaoDoacao, Integer> colQuantidadeSolicitada;
+    @FXML
+    private TableColumn<SolicitacaoDoacao, Integer> colFaltam;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if (instituicoesListView != null) {
@@ -93,6 +106,22 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação.");
         }
     }
+
+    private RepositorioSolicitacaoDoacao repositorioSolicitacaoDoacao = new RepositorioSolicitacaoDoacao();
+
+    public List<SolicitacaoDoacao> carregarSolicitacoes() {
+        List<SolicitacaoDoacao> solicitacoes = new ArrayList<>();
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/dados/solicitacoes_doacoes.dat"))) {
+            Object obj = ois.readObject();
+            System.out.println(obj.getClass().getName());
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return solicitacoes;
+    }
+
 
     private void carregarInstituicoes() {
         if (instituicoesListView != null) {
@@ -174,6 +203,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        carregarSolicitacoes();
     }
 
 
