@@ -808,39 +808,6 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
     }
 
-    @FXML
-    void botaoSalvarIntencaoDoacao(ActionEvent event) {
-        String nomeInstituicao = exibirEnderecoInstituicaoLabel.getText();
-        String nomeItem = fieldInserirNomeItem.getText();
-        String quantidadeStr = fieldInserirQtdItem.getText();
-        LocalDateTime dataHora = LocalDateTime.now();
-        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
-        int quantidade;
-
-        if (nomeInstituicao.isEmpty() || nomeItem.isEmpty() || quantidadeStr.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos corretamente.");
-            return;
-        }
-
-        try {
-            quantidade = Integer.parseInt(quantidadeStr);
-            if (quantidade <= 0) {
-                showAlert(Alert.AlertType.ERROR, "Erro de validação", "A quantidade deve ser maior que zero.");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Quantidade inválida. Por favor, insira um número válido.");
-            return;
-        }
-
-        IntencaoDoacao novaIntencao = new IntencaoDoacao(nomeInstituicao, nomeItem, quantidade, dataHora);
-        RepositorioIntencaoDoacao repositorio = new RepositorioIntencaoDoacao();
-        repositorio.adicionarIntencao(novaIntencao);
-
-        showAlert(Alert.AlertType.INFORMATION, "Sucesso", "A intenção de doação foi salva com sucesso! Realize a sua doação dentro dos próximos 7 dias.");
-    }
-
-
 
     //Tela 07-10
 
@@ -873,51 +840,6 @@ public class ControladorIntencaoDeDoacao implements Initializable {
                 showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar o comprovante.");
             }
         }
-    }
-
-    @FXML
-    private Button botaoRegistrarDoacao;
-
-    private String obterItemSelecionado() {
-        if (fieldInserirNomeAlimento != null && !fieldInserirNomeAlimento.getText().isEmpty()) {
-            return fieldInserirNomeAlimento.getText();
-        } else if (fieldInserirNomeBebida != null && !fieldInserirNomeBebida.getText().isEmpty()) {
-            return fieldInserirNomeBebida.getText();
-        } else if (fieldInserirNomeRoupa != null && !fieldInserirNomeRoupa.getText().isEmpty()) {
-            return fieldInserirNomeRoupa.getText();
-        } else if (fieldInserirProdLimpeza != null && !fieldInserirProdLimpeza.getText().isEmpty()) {
-            return fieldInserirProdLimpeza.getText();
-        } else if (fieldInserirNomeMovel != null && !fieldInserirNomeMovel.getText().isEmpty()) {
-            return fieldInserirNomeMovel.getText();
-        } else if (fieldInserirProdHigiene != null && !fieldInserirProdHigiene.getText().isEmpty()) {
-            return fieldInserirProdHigiene.getText();
-        } else {
-            return null;
-        }
-    }
-
-    public void salvarDoacoesEmArquivo(RepositorioDoacoes repositorioDoacoes) {
-        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
-
-        if (doadorLogado == null) {
-            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Nenhum doador está logado."));
-            return;
-        }
-
-        String nomeUsuario = doadorLogado.getNomeUsuario();
-        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.dat";
-
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(caminhoArquivo))) {
-            oos.writeObject(repositorioDoacoes.listarDoacoes());
-        } catch (IOException e) {
-            e.printStackTrace();
-            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar as doações."));
-        }
-    }
-
-    public void verificarProgressoParaCertificado(Doador doador) {
-        ControladorCertificado controladorCertificado = new ControladorCertificado();
-        controladorCertificado.verificarProgressoParaCertificado(doador);
     }
 
     private Instituicao instituicaoSelecionada;

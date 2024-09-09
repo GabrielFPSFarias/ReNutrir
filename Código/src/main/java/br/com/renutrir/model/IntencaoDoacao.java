@@ -40,6 +40,14 @@ public class IntencaoDoacao {
         this.dataHora = LocalDateTime.now();
     }
 
+    public String getNomeUsuarioDoador() {
+        return doador != null ? doador.getNome() : "Desconhecido";
+    }
+
+    public String getNomeUsuarioInstituicao() {
+        return instituicao != null ? instituicao.getNome() : "Desconhecido";
+    }
+
     // Getters e Setters
     public String getTipoItem() {
         return tipoItem;
@@ -110,6 +118,5 @@ public class IntencaoDoacao {
                     doador.getNome(), item, quantidade, data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")), status);
         }
     }
-
 
 }

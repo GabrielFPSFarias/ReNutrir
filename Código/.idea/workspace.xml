@@ -11,9 +11,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dados/intencoes-de-doacao.dat" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dados/intencoes.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/dados/intencoes.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/IntencaoDoacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/IntencaoDoacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioIntencaoDoacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioIntencaoDoacao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorIntencaoDeDoacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorIntencaoDeDoacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/07-9-intencao-concluida.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/07-9-intencao-concluida.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
