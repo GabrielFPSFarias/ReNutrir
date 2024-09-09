@@ -2,8 +2,8 @@ package br.com.renutrir.model;
 
 import java.io.Serializable;
 
-public class SolicitacaoDoacao implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class SolicitacaoDoacao implements Serializable{
+    private static final long serialVersionUID = 8983558202217591746L;
 
     private String tipoItem;
     private String item;

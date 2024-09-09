@@ -46,7 +46,7 @@
    <center>
       <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0">
          <content>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="287.0" prefWidth="591.0" BorderPane.alignment="CENTER">
+            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="372.0" prefWidth="591.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
@@ -55,8 +55,9 @@
                   <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="126.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="38.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="121.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="73.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <BorderPane.margin>
                   <Insets bottom="40.0" top="-40.0" />
@@ -65,14 +66,15 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button fx:id="instituicoesDoacaoBotao" mnemonicParsing="false" onAction="#botaoInstituicoesDoacao" prefHeight="30.0" prefWidth="243.0" text="Instituições que precisam de doação" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Button fx:id="doarAgoraBotao" layoutX="284.0" layoutY="19.0" mnemonicParsing="false" onAction="#botaoDoarAgora" prefHeight="30.0" prefWidth="243.0" text="Doar agora" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button fx:id="instituicoesDoacaoBotao" mnemonicParsing="false" onAction="#botaoInstituicoesDoacao" prefHeight="30.0" prefWidth="243.0" text="Instituições que precisam de doação" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Button fx:id="doarAgoraBotao" layoutX="284.0" layoutY="19.0" mnemonicParsing="false" onAction="#botaoDoarAgora" prefHeight="30.0" prefWidth="243.0" text="Doar agora" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label fx:id="instituicaoNomeLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="66.0" prefWidth="408.0" text="Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação. Escolha abaixo a instituição beneficiária." textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
                   <ListView fx:id="instituicoesListView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="107.0" prefWidth="396.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="479.0" text="Distância para a Instituição selecionada" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </content>
