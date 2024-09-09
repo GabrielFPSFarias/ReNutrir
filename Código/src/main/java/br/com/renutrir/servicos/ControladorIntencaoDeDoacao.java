@@ -729,7 +729,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     private TextField fieldInserirProdHigiene;
-    
+
     public void alterarProdutoHigiente(String alterar) {
         this.fieldInserirProdHigiene.setText(alterar);
     }

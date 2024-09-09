@@ -114,18 +114,22 @@ public class ControladorSolicitacaoDoacao {
     }
 
     private void salvarSolicitacao(String tipoItem, TextField itemField, TextField quantidadeField) {
-        String item = itemField.getText();
-        int quantidade = Integer.parseInt(quantidadeField.getText());
-        Instituicao instituicao = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+        try{
+            String item = itemField.getText();
+            int quantidade = Integer.parseInt(quantidadeField.getText());
+            Instituicao instituicao = SessaoInstituicao.getInstancia().getInstituicaoLogada();
 
-        if (instituicao != null) {
-            SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(tipoItem, item, quantidade, instituicao.getNome(), instituicao.getNomeUsuario());
-            RepositorioSolicitacaoDoacao repositorio = new RepositorioSolicitacaoDoacao();
-            repositorio.salvarSolicitacao(solicitacao);
-            System.out.println("Solicitação salva: " + solicitacao);
-            showAlert(Alert.AlertType.INFORMATION, "Concluído!", "Solicitação de doação criada para os doadores");
-            realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
-        }
+            if (instituicao != null) {
+                SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(tipoItem, item, quantidade, instituicao.getNome(), instituicao.getNomeUsuario());
+                RepositorioSolicitacaoDoacao repositorio = new RepositorioSolicitacaoDoacao();
+                repositorio.salvarSolicitacao(solicitacao);
+                System.out.println("Solicitação salva: " + solicitacao);
+                showAlert(Alert.AlertType.INFORMATION, "Concluído!", "Solicitação de doação criada para os doadores");
+                realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml", "ReNutrir - Solicitar Doações");
+            }
+        } catch (NumberFormatException e) {
+        showAlert(Alert.AlertType.ERROR, "Erro", "Por favor, insira um número válido na quantidade.");
+    }
     }
 
     public void showAlert(Alert.AlertType alertType, String title, String message) {
