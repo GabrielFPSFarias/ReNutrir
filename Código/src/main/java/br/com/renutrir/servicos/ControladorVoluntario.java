@@ -40,7 +40,7 @@ public class ControladorVoluntario implements Initializable {
     SessaoInstituicao sessaoInstituicao;
 
     public Button botaoSolicitarNovosVoluntarios;
-    private HelloController hc;
+    private HelloController hc = new HelloController();
 
     private ControladorTelas controladorTelas;
 
@@ -141,6 +141,7 @@ public class ControladorVoluntario implements Initializable {
     @FXML
     public void botaoQueroVoluntario() {
 
+        realizarTrocaDeTela("/br/com/renutrir/05.5-lista-instituicoes1", "Renutrir - Lista Instituicoes");
     }
 
     @FXML
@@ -199,13 +200,15 @@ public class ControladorVoluntario implements Initializable {
     @FXML
     public void botaoSejaVoluntario(ActionEvent actionEvent) {
         try {
-            Stage dialog = new Stage();
+
+            realizarTrocaDeTela("/br/com/renutrir/05.5-lista-instituicoes1.fxml", "Lista de instituições");
+            /*Stage dialog = new Stage();
             dialog.setScene(ControladorTelas.getInstance().getSejaVoluntarioScene());
             dialog.setResizable(false);
             dialog.setTitle("Seja Voluntário");
             dialog.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
             dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.showAndWait();
+            dialog.showAndWait();*/
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");

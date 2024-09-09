@@ -2,10 +2,12 @@ package br.com.renutrir.repositorio;
 
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Instituicao;
+import javafx.fxml.Initializable;
 
+import java.net.URL;
 import java.util.*;
 
-public class RepositorioContas {
+public class RepositorioContas implements Initializable {
 
     // Salva os doadores por email, nome usuário e CPF
     private Map<String, Doador> doadoresPorEmail;
@@ -37,10 +39,6 @@ public class RepositorioContas {
         this.contasPorNomeInstituicao = new HashMap<>();
         this.contasEmailInstituicao = new HashMap<>();
 
-    }
-
-    public List<Instituicao> getListaNomeInstituicoes() {
-        return new ArrayList<>(contasPorNomeInstituicao.values());
     }
 
 
@@ -180,4 +178,17 @@ public class RepositorioContas {
         return true;
     }
 
+    private ArrayList<Instituicao> listView;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+       listView = new ArrayList<>(contasPorNomeInstituicao.values());
+
+    }
+
+    public List<Instituicao> getListaNomeInstituicoes() {
+
+        return listView;
+    }
 }

@@ -54,6 +54,12 @@ public class HelloController {
         }
     };*/
 
+    @FXML
+    public void botaoListaDoacaoEfetuada(){
+
+        realizarTrocaDeTela("/br/com/renutrir/05.5-lista-instituicoes1.fxml", "ReNutrir - Lista das Instituições");
+    }
+
     public ControladorDoacoesPendentes controladorDoacoesPendentes = new ControladorDoacoesPendentes();
     public Button instituicoesDoacaoBotao;
     public ComboBox escolherInstituicaoDoarCbox;
@@ -80,6 +86,9 @@ public class HelloController {
     public Button confirmarTransportesBotao;
     public Button criarEventoBotao;
     public Button historicoDoacoesBotao;
+
+    @FXML
+    public Button doacaoEfetuada;
     public Button solicitarDoacoesBotao;
     public Button atuaisVoluntariosBotao;
     public Button perfilInstituicaoBotao;

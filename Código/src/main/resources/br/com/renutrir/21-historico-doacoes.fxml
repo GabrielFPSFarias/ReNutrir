@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.renutrir.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.renutrir.HelloController">
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
@@ -70,7 +70,7 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Lista de doações efetuadas" textAlignment="CENTER" />
+                  <Button fx:id="doacaoEfetuada" mnemonicParsing="false" onAction="#botaoListaDoacaoEfetuada" prefHeight="30.0" prefWidth="226.0" text="Lista de doações efetuadas" textAlignment="CENTER" />
                </children>
             </GridPane>
          </content>

@@ -16,6 +16,7 @@ public class Instituicao extends Conta implements Serializable {
     private LocalDateTime horarioColeta;
     private boolean PrecisaVoluntario;
     private String endereco;
+    private String descricao;
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
@@ -115,6 +116,14 @@ public class Instituicao extends Conta implements Serializable {
         this.horarioColeta = horarioColeta;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     @Override
     public void setNomeUsuario(String nomeUsuario) {
         super.setNomeUsuario(nomeUsuario);
@@ -123,4 +132,5 @@ public class Instituicao extends Conta implements Serializable {
     public void solicitarVoluntarios(){
         this.PrecisaVoluntario = true;
     }
+
 }
