@@ -2,6 +2,8 @@ package br.com.renutrir.servicos;
 
 import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Instituicao;
+import br.com.renutrir.model.SolicitacaoDoacao;
+import br.com.renutrir.repositorio.RepositorioSolicitacaoDoacao;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
 import javafx.event.ActionEvent;
@@ -9,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -78,6 +81,59 @@ public class ControladorSolicitacaoDoacao {
     @FXML
     void solicitarItemHgiene(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/22-7-higiene-pessoal.fxml", "ReNutrir - Solicitar Doações");
+    }
+
+    @FXML
+    public void solicitarConfAlimentos(ActionEvent actionEvent) {
+        salvarSolicitacao("Alimentos", doacaoAlimentosItemField, doacaoAlimentosSolicitarField);
+    }
+
+    @FXML
+    public void solicitarConfRoupas(ActionEvent actionEvent) {
+        salvarSolicitacao("Roupas", doacaoRoupasItemField, doacaoRoupasSolicitarField);
+    }
+
+    @FXML
+    public void solicitarConfMoveis(ActionEvent actionEvent) {
+        salvarSolicitacao("Moveis", doacaoMoveisItemField, doacaoMoveisSolicitarField);
+    }
+
+    @FXML
+    public void solicitarConfBebidas(ActionEvent actionEvent) {
+        salvarSolicitacao("Bebidas", doacaoBebidasItemField, doacaoBebidasSolicitarField);
+    }
+
+    @FXML
+    public void solicitarConfProdLimpeza(ActionEvent actionEvent) {
+        salvarSolicitacao("Produto de Limpeza", doacaoProdLimpezaItemField, doacaoProdLimpezaSolicitarField);
+    }
+
+    @FXML
+    public void solicitarConfProdHigiene(ActionEvent actionEvent) {
+        salvarSolicitacao("Produto de Higiene", doacaoProdHigieneItemField, doacaoProdHigieneSolicitarField);
+    }
+
+    private void salvarSolicitacao(String tipoItem, TextField itemField, TextField quantidadeField) {
+        String item = itemField.getText();
+        int quantidade = Integer.parseInt(quantidadeField.getText());
+        Instituicao instituicao = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+
+        if (instituicao != null) {
+            SolicitacaoDoacao solicitacao = new SolicitacaoDoacao(tipoItem, item, quantidade, instituicao.getNome(), instituicao.getNomeUsuario());
+            RepositorioSolicitacaoDoacao repositorio = new RepositorioSolicitacaoDoacao();
+            repositorio.salvarSolicitacao(solicitacao);
+            System.out.println("Solicitação salva: " + solicitacao);
+            showAlert(Alert.AlertType.INFORMATION, "Concluído!", "Solicitação de doação criada para os doadores");
+            realizarTrocaDeTela("/br/com/renutrir/22-solicitar-doacoes.fxml","ReNutrir - Solicitar Doações");
+        }
+    }
+
+    public void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
@@ -161,34 +217,16 @@ public class ControladorSolicitacaoDoacao {
     public void fieldSolicitarDoacaoProdHigene(ActionEvent actionEvent) {
     }
 
-    public void solicitarConfProdHigiene(ActionEvent actionEvent) {
-    }
-
-    public void solicitarConfProdLimpeza(ActionEvent actionEvent) {
-    }
-
     public void fieldSolicitarDoacaoProdLimpeza(ActionEvent actionEvent) {
-    }
-
-    public void solicitarConfBebidas(ActionEvent actionEvent) {
     }
 
     public void fieldSolicitarDoacaoBebidas(ActionEvent actionEvent) {
     }
 
-    public void solicitarConfMoveis(ActionEvent actionEvent) {
-    }
-
     public void fieldSolicitarDoacaoMoveis(ActionEvent actionEvent) {
     }
 
-    public void solicitarConfRoupas(ActionEvent actionEvent) {
-    }
-
     public void fieldSolicitarDoacaoRoupas(ActionEvent actionEvent) {
-    }
-
-    public void solicitarConfAlimentos(ActionEvent actionEvent) {
     }
 
     public void fieldSolicitarDoacaoAlimentos(ActionEvent actionEvent) {

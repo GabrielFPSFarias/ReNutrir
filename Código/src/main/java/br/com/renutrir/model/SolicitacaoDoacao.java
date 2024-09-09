@@ -1,5 +1,81 @@
 package br.com.renutrir.model;
 
+import java.io.Serializable;
+
+public class SolicitacaoDoacao implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private String tipoItem;
+    private String item;
+    private int quantidade;
+    private String nomeInstituicao;
+    private String nomeUsuario;
+
+    public SolicitacaoDoacao(String tipoItem, String item, int quantidade, String nomeInstituicao, String nomeUsuario) {
+        this.tipoItem = tipoItem;
+        this.item = item;
+        this.quantidade = quantidade;
+        this.nomeInstituicao = nomeInstituicao;
+        this.nomeUsuario = nomeUsuario;
+    }
+
+    // Getters e Setters
+
+    public String getTipoItem() {
+        return tipoItem;
+    }
+
+    public void setTipoItem(String tipoItem) {
+        this.tipoItem = tipoItem;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public String getNomeInstituicao() {
+        return nomeInstituicao;
+    }
+
+    public void setNomeInstituicao(String nomeInstituicao) {
+        this.nomeInstituicao = nomeInstituicao;
+    }
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
+
+    @Override
+    public String toString() {
+        return "SolicitacaoDoacao{" +
+                "tipoItem='" + tipoItem + '\'' +
+                ", item='" + item + '\'' +
+                ", quantidade=" + quantidade +
+                ", nomeInstituicao='" + nomeInstituicao + '\'' +
+                ", nomeUsuario='" + nomeUsuario + '\'' +
+                '}';
+    }
+}
+
+/*
+package br.com.renutrir.model;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -51,3 +127,4 @@ public class SolicitacaoDoacao  {
 
 
 }
+*/
