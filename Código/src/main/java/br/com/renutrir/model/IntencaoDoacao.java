@@ -1,10 +1,11 @@
 package br.com.renutrir.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class IntencaoDoacao {
+public class IntencaoDoacao implements Serializable {
     private String tipoItem; // Valor, alimento, Roupas, Móveis, etc.
     private String item;
     private int quantidade;
@@ -38,6 +39,14 @@ public class IntencaoDoacao {
         this.nomeItem = nomeItem;
         this.quantidade = quantidade;
         this.dataHora = LocalDateTime.now();
+    }
+
+    public String getNomeUsuarioDoador() {
+        return doador != null ? doador.getNome() : "Desconhecido";
+    }
+
+    public String getNomeUsuarioInstituicao() {
+        return instituicao != null ? instituicao.getNome() : "Desconhecido";
     }
 
     // Getters e Setters
@@ -106,10 +115,9 @@ public class IntencaoDoacao {
         if (this.doador == null) {
             return "Não há Intenção de Doação";
         } else {
-            return String.format("Doador: %s, Item: %s, Quantidade: %d, Data: %s, Status: %s",
-                    doador.getNome(), item, quantidade, data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")), status);
+            return String.format("Doador: %s, Item: %s, Quantidade: %d",
+                    doador.getNome(), item, quantidade);
         }
     }
-
 
 }

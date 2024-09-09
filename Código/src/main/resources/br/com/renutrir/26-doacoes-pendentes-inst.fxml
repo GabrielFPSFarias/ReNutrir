@@ -65,7 +65,7 @@
                </padding>
                <children>
                   <Button fx:id="exibirIDoacaoBotao" mnemonicParsing="false" onAction="#botaoExibirIDoacao" prefHeight="30.0" prefWidth="226.0" text="Exibir intenção de doação" textAlignment="CENTER" GridPane.rowIndex="5" />
-                  <ComboBox fx:id="CBoxDPendentes" prefWidth="150.0" />
+                  <ComboBox fx:id="CBoxDPendentes" prefHeight="25.0" prefWidth="364.0" promptText="Selecione uma doação pendente" />
                </children>
             </GridPane>
          </content>
