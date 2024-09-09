@@ -3,6 +3,7 @@ package br.com.renutrir.servicos;
 import br.com.renutrir.model.*;
 import br.com.renutrir.renutrir.ProgressAlert;
 import br.com.renutrir.repositorio.RepositorioIntencaoDoacao;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,6 +46,7 @@ import java.util.ResourceBundle;
 import br.com.renutrir.renutrir.HelloController;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.util.Duration;
 
 public class ControladorIntencaoDeDoacao implements Initializable {
 
@@ -385,6 +387,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
@@ -465,6 +468,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
@@ -551,6 +555,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
@@ -627,6 +632,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
@@ -703,6 +709,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
@@ -779,6 +786,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
