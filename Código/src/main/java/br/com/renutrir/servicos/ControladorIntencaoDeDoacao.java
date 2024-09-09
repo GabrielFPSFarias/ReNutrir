@@ -117,7 +117,10 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         if (instituicoesListView != null) {
             carregarInstituicoes();
         } else {
-            System.err.println("instituicoesListView é null!");
+            instituicoesListView = new ListView<>();
+            if (instituicoesListView == null) {
+                System.err.println("instituicoesListView é null!");
+            }
         }
 
         if (RepositorioIntencaoDoacao.getInstituicaoSelecionada() == null) {
