@@ -11,8 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/IntencaoDoacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/IntencaoDoacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorDoacoesPendentes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorDoacoesPendentes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorVoluntario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorVoluntario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

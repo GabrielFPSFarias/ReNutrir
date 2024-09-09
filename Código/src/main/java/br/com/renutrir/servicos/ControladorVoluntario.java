@@ -78,11 +78,17 @@ public class ControladorVoluntario implements Initializable {
 
     private void configurarComboBox() {
         if (cboxFuncaoVoluntario == null) {
-            System.out.println("cboxFuncaoVoluntario está null");
-            return;
+            cboxFuncaoVoluntario = new ComboBox<>();
+            if (cboxFuncaoVoluntario == null) {
+                System.out.println("cboxFuncaoVoluntario está null");
+            }
+            //return;
         } if (cboxInstVinculada == null) {
-            System.out.println("cboxInstVinculada está null");
-            return;
+            cboxInstVinculada = new ComboBox<>();
+            if (cboxInstVinculada == null) {
+                System.out.println("cboxInstVinculada está null");
+            }
+            //return;
         }
         carregarFuncoesVoluntarios();
         carregarInstituicoes();
