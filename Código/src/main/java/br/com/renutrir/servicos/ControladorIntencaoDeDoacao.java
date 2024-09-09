@@ -700,7 +700,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         LocalDateTime dataHora = LocalDateTime.now();
 
         try {
-            URL fxmlUrl = getClass().getResource("/br/com/renutrir/07-9-intencao-concluida.fxml");
+            URL fxmlUrl = getClass().getResource("/br/com/renutrir/07-9-intencao-concluida.fxml"); //tem que ser constante
             if (fxmlUrl == null) {
                 throw new IOException("FXML não encontrado.");
             }
@@ -729,6 +729,10 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     private TextField fieldInserirProdHigiene;
+    
+    public void alterarProdutoHigiente(String alterar) {
+        this.fieldInserirProdHigiene.setText(alterar);
+    }
 
     @FXML
     void inserirProdHigieneField(ActionEvent event) {
