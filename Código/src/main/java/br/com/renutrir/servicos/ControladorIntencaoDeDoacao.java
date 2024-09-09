@@ -94,6 +94,24 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     @FXML
     private TableColumn<SolicitacaoDoacao, Integer> colFaltam;
 
+    public void inicializarDados() {
+        configurarTabela();
+        carregarEExibirSolicitacoes();
+    }
+
+    private void configurarTabela() {
+        colInstituicao.setCellValueFactory(new PropertyValueFactory<>("instituicao"));
+        colItemSolicitado.setCellValueFactory(new PropertyValueFactory<>("itemSolicitado"));
+        colQuantidadeSolicitada.setCellValueFactory(new PropertyValueFactory<>("quantidadeSolicitada"));
+        colFaltam.setCellValueFactory(new PropertyValueFactory<>("faltam"));
+    }
+
+    private void carregarEExibirSolicitacoes() {
+        List<SolicitacaoDoacao> solicitacoes = repositorioSolicitacaoDoacao.carregarSolicitacoes();
+        ObservableList<SolicitacaoDoacao> observableSolicitacoes = FXCollections.observableArrayList(solicitacoes);
+        tableViewDoacoesSolicitadas.setItems(observableSolicitacoes);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if (instituicoesListView != null) {
@@ -105,6 +123,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         if (RepositorioIntencaoDoacao.getInstituicaoSelecionada() == null) {
             instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação.");
         }
+
     }
 
     private RepositorioSolicitacaoDoacao repositorioSolicitacaoDoacao = new RepositorioSolicitacaoDoacao();
@@ -121,7 +140,6 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
         return solicitacoes;
     }
-
 
     private void carregarInstituicoes() {
         if (instituicoesListView != null) {
@@ -195,51 +213,22 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             Parent root = loader.load();
 
             ControladorIntencaoDeDoacao controlador = loader.getController();
+            controlador.configurarTabela();
+            controlador.inicializarDados();
+            controlador.carregarEExibirSolicitacoes();
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setTitle("ReNutrir - Doações Solicitadas");
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação para instituições.");
         }
-        carregarSolicitacoes();
     }
 
-
-    @FXML
-    public void clearListView(ActionEvent event) {
-        instituicoesListView.getSelectionModel().clearSelection();
-    }
-
-    @FXML
-    public void selectAllListView(ActionEvent event) {
-        instituicoesListView.getSelectionModel().selectAll();
-    }
-
-    @FXML
-    public void selectFirstListView(ActionEvent event) {
-        instituicoesListView.getSelectionModel().selectFirst();
-    }
-
-    @FXML
-    public void selectLastListView(ActionEvent event) {
-        instituicoesListView.getSelectionModel().selectLast();
-    }
-
-    @FXML
-    public void selectNextListView(ActionEvent event) {
-        instituicoesListView.getSelectionModel().selectNext();
-    }
-
-    @FXML
-    public void selectPrevListView(ActionEvent event) {
-        instituicoesListView.getSelectionModel().selectPrevious();
-    }
-
-    public void setControladorTelas(ControladorTelas controladorTelas) {
-        this.controladorTelas = controladorTelas;
-    }
 
     //Tela 05 - Intenção de doação
 
