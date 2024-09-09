@@ -3,6 +3,7 @@ package br.com.renutrir.servicos;
 import br.com.renutrir.model.*;
 import br.com.renutrir.renutrir.ProgressAlert;
 import br.com.renutrir.repositorio.RepositorioIntencaoDoacao;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,6 +46,7 @@ import java.util.ResourceBundle;
 import br.com.renutrir.renutrir.HelloController;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.util.Duration;
 
 public class ControladorIntencaoDeDoacao implements Initializable {
 
@@ -347,12 +349,21 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void doarAlimentosBotao(ActionEvent actionEvent) {
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+
+        if (instituicaoSelecionada == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma instituição selecionada.");
+            return;
+        }
+
+        System.out.println("Instituição selecionada: " + instituicaoSelecionada.getNome());
+
         String nomeItem = fieldItemDoarIntencao.getText();
         String qtdItem = fieldInserirQtdItem.getText();
-        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
-        RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
         IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Alimentos", nomeItem);
+        RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
         repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
+
         int quantidade;
         try {
             quantidade = Integer.parseInt(qtdItem);
@@ -369,13 +380,14 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         try {
             URL fxmlUrl = getClass().getResource("/br/com/renutrir/07-9-intencao-concluida.fxml");
             if (fxmlUrl == null) {
-                throw new IOException("Arquivo FXML não encontrado: /br/com/renutrir/07-9-intencao-concluida.fxml");
+                throw new IOException("FXML não encontrado.");
             }
 
             FXMLLoader loader = new FXMLLoader(fxmlUrl);
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
-            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora);
+            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
@@ -418,11 +430,19 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void doarBebidaBotao(ActionEvent actionEvent) {
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+
+        if (instituicaoSelecionada == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma instituição selecionada.");
+            return;
+        }
+
+        System.out.println("Instituição selecionada: " + instituicaoSelecionada.getNome());
+
         String nomeItem = fieldItemDoarIntencao.getText();
         String qtdItem = fieldInserirQtdItem.getText();
-        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Alimentos", nomeItem);
         RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
-        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Bebidas", nomeItem);
         repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
 
         int quantidade;
@@ -441,13 +461,14 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         try {
             URL fxmlUrl = getClass().getResource("/br/com/renutrir/07-9-intencao-concluida.fxml");
             if (fxmlUrl == null) {
-                throw new IOException("Arquivo FXML não encontrado: /br/com/renutrir/07-9-intencao-concluida.fxml");
+                throw new IOException("FXML não encontrado.");
             }
 
             FXMLLoader loader = new FXMLLoader(fxmlUrl);
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
-            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora);
+            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
@@ -496,11 +517,19 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void doarRoupaBotao(ActionEvent actionEvent) {
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+
+        if (instituicaoSelecionada == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma instituição selecionada.");
+            return;
+        }
+
+        System.out.println("Instituição selecionada: " + instituicaoSelecionada.getNome());
+
         String nomeItem = fieldItemDoarIntencao.getText();
         String qtdItem = fieldInserirQtdItem.getText();
-        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Alimentos", nomeItem);
         RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
-        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Roupas", nomeItem);
         repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
 
         int quantidade;
@@ -519,13 +548,14 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         try {
             URL fxmlUrl = getClass().getResource("/br/com/renutrir/07-9-intencao-concluida.fxml");
             if (fxmlUrl == null) {
-                throw new IOException("Arquivo FXML não encontrado: /br/com/renutrir/07-9-intencao-concluida.fxml");
+                throw new IOException("FXML não encontrado.");
             }
 
             FXMLLoader loader = new FXMLLoader(fxmlUrl);
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
-            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora);
+            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
@@ -564,11 +594,19 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void doarProdLimpezaBotao(ActionEvent actionEvent) {
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+
+        if (instituicaoSelecionada == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma instituição selecionada.");
+            return;
+        }
+
+        System.out.println("Instituição selecionada: " + instituicaoSelecionada.getNome());
+
         String nomeItem = fieldItemDoarIntencao.getText();
         String qtdItem = fieldInserirQtdItem.getText();
-        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Alimentos", nomeItem);
         RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
-        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Produtos de Limpeza", nomeItem);
         repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
 
         int quantidade;
@@ -581,19 +619,20 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
         String doadorNome = doadorLogado != null ? doadorLogado.getNome() : "Desconhecido";
-        String tipoDoacao = "Produto de Limpeza";
+        String tipoDoacao = "Produtos de limpeza";
         LocalDateTime dataHora = LocalDateTime.now();
 
         try {
             URL fxmlUrl = getClass().getResource("/br/com/renutrir/07-9-intencao-concluida.fxml");
             if (fxmlUrl == null) {
-                throw new IOException("Arquivo FXML não encontrado: /br/com/renutrir/07-9-intencao-concluida.fxml");
+                throw new IOException("FXML não encontrado.");
             }
 
             FXMLLoader loader = new FXMLLoader(fxmlUrl);
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
-            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora);
+            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
@@ -632,15 +671,24 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void botaoDoarMovel(ActionEvent actionEvent) {
-        String nomeItem = fieldItemDoarIntencao.getText();
         Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+
+        if (instituicaoSelecionada == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma instituição selecionada.");
+            return;
+        }
+
+        System.out.println("Instituição selecionada: " + instituicaoSelecionada.getNome());
+
+        String nomeItem = fieldItemDoarIntencao.getText();
+        String qtdItem = String.valueOf(1);
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Alimentos", nomeItem);
         RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
-        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, 1, "Móveis", nomeItem);
         repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
 
         int quantidade;
         try {
-            quantidade = 1;
+            quantidade = Integer.parseInt(qtdItem);
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Erro de Validação", "A quantidade deve ser um número válido.");
             return;
@@ -654,13 +702,14 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         try {
             URL fxmlUrl = getClass().getResource("/br/com/renutrir/07-9-intencao-concluida.fxml");
             if (fxmlUrl == null) {
-                throw new IOException("Arquivo FXML não encontrado: /br/com/renutrir/07-9-intencao-concluida.fxml");
+                throw new IOException("FXML não encontrado.");
             }
 
             FXMLLoader loader = new FXMLLoader(fxmlUrl);
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
-            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora);
+            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
@@ -699,11 +748,19 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     void doarProdHigieneBotao(ActionEvent actionEvent) {
+        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+
+        if (instituicaoSelecionada == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhuma instituição selecionada.");
+            return;
+        }
+
+        System.out.println("Instituição selecionada: " + instituicaoSelecionada.getNome());
+
         String nomeItem = fieldItemDoarIntencao.getText();
         String qtdItem = fieldInserirQtdItem.getText();
-        Instituicao instituicaoSelecionada = RepositorioIntencaoDoacao.getInstituicaoSelecionada();
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Alimentos", nomeItem);
         RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
-        IntencaoDoacao intencaoDoacao = new IntencaoDoacao(SessaoDoador.getInstancia().getDoadorLogado(), instituicaoSelecionada, Integer.parseInt(qtdItem), "Produtos de Higiene", nomeItem);
         repositorioIntencaoDoacao.adicionarIntencao(intencaoDoacao);
 
         int quantidade;
@@ -716,19 +773,20 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
         String doadorNome = doadorLogado != null ? doadorLogado.getNome() : "Desconhecido";
-        String tipoDoacao = "Produto de Higiene";
+        String tipoDoacao = "Produtos de higiene";
         LocalDateTime dataHora = LocalDateTime.now();
 
         try {
             URL fxmlUrl = getClass().getResource("/br/com/renutrir/07-9-intencao-concluida.fxml");
             if (fxmlUrl == null) {
-                throw new IOException("Arquivo FXML não encontrado: /br/com/renutrir/07-9-intencao-concluida.fxml");
+                throw new IOException("FXML não encontrado.");
             }
 
             FXMLLoader loader = new FXMLLoader(fxmlUrl);
             Parent root = loader.load();
             ControladorIntencaoDeDoacao controlador = loader.getController();
-            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora);
+            controlador.setInformacoesDoacao(doadorNome, tipoDoacao, quantidade, nomeItem, dataHora, instituicaoSelecionada);
+            showAlert(Alert.AlertType.INFORMATION, "Intenção Realizada", "Sua intenção de doação foi realizada com sucesso!");
 
             Stage stage = (Stage) botaoItemDoar.getScene().getWindow();
             stage.setTitle("ReNutrir - Intenção Concluída");
@@ -751,42 +809,12 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     private Label exibirIntencaoDoacaoLabel;
 
     @FXML
+    private Label labelEnderecoInstituicaoSel;
+
+    @FXML
     void botaoVoltar39(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Menu Doador");
     }
-
-    @FXML
-    void botaoSalvarIntencaoDoacao(ActionEvent event) {
-        String nomeInstituicao = exibirEnderecoInstituicaoLabel.getText();
-        String nomeItem = fieldInserirNomeItem.getText();
-        String quantidadeStr = fieldInserirQtdItem.getText();
-        LocalDateTime dataHora = LocalDateTime.now();
-        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
-        int quantidade;
-
-        if (nomeInstituicao.isEmpty() || nomeItem.isEmpty() || quantidadeStr.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Por favor, preencha todos os campos corretamente.");
-            return;
-        }
-
-        try {
-            quantidade = Integer.parseInt(quantidadeStr);
-            if (quantidade <= 0) {
-                showAlert(Alert.AlertType.ERROR, "Erro de validação", "A quantidade deve ser maior que zero.");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Erro de validação", "Quantidade inválida. Por favor, insira um número válido.");
-            return;
-        }
-
-        IntencaoDoacao novaIntencao = new IntencaoDoacao(nomeInstituicao, nomeItem, quantidade, dataHora);
-        RepositorioIntencaoDoacao repositorio = new RepositorioIntencaoDoacao();
-        repositorio.adicionarIntencao(novaIntencao);
-
-        showAlert(Alert.AlertType.INFORMATION, "Sucesso", "A intenção de doação foi salva com sucesso! Realize a sua doação dentro dos próximos 7 dias.");
-    }
-
 
 
     //Tela 07-10
@@ -822,112 +850,26 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         }
     }
 
-    @FXML
-    private Button botaoRegistrarDoacao;
+    private Instituicao instituicaoSelecionada;
 
-    private String obterItemSelecionado() {
-        if (fieldInserirNomeAlimento != null && !fieldInserirNomeAlimento.getText().isEmpty()) {
-            return fieldInserirNomeAlimento.getText();
-        } else if (fieldInserirNomeBebida != null && !fieldInserirNomeBebida.getText().isEmpty()) {
-            return fieldInserirNomeBebida.getText();
-        } else if (fieldInserirNomeRoupa != null && !fieldInserirNomeRoupa.getText().isEmpty()) {
-            return fieldInserirNomeRoupa.getText();
-        } else if (fieldInserirProdLimpeza != null && !fieldInserirProdLimpeza.getText().isEmpty()) {
-            return fieldInserirProdLimpeza.getText();
-        } else if (fieldInserirNomeMovel != null && !fieldInserirNomeMovel.getText().isEmpty()) {
-            return fieldInserirNomeMovel.getText();
-        } else if (fieldInserirProdHigiene != null && !fieldInserirProdHigiene.getText().isEmpty()) {
-            return fieldInserirProdHigiene.getText();
+    private void atualizarLabelEndereco() {
+        if (instituicaoSelecionada != null) {
+            labelEnderecoInstituicaoSel.setText(instituicaoSelecionada.getEndereco()+"");
         } else {
-            return null;
+            labelEnderecoInstituicaoSel.setText("Endereço: Não disponível");
         }
     }
 
-    @FXML
-    private void registrarDoacao(ActionEvent event) {
-        Doador doador = SessaoDoador.getInstancia().getDoadorLogado();
-
-        if (doador == null) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Doador não encontrado. Certifique-se de que você está logado.");
-            return;
-        }
-
-        String itemSelecionado = obterItemSelecionado();
-
-        ProgressAlert progressAlert = new ProgressAlert();
-        progressAlert.start(new Stage());
-        progressAlert.showProgress();
-
-        new Thread(() -> {
-            try {
-                Thread.sleep(500);
-
-                String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
-                String status = "Concluída";
-
-                Doacao doacao = new Doacao(doador.getNomeUsuario(), itemSelecionado, 1, dataHora, status);
-
-                RepositorioDoacoes repositorioDoacoes = new RepositorioDoacoes();
-                repositorioDoacoes.adicionarDoacao(doacao);
-                salvarDoacoesEmArquivo(repositorioDoacoes);
-
-                Platform.runLater(() -> {
-                    verificarProgressoParaCertificado(doador);
-
-                    progressAlert.hideProgress();
-                    showAlert(Alert.AlertType.INFORMATION, "Doação Concluída", "Sua doação foi realizada com sucesso!");
-                });
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-
-    public void salvarDoacoesEmArquivo(RepositorioDoacoes repositorioDoacoes) {
-        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
-
-        if (doadorLogado == null) {
-            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Nenhum doador está logado."));
-            return;
-        }
-
-        String nomeUsuario = doadorLogado.getNomeUsuario();
-        String caminhoArquivo = "src/dados/" + nomeUsuario + "_doacoes.dat";
-
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(caminhoArquivo))) {
-            oos.writeObject(repositorioDoacoes.listarDoacoes());
-        } catch (IOException e) {
-            e.printStackTrace();
-            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível salvar as doações."));
-        }
-    }
-
-    public void verificarProgressoParaCertificado(Doador doador) {
-        ControladorCertificado controladorCertificado = new ControladorCertificado();
-        controladorCertificado.verificarProgressoParaCertificado(doador);
-    }
-
-    public void setInformacoesDoacao(String doadorNome, String tipoDoacao, int quantidade, String item, LocalDateTime dataHora) {
+    public void setInformacoesDoacao(String doadorNome, String tipoDoacao, int quantidade, String nomeItem, LocalDateTime dataHora, Instituicao instituicao) {
+        this.instituicaoSelecionada = instituicao;
         String dataHoraFormatada = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         exibirInfoDoacaoLabel.setText(String.format(
                 "Doador: %s\nData e hora: %s\nTipo da doação: %s\nItem: %s\nQuantidade: %d",
-                doadorNome, dataHoraFormatada, tipoDoacao, item, quantidade));
+                doadorNome, dataHoraFormatada, tipoDoacao, nomeItem, quantidade));
+        atualizarLabelEndereco();
 
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
     }
-
-    public void setIntencaoDoacao(String nomeDoador, String tipoDoacao, int quantidade, LocalDateTime dataHora) {
-        if (exibirIntencaoDoacaoLabel != null) {
-            String texto = String.format("Doador: %s\nData e hora: %s\nTipo da doação: %s\nQuantidade: %d",
-                    nomeDoador, dataHora, tipoDoacao, quantidade);
-            exibirIntencaoDoacaoLabel.setText(texto);
-        } else {
-            System.out.println("exibirIntencaoDoacaoLabel é null");
-        }
-    }
-
-
 
     public void trocarTela(Stage stage, String fxmlFile, String title) {
         try {
@@ -977,94 +919,3 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     }
 
 }
-
-/*
-    private HelloController hc;
-    private RepositorioIntencaoDoacao repositorioIntencaoDoacao;
-
-    @FXML
-    private Button doarAgoraBotao;
-
-    @FXML
-    void botaoDoarAgora(ActionEvent event) {
-        hc.realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Realizar Doação");
-    }
-
-    @FXML
-    private ComboBox<String> escolherInstituicaoDoarCbox;
-
-    private RepositorioInstituicao repositorioInstituicao;
-
-    @FXML
-    public void initialize() {
-        repositorioInstituicao = new RepositorioInstituicao();
-        carregarInstituicoesNaComboBox();
-    }
-
-    private void carregarInstituicoesNaComboBox() {
-        List<Instituicao> instituicoes = repositorioInstituicao.listarInstituicoes();
-        if (instituicoes.isEmpty()) {
-            System.out.println("Nenhuma instituição encontrada no arquivo.");
-        }
-        for (Instituicao instituicao : instituicoes) {
-            System.out.println("Adicionando instituição: " + instituicao.getNome());
-            escolherInstituicaoDoarCbox.getItems().add(instituicao.getNome());
-        }
-    }
-
-    @FXML
-    void cboxEscolherInstituicaoDoar(ActionEvent event) {
-
-    }
-    @FXML
-    public void botaoInstituicoesDoacao(ActionEvent actionEvent) {
-        hc.realizarTrocaDeTela("/br/com/renutrir/06-doacoes-solicitadas.fxml", "ReNutrir - Doações Solicitadas");
-    }
-
-    public ControladorIntencaoDeDoacao(HelloController hc) {
-        this.repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
-        this.hc = hc;
-    }
-
-    public List<IntencaoDoacao> listarIntencoes() {
-        return repositorioIntencaoDoacao.listarIntencoes();
-    }
-
-    public void criarIntencaoDeDoacao(IntencaoDoacao intencao) {
-        if (validarIntencaoDeDoacao(intencao)) {
-            repositorioIntencaoDoacao.adicionarIntencao(intencao);
-            System.out.println("Intenção de doação criada com sucesso!");
-        } else {
-            System.out.println("Falha ao criar intenção de doação: dados inválidos.");
-        }
-    }
-
-
-    public void atualizarIntencaoDeDoacao(IntencaoDoacao intencao) {
-        if (validarIntencaoDeDoacao(intencao)) {
-            repositorioIntencaoDoacao.atualizarIntencao(intencao);
-            System.out.println("Intenção de doação atualizada com sucesso!");
-        } else {
-            System.out.println("Falha ao atualizar intenção de doação: dados inválidos.");
-        }
-    }
-
-    public void removerIntencaoDeDoacao(IntencaoDoacao intencao) {
-        repositorioIntencaoDoacao.removerIntencao(intencao);
-        System.out.println("Intenção de doação removida com sucesso!");
-    }
-
-    private boolean validarIntencaoDeDoacao(IntencaoDoacao intencao) {
-        if (intencao.getItem() == null || intencao.getItem().isEmpty()) {
-            System.out.println("Item inválido.");
-            return false;
-        }
-        if (intencao.getQuantidade() <= 0) {
-            System.out.println("Quantidade inválida.");
-            return false;
-        }
-        // espaço para mais validações..
-
-        return true;
-    }
-*/
