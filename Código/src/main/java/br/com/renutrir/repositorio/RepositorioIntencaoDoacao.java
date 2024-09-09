@@ -1,3 +1,4 @@
+/*
 package br.com.renutrir.repositorio;
 
 import br.com.renutrir.model.Doador;
@@ -134,9 +135,9 @@ public class RepositorioIntencaoDoacao {
         instituicaoSelecionada = instituicao;
     }
 }
-
+*/
 //Repositório Novo
-/*
+
 package br.com.renutrir.repositorio;
 
 import br.com.renutrir.model.Doador;
@@ -226,7 +227,7 @@ public class RepositorioIntencaoDoacao {
 
     public boolean instRecebe(Instituicao instituicao) {
         for(IntencaoDoacao intencao : this.intencoes){
-            if(intencao.getInstituicao().equals(instituicao)){
+            if(intencao.getInstituicao().getNomeUsuario().equals(instituicao.getNomeUsuario())){
                 return true;
             }
         }
@@ -247,5 +248,3 @@ public class RepositorioIntencaoDoacao {
         return intencoes;
     }
 }
-
- */

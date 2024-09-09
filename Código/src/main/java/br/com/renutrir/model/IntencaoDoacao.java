@@ -1,10 +1,14 @@
 package br.com.renutrir.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class IntencaoDoacao {
+public class IntencaoDoacao implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private String tipoItem; // Valor, alimento, Roupas, Móveis, etc.
     private String item;
     private int quantidade;
@@ -106,8 +110,7 @@ public class IntencaoDoacao {
         if (this.doador == null) {
             return "Não há Intenção de Doação";
         } else {
-            return String.format("Doador: %s, Item: %s, Quantidade: %d, Data: %s, Status: %s",
-                    doador.getNome(), item, quantidade, data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")), status);
+            return "Há intenções";
         }
     }
 

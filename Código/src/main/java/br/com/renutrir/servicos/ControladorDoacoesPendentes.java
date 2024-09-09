@@ -78,18 +78,29 @@ public class ControladorDoacoesPendentes implements Initializable {
     @FXML
     private ComboBox <IntencaoDoacao> CBoxDPendentes;
 
-public void preencherCBoxDPendentes(Instituicao instituicao) {
+public void preencherCBoxDPendentes() {
+    if(SessaoInstituicao.getInstancia().getInstituicaoLogada() != null){
+        Instituicao instituicao = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+    System.out.println("Checando intenções para " + instituicao.getNome());
+    CBoxDPendentes = new ComboBox<IntencaoDoacao>();
     RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
     if(repositorioIntencaoDoacao.instRecebe(instituicao)){
         CBoxDPendentes.getItems().clear();
     List<IntencaoDoacao> intencoes = repositorioIntencaoDoacao.getIntencoes();
-    if(!intencoes.isEmpty()) {
         for (IntencaoDoacao intencaoDoacao : intencoes) {
-            if (intencaoDoacao.getInstituicao() == instituicao) {
+            System.out.println(intencaoDoacao);
+            if (intencaoDoacao.getInstituicao().getNomeUsuario().equals(instituicao.getNomeUsuario())) {
+                System.out.println("É para a instituição");
                 CBoxDPendentes.getItems().add(intencaoDoacao);
+                System.out.println(CBoxDPendentes.getItems());
+            }
             }
         }
     }
+    else{
+        IntencaoDoacao intencaoDoacao = new IntencaoDoacao();
+        intencaoDoacao.setDoador(null);
+        CBoxDPendentes.setItems(FXCollections.observableArrayList(intencaoDoacao));
     }
     }
 
@@ -118,8 +129,6 @@ public void preencherCBoxDPendentes(Instituicao instituicao) {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        IntencaoDoacao intencaoDoacao = new IntencaoDoacao();
-        intencaoDoacao.setDoador(null);
-        CBoxDPendentes.setItems(FXCollections.observableArrayList(intencaoDoacao));
+        preencherCBoxDPendentes();
     }
 }
