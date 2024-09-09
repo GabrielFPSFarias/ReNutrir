@@ -62,8 +62,9 @@
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints maxHeight="227.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="252.0" minHeight="10.0" prefHeight="218.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="252.0" minHeight="10.0" prefHeight="187.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="252.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <BorderPane.margin>
                   <Insets bottom="40.0" top="-40.0" />
@@ -72,16 +73,17 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button fx:id="salvarComprovanteBotao" layoutX="293.0" layoutY="163.0" mnemonicParsing="false" onAction="#botaoSalvarComprovante" prefHeight="30.0" prefWidth="226.0" text="Salvar comprovante" textAlignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="salvarComprovanteBotao" layoutX="293.0" layoutY="163.0" mnemonicParsing="false" onAction="#botaoSalvarComprovante" prefHeight="30.0" prefWidth="226.0" text="Salvar comprovante" textAlignment="CENTER" GridPane.rowIndex="3" />
                   <Label fx:id="exibirInfoDoacaoLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="218.0" prefWidth="493.0" text="Doador:\nData e hora:\nTipo da doação:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="16.0" />
                      </font></Label>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Realize a sua doação dentro dos próximos 7 dias.">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
+                  <Label fx:id="labelEnderecoInstituicaoSel" alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="480.0" text="Endereço da Instituição" textAlignment="CENTER" textFill="#000828" wrapText="true" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>
