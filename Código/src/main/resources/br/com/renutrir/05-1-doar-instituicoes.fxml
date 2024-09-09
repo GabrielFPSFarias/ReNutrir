@@ -46,7 +46,7 @@
    <center>
       <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0">
          <content>
-            <GridPane prefHeight="317.0" prefWidth="792.0">
+            <GridPane prefHeight="317.0" prefWidth="788.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -55,13 +55,16 @@
                 <RowConstraints maxHeight="100.0" minHeight="1.0" prefHeight="1.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="tableViewDoacoesSolicitadas" prefHeight="264.0" prefWidth="833.0" tableMenuButtonVisible="true">
+                  <TableView fx:id="tableViewDoacoesSolicitadas" prefHeight="316.0" prefWidth="769.0" tableMenuButtonVisible="true">
                     <columns>
-                      <TableColumn fx:id="colInstituicao" prefWidth="258.0" text="Instituição" />
-                      <TableColumn fx:id="colItem" prefWidth="318.0" text="Item Solicitado" />
-                        <TableColumn fx:id="colQuantidade" prefWidth="113.0" text="Quantidade" />
-                        <TableColumn fx:id="colFaltam" prefWidth="102.0" text="Faltam" />
+                      <TableColumn fx:id="colInstituicao" prefWidth="267.0" text="Instituição" />
+                      <TableColumn fx:id="colItem" prefWidth="289.0" text="Item Solicitado" />
+                        <TableColumn fx:id="colQuantidade" prefWidth="126.0" text="Quantidade" />
+                        <TableColumn fx:id="colFaltam" prefWidth="109.0" text="Faltam" />
                     </columns>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
                   </TableView>
                </children>
             </GridPane>

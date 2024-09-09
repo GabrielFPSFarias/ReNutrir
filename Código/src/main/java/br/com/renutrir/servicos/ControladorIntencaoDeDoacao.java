@@ -134,8 +134,8 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             colFaltam = new TableColumn<>();
         }
 
-        colInstituicao.setCellValueFactory(new PropertyValueFactory<>("instituicao"));
-        colItem.setCellValueFactory(new PropertyValueFactory<>("itemSolicitado"));
+        colInstituicao.setCellValueFactory(new PropertyValueFactory<>("nomeInstituicao"));
+        colItem.setCellValueFactory(new PropertyValueFactory<>("item"));
         colQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         colFaltam.setCellValueFactory(new PropertyValueFactory<>("faltam"));
     }
