@@ -270,19 +270,24 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     @FXML
     private void botaoDoarInstSelecionada(ActionEvent actionEvent) {
-        SolicitacaoDoacao instituicaoSelecionada = tableViewDoacoesSolicitadas.getSelectionModel().getSelectedItem();
-        if (instituicaoSelecionada == null) {
+        SolicitacaoDoacao solicitacaoSelecionada = tableViewDoacoesSolicitadas.getSelectionModel().getSelectedItem();
+        if (solicitacaoSelecionada == null) {
             showAlert(Alert.AlertType.WARNING, "Seleção Necessária", "Por favor, selecione uma solicitação para prosseguir.");
             return;
         }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/05-2-doacao-solicitacao.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setTitle("ReNutrir - Doação Solicitação");
 
-            ControladorSolicitacaoDoacao controlador = loader.getController();
-            controlador.setInformacoes(instituicaoSelecionada, fieldItemDoarIntencao.getText(), fieldInserirQtdItem.getText());
+            if (fieldInserirQtdItem == null){
+                fieldInserirQtdItem = new TextField();
+            }
+
+            ControladorIntencaoDeDoacao controlador = loader.getController();
+            controlador.setInformacoes(solicitacaoSelecionada, solicitacaoSelecionada.getItem(), fieldInserirQtdItem.getText());
 
             stage.setScene(new Scene(root));
             stage.show();
@@ -291,6 +296,37 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação solicitação.");
         }
     }
+
+    public void setInformacoes(SolicitacaoDoacao instituicaoSelecionada, String itemDoacao, String quantidade) {
+        nomeInstSolicitadoraLabel.setText(instituicaoSelecionada.getNomeInstituicao());
+        nomeItemSolicitadoLabel.setText(instituicaoSelecionada.getItem());
+        fieldInserirQtdItem.setText(quantidade);
+    }
+
+
+    //Tela 05-2
+
+    @FXML
+    private Label nomeItemSolicitadoLabel;
+
+    @FXML
+    private Label nomeInstSolicitadoraLabel;
+
+    @FXML
+    void botaoVoltar76(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/05-1-doar-instituicoes.fxml", "ReNutrir - Doações Solicitadas");
+    }
+
+    @FXML
+    void doarItemSolicitadoBotao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inserirQtdItemField(ActionEvent event) {
+
+    }
+
 
     //Label
     @FXML

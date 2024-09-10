@@ -29,7 +29,7 @@
                   <Insets bottom="10.0" top="20.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirme a sua intenção de doação com ALIMENTOS" textAlignment="CENTER" wrappingWidth="469.1875">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirme a sua intenção de doação de uma solicitação" textAlignment="CENTER" wrappingWidth="469.1875">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -43,7 +43,7 @@
    <bottom>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="72.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="voltarBotao" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar33" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
+            <Button fx:id="voltarBotao" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#botaoVoltar76" prefHeight="25.0" prefWidth="97.0" text="Voltar" textAlignment="CENTER">
                <VBox.margin>
                   <Insets right="10.0" />
                </VBox.margin>
@@ -79,11 +79,19 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button fx:id="botaoItemDoar" mnemonicParsing="false" onAction="#doarAlimentosBotao" prefHeight="30.0" prefWidth="226.0" text="Doar ALIMENTOS" textAlignment="CENTER" GridPane.rowIndex="7" />
-                  <TextField fx:id="fieldItemDoarIntencao" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirNomeAlimentoField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="2" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite o alimento que deseja doar:" GridPane.rowIndex="1" />
-                  <TextField fx:id="fieldInserirQtdItem" layoutX="294.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirQtdAlimentoField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="5" />
+                  <Button fx:id="botaoItemDoar" mnemonicParsing="false" onAction="#doarItemSolicitadoBotao" prefHeight="30.0" prefWidth="226.0" text="Doar agora" textAlignment="CENTER" GridPane.rowIndex="7" />
+                  <TextField fx:id="fieldInserirQtdItem" layoutX="294.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#inserirQtdItemField" prefHeight="25.0" prefWidth="224.0" GridPane.rowIndex="5" />
                   <Text layoutX="314.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digite a quantidade:" GridPane.rowIndex="4" />
+                  <Label fx:id="nomeInstSolicitadoraLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="480.0" text="Instituição Beneficiária" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nomeItemSolicitadoLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="480.0" text="Item requisitado" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
          </content>
