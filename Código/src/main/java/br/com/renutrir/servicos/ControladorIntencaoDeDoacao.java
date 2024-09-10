@@ -239,10 +239,19 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     //Tela 05.1 - Lista Instituições que solicitaram doações
 
+    @FXML
+    private Button doarInstSelecionadaBotao;
+
+    @FXML
+    private Label labelEnderecoEmailInst;
+
     public void botaoVoltar75(ActionEvent actionEvent) {
         realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
+    public void botaoDoarInstSelecionada(ActionEvent actionEvent){
+
+    }
 
     //Label
     @FXML
