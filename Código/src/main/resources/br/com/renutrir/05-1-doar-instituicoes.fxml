@@ -82,7 +82,7 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Label fx:id="labelEnderecoEmailInst" alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="513.0" text="Endereço e email da instituição selecionada" textAlignment="JUSTIFY" wrapText="true" />
+                        <Label fx:id="labelEnderecoEmailInst" alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="513.0" text="Endereço e email da instituição selecionada" textAlignment="CENTER" wrapText="true" />
                      </children>
                   </GridPane>
                </children>
