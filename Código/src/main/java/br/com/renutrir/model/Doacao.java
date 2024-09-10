@@ -12,6 +12,11 @@ public class Doacao extends IntencaoDoacao {
         this.setStatus("Concluída");
         this.setData(LocalDateTime.now());
     }
+
+    public Doacao(String nomeUsuario, String itemSelecionado, int quantidade, String dataHora, String status) {
+        this.setStatus("Concluída");
+        this.setData(LocalDateTime.now());
+    }
 }
 
 /*
