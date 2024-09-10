@@ -18,20 +18,23 @@ public class Evento implements Serializable {
     private String tipo;
     private LocalTime horario;
     private String descricao;
+    private Instituicao instituicao;
 
-    public Evento(String nome, LocalDate data, String local) {
+    public Evento(String nome, LocalDate data, String local, Instituicao instituicao) {
         this.nome = nome;
         this.data = data;
         this.local = local;
+        this.instituicao = instituicao;
     }
 
-    public Evento(String nome, LocalDate data, String local, LocalTime horario, String tipo, String descricao) {
+    public Evento(String nome, LocalDate data, String local, LocalTime horario, String tipo, String descricao, Instituicao instituicao) {
         this.nome = nome;
         this.data = data;
         this.local = local;
         this.horario = horario;
         this.tipo = tipo;
         this.descricao = descricao;
+        this.instituicao = instituicao;
     }
 
     // Getters e Setters
@@ -117,9 +120,17 @@ public class Evento implements Serializable {
 
     private String nomeEventoParaEditar;
 
+    public Instituicao getInstituicao() {
+        return instituicao;
+    }
+
+    public void setInstituicao(Instituicao instituicao) {
+        this.instituicao = instituicao;
+    }
 
     @Override
     public String toString() {
-        return nome + " - " + data + " " + horario + " - " + tipo + " - " + local;
+        return nome + " - " + data + " " + horario + " - " + tipo + " - " + local + " (Instituição: " + instituicao.getNome() + ")";
     }
+
 }

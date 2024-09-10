@@ -94,15 +94,20 @@ public class ControladorEventos {
     private Evento criarEvento() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime dataHora = LocalDateTime.parse(dataEventoField.getText() + " " + horarioEventoField.getText(), formatter);
+
+        Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+
         return new Evento(
                 nomeEventoField.getText(),
                 dataHora.toLocalDate(),
                 endEventoField.getText(),
                 dataHora.toLocalTime(),
                 tipoEventoField.getText(),
-                descricaoEventoField.getText()
+                descricaoEventoField.getText(),
+                instituicaoLogada
         );
     }
+
 
     private void atualizarEvento(Evento evento) {
         evento.setNome(nomeEventoField.getText());
@@ -204,6 +209,10 @@ public class ControladorEventos {
             }
         }
 
+        if (tableViewEventos == null) {
+            tableViewEventos = new TableView<>();
+        }
+
         tableViewEventos.setItems(eventosList);
 
     }
@@ -224,7 +233,7 @@ public class ControladorEventos {
 
     @FXML
     void botaoVoltar20(ActionEvent event) {
-        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Criar Evento");
     }
 
 
@@ -268,14 +277,14 @@ public class ControladorEventos {
 
     @FXML
     void botaoVoltar43(ActionEvent event) {
-        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+        realizarTrocaDeTela("/br/com/renutrir/20-criar-eventos.fxml", "ReNutrir - Criar Evento");
     }
 
     //Tela 20.3 Editar eventos criados pela instituição
 
     @FXML
     void botaoVoltar44(ActionEvent event) {
-        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
+        realizarTrocaDeTela("/br/com/renutrir/20-criar-eventos.fxml", "ReNutrir - Criar Evento");
     }
 
 
@@ -291,11 +300,24 @@ public class ControladorEventos {
     private TableColumn<Evento, String> tableEventosInformacoes;
 
     public void initialize() {
-        tableEventosInstituicao.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        if (tableEventosInstituicao == null || tableEventosInformacoes == null) {
+            tableEventosInstituicao = new TableColumn<>();
+            tableEventosInformacoes = new TableColumn<>();
+        }
+
+        tableEventosInstituicao.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getInstituicao().getNome()));
+
         tableEventosInformacoes.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getNome() + " - " + cellData.getValue().getData()
-                        + " " + cellData.getValue().getHorario() + " - " + cellData.getValue().getLocal()
-                        + " - " + cellData.getValue().getDescricao()));
+                new SimpleStringProperty(
+                        cellData.getValue().getNome() + " - "
+                                + cellData.getValue().getData() + " "
+                                + cellData.getValue().getHorario() + " - "
+                                + cellData.getValue().getLocal() + " - "
+                                + cellData.getValue().getDescricao()
+                ));
+
+        atualizarListaEventos();
     }
 
     @FXML
