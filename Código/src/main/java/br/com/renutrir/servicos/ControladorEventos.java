@@ -7,6 +7,9 @@ import br.com.renutrir.repositorio.RepositorioEventos;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
 import javafx.animation.PauseTransition;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +18,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -184,30 +190,24 @@ public class ControladorEventos {
         pause.play();
     }
 
+
     private void atualizarListaEventos() {
         RepositorioEventos repositorioEventos = new RepositorioEventos();
         List<Evento> eventos = repositorioEventos.listarEventos();
-        Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
 
-        StringBuilder eventosTexto = new StringBuilder();
+        ObservableList<Evento> eventosList = FXCollections.observableArrayList();
         LocalDateTime agora = LocalDateTime.now();
 
-        if (eventos.isEmpty()) {
-            eventosTexto.append("Nenhum evento encontrado.\n");
-        } else {
-            for (Evento evento : eventos) {
-                if (evento.getNome().equals(instituicaoLogada.getNome()) &&
-                        evento.getData().atTime(evento.getHorario()).isAfter(agora)) {
-                    eventosTexto.append(evento.toString()).append("\n\n");
-                    System.out.println("Evento: " + evento);
-                }
+        for (Evento evento : eventos) {
+            if (evento.getData().atTime(evento.getHorario()).isAfter(agora)) {
+                eventosList.add(evento);
             }
         }
-        if (listaEventosArea == null) {
-            listaEventosArea = new Label();
-        }
-        listaEventosArea.setText(eventosTexto.toString());
+
+        tableViewEventos.setItems(eventosList);
+
     }
+
 
     @FXML
     private Button criarNovoEventoBotao;
@@ -278,4 +278,28 @@ public class ControladorEventos {
         realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Instituição");
     }
 
+
+    //Tela para o voluntário
+
+    @FXML
+    private TableView<Evento> tableViewEventos;
+
+    @FXML
+    private TableColumn<Evento, String> tableEventosInstituicao;
+
+    @FXML
+    private TableColumn<Evento, String> tableEventosInformacoes;
+
+    public void initialize() {
+        tableEventosInstituicao.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        tableEventosInformacoes.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getNome() + " - " + cellData.getValue().getData()
+                        + " " + cellData.getValue().getHorario() + " - " + cellData.getValue().getLocal()
+                        + " - " + cellData.getValue().getDescricao()));
+    }
+
+    @FXML
+    void botaoVoltar16(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+    }
 }
