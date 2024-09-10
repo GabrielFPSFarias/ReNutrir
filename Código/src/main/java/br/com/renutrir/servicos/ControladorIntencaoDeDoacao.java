@@ -303,7 +303,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         fieldInserirQtdItem.setText(quantidade);
     }
 
-    
+
     //Tela 05-2
 
     @FXML

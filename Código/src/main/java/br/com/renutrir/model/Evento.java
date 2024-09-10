@@ -1,10 +1,13 @@
 package br.com.renutrir.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public class Evento {
+public class Evento implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String nome;
     private LocalDate data;
     private String local;

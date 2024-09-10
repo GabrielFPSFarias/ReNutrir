@@ -10,7 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/eventos.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/Evento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/Evento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioEventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/repositorio/RepositorioEventos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorEventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorEventos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorIntencaoDeDoacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorIntencaoDeDoacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/20-1-detalhes-eventos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/20-1-detalhes-eventos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/20-2-lista-eventos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/20-2-lista-eventos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/20-3-editar-eventos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/20-3-editar-eventos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/20-criar-eventos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/20-criar-eventos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/SolicitacaoDoacao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/SolicitacaoDoacao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/renutrir/HelloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/renutrir/HelloController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorIntencaoDeDoacao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorIntencaoDeDoacao.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

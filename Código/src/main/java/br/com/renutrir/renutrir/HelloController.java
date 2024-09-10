@@ -976,7 +976,7 @@ public class HelloController {
     }
 
     @FXML
-    private TextArea listaEventosArea;
+    private Label listaEventosArea;
 
     private void atualizarListaEventos() {
         if (listaEventosArea == null) {
