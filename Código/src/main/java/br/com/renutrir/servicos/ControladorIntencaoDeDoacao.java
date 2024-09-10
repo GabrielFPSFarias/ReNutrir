@@ -268,35 +268,6 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
 
-//    @FXML
-//    private void botaoDoarInstSelecionada(ActionEvent actionEvent) {
-//        SolicitacaoDoacao solicitacaoSelecionada = tableViewDoacoesSolicitadas.getSelectionModel().getSelectedItem();
-//        if (solicitacaoSelecionada == null) {
-//            showAlert(Alert.AlertType.WARNING, "Seleção Necessária", "Por favor, selecione uma solicitação para prosseguir.");
-//            return;
-//        }
-//
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/05-2-doacao-solicitacao.fxml"));
-//            Parent root = loader.load();
-//            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-//            stage.setTitle("ReNutrir - Doação Solicitação");
-//
-//            if (fieldInserirQtdItem == null){
-//                fieldInserirQtdItem = new TextField();
-//            }
-//
-//            ControladorIntencaoDeDoacao controlador = loader.getController();
-//            controlador.setInformacoes(solicitacaoSelecionada, solicitacaoSelecionada.getItem(), fieldInserirQtdItem.getText());
-//
-//            stage.setScene(new Scene(root));
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação solicitação.");
-//        }
-//    }
-
     @FXML
     private void botaoDoarInstSelecionada(ActionEvent actionEvent) {
         SolicitacaoDoacao solicitacaoSelecionada = tableViewDoacoesSolicitadas.getSelectionModel().getSelectedItem();
@@ -332,14 +303,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         fieldInserirQtdItem.setText(quantidade);
     }
 
-
-//    public void setInformacoes(SolicitacaoDoacao instituicaoSelecionada, String itemDoacao, String quantidade) {
-//        nomeInstSolicitadoraLabel.setText(instituicaoSelecionada.getNomeInstituicao());
-//        nomeItemSolicitadoLabel.setText(instituicaoSelecionada.getItem());
-//        fieldInserirQtdItem.setText(quantidade);
-//    }
-
-
+    
     //Tela 05-2
 
     @FXML
