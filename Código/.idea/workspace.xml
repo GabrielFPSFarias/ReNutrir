@@ -11,9 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dados/doadores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/dados/doadores.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorDoacaoConcluida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorDoacaoConcluida.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorDoacaoConcluida.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorDoacaoConcluida.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dados/instituicoes.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/dados/instituicoes.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/Instituicao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/model/Instituicao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorCadastro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorCadastro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/02-cadastro-instituicao.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/02-cadastro-instituicao.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/02-cadastro-instituicao.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/02-cadastro-instituicao.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Instituicao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/model/Instituicao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorCadastro.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorCadastro.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

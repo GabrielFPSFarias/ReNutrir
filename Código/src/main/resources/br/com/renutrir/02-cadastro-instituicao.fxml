@@ -115,9 +115,9 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Conta bancária:" GridPane.rowIndex="17" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Razão Social:" GridPane.rowIndex="16" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chave PIX:" GridPane.rowIndex="18" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="17" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                  <TextField fx:id="razaoSocialInsText" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                  <TextField fx:id="contaBancariaInsText" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                  <TextField fx:id="chavePixInsText" GridPane.columnIndex="1" GridPane.rowIndex="18" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Horário de funcionamento:" GridPane.rowIndex="19" />
                   <GridPane alignment="CENTER" prefHeight="25.0" prefWidth="437.0" GridPane.columnIndex="1" GridPane.rowIndex="19">
                     <columnConstraints>
@@ -131,13 +131,13 @@
                       <RowConstraints />
                     </rowConstraints>
                      <children>
-                        <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="87.0" />
-                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="87.0" GridPane.columnIndex="2" />
+                        <TextField fx:id="horarioInicialInsText" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="87.0" />
+                        <TextField fx:id="horarioFinalInsText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="87.0" GridPane.columnIndex="2" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="às" textAlignment="CENTER" wrappingWidth="88.13671875" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição da instituição:" GridPane.rowIndex="20" />
-                  <TextArea prefHeight="33.0" prefWidth="437.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+                  <TextArea fx:id="descricaoInstituicaoTextArea" prefHeight="33.0" prefWidth="437.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="20" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="40.0" top="-40.0" />

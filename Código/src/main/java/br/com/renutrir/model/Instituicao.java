@@ -15,12 +15,48 @@ public class Instituicao extends Conta implements Serializable {
     private double distanciaMaximaDeColeta;
     private LocalDateTime horarioFuncionamento;
     private LocalDateTime horarioColeta;
-    private boolean PrecisaVoluntario;
+    private boolean precisaVoluntario;
     private String endereco;
     private String descricao;
+    private String chavePix;
+    private String razaoSocial;
+    private String horarioInicial;
+    private String horarioFinal;
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public String getChavePix() {
+        return chavePix;
+    }
+
+    public void setChavePix(String chavePix) {
+        this.chavePix = chavePix;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public String getHorarioInicial() {
+        return horarioInicial;
+    }
+
+    public void setHorarioInicial(String horarioInicial) {
+        this.horarioInicial = horarioInicial;
+    }
+
+    public String getHorarioFinal() {
+        return horarioFinal;
+    }
+
+    public void setHorarioFinal(String horarioFinal) {
+        this.horarioFinal = horarioFinal;
     }
 
     public Evento criarEvento(String nome, LocalDate data, String local, LocalTime horario, String tipo, String descricao) {
@@ -62,7 +98,6 @@ public class Instituicao extends Conta implements Serializable {
                 .anyMatch(instituicao -> this.cnpj.equals(instituicao.getCnpj()) || this.getEmail().equals(instituicao.getEmail()));
     }
 
-
     private boolean cnpjValidacao(String cnpj) {
         if (cnpj == null || !cnpj.matches("\\d{14}")) {
             return false;
@@ -101,21 +136,16 @@ public class Instituicao extends Conta implements Serializable {
         this.horarioFuncionamento = horarioFuncionamento;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     @Override
     public void setNomeUsuario(String nomeUsuario) {
         super.setNomeUsuario(nomeUsuario);
     }
 
-    public void solicitarVoluntarios(){
-        this.PrecisaVoluntario = true;
+    public void solicitarVoluntarios() {
+        this.precisaVoluntario = true;
     }
 
+    public void setDescricao(String descricaoInstituicao) {
+        this.descricao = descricao;
+    }
 }
