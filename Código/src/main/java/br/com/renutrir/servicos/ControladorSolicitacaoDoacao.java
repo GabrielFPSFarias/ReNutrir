@@ -281,4 +281,7 @@ public class ControladorSolicitacaoDoacao {
 
     public void fieldItemDoacaoProdHigene(ActionEvent actionEvent) {
     }
+
+    public void setInformacoes(SolicitacaoDoacao instituicaoSelecionada, String text, String text1) {
+    }
 }
