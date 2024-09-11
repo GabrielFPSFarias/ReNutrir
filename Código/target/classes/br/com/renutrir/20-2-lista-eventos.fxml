@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.renutrir.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.servicos.ControladorEventos">
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
@@ -56,26 +56,13 @@
       </VBox>
    </bottom>
    <center>
-      <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0">
+      <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0" BorderPane.alignment="CENTER">
          <content>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="321.0" prefWidth="591.0" BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="484.0" minWidth="301.0" prefWidth="465.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints maxHeight="260.0" minHeight="10.0" prefHeight="260.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <BorderPane.margin>
-                  <Insets bottom="40.0" top="-40.0" />
-               </BorderPane.margin>
-               <padding>
-                  <Insets left="100.0" right="-100.0" />
-               </padding>
-               <children>
-                  <Label fx:id="labelEventosLista" alignment="CENTER" prefHeight="324.0" prefWidth="484.0" text="Eventos criados" textAlignment="CENTER" />
-                  <TextArea fx:id="listaEventosArea" prefHeight="200.0" prefWidth="200.0" />
-               </children>
-            </GridPane>
+            <Label fx:id="listaEventosArea" alignment="CENTER" contentDisplay="CENTER" prefHeight="315.0" prefWidth="796.0" text="Lista dos Eventos Criados" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </content>
       </ScrollPane>
    </center>

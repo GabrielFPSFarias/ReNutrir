@@ -1,2 +1,0 @@
-Evento Comunidade City;2024-09-03;17:00;Rua 14, Curado IV;Mutirão;Evento de teste
-Evento City;2024-09-03;16:00;Avenida 7, Curado IV;Mutirão;teste de evento

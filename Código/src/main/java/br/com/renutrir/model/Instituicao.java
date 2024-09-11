@@ -3,6 +3,7 @@ package br.com.renutrir.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Period;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class Instituicao extends Conta implements Serializable {
         this.endereco = endereco;
     }
 
-    public Evento criarEvento(String nome, LocalDate data, String local) {
-        return new Evento(nome, data, local);
+    public Evento criarEvento(String nome, LocalDate data, String local, LocalTime horario, String tipo, String descricao) {
+        return new Evento(nome, data, local, horario, tipo, descricao, this);
     }
 
     public LocalDate getDataFundacao() {

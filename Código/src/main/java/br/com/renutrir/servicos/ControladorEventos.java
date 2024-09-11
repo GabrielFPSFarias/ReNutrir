@@ -1,272 +1,385 @@
 package br.com.renutrir.servicos;
 
+import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Evento;
-import br.com.renutrir.renutrir.HelloController;
+import br.com.renutrir.model.Instituicao;
+import br.com.renutrir.repositorio.RepositorioEventos;
+import br.com.renutrir.sessao.SessaoDoador;
+import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.animation.PauseTransition;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Optional;
 
 public class ControladorEventos {
-    public ControladorEventos() {
-    }
-/*
-private HelloController hc;  
 
-ControladorEventos(HelloController hc){
+    @FXML
+    private TextField nomeEventoField;
 
-  this.hc = hc;
-}
+    @FXML
+    private TextField dataEventoField;
 
-@FXML
-    public Button eventosBotao;
+    @FXML
+    private TextField horarioEventoField;
 
-@FXML
-    private Button editarEventoBotao;
-
-  public void botaoEventos(ActionEvent actionEvent) {
-    realizarTrocaDeTela("/br/com/renutrir/16-proximos-eventos.fxml", "ReNutrir - Eventos");       
-  }
-
-
-@FXML
+    @FXML
     private TextField endEventoField;
-  
-@FXML
-    private TextField dataEventoField;  
 
-@FXML
+    @FXML
     private TextField tipoEventoField;
 
-@FXML
-    public void botaoCriarEvento() {
-        realizarTrocaDeTela("/br/com/renutrir/20-criar-eventos.fxml", "ReNutrir - Criar Evento");
-    }  
-@FXML  
-   public Button criarEventoBotao; 
+    @FXML
+    private TextArea descricaoEventoField;
 
-@FXML
-   private TextArea listaEventosArea;
+    @FXML
+    private Button voltarBotao;
 
-@FXML
-    private Button criarEventosBotao;
-  
-@FXML
-    private TextField horarioEventoField;  
+    private RepositorioEventos repositorio;
 
- private void limparCamposEvento() {
+    public ControladorEventos() {
+        repositorio = new RepositorioEventos();
+    }
+
+    @FXML
+    void botaoEditarEvento(ActionEvent event) {
+        if (nomeEventoField == null) {
+            nomeEventoField = new TextField();
+        }
+
+        String nomeEventoSelecionado = nomeEventoField.getText();
+        Optional<Evento> eventoParaEditarOpt = repositorio.buscarEventoPorNome(nomeEventoSelecionado);
+
+        if (eventoParaEditarOpt.isPresent()) {
+            Evento eventoParaEditar = eventoParaEditarOpt.get();
+            atualizarEvento(eventoParaEditar);
+            repositorio.atualizarEvento(eventoParaEditar);
+            showAlert(Alert.AlertType.INFORMATION, "Evento Editado", "O evento '" + nomeEventoSelecionado + "' foi editado com sucesso!");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Evento não encontrado.");
+        }
+    }
+
+    public void removerEventosPassados() {
+        List<Evento> eventosAtuais = repositorio.listarEventos();
+        LocalDateTime agora = LocalDateTime.now();
+
+        eventosAtuais.removeIf(evento -> evento.getData().atTime(evento.getHorario()).isBefore(agora));
+        repositorio.salvarEventos();
+    }
+
+    private Evento criarEvento() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime dataHora = LocalDateTime.parse(dataEventoField.getText() + " " + horarioEventoField.getText(), formatter);
+
+        Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+
+        return new Evento(
+                nomeEventoField.getText(),
+                dataHora.toLocalDate(),
+                endEventoField.getText(),
+                dataHora.toLocalTime(),
+                tipoEventoField.getText(),
+                descricaoEventoField.getText(),
+                instituicaoLogada
+        );
+    }
+
+
+    private void atualizarEvento(Evento evento) {
+        evento.setNome(nomeEventoField.getText());
+        evento.setData(LocalDate.parse(dataEventoField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        evento.setHorario(LocalTime.parse(horarioEventoField.getText(), DateTimeFormatter.ofPattern("HH:mm")));
+        evento.setLocal(endEventoField.getText());
+        evento.setTipo(tipoEventoField.getText());
+        evento.setDescricao(descricaoEventoField.getText());
+    }
+
+    private void limparCamposEvento() {
         nomeEventoField.clear();
         dataEventoField.clear();
         horarioEventoField.clear();
         endEventoField.clear();
         tipoEventoField.clear();
         descricaoEventoField.clear();
-    }  
+    }
 
- @FXML
-    public void botaoCriarNovoEvento() {
-        realizarTrocaDeTela("/br/com/renutrir/20-1-detalhes-eventos.fxml", "ReNutrir - Criar Novo Evento");
-    }  
+    private void showAlert(Alert.AlertType tipo, String titulo, String mensagem) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
+    }
 
-@FXML
-   private Button criarNovoEventoBotao;
-  
-@FXML
-   private void atualizarListaEventos() {
-        if (listaEventosArea == null) {
-            System.err.println("Erro: listaEventosArea não foi inicializada.");
-            return;
-        }  
-     
-private void salvarEventoNoArquivo(Evento evento) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("eventos.txt", true))) {
-            writer.write(evento.getNome() + ";" + evento.getData() + ";" + evento.getHorario() + ";" + evento.getLocal() + ";" + evento.getTipo() + ";" + evento.getDescricao());
-            writer.newLine();
+    public void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
+        System.out.println("Clicou: " + fxmlArquivo);
+        Stage stage = (Stage) voltarBotao.getScene().getWindow();
+        trocarTela(stage, fxmlArquivo, titulo);
+
+        if (fxmlArquivo.equals("/br/com/renutrir/03-login.fxml")) {
+            SessaoDoador.getInstancia().limparSessao();
+            SessaoInstituicao.getInstancia().limparSessao();
+        } else {
+            logarSessaoUsuario();
+        }
+    }
+
+    private void trocarTela(Stage stage, String fxmlFile, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+            stage.setScene(new Scene(root, 800, 500));
+            stage.setTitle(title);
+            stage.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }     
+    }
 
- @FXML
-    private Button botaoSalvarCriarEvento;
+    private void logarSessaoUsuario() {
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+        if (doadorLogado != null) {
+            System.out.println("Doador logado: " + doadorLogado.getNome());
+        }
 
-@FXML
-    void salvarCriarEventoBotao(ActionEvent event) {
+        Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+        if (instituicaoLogada != null) {
+            System.out.println("Instituição logada: " + instituicaoLogada.getNome());
+        }
+    }
+
+    @FXML
+    public void salvarCriarEventoBotao(ActionEvent actionEvent) {
         try {
-            String nome = nomeEventoField.getText();
-            String dataStr = dataEventoField.getText();
-            String horarioStr = horarioEventoField.getText();
-            String local = endEventoField.getText();
-            String tipo = tipoEventoField.getText();
-            String descricao = descricaoEventoField.getText();
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            LocalDateTime dataHora = LocalDateTime.parse(dataStr + " " + horarioStr, formatter);
-
-            Evento evento = new Evento(nome, dataHora.toLocalDate(), local, dataHora.toLocalTime(), tipo, descricao);
-            salvarEventoNoArquivo(evento);
+            Evento evento = criarEvento();
+            repositorio.adicionarEvento(evento);
             limparCamposEvento();
-
-            //evento criado com sucesso
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Evento Criado");
-            alert.setHeaderText(null);
-            alert.setContentText("O evento '" + nome + "' foi criado com sucesso!");
-            alert.showAndWait();
-
+            showAlert(Alert.AlertType.INFORMATION, "Evento Criado", "O evento '" + evento.getNome() + "' foi criado com sucesso!");
         } catch (DateTimeParseException e) {
-            //mostrar erro de formatação na data e hr
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro de Formato");
-            alert.setHeaderText("Formato de Data/Hora Inválido");
-            alert.setContentText("Por favor, insira a data e hora no formato 'dd/MM/yyyy HH:mm'.");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.ERROR, "Erro de Formato", "Por favor, insira a data e hora no formato 'dd/MM/yyyy HH:mm'.");
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }  
-
-   
- @FXML
-    private Button listaEventosCriadosBotao;
-
-@FXML
-    void fieldEndEvento(ActionEvent event) {
-
     }
-@FXML
-    void fieldDataEvento(ActionEvent event) {
 
-    }
-@FXML
-    void fieldNomeEvento(ActionEvent event) {
-
-    }  
-@FXML
-    void fieldTipoEvento(ActionEvent event) {
-    }  
-  
-@FXML
-    private TextField nomeEventoField;
-  
-@FXML
+    @FXML
     public void botaoListaEventosCriadosBotao(ActionEvent actionEvent) {
-        realizarTrocaDeTela("/br/com/renutrir/20-2-lista-eventos.fxml","ReNutrir - Lista de Eventos");
+        realizarTrocaDeTela("/br/com/renutrir/20-2-lista-eventos.fxml", "ReNutrir - Lista de Eventos");
 
         PauseTransition pause = new PauseTransition(Duration.millis(500));
         pause.setOnFinished(event -> atualizarListaEventos());
         pause.play();
+    }
 
-        List<Evento> eventos = carregarEventosDoArquivo();
-        Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
 
-        StringBuilder eventosTexto = new StringBuilder(); //cada evento está relacionado com a inst que o criou
+    private void atualizarListaEventos() {
+        RepositorioEventos repositorioEventos = new RepositorioEventos();
+        List<Evento> eventos = repositorioEventos.listarEventos();
+
+        ObservableList<Evento> eventosList = FXCollections.observableArrayList();
+        LocalDateTime agora = LocalDateTime.now();
+
         for (Evento evento : eventos) {
-            if (evento.getNome().equals(instituicaoLogada.getNome())) {
-                eventosTexto.append(evento.toString()).append("\n");
+            if (evento.getData().atTime(evento.getHorario()).isAfter(agora)) {
+                eventosList.add(evento);
             }
         }
-        listaEventosArea.setText(eventosTexto.toString());
-    }  
-  
-@FXML
-    private Label labelEventosLista;
-@FXML
+
+        if (tableViewEventos == null) {
+            tableViewEventos = new TableView<>();
+        }
+
+        tableViewEventos.setItems(eventosList);
+
+    }
+
+
+    @FXML
+    private Button criarNovoEventoBotao;
+
+    @FXML
+    public void botaoCriarNovoEvento() {
+        realizarTrocaDeTela("/br/com/renutrir/20-1-detalhes-eventos.fxml", "ReNutrir - Criar Novo Evento");
+    }
+
+    //Tela 20.1 - Detalhes Eventos
+
+    @FXML
+    private Button botaoSalvarCriarEvento;
+
+    @FXML
+    void botaoVoltar20(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Criar Evento");
+    }
+
+    @FXML
+    void fieldNomeEvento(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fieldEndEvento(ActionEvent event) {
+
+    }
+
+    @FXML
     void fieldHorarioEvento(ActionEvent event) {
 
     }
-  
-@FXML
-    void botaoEditarEvento(ActionEvent event) {
-        realizarTrocaDeTela("/br/com/renutrir/20-3-editar-eventos.fxml","ReNutrir - Lista de Eventos");
-        String nomeEventoSelecionado = nomeEventoField.getText();
 
-        List<Evento> eventos = carregarEventosDoArquivo();
-        Evento eventoParaEditar = eventos.stream()
-                .filter(e -> e.getNome().equals(nomeEventoSelecionado))
-                .findFirst()
-                .orElse(null);
+    @FXML
+    void fieldDataEvento(ActionEvent event) {
 
-        if (eventoParaEditar != null) {
-            eventoParaEditar.setNome(nomeEventoField.getText());
-            eventoParaEditar.setData(LocalDate.parse(dataEventoField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            eventoParaEditar.setHorario(LocalTime.parse(horarioEventoField.getText(), DateTimeFormatter.ofPattern("HH:mm")));
-            eventoParaEditar.setLocal(endEventoField.getText());
-            eventoParaEditar.setTipo(tipoEventoField.getText());
-            eventoParaEditar.setDescricao(descricaoEventoField.getText());
+    }
 
-            salvarEventoNoArquivo((Evento) eventos); //salva as mudanças
+    @FXML
+    void fieldTipoEvento(ActionEvent event) {
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Evento Editado");
-            alert.setHeaderText(null);
-            alert.setContentText("O evento '" + nomeEventoParaEditar + "' foi editado com sucesso!");
-            alert.showAndWait();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText(null);
-            alert.setContentText("Evento não encontrado.");
-            alert.showAndWait();
-        }
-    }  
-  
-@FXML
-    private TextArea descricaoEventoField;
-@FXML
+    }
+
+    @FXML
     void fieldDescricaoEvento(ActionEvent event) {
 
     }
-@FXML  
-private String nomeEventoParaEditar;  
 
-private List<Evento> carregarEventosDoArquivo() {
-        List<Evento> eventos = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("eventos.txt"))) {
-            String linha;
-            while ((linha = reader.readLine()) != null) {
-                String[] partes = linha.split(";");
-                String nome = partes[0];
-                LocalDate data = LocalDate.parse(partes[1]);
-                String horario = partes[2];
-                String local = partes[3];
-                String tipo = partes[4];
-                String descricao = partes[5];
+    //Tela 20.2 Lista de eventos criados
 
-                Evento evento = new Evento(nome, data, local, LocalTime.parse(horario), tipo, descricao);
-                eventos.add(evento);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return eventos;
-    }
-  
-  
-private void removerEventosPassados() {
-        List<Evento> eventosAtuais = carregarEventosDoArquivo();
-        LocalDateTime agora = LocalDateTime.now();
+    @FXML
+    private Label labelEventosLista;
 
-        eventosAtuais.removeIf(evento -> evento.getData().atTime(evento.getHorario()).isBefore(agora));
+    @FXML
+    private Label listaEventosArea;
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("eventos.txt"))) {
-            for (Evento evento : eventosAtuais) {
-                writer.write(evento.getNome() + ";" + evento.getData() + ";" + evento.getHorario() + ";" + evento.getLocal() + ";" + evento.getTipo());
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    void botaoVoltar43(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/20-criar-eventos.fxml", "ReNutrir - Criar Evento");
     }
 
-*/
+    //Tela 20.3 Editar eventos criados pela instituição
+
+    @FXML
+    void botaoVoltar44(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/20-criar-eventos.fxml", "ReNutrir - Criar Evento");
+    }
+
+    @FXML
+    private TableView<Evento> tableViewEventos;
+
+    @FXML
+    private TableColumn<Evento, String> tableEventosInstituicao;
+
+    @FXML
+    private TableColumn<Evento, String> tableEventosInformacoes;
+
+    @FXML
+    private Label labelNenhumEvento;
+
+    @FXML
+    public void initialize() {
+        configurarTabelaEventos();
+        carregarEExibirEventos();
+    }
+
+    private void configurarTabelaEventos() {
+        if (tableEventosInstituicao == null) {
+            tableEventosInstituicao = new TableColumn<>("Instituição");
+        }
+        if (tableEventosInformacoes == null) {
+            tableEventosInformacoes = new TableColumn<>("Informações");
+        }
+        if (tableViewEventos == null) {
+            tableViewEventos = new TableView<>();
+        }
+        if (labelNenhumEvento == null) {
+            labelNenhumEvento = new Label("Não há eventos próximos");
+        }
+
+        tableEventosInstituicao.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getInstituicao().getNome()));
+
+        tableEventosInformacoes.setCellValueFactory(cellData ->
+                new SimpleStringProperty(
+                        cellData.getValue().getNome() + " - " +
+                                cellData.getValue().getData() + " " +
+                                cellData.getValue().getHorario() + " - " +
+                                cellData.getValue().getLocal() + " - " +
+                                cellData.getValue().getDescricao()
+                ));
+
+        tableViewEventos.getColumns().clear();
+        tableViewEventos.getColumns().addAll(tableEventosInstituicao, tableEventosInformacoes);
+        tableEventosInformacoes.setCellFactory(column -> new CustomTableCell());
+        tableViewEventos.setRowFactory(tv -> new CustomTableRow<>());
+    }
+
+    private void carregarEExibirEventos() {
+        RepositorioEventos repositorioEvento = new RepositorioEventos();
+        List<Evento> eventos = repositorioEvento.carregarEventos();
+        ObservableList<Evento> observableEventos = FXCollections.observableArrayList(eventos);
+
+        if (observableEventos.isEmpty()) {
+            tableViewEventos.setVisible(false);
+            labelNenhumEvento.setVisible(true);
+        } else {
+            tableViewEventos.setItems(observableEventos);
+            tableViewEventos.setVisible(true);
+            labelNenhumEvento.setVisible(false);
+        }
+    }
+
+    @FXML
+    void botaoVoltar16(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+    }
+
+    private class CustomTableRow<T> extends TableRow<T> {
+        @Override
+        protected void updateItem(T item, boolean empty) {
+            super.updateItem(item, empty);
+            setPrefHeight(45); //pixels
+        }
+    }
+
+    private class CustomTableCell extends TableCell<Evento, String> {
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item == null || empty) {
+                setText(null);
+                setGraphic(null);
+            } else {
+                Text text = new Text(item);
+                text.setWrappingWidth(tableEventosInformacoes.getWidth() - 10); //margens
+                setGraphic(text);
+                setText(null);
+            }
+        }
+    }
 }

@@ -122,6 +122,12 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação.");
         }
         inicializarDados();
+
+        tableViewDoacoesSolicitadas.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                atualizarLabelInformacoes(newVal);
+            }
+        });
     }
 
     private RepositorioSolicitacaoDoacao repositorioSolicitacaoDoacao = new RepositorioSolicitacaoDoacao();
@@ -178,6 +184,19 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             this.instituicaoNomeLabel.setText("Seja bem-vindo ao ReNutrir. Realize aqui a sua intenção de doação. Escolha abaixo a instituição beneficiária.");
         }
     }
+
+    @FXML
+    private void atualizarLabelInformacoes(SolicitacaoDoacao solicitacao) {
+        Optional<Instituicao> instituicaoOpt = repositorioInstituicao.buscarInstituicaoPorNome(solicitacao.getNomeInstituicao());
+
+        if (instituicaoOpt.isPresent()) {
+            Instituicao instituicao = instituicaoOpt.get();
+            labelEnderecoEmailInst.setText(instituicao.getEndereco() + "\nEmail: " + instituicao.getEmail());
+        } else {
+            labelEnderecoEmailInst.setText("Informações não disponíveis.");
+        }
+    }
+
 
     @FXML
     public void botaoDoarAgora(ActionEvent actionEvent) {
@@ -242,9 +261,146 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     //Tela 05.1 - Lista Instituições que solicitaram doações
 
+    @FXML
+    private Button doarInstSelecionadaBotao;
+
+    @FXML
+    private Label labelEnderecoEmailInst;
+
     public void botaoVoltar75(ActionEvent actionEvent) {
         realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
+
+    @FXML
+    private void botaoDoarInstSelecionada(ActionEvent actionEvent) {
+        SolicitacaoDoacao solicitacaoSelecionada = tableViewDoacoesSolicitadas.getSelectionModel().getSelectedItem();
+        if (solicitacaoSelecionada == null) {
+            showAlert(Alert.AlertType.WARNING, "Seleção Necessária", "Por favor, selecione uma solicitação para prosseguir.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/05-2-doacao-solicitacao.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setTitle("ReNutrir - Doação Solicitação");
+
+            if (fieldInserirQtdItem == null){
+                fieldInserirQtdItem = new TextField();
+            }
+
+            ControladorIntencaoDeDoacao controlador = loader.getController();
+            controlador.setInformacoes(solicitacaoSelecionada, fieldInserirQtdItem.getText());
+
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação solicitação.");
+        }
+    }
+
+    public void setInformacoes(SolicitacaoDoacao solicitacao, String quantidade) {
+        nomeInstSolicitadoraLabel.setText(solicitacao.getNomeInstituicao());
+        nomeItemSolicitadoLabel.setText(solicitacao.getItem());
+        fieldInserirQtdItem.setText(quantidade);
+    }
+
+
+    //Tela 05-2
+
+    @FXML
+    private Label nomeItemSolicitadoLabel;
+
+    @FXML
+    private Label nomeInstSolicitadoraLabel;
+
+    @FXML
+    void botaoVoltar76(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/05-1-doar-instituicoes.fxml", "ReNutrir - Doações Solicitadas");
+    }
+
+    @FXML
+    void doarItemSolicitadoBotao(ActionEvent event) {
+        SolicitacaoDoacao solicitacaoSelecionada = tableViewDoacoesSolicitadas.getSelectionModel().getSelectedItem();
+
+        if (solicitacaoSelecionada == null) {
+            showAlert(Alert.AlertType.WARNING, "Seleção Necessária", "Por favor, selecione uma solicitação para prosseguir.");
+            return;
+        }
+
+        String qtdDoadaStr = fieldInserirQtdItem.getText();
+        int quantidadeDoada;
+
+        try {
+            quantidadeDoada = Integer.parseInt(qtdDoadaStr);
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "A quantidade deve ser um número válido.");
+            return;
+        }
+
+        int quantidadeFaltante = solicitacaoSelecionada.getFaltam();
+        if (quantidadeDoada > quantidadeFaltante) {
+            showAlert(Alert.AlertType.WARNING, "Quantidade Excedida", "A quantidade doada excede a quantidade solicitada.");
+            return;
+        }
+
+        solicitacaoSelecionada.setFaltam(quantidadeFaltante - quantidadeDoada);
+
+        RepositorioInstituicao repositorioInstituicao = new RepositorioInstituicao();
+        RepositorioSolicitacaoDoacao repositorioSolicitacao = new RepositorioSolicitacaoDoacao(repositorioInstituicao);
+
+        repositorioSolicitacao.atualizarSolicitacao(solicitacaoSelecionada);
+
+        Endereco enderecoInstituicao = repositorioSolicitacao.getEnderecoInstituicao(
+                solicitacaoSelecionada.getTipoItem(),
+                solicitacaoSelecionada.getItem(),
+                solicitacaoSelecionada.getNomeInstituicao(),
+                solicitacaoSelecionada.getNomeUsuario()
+        );
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/07-9-intencao-concluida.fxml"));
+            Parent root = loader.load();
+
+            ControladorIntencaoDeDoacao controlador = loader.getController();
+            controlador.setInformacoesDoacaoSolicitada(
+                    SessaoDoador.getInstancia().getDoadorLogado().getNome(),
+                    solicitacaoSelecionada.getItem(),
+                    quantidadeDoada,
+                    LocalDateTime.now(),
+                    String.valueOf(enderecoInstituicao)
+            );
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("ReNutrir - Doação Concluída");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
+        }
+    }
+
+
+
+    @FXML
+    void inserirQtdItemField(ActionEvent event) {
+
+    }
+
+    public void setInformacoesDoacaoSolicitada(String nomeDoador, String nomeItem, int quantidadeDoada, LocalDateTime dataHora, String enderecoInstituicao) {
+        String infoDoacao = String.format("Doador: %s\nItem: %s\nQuantidade: %d\nData/Hora: %s",
+                nomeDoador,
+                nomeItem,
+                quantidadeDoada,
+                dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+        exibirInfoDoacaoLabel.setText(infoDoacao);
+        labelEnderecoInstituicaoSel.setText(enderecoInstituicao);
+    }
+
+
 
 
     //Label

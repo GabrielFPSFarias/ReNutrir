@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
@@ -11,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.renutrir.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.renutrir.servicos.ControladorEventos">
    <top>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="287.0" BorderPane.alignment="CENTER">
          <children>
@@ -51,27 +56,26 @@
    <center>
       <ScrollPane prefHeight="306.0" prefViewportHeight="307.0" prefViewportWidth="516.0" prefWidth="678.0">
          <content>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="287.0" prefWidth="591.0" BorderPane.alignment="CENTER">
+            <GridPane prefHeight="309.0" prefWidth="795.0">
               <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="247.0" minHeight="10.0" prefHeight="239.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
               </rowConstraints>
-               <BorderPane.margin>
-                  <Insets bottom="40.0" top="-40.0" />
-               </BorderPane.margin>
-               <padding>
-                  <Insets left="100.0" right="-100.0" />
-               </padding>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Mutirões de doação" textAlignment="CENTER" />
-                  <Button layoutX="293.0" layoutY="19.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Campanha do bem" textAlignment="CENTER" GridPane.rowIndex="1" />
+                  <TableView fx:id="tableViewEventos" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="tableEventosInstituicao" prefWidth="216.0" text="Instituição Organizadora" />
+                      <TableColumn fx:id="tableEventosInformacoes" minWidth="0.0" prefWidth="576.0" text="Informações do Evento " />
+                    </columns>
+                  </TableView>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Button contentDisplay="CENTER" layoutX="285.0" layoutY="16.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Mutirões de doação" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
                </children>
             </GridPane>
          </content>
