@@ -577,16 +577,11 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
             // Exibe a distância no Label
 
-            distanciaLabel.setText(distanciaEmKm + " Km");
+            distanciaLabel.setText("Encontra-se a " + distanciaEmKm + " Km de distância");
 
         }
         else System.out.println("Muda aí");
     }
-
-    // Método para fechar o serviço de cálculo de distância, caso necessário
-    /*public void fechar() {
-        calculadorDistancia.fechar();
-    }*/
 
 
     private Instituicao obterInstituicaoPorNome(String nome) {
