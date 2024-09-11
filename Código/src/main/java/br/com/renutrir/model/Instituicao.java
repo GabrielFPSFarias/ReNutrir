@@ -92,28 +92,12 @@ public class Instituicao extends Conta implements Serializable {
         return (digito1 == cnpjInt[12] && digito2 == cnpjInt[13]);
     }
 
-    public double getDistanciaMaximaDeColeta() {
-        return distanciaMaximaDeColeta;
-    }
-
-    public void setDistanciaMaximaDeColeta(double distanciaMaximaDeColeta) {
-        this.distanciaMaximaDeColeta = distanciaMaximaDeColeta;
-    }
-
     public LocalDateTime getHorarioFuncionamento() {
         return horarioFuncionamento;
     }
 
     public void setHorarioFuncionamento(LocalDateTime horarioFuncionamento) {
         this.horarioFuncionamento = horarioFuncionamento;
-    }
-
-    public LocalDateTime getHorarioColeta() {
-        return horarioColeta;
-    }
-
-    public void setHorarioColeta(LocalDateTime horarioColeta) {
-        this.horarioColeta = horarioColeta;
     }
 
     public String getDescricao() {

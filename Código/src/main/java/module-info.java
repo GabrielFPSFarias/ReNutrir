@@ -4,8 +4,9 @@ module br.com.renutrir.renutrir {
     requires javafx.base;
     requires javafx.graphics;
     requires java.desktop;
+    requires org.apache.httpcomponents.httpclient;
+    requires org.apache.httpcomponents.httpcore;
     requires org.json;
-    requires google.maps.services;
 
     opens br.com.renutrir.model to javafx.base;
     opens br.com.renutrir.servicos to javafx.fxml;

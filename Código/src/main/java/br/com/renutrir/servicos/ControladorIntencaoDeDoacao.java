@@ -50,6 +50,7 @@ import javafx.util.Duration;
 
 public class ControladorIntencaoDeDoacao implements Initializable {
 
+    private GoogleMapsService googleMapsService;
     @FXML
     public Button botaoItemDoar;
     public TextField fieldItemDoarIntencao;
@@ -60,6 +61,8 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     public ControladorIntencaoDeDoacao() {
         repositorioInstituicao = new RepositorioInstituicao();
+        this.googleMapsService = new GoogleMapsService();
+
     }
 
     private HelloController helloController;
@@ -283,6 +286,12 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     @FXML
     private Button cartaoDoar;
 
+    @FXML
+    private Label distanciaLabel; // Label onde será exibida a distância
+
+    private String enderecoUsuario;
+
+
     //Função Botões
 
     @FXML
@@ -396,6 +405,33 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
         }
     }
+    @FXML
+    public void onInstituicaoSelecionada(MouseEvent event) throws Exception {
+        // Obtém a instituição selecionada diretamente do ListView
+        Instituicao instituicaoClicada = instituicoesListView.getSelectionModel().getSelectedItem();
+
+        if (instituicaoClicada != null) {
+            // Obtém o endereço da instituição selecionada
+            String enderecoInstituicao = instituicaoClicada.getEndereco().getEnderecoCompleto();
+
+            enderecoUsuario = SessaoDoador.getInstancia().getDoadorLogado().getEndereco().getEnderecoCompleto();
+
+            // Calcula a distância entre o endereço do usuário e o endereço da instituição
+            double distanciaEmKm = GoogleMapsService.calcularDistanciaEntreDoisEnderecos(enderecoUsuario, enderecoInstituicao);
+
+            // Exibe a distância no Label
+
+            distanciaLabel.setText(distanciaEmKm + " Km");
+
+        }
+        else System.out.println("Muda aí");
+    }
+
+    // Método para fechar o serviço de cálculo de distância, caso necessário
+    /*public void fechar() {
+        calculadorDistancia.fechar();
+    }*/
+
 
     private Instituicao obterInstituicaoPorNome(String nome) {
         return new Instituicao();

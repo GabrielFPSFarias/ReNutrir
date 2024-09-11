@@ -59,7 +59,7 @@
                <children>
                   <ListView fx:id="instituicaoListView" layoutX="15.0" layoutY="11.0" prefHeight="313.0" prefWidth="372.0" />
                   <ComboBox fx:id="cboxFuncaoVoluntario" layoutX="275.0" layoutY="336.0" prefHeight="27.0" prefWidth="225.0" promptText="Escoha a função de voluntário:" />
-                  <Label fx:id="instituicaoDetalhesLabel" alignment="TOP_LEFT" layoutX="394.0" layoutY="11.0" prefHeight="312.0" prefWidth="392.0" text="Selecione uma instituição" />
+                  <Label fx:id="instituicaoDetalhesLabel" alignment="TOP_LEFT" layoutX="394.0" layoutY="11.0" prefHeight="312.0" prefWidth="392.0" text="Selecione uma instituição" wrapText="true" />
                </children>
             </AnchorPane>
         </content>

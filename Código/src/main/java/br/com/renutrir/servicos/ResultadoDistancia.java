@@ -1,6 +1,11 @@
 package br.com.renutrir.servicos;
 
+import br.com.renutrir.model.Endereco;
+import br.com.renutrir.repositorio.RepositorioInstituicao;
+import  br.com.renutrir.model.Instituicao;
+
 public class ResultadoDistancia {
+
     private String enderecoInstituicao;
     private long distanciaEmMetros;
 
@@ -8,6 +13,8 @@ public class ResultadoDistancia {
         this.enderecoInstituicao = enderecoInstituicao;
         this.distanciaEmMetros = distanciaEmMetros;
     }
+
+
 
     public String getEnderecoInstituicao() {
         return enderecoInstituicao;
