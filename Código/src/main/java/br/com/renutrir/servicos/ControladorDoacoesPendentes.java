@@ -124,12 +124,11 @@ public class ControladorDoacoesPendentes implements Initializable {
         return intencaoSelecionada;
     }
 
-    private IntencaoDoacao intencaoSelecionada;
+    static private IntencaoDoacao intencaoSelecionada;
     @FXML
     public void botaoExibirIDoacao(ActionEvent actionEvent) {
         intencaoSelecionada = CBoxDPendentes.getSelectionModel().getSelectedItem();
         System.out.println(intencaoSelecionada);
-
         if (intencaoSelecionada != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/26-1-validar-intencao.fxml"));
@@ -146,7 +145,6 @@ public class ControladorDoacoesPendentes implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            setInformacoesItencaoDoacao();
         } else {
             System.out.println("Nenhuma intenção de doação selecionada.");
         }
@@ -164,22 +162,25 @@ public class ControladorDoacoesPendentes implements Initializable {
     public Label nomeDoadorLabelF = new Label();
     public Label dataHoraIntencaoLabelF = new Label();
     public Label itemDoadoLabelF = new Label();
-    public Label tipoDoacaoLabelF = new Label();
+    public Label quantidadeDoacaoLabelF = new Label();
 
     public void setInformacoesItencaoDoacao() {
-        IntencaoDoacao intencaoDoacao = this.intencaoSelecionada;
-        System.out.println(intencaoDoacao);
-        String UM;
-        switch (intencaoDoacao.getTipoItem()) {
-            case "Alimentos": UM = "Kg"; break;
-            case "Bebidas": UM = "L"; break;
-            default: UM = "x"; break;
+        if (intencaoSelecionada != null) {
+            IntencaoDoacao intencaoDoacao = this.intencaoSelecionada;
+            System.out.println(intencaoDoacao + " " + intencaoDoacao.getTipoItem());
+            String dataHoraFormatada = this.intencaoSelecionada.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+            itemDoadoLabelF.setText(intencaoDoacao.getItem());
+            System.out.println(itemDoadoLabelF.getText());
+            quantidadeDoacaoLabelF.setText("Quantidade: " + intencaoDoacao.getQuantidade());
+            System.out.println(quantidadeDoacaoLabelF.getText());
+            nomeDoadorLabelF.setText("Doador: " + intencaoDoacao.getDoador().getNome());
+            System.out.println(nomeDoadorLabelF.getText());
+            dataHoraIntencaoLabelF.setText(dataHoraFormatada);
+            System.out.println(dataHoraIntencaoLabelF.getText());
         }
-        String dataHoraFormatada = this.intencaoSelecionada.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
-        itemDoadoLabelF.setText(intencaoDoacao.getQuantidade() + UM + " " + intencaoDoacao.getItem());
-        tipoDoacaoLabelF.setText("Tipo: " + intencaoDoacao.getTipoItem());
-        nomeDoadorLabelF.setText("Doador: " + intencaoDoacao.getDoador().getNome());
-        dataHoraIntencaoLabelF.setText(dataHoraFormatada);
+        else{
+            System.out.println("Nenhuma intencao selecionada.");
+        }
     }
 
     @FXML
@@ -190,11 +191,14 @@ public class ControladorDoacoesPendentes implements Initializable {
         RepositorioDoacoes repositorioDoacoes = new RepositorioDoacoes();
         repositorioIntencaoDoacao.removerIntencao(intencaoDoacao);
         Doacao doacao = new Doacao(intencaoDoacao.getDoador(), intencaoDoacao.getInstituicao(), intencaoDoacao.getQuantidade(), intencaoDoacao.getTipoItem(), intencaoDoacao.getItem());
+        System.out.println(doacao + " " + doacao.getStatus() + " " + doacao.getData());
         repositorioDoacoes.adicionarDoacao(doacao);
+        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml","ReNutrir - Menu Instituição");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         preencherCBoxDPendentes();
+        setInformacoesItencaoDoacao();
     }
 }
