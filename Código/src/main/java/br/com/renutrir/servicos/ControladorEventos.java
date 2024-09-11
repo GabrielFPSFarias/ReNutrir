@@ -18,11 +18,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -236,7 +239,6 @@ public class ControladorEventos {
         realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Criar Evento");
     }
 
-
     @FXML
     void fieldNomeEvento(ActionEvent event) {
 
@@ -287,9 +289,6 @@ public class ControladorEventos {
         realizarTrocaDeTela("/br/com/renutrir/20-criar-eventos.fxml", "ReNutrir - Criar Evento");
     }
 
-
-    //Tela para o voluntário
-
     @FXML
     private TableView<Evento> tableViewEventos;
 
@@ -299,10 +298,27 @@ public class ControladorEventos {
     @FXML
     private TableColumn<Evento, String> tableEventosInformacoes;
 
+    @FXML
+    private Label labelNenhumEvento;
+
+    @FXML
     public void initialize() {
-        if (tableEventosInstituicao == null || tableEventosInformacoes == null) {
-            tableEventosInstituicao = new TableColumn<>();
-            tableEventosInformacoes = new TableColumn<>();
+        configurarTabelaEventos();
+        carregarEExibirEventos();
+    }
+
+    private void configurarTabelaEventos() {
+        if (tableEventosInstituicao == null) {
+            tableEventosInstituicao = new TableColumn<>("Instituição");
+        }
+        if (tableEventosInformacoes == null) {
+            tableEventosInformacoes = new TableColumn<>("Informações");
+        }
+        if (tableViewEventos == null) {
+            tableViewEventos = new TableView<>();
+        }
+        if (labelNenhumEvento == null) {
+            labelNenhumEvento = new Label("Não há eventos próximos");
         }
 
         tableEventosInstituicao.setCellValueFactory(cellData ->
@@ -310,18 +326,60 @@ public class ControladorEventos {
 
         tableEventosInformacoes.setCellValueFactory(cellData ->
                 new SimpleStringProperty(
-                        cellData.getValue().getNome() + " - "
-                                + cellData.getValue().getData() + " "
-                                + cellData.getValue().getHorario() + " - "
-                                + cellData.getValue().getLocal() + " - "
-                                + cellData.getValue().getDescricao()
+                        cellData.getValue().getNome() + " - " +
+                                cellData.getValue().getData() + " " +
+                                cellData.getValue().getHorario() + " - " +
+                                cellData.getValue().getLocal() + " - " +
+                                cellData.getValue().getDescricao()
                 ));
 
-        atualizarListaEventos();
+        tableViewEventos.getColumns().clear();
+        tableViewEventos.getColumns().addAll(tableEventosInstituicao, tableEventosInformacoes);
+        tableEventosInformacoes.setCellFactory(column -> new CustomTableCell());
+        tableViewEventos.setRowFactory(tv -> new CustomTableRow<>());
+    }
+
+    private void carregarEExibirEventos() {
+        RepositorioEventos repositorioEvento = new RepositorioEventos();
+        List<Evento> eventos = repositorioEvento.carregarEventos();
+        ObservableList<Evento> observableEventos = FXCollections.observableArrayList(eventos);
+
+        if (observableEventos.isEmpty()) {
+            tableViewEventos.setVisible(false);
+            labelNenhumEvento.setVisible(true);
+        } else {
+            tableViewEventos.setItems(observableEventos);
+            tableViewEventos.setVisible(true);
+            labelNenhumEvento.setVisible(false);
+        }
     }
 
     @FXML
     void botaoVoltar16(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+    }
+
+    private class CustomTableRow<T> extends TableRow<T> {
+        @Override
+        protected void updateItem(T item, boolean empty) {
+            super.updateItem(item, empty);
+            setPrefHeight(45); //pixels
+        }
+    }
+
+    private class CustomTableCell extends TableCell<Evento, String> {
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item == null || empty) {
+                setText(null);
+                setGraphic(null);
+            } else {
+                Text text = new Text(item);
+                text.setWrappingWidth(tableEventosInformacoes.getWidth() - 10); //margens
+                setGraphic(text);
+                setText(null);
+            }
+        }
     }
 }

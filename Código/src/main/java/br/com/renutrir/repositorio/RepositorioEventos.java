@@ -15,16 +15,31 @@ public class RepositorioEventos {
         eventos = carregarEventos();
     }
 
-    private List<Evento> carregarEventos() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivoEventos))) {
-            return (List<Evento>) ois.readObject();
-        } catch (FileNotFoundException e) {
-            return new ArrayList<>();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
+    public List<Evento> carregarEventos() {
+        List<Evento> eventos = new ArrayList<>();
+        File arquivo = new File(arquivoEventos);
+
+        if (!arquivo.exists()) {
+            try {
+                arquivo.createNewFile();
+                System.out.println("Arquivo de eventos não encontrado, criando um novo.");
+            } catch (IOException e) {
+                System.err.println("Erro ao criar o arquivo de eventos: " + e.getMessage());
+            }
+            return eventos;
         }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
+            eventos = (List<Evento>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            System.err.println("Erro: Arquivo de eventos não encontrado - " + e.getMessage());
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Erro ao carregar os eventos: " + e.getMessage());
+        }
+
+        return eventos;
     }
+
 
     public void salvarEventos() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivoEventos))) {
