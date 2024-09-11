@@ -780,12 +780,14 @@ public class HelloController {
                             "Nome de Usuário: %s\n" +
                             "Telefone: %s\n" +
                             "CNPJ: %s\n" +
-                            "%s\n",
+                            "%s\n\n" +
+                            "Razão social: %s\n",
                     instituicaoLogada.getNome() != null ? instituicaoLogada.getNome() : "",
                     instituicaoLogada.getNomeUsuario() != null ? instituicaoLogada.getNomeUsuario() : "",
                     instituicaoLogada.getTelefone() != null ? instituicaoLogada.getTelefone() : "",
                     instituicaoLogada.getCnpj() != null ? instituicaoLogada.getCnpj() : "",
-                    instituicaoLogada.getEndereco() != null ? instituicaoLogada.getEndereco() : ""
+                    instituicaoLogada.getEndereco() != null ? instituicaoLogada.getEndereco() : "",
+                    instituicaoLogada.getRazaoSocial() != null ? instituicaoLogada.getRazaoSocial() : ""
             );
 
             exibirInfoInstLabel.setText(perfilInst);
@@ -794,6 +796,7 @@ public class HelloController {
             exibirInfoInstLabel.setText("Nenhuma instituição logada.");
         }
     }
+
 
 
     //Limpar a sessão

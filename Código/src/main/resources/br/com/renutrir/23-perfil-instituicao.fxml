@@ -62,9 +62,8 @@
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="480.0" prefWidth="434.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints maxHeight="192.0" minHeight="10.0" prefHeight="190.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="90.0" minHeight="0.0" prefHeight="2.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="248.0" minHeight="10.0" prefHeight="248.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <BorderPane.margin>
                   <Insets bottom="40.0" top="-40.0" />
@@ -73,8 +72,8 @@
                   <Insets left="100.0" right="-100.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Excluir conta dessa instituição" textAlignment="CENTER" GridPane.rowIndex="2" />
-                  <Label fx:id="exibirInfoInstLabel" alignment="CENTER" prefHeight="181.0" prefWidth="536.0" text="Exibir informações da instituição" textAlignment="CENTER" wrapText="true">
+                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="226.0" text="Excluir conta dessa instituição" textAlignment="CENTER" GridPane.rowIndex="1" />
+                  <Label fx:id="exibirInfoInstLabel" alignment="CENTER" prefHeight="248.0" prefWidth="561.0" text="Exibir informações da instituição" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font></Label>

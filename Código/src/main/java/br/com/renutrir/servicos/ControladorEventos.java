@@ -37,6 +37,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ControladorEventos {
 
@@ -198,29 +199,6 @@ public class ControladorEventos {
         pause.play();
     }
 
-
-    private void atualizarListaEventos() {
-        RepositorioEventos repositorioEventos = new RepositorioEventos();
-        List<Evento> eventos = repositorioEventos.listarEventos();
-
-        ObservableList<Evento> eventosList = FXCollections.observableArrayList();
-        LocalDateTime agora = LocalDateTime.now();
-
-        for (Evento evento : eventos) {
-            if (evento.getData().atTime(evento.getHorario()).isAfter(agora)) {
-                eventosList.add(evento);
-            }
-        }
-
-        if (tableViewEventos == null) {
-            tableViewEventos = new TableView<>();
-        }
-
-        tableViewEventos.setItems(eventosList);
-
-    }
-
-
     @FXML
     private Button criarNovoEventoBotao;
 
@@ -339,10 +317,38 @@ public class ControladorEventos {
         tableViewEventos.setRowFactory(tv -> new CustomTableRow<>());
     }
 
-    private void carregarEExibirEventos() {
-        RepositorioEventos repositorioEvento = new RepositorioEventos();
-        List<Evento> eventos = repositorioEvento.carregarEventos();
-        ObservableList<Evento> observableEventos = FXCollections.observableArrayList(eventos);
+    private void atualizarListaEventos() {
+        List<Evento> eventos = repositorio.listarEventos();
+        LocalDateTime agora = LocalDateTime.now();
+
+        ObservableList<Evento> eventosList = FXCollections.observableArrayList();
+
+        for (Evento evento : eventos) {
+            if (evento.getData().atTime(evento.getHorario()).isAfter(agora)) {
+                eventosList.add(evento);
+            }
+        }
+
+        if (tableViewEventos == null) {
+            tableViewEventos = new TableView<>();
+        }
+
+        tableViewEventos.setItems(eventosList);
+        tableViewEventos.setVisible(!eventosList.isEmpty());
+        labelNenhumEvento.setVisible(eventosList.isEmpty());
+    }
+
+    @FXML
+    public void carregarEExibirEventos() {
+        RepositorioEventos repositorioEventos = new RepositorioEventos();
+        List<Evento> eventos = repositorioEventos.listarEventos();
+
+        LocalDateTime agora = LocalDateTime.now();
+        List<Evento> eventosFuturos = eventos.stream()
+                .filter(evento -> evento.getData().atTime(evento.getHorario()).isAfter(agora))
+                .collect(Collectors.toList());
+
+        ObservableList<Evento> observableEventos = FXCollections.observableArrayList(eventosFuturos);
 
         if (observableEventos.isEmpty()) {
             tableViewEventos.setVisible(false);
@@ -353,6 +359,7 @@ public class ControladorEventos {
             labelNenhumEvento.setVisible(false);
         }
     }
+
 
     @FXML
     void botaoVoltar16(ActionEvent event) {

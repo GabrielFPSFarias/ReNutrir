@@ -148,4 +148,8 @@ public class Instituicao extends Conta implements Serializable {
     public void setDescricao(String descricaoInstituicao) {
         this.descricao = descricao;
     }
+
+    public String getDescricao() {
+        return descricao;
+    }
 }
