@@ -67,8 +67,8 @@
                <children>
                   <TableView fx:id="tableViewEventos" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn fx:id="tableEventosInstituicao" prefWidth="256.0" text="Instituição Organizadora" />
-                      <TableColumn fx:id="tableEventosInformacoes" minWidth="0.0" prefWidth="536.0" text="Informações do Evento " />
+                      <TableColumn fx:id="tableEventosInstituicao" prefWidth="216.0" text="Instituição Organizadora" />
+                      <TableColumn fx:id="tableEventosInformacoes" minWidth="0.0" prefWidth="576.0" text="Informações do Evento " />
                     </columns>
                   </TableView>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">

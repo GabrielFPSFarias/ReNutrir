@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -183,6 +184,7 @@ public class ControladorDoacoesPendentes implements Initializable {
         }
     }
 
+    /*
     @FXML
     public void botaoDoacaoRecebidaF(ActionEvent actionEvent) {
         IntencaoDoacao intencaoDoacao = this.getIntencaoSelecionada();
@@ -195,6 +197,36 @@ public class ControladorDoacoesPendentes implements Initializable {
         repositorioDoacoes.adicionarDoacao(doacao);
         realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml","ReNutrir - Menu Instituição");
     }
+     */
+
+    @FXML
+    public void botaoDoacaoRecebidaF(ActionEvent actionEvent) {
+        IntencaoDoacao intencaoDoacao = this.getIntencaoSelecionada();
+        if (intencaoDoacao == null) {
+            new Alert(Alert.AlertType.ERROR, "Nenhuma intenção de doação selecionada.").showAndWait();
+            return;
+        }
+        RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+        RepositorioDoacoes repositorioDoacoes = new RepositorioDoacoes();
+
+        boolean sucessoRemocao = repositorioIntencaoDoacao.removerIntencao(intencaoDoacao);
+
+        if (!sucessoRemocao) {
+            new Alert(Alert.AlertType.ERROR, "Falha ao remover a intenção de doação.").showAndWait();
+            return;
+        }
+        Doacao doacao = new Doacao(
+                intencaoDoacao.getDoador(),
+                intencaoDoacao.getInstituicao(),
+                intencaoDoacao.getQuantidade(),
+                intencaoDoacao.getTipoItem(),
+                intencaoDoacao.getItem()
+        );
+        repositorioDoacoes.adicionarDoacao(doacao);
+        System.out.println(doacao + " " + doacao.getStatus() + " " + doacao.getData());
+        realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Menu Instituição");
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
