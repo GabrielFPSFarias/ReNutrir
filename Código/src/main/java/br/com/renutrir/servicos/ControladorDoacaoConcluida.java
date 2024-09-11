@@ -108,6 +108,7 @@ public class ControladorDoacaoConcluida {
     public void configurarTelaConfirmarPix(String valorDoacao) {
         valorDoacaoPixLabel.setText("Valor: R$ " + valorDoacao);
         fieldPixCopiaCola.setText(gerarCodigoPixAleatorio());
+        fieldPixCopiaCola.setEditable(false);
     }
 
     public void configurarTela(String nomeDoador, String tipoDoacao, LocalDateTime dataHora, String valorDoacao) {
@@ -120,11 +121,15 @@ public class ControladorDoacaoConcluida {
     private String gerarCodigoPixAleatorio() {
         String[] codigos = {
                 "00020126870014BR.GOV.BCB.PIX0127renutrir@instituicao.com.br0234DoacaoparaInstituicoesReNutrir5204000053039865802BR5911ReNutrirSA6006Recife62070503***63049D25",
-                "00020126360014BR.GOV.BCB.PIX0127renutrir@instituicao.com.br0234DoacaoparaInstituicoesReNutrir5204000053039865802BR5911ReNutrir6006Olinda62070503***63049D25"
+                "00020126360014BR.GOV.BCB.PIX0127renutrir@instituicao.com.br0234DoacaoparaInstituicoesReNutrir5204000053039865802BR5911ReNutrir6006Olinda62070503***63049D25",
+                "00020126860014BR.GOV.BCB.PIX0127renutrir@instituicao.com.br0234DoacaoparaInstituicoesReNutrir5204000053039865802BR5911ReNutrirPE6007Recife62070503***63049D25",
+                "00020126450014BR.GOV.BCB.PIX0127renutrir@instituicao.com.br0234DoacaoparaInstituicoesReNutrir5204000053039865802BR5911ReNutrirSA6006Olinda62070503***63049D25",
+                "00020126270014BR.GOV.BCB.PIX0127renutrir@instituicao.com.br0234DoacaoparaInstituicoesReNutrir5204000053039865802BR5911ReNutrirPE6006Recife62070503***63049D25"
         };
         int indice = new Random().nextInt(codigos.length);
         return codigos[indice];
     }
+
 
     @FXML
     void inserirValorPixField(ActionEvent event) {
@@ -164,6 +169,7 @@ public class ControladorDoacaoConcluida {
         String doadorNome = doador.getNome();
         String tipoDoacao = "PIX";
         LocalDateTime dataHora = LocalDateTime.now();
+        String valorDoacao = valorDoacaoPixLabel.getText().replace("Valor: R$ ", "");
 
         ProgressAlert progressAlert = new ProgressAlert();
         progressAlert.start(new Stage());
@@ -730,8 +736,10 @@ public class ControladorDoacaoConcluida {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Ocorreu um erro ao carregar a tela.");
         }
     }
+
 
     public void realizarTrocaDeTelaComInfoPix(String caminhoFXML, String titulo, String nomeDoador, String tipoDoacao, LocalDateTime dataHora, String valorDoacao) {
         try {
