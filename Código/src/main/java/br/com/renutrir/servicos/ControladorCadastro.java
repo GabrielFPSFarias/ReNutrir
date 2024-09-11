@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -56,15 +57,17 @@ public class ControladorCadastro extends HelloController {
     @FXML private TextField fieldNumeroIns;
     @FXML private TextField fieldCompIns;
     @FXML private TextField fieldUfIns;
-
+    @FXML private TextField chavePixInsText;
+    @FXML private TextField razaoSocialInsText;
+    @FXML private TextField horarioInicialInsText;
+    @FXML private TextField horarioFinalInsText;
+    @FXML private TextArea descricaoInstituicaoTextArea;
 
     // Botões
     @FXML private Button confCad;
     @FXML private Button confCadIns;
     @FXML private Button voltarBotao;
 
-
-    // Métodos de Verificação
     private boolean verificarCamposInstituicaoValidos(String email, String nomeUsuario, String cnpj) {
         return email != null && !email.trim().isEmpty() &&
                 nomeUsuario != null && !nomeUsuario.trim().isEmpty() &&
@@ -175,72 +178,87 @@ public class ControladorCadastro extends HelloController {
         String uf = fieldUfIns.getText();
         String comp = fieldCompIns.getText();
         String ref = fieldRefIns.getText();
+        String chavePix = chavePixInsText.getText();
+        String razaoSocial = razaoSocialInsText.getText();
+        String horarioInicial = horarioInicialInsText.getText();
+        String horarioFinal = horarioFinalInsText.getText();
+        String descricaoInstituicao = descricaoInstituicaoTextArea.getText();
 
         RepositorioInstituicao repositorioInstituicao = new RepositorioInstituicao();
 
-        if (!verificarCamposInstituicaoValidos(email, nomeUsuario, cnpj)) {
-            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Os campos não podem estar vazios.");
-        } else if (repositorioInstituicao.buscarInstituicaoPorCnpj(cnpj).isPresent()) {
-            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "E-mail, nome de usuário ou CNPJ já existente.");
-        } else {
+        if (!verificarCamposInstituicaoValidos(email, nomeUsuario, cnpj) ||
+                nome.isEmpty() || telefone.isEmpty() || endereco.isEmpty() ||
+                bairro.isEmpty() || numero.isEmpty() || municipio.isEmpty() ||
+                uf.isEmpty() || chavePix.isEmpty() || razaoSocial.isEmpty() ||
+                horarioInicial.isEmpty() || horarioFinal.isEmpty() || descricaoInstituicao.isEmpty()) {
 
-            if (email == null || email.trim().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O e-mail não pode estar vazio.");
-                return;
-            }
-
-            if (!email.contains("@")) {
-                showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O e-mail deve conter um '@'.");
-                return;
-            }
-
-            if (nomeUsuario == null || nomeUsuario.length() < 6) {
-                showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O nome de usuário deve ter pelo menos 6 ou mais caracteres.");
-                return;
-            }
-
-            if (senha == null || senha.length() < 4) {
-                showAlert(Alert.AlertType.ERROR, "Erro de Validação", "A senha deve ter pelo menos 4 caracteres.");
-                return;
-            }
-
-            if (!senha.equals(confSenha)) {
-                showAlert(Alert.AlertType.ERROR, "Erro de Validação", "As senhas não correspondem.");
-                return;
-            }
-
-            if (repositorioInstituicao.buscarInstituicaoPorEmail(email).isPresent()) {
-                showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse e-mail.");
-                return;
-            }
-
-            if (repositorioInstituicao.buscarInstituicaoPorNomeUsuario(nomeUsuario).isPresent()) {
-                showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse nome de usuário.");
-                return;
-            }
-
-            Instituicao instituicao = new Instituicao();
-            instituicao.setNome(nome);
-            instituicao.setNomeUsuario(nomeUsuario);
-            instituicao.setEmail(email);
-            instituicao.setSenha(senha);
-            instituicao.setTelefone(telefone);
-
-            try {
-                instituicao.setCnpj(cnpj);
-            } catch (IllegalArgumentException e) {
-                showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O CNPJ digitado é inválido ou não existe.");
-                return;
-            }
-
-            instituicao.setEndereco(new Endereco(endereco, bairro, numero, municipio, uf, comp, ref));
-
-            repositorioInstituicao.adicionarInstituicao(instituicao);
-            showAlert(Alert.AlertType.INFORMATION, "Cadastro", "Cadastro da instituição confirmado!");
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Todos os campos são obrigatórios.");
+            return;
         }
+
+        if (repositorioInstituicao.buscarInstituicaoPorCnpj(cnpj).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "CNPJ já existente.");
+            return;
+        }
+
+        if (!email.contains("@")) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O e-mail deve conter um '@'.");
+            return;
+        }
+
+        if (nomeUsuario.length() < 6) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O nome de usuário deve ter pelo menos 6 ou mais caracteres.");
+            return;
+        }
+
+        if (senha.length() < 4) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "A senha deve ter pelo menos 4 caracteres.");
+            return;
+        }
+
+        if (!senha.equals(confSenha)) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "As senhas não correspondem.");
+            return;
+        }
+
+        if (repositorioInstituicao.buscarInstituicaoPorEmail(email).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse e-mail.");
+            return;
+        }
+
+        if (repositorioInstituicao.buscarInstituicaoPorNomeUsuario(nomeUsuario).isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse nome de usuário.");
+            return;
+        }
+
+        Instituicao instituicao = new Instituicao();
+        instituicao.setNome(nome);
+        instituicao.setNomeUsuario(nomeUsuario);
+        instituicao.setEmail(email);
+        instituicao.setSenha(senha);
+        instituicao.setTelefone(telefone);
+
+        try {
+            instituicao.setCnpj(cnpj);
+        } catch (IllegalArgumentException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Validação", "O CNPJ digitado é inválido ou não existe.");
+            return;
+        }
+
+        instituicao.setEndereco(new Endereco(endereco, bairro, numero, municipio, uf, comp, ref));
+
+        instituicao.setChavePix(chavePix);
+        instituicao.setRazaoSocial(razaoSocial);
+        instituicao.setHorarioInicial(horarioInicial);
+        instituicao.setHorarioFinal(horarioFinal);
+        instituicao.setDescricao(descricaoInstituicao);
+
+        repositorioInstituicao.adicionarInstituicao(instituicao);
+
+        showAlert(Alert.AlertType.INFORMATION, "Cadastro", "Cadastro da instituição confirmado!");
     }
 
-    // Métodos Auxiliares
+
     public void showAlert(Alert.AlertType tipo, String titulo, String mensagem) {
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);
