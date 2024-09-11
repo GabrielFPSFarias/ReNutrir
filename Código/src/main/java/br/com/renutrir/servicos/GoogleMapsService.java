@@ -11,7 +11,7 @@ public class GoogleMapsService {
 
     private static final String API_KEY = "AIzaSyC60cxhNaxQJN2Ra7frE6E8AR2JCwNMLCk";
 
-    public static double calcularDistanciaEntreDoisEnderecos(String origem, String destino) throws Exception {
+    public static String calcularDistanciaEntreDoisEnderecos(String origem, String destino) throws Exception {
         origem = origem.replace(" ", "+");
         destino = destino.replace(" ", "+");
 
@@ -50,7 +50,8 @@ public class GoogleMapsService {
             if (element.has("distance")) {
                 JSONObject distanceObject = element.getJSONObject("distance");
                 double distanciaMetros = distanceObject.getDouble("value");
-                return (distanciaMetros / 1000);
+
+                return medidaDistancia(distanciaMetros);
             } else {
                 throw new Exception("Não foi possível obter a distância para os endereços fornecidos.");
             }
@@ -59,5 +60,14 @@ public class GoogleMapsService {
                 conn.disconnect();
             }
         }
+    }
+    public static String medidaDistancia(double distanciaMetros) {
+
+        if (distanciaMetros >= 1000) {
+            // Converte para Km e formata com uma casa decimal
+            return String.format("%.1f Km", distanciaMetros / 1000);
+        }
+
+        return String.format("%.0f metros", distanciaMetros);
     }
 }

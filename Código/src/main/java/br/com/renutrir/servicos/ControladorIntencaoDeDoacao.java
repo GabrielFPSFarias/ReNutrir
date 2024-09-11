@@ -573,11 +573,11 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             enderecoUsuario = SessaoDoador.getInstancia().getDoadorLogado().getEndereco().getEnderecoCompleto();
 
             // Calcula a distância entre o endereço do usuário e o endereço da instituição
-            double distanciaEmKm = GoogleMapsService.calcularDistanciaEntreDoisEnderecos(enderecoUsuario, enderecoInstituicao);
+            String distancia = GoogleMapsService.calcularDistanciaEntreDoisEnderecos(enderecoUsuario, enderecoInstituicao);
 
             // Exibe a distância no Label
 
-            distanciaLabel.setText("Encontra-se a " + distanciaEmKm + " Km de distância");
+            distanciaLabel.setText("Encontra-se a " + distancia + " de distância");
 
         }
         else System.out.println("Muda aí");
