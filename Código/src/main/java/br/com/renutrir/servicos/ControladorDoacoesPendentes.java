@@ -298,7 +298,7 @@ public class ControladorDoacoesPendentes implements Initializable {
                 System.out.println("Item selecionado: " + newVal.getDetalhesDoacao());
             }
         });
-        
+
         Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
         if (instituicaoLogada != null) {
             preencherCBoxDPendentes();
