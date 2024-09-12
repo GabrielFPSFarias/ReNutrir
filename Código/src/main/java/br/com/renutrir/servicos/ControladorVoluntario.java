@@ -13,16 +13,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,7 +28,51 @@ import java.util.ResourceBundle;
 
 public class ControladorVoluntario implements Initializable {
 
+    private ControladorEscolhaInstituicaoFuncaoVoluntario controlarEscolha;
+
     public ControladorVoluntario() {
+
+        this.controlarEscolha = new ControladorEscolhaInstituicaoFuncaoVoluntario();
+    }
+
+    public Label getInstituicaoVinculadaLabel() {
+        return instituicaoVinculadaLabel;
+    }
+
+    public void setInstituicaoVinculadaLabel(Label instituicaoVinculadaLabel) {
+        this.instituicaoVinculadaLabel = instituicaoVinculadaLabel;
+    }
+
+    public Label getFuncaoVoluntarioLabel() {
+        return funcaoVoluntarioLabel;
+    }
+
+    public void setFuncaoVoluntarioLabel(Label funcaoVoluntarioLabel) {
+        this.funcaoVoluntarioLabel = funcaoVoluntarioLabel;
+    }
+
+    @FXML
+    private Label instituicaoVinculadaLabel;
+
+    @FXML
+    private Label funcaoVoluntarioLabel;
+
+    @FXML
+    private Button botaoPerfilVoluntario;
+
+    @FXML
+    public void botaoPerfilVoluntario(){
+
+        controlarEscolha.realizarTrocaDeTela("/br/com/renutrir/30-perfil-voluntario.fxml", "Perfil do Voluntario",botaoPerfilVoluntario);
+
+    }
+
+    @FXML
+    private Button botaoVoltarPerfilVoluntario;
+
+   public void botaoVoltarPerfilVoluntario (){
+
+       controlarEscolha.realizarTrocaDeTela("/br/com/renutrir/08-menu-voluntario.fxml", "Perfil do Voluntario",botaoVoltarPerfilVoluntario);
     }
 
     SessaoInstituicao sessaoInstituicao;
@@ -207,7 +245,7 @@ public class ControladorVoluntario implements Initializable {
     public void botaoSejaVoluntario(ActionEvent actionEvent) {
         try {
 
-            realizarTrocaDeTela("/br/com/renutrir/05.5-lista-instituicoes1.fxml", "Lista de instituições");
+            realizarTrocaDeTela("/br/com/renutrir/27-escolha-instituicao-funcao-voluntario.fxml", "Escolha de instituições e fuunções do voluntário");
             /*Stage dialog = new Stage();
             dialog.setScene(ControladorTelas.getInstance().getSejaVoluntarioScene());
             dialog.setResizable(false);
@@ -225,7 +263,7 @@ public class ControladorVoluntario implements Initializable {
     }
 
     public void botaoTransportesDoacoes(ActionEvent actionEvent) {
-        realizarTrocaDeTela("/br/com/renutrir/10-transportes-doacoes.fxml", "ReNutrir - Transportes");
+        realizarTrocaDeTela("/br/com/renutrir/30-perfil-voluntario.fxml", "ReNutrir - Transportes");
     }
 
     public void botaoTransportesPendentes(ActionEvent actionEvent) {
