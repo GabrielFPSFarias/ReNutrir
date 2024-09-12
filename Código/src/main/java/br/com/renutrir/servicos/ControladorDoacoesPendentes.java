@@ -145,13 +145,12 @@ public class ControladorDoacoesPendentes implements Initializable {
 
             List<IntencaoDoacao> intencoesFiltradas = new ArrayList<>();
             for (IntencaoDoacao intencaoDoacao : intencoes) {
-                if (intencaoDoacao.getInstituicao() != null &&
-                        intencaoDoacao.getInstituicao().getNomeUsuario().equals(instituicaoLogada.getNomeUsuario())) {
+                if (intencaoDoacao.getInstituicao().getNomeUsuario().equals(instituicaoLogada.getNomeUsuario())) {
                     intencoesFiltradas.add(intencaoDoacao);
                 }
             }
 
-            if (CBoxDPendentes == null) {
+            if(CBoxDPendentes == null){
                 CBoxDPendentes = new ComboBox<>();
             }
 
@@ -159,14 +158,15 @@ public class ControladorDoacoesPendentes implements Initializable {
                 ObservableList<IntencaoDoacao> observableList = FXCollections.observableArrayList(intencoesFiltradas);
                 CBoxDPendentes.setItems(observableList);
             } else {
-                CBoxDPendentes.getItems().clear();
-                CBoxDPendentes.getItems().add(new IntencaoDoacao("Não há intenções pendentes"));
-                CBoxDPendentes.getSelectionModel().selectFirst(); // Seleciona o primeiro item
+                IntencaoDoacao intencaoDoacao = new IntencaoDoacao();
+                intencaoDoacao.setDoador(null);
+                CBoxDPendentes.setItems(FXCollections.observableArrayList(intencaoDoacao));
+                System.out.println("Nenhuma intenção de doação pendente para a instituição " + instituicaoLogada.getNome());
             }
+        } else {
+            System.out.println("Nenhuma instituição logada.");
         }
     }
-
-
 
     @FXML
     public Button exibirIDoacaoBotao;

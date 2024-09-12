@@ -13,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -22,7 +21,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -145,12 +143,6 @@ public class ControladorVoluntario implements Initializable {
     }
 
     @FXML
-    public void botaoQueroVoluntario() {
-
-        realizarTrocaDeTela("/br/com/renutrir/05.5-lista-instituicoes1", "Renutrir - Lista Instituicoes");
-    }
-
-    @FXML
     void segundaVoluntarioBox(ActionEvent event) {
 
     }
@@ -207,7 +199,7 @@ public class ControladorVoluntario implements Initializable {
     public void botaoSejaVoluntario(ActionEvent actionEvent) {
         try {
 
-            realizarTrocaDeTela("/br/com/renutrir/05.5-lista-instituicoes1.fxml", "Lista de instituições");
+            realizarTrocaDeTela("/br/com/renutrir/27-escolha-instituicao-funcao-voluntario.fxml", "Escolha de instituiçãp e função do voluntário");
             /*Stage dialog = new Stage();
             dialog.setScene(ControladorTelas.getInstance().getSejaVoluntarioScene());
             dialog.setResizable(false);
