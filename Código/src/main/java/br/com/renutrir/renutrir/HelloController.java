@@ -176,11 +176,6 @@ public class HelloController {
     }
 
     @FXML
-    public void botaoVoltar5() {
-        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
-    }
-
-    @FXML
     public void botaoVoltar6() {
         realizarTrocaDeTela("/br/com/renutrir/05-intencao-doacao.fxml", "ReNutrir - Intenção de Doação");
     }
