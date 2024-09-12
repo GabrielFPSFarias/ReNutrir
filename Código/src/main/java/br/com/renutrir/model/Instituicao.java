@@ -8,6 +8,10 @@ import java.time.Period;
 import java.util.List;
 
 public class Instituicao extends Conta implements Serializable {
+
+     public Instituicao(){
+        repositorioVoluntario = new RepositorioVoluntario();
+    }
     private static final long serialVersionUID = 1L;
 
     private String cnpj;
@@ -22,6 +26,12 @@ public class Instituicao extends Conta implements Serializable {
     private String razaoSocial;
     private String horarioInicial;
     private String horarioFinal;
+
+    private RepositorioVoluntario repositorioVoluntario;
+
+    public RepositorioVoluntario getRepositorioVoluntario() {
+        return repositorioVoluntario;
+    }
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
