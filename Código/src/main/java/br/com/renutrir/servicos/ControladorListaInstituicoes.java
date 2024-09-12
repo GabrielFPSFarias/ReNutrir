@@ -243,6 +243,9 @@ public class ControladorListaInstituicoes implements Initializable {
     @FXML
     private ComboBox<String> cboxFuncaoVoluntario;
 
+    @FXML
+    private TextField buscaTextField;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -374,6 +377,29 @@ public class ControladorListaInstituicoes implements Initializable {
             return detalhes.toString();
         } else {
             return "Detalhes da instituição não encontrados.";
+        }
+    }
+
+    @FXML
+    private void buscarInstituicoesPorEndereco(){
+
+        buscaTextField.textProperty().addListener((observable, oldValue, newValue) -> filtrarInstituicoes(newValue));
+
+    }
+
+    private void filtrarInstituicoes(String busca) {
+        if (busca == null || busca.isEmpty()) {
+            // Se o campo de busca estiver vazio, mostra a lista completa
+            instituicaoListView.setItems(FXCollections.observableArrayList(repositorioInstituicoes.listarInstituicoes()));
+        } else {
+            // Filtra a lista de instituições pelo nome
+            ObservableList<Instituicao> listaFiltrada = FXCollections.observableArrayList();
+            for (Instituicao instituicao : repositorioInstituicoes.listarInstituicoes()) {
+                if (instituicao.getEndereco().getEnderecoCompleto().toLowerCase().contains(busca.toLowerCase())) {
+                    listaFiltrada.add(instituicao);
+                }
+            }
+            instituicaoListView.setItems(listaFiltrada);
         }
     }
 }

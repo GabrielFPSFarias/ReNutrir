@@ -50,7 +50,7 @@ import javafx.util.Duration;
 
 public class ControladorIntencaoDeDoacao implements Initializable {
 
-    private GoogleMapsService googleMapsService;
+    private ControladorGoogleMapsService googleMapsService;
     @FXML
     public Button botaoItemDoar;
     public TextField fieldItemDoarIntencao;
@@ -61,7 +61,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
     public ControladorIntencaoDeDoacao() {
         repositorioInstituicao = new RepositorioInstituicao();
-        this.googleMapsService = new GoogleMapsService();
+        this.googleMapsService = new ControladorGoogleMapsService();
 
     }
 
@@ -128,6 +128,8 @@ public class ControladorIntencaoDeDoacao implements Initializable {
                 atualizarLabelInformacoes(newVal);
             }
         });
+
+
     }
 
     private RepositorioSolicitacaoDoacao repositorioSolicitacaoDoacao = new RepositorioSolicitacaoDoacao();
@@ -562,7 +564,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         }
     }
     @FXML
-    public void onInstituicaoSelecionada(MouseEvent event) throws Exception {
+    public void onInstituicaoClicada(MouseEvent event) throws Exception {
         // Obtém a instituição selecionada diretamente do ListView
         Instituicao instituicaoClicada = instituicoesListView.getSelectionModel().getSelectedItem();
 
@@ -573,14 +575,13 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             enderecoUsuario = SessaoDoador.getInstancia().getDoadorLogado().getEndereco().getEnderecoCompleto();
 
             // Calcula a distância entre o endereço do usuário e o endereço da instituição
-            String distancia = GoogleMapsService.calcularDistanciaEntreDoisEnderecos(enderecoUsuario, enderecoInstituicao);
+            String distancia = ControladorGoogleMapsService.calcularDistanciaEntreDoisEnderecos(enderecoUsuario, enderecoInstituicao);
 
             // Exibe a distância no Label
 
             distanciaLabel.setText("Encontra-se a " + distancia + " de distância");
 
         }
-        else System.out.println("Muda aí");
     }
 
 
