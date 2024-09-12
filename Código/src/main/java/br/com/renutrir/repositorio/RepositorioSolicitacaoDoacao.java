@@ -89,6 +89,39 @@ public class RepositorioSolicitacaoDoacao {
         }
     }
 
+    public void salvarSolicitacoes(List<SolicitacaoDoacao> solicitacoes) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ArquivoSolicitacao))) {
+            oos.writeObject(solicitacoes);
+            System.out.println("Solicitações salvas com sucesso.");
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar as solicitações: " + e.getMessage());
+        }
+    }
+
+    public void removerSolicitacoes(List<SolicitacaoDoacao> solicitacoesParaRemover) {
+        List<SolicitacaoDoacao> todasSolicitacoes = carregarSolicitacoes();
+        todasSolicitacoes.removeAll(solicitacoesParaRemover);
+        salvarSolicitacoes(todasSolicitacoes);
+    }
+
+    public void removerSolicitacao(SolicitacaoDoacao solicitacaoParaRemover) {
+        List<SolicitacaoDoacao> todasSolicitacoes = carregarSolicitacoes();
+
+        boolean removido = todasSolicitacoes.removeIf(solicitacao ->
+                solicitacao.getTipoItem().equals(solicitacaoParaRemover.getTipoItem()) &&
+                        solicitacao.getItem().equals(solicitacaoParaRemover.getItem()) &&
+                        solicitacao.getNomeInstituicao().equals(solicitacaoParaRemover.getNomeInstituicao()) &&
+                        solicitacao.getNomeUsuario().equals(solicitacaoParaRemover.getNomeUsuario())
+        );
+
+        if (removido) {
+            salvarSolicitacoes(todasSolicitacoes);
+            System.out.println("Solicitação removida com sucesso.");
+        } else {
+            System.err.println("Erro: Solicitação não encontrada para remoção.");
+        }
+    }
+
     public Endereco getEnderecoInstituicao(String tipoItem, String item, String nomeInstituicao, String nomeUsuario) {
         List<SolicitacaoDoacao> solicitacoes = carregarSolicitacoes();
 
