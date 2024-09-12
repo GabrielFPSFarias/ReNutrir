@@ -58,21 +58,15 @@ public class ControladorEscolhaInstituicaoFuncaoVoluntario implements Initializa
     private Label instituicaoDetalhesLabel;
 
     @FXML
-    private ComboBox<String> cboxFuncaoVoluntario;
-
-    @FXML
     private TextField buscaTextField;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Carregar as instituições na ListView
         carregarListView();
 
-        // Configurar a ListView de funções de voluntário
-        carregarFuncoesVoluntarios();
+        configurarListViewFuncoes();
 
-        // Adiciona listener para a ListView de Instituições
         instituicaoListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 instituicaoSelecionada = newValue;
@@ -83,7 +77,7 @@ public class ControladorEscolhaInstituicaoFuncaoVoluntario implements Initializa
             }
         });
 
-        // Adiciona listener para a ListView de Funções de Voluntário
+
         funcaoVoluntarioListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 funcaoVoluntarioSelecionada = newValue;
@@ -92,7 +86,6 @@ public class ControladorEscolhaInstituicaoFuncaoVoluntario implements Initializa
             }
         });
 
-        // Listener para o campo de busca
         buscaTextField.textProperty().addListener((observable, oldValue, newValue) -> filtrarInstituicoes(newValue));
     }
 
@@ -126,34 +119,36 @@ public class ControladorEscolhaInstituicaoFuncaoVoluntario implements Initializa
 
         if (instituicaoListView != null){
 
-        obsInstituicoes = FXCollections.observableArrayList(repositorioInstituicoes.listarInstituicoes());
+            obsInstituicoes = FXCollections.observableArrayList(repositorioInstituicoes.listarInstituicoes());
 
-        instituicaoListView.setItems(obsInstituicoes);
+            instituicaoListView.setItems(obsInstituicoes);
 
-        instituicaoListView.setCellFactory(new Callback<ListView<Instituicao>, ListCell<Instituicao>>() {
-            @Override
-            public ListCell<Instituicao> call(ListView<Instituicao> param) {
-                return new ListCell<Instituicao>() {
-                    @Override
-                    protected void updateItem(Instituicao instituicao, boolean empty) {
-                        super.updateItem(instituicao, empty);
-                        if (instituicao != null) {
-                            setText(instituicao.getNome());
-                        } else {
-                            setText(null);
+            instituicaoListView.setCellFactory(new Callback<ListView<Instituicao>, ListCell<Instituicao>>() {
+                @Override
+                public ListCell<Instituicao> call(ListView<Instituicao> param) {
+                    return new ListCell<Instituicao>() {
+                        @Override
+                        protected void updateItem(Instituicao instituicao, boolean empty) {
+                            super.updateItem(instituicao, empty);
+                            if (instituicao != null) {
+                                setText(instituicao.getNome());
+                            } else {
+                                setText(null);
+                            }
                         }
-                    }
-                };
-            }
-        });
+                    };
+                }
+            });
 
-        instituicaoListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                String detalhesInst = getDetalhes(newValue.getNomeUsuario());
-                instituicaoDetalhesLabel.setText(detalhesInst);
-            }
-        });
-         } else System.err.println("ListView é nulo");
+            instituicaoListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    String detalhesInst = getDetalhes(newValue.getNomeUsuario());
+                    instituicaoDetalhesLabel.setText(detalhesInst);
+                }
+            });
+        } else System.err.println("ListView é nulo");
+
+        salvarSelecao();
     }
     @FXML
     private void carregarFuncoesVoluntarios() {
@@ -172,7 +167,7 @@ public class ControladorEscolhaInstituicaoFuncaoVoluntario implements Initializa
     }
 
     private void configurarListViewFuncoes() {
-        if (cboxFuncaoVoluntario == null) {
+        if (funcaoVoluntarioListView == null) {
             System.out.println("listFuncaoVoluntario está null");
             return;
         }
@@ -204,30 +199,30 @@ public class ControladorEscolhaInstituicaoFuncaoVoluntario implements Initializa
 
         salvarSelecao();
 
-            if (instituicaoSelecionada != null && funcaoVoluntarioSelecionada != null) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/28-confirmacao-voluntario.fxml"));
-                    Parent root = loader.load();
+        if (instituicaoSelecionada != null && funcaoVoluntarioSelecionada != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/renutrir/28-confirmacao-voluntario.fxml"));
+                Parent root = loader.load();
 
-                    ControladorConfirmacaoVoluntario controladorConfirmacao = loader.getController();
+                ControladorConfirmacaoVoluntario controladorConfirmacao = loader.getController();
 
-                    controladorConfirmacao.setConfirmacaoDados(instituicaoSelecionada, funcaoVoluntarioSelecionada);
+                controladorConfirmacao.setConfirmacaoDados(instituicaoSelecionada, funcaoVoluntarioSelecionada);
 
-                    Stage stage = (Stage) proximoBotao1.getScene().getWindow();
-                    stage.setScene(new Scene(root));
-                    stage.show();
+                Stage stage = (Stage) proximoBotao1.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Atenção");
-                alert.setHeaderText(null);
-                alert.setContentText("Por favor, selecione uma instituição e uma função de voluntário.");
-                alert.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        } else {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Atenção");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, selecione uma instituição e uma função de voluntário.");
+            alert.showAndWait();
+        }
 
 
     }
