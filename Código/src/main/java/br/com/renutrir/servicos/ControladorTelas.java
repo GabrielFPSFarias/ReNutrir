@@ -5,15 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.renutrir.renutrir.HelloController;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import br.com.renutrir.servicos.ControladorListaInstituicoes;
 
 public class ControladorTelas {
     private static ControladorTelas instance;
@@ -34,11 +30,6 @@ public class ControladorTelas {
         alert.showAndWait();
     }
 
-    public void fecharTelaAtual() {
-        if (stage != null) {
-            stage.close();
-        }
-    }
 
     //controlador geral
     private Scene mainScene;
@@ -228,8 +219,8 @@ public class ControladorTelas {
     private Scene solicitarDoacoesHigienePessoalScene;
     private ControladorSolicitacaoDoacao controladorSolicitarDoacoesHigienePessoal;
 
-    private Scene listaInstituicoesScene;
-    private ControladorListaInstituicoes controladorListaInstituicoes;
+    private Scene escolhaInstituicoesScene;
+    private ControladorEscolhaInstituicaoFuncaoVoluntario controladorEscolhaInstituicoes;
 
     private ControladorTelas() {
         this.initialize();
@@ -285,12 +276,6 @@ public class ControladorTelas {
             Pane intencaoDoacaoPane = fxmlLoader.load(getClass().getResource("/br/com/renutrir/05-intencao-doacao.fxml").openStream());
             this.intencaoDoacaoScene = new Scene(intencaoDoacaoPane);
             this.controladorIntencaoDeDoacao = fxmlLoader.getController();
-
-            //05.5 - Lista de Instituições
-            fxmlLoader = new FXMLLoader();
-            Pane listaInstituicoesPane = fxmlLoader.load(getClass().getResource("/br/com/renutrir/05.5-lista-instituicoes1.fxml").openStream());
-            this.listaInstituicoesScene = new Scene(listaInstituicoesPane);
-            this.controladorListaInstituicoes = fxmlLoader.getController();
 
             //06 - Doações Solicitadas
             fxmlLoader = new FXMLLoader();
@@ -407,7 +392,7 @@ public class ControladorTelas {
             this.controladorSejaVoluntario = fxmlLoader.getController();
 
             //10 - Transportes Doações
-            fxmlLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/10-transportes-doacoes.fxml"));
+            fxmlLoader = new FXMLLoader(getClass().getResource("/br/com/renutrir/30-perfil-voluntario.fxml"));
             Pane transportesDoacoesPane = fxmlLoader.load();
             this.transportesDoacoesScene = new Scene(transportesDoacoesPane);
             this.controladorTransportesDoacoes = fxmlLoader.getController();
@@ -573,6 +558,14 @@ public class ControladorTelas {
             Pane validarIntencaoPane = fxmlLoader.load();
             this.validarIntencaoScene = new Scene(validarIntencaoPane);
             this.controladorValidarIntencao = fxmlLoader.getController();
+
+
+
+            //27 - Escolha de instituições e funções voluntário
+            fxmlLoader = new FXMLLoader();
+            Pane escolhaInstituicoesPane = fxmlLoader.load(getClass().getResource("/br/com/renutrir/05.5-lista-instituicoes1.fxml").openStream());
+            this.escolhaInstituicoesScene = new Scene(escolhaInstituicoesPane);
+            this.controladorEscolhaInstituicoes = fxmlLoader.getController();
 
         } catch (IOException e) {
             e.printStackTrace();
