@@ -701,4 +701,19 @@ public class HelloController {
         doadorLogado = null;
     }
 
+    //Tela 17 e 23
+
+    @FXML
+    private Button excluirConta;
+
+    @FXML
+    void excluirContaDoador(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/29-excluir-conta.fxml", "ReNutrir - Excluir conta");
+    }
+
+    @FXML
+    void excluirContaInstituicao(ActionEvent event) {
+        realizarTrocaDeTela("/br/com/renutrir/29-excluir-conta.fxml", "ReNutrir - Excluir conta");
+    }
+
 }
