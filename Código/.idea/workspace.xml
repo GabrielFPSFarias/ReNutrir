@@ -9,21 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dados/eventos.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/dados/eventos.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dados/solicitacoes_doacoes.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/dados/solicitacoes_doacoes.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/renutrir/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorPerfil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/renutrir/servicos/ControladorPerfil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/05-2-doacao-solicitacao.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/17-perfil-doador.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/17-perfil-doador.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/23-perfil-instituicao.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/br/com/renutrir/23-perfil-instituicao.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/05-2-doacao-solicitacao.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/17-perfil-doador.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/17-perfil-doador.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/23-perfil-instituicao.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/23-perfil-instituicao.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/renutrir/HelloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/renutrir/HelloController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorPerfil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/renutrir/servicos/ControladorPerfil.class" afterDir="false" />
-    </list>
+    <list default="true" id="2e816e63-bd1d-42a2-b9e9-cab020d93f07" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
