@@ -89,6 +89,23 @@ public class RepositorioSolicitacaoDoacao {
         }
     }
 
+    public void salvarSolicitacoes(List<SolicitacaoDoacao> solicitacoes) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ArquivoSolicitacao))) {
+            oos.writeObject(solicitacoes);
+            System.out.println("Solicitações salvas com sucesso.");
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar as solicitações: " + e.getMessage());
+        }
+    }
+
+    public void removerSolicitacoes(List<SolicitacaoDoacao> solicitacoesParaRemover) {
+        List<SolicitacaoDoacao> todasSolicitacoes = carregarSolicitacoes();
+        todasSolicitacoes.removeAll(solicitacoesParaRemover);
+        salvarSolicitacoes(todasSolicitacoes);
+    }
+
+
+
     public Endereco getEnderecoInstituicao(String tipoItem, String item, String nomeInstituicao, String nomeUsuario) {
         List<SolicitacaoDoacao> solicitacoes = carregarSolicitacoes();
 

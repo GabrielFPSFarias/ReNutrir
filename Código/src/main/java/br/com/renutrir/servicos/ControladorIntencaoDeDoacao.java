@@ -27,6 +27,7 @@ import java.io.*;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -134,6 +135,8 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         colItem.setCellValueFactory(new PropertyValueFactory<>("item"));
         colQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         colFaltam.setCellValueFactory(new PropertyValueFactory<>("faltam"));
+        
+        verificarESubstituirSolicitacoes();
     }
 
     private void carregarEExibirSolicitacoes() {
@@ -352,6 +355,21 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             }
         });
     }
+
+    private void verificarESubstituirSolicitacoes() {
+        ObservableList<SolicitacaoDoacao> solicitacoes = tableViewDoacoesSolicitadas.getItems();
+        List<SolicitacaoDoacao> solicitacoesParaRemover = new ArrayList<>();
+
+        for (SolicitacaoDoacao solicitacao : solicitacoes) {
+            if (solicitacao.getFaltam() <= 0) {
+                solicitacoesParaRemover.add(solicitacao);
+            }
+        }
+
+        solicitacoes.removeAll(solicitacoesParaRemover);
+        repositorioSolicitacaoDoacao.removerSolicitacoes(solicitacoesParaRemover);
+    }
+
 
 
     //Tela 05-2
