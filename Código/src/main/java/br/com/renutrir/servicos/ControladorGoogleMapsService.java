@@ -11,7 +11,7 @@ public class ControladorGoogleMapsService {
 
     private static final String API_KEY = "AIzaSyC60cxhNaxQJN2Ra7frE6E8AR2JCwNMLCk";
 
-    public static String calcularDistanciaEntreDoisEnderecos(String origem, String destino) throws Exception {
+    public String calcularDistanciaEntreDoisEnderecos(String origem, String destino) throws Exception {
         origem = origem.replace(" ", "+");
         destino = destino.replace(" ", "+");
 

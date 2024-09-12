@@ -46,6 +46,7 @@ import java.util.ResourceBundle;
 import br.com.renutrir.renutrir.HelloController;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
+import br.com.renutrir.servicos.ControladorGoogleMapsService;
 import javafx.util.Duration;
 
 public class ControladorIntencaoDeDoacao implements Initializable {
@@ -575,7 +576,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             enderecoUsuario = SessaoDoador.getInstancia().getDoadorLogado().getEndereco().getEnderecoCompleto();
 
             // Calcula a distância entre o endereço do usuário e o endereço da instituição
-            String distancia = ControladorGoogleMapsService.calcularDistanciaEntreDoisEnderecos(enderecoUsuario, enderecoInstituicao);
+            String distancia = googleMapsService.calcularDistanciaEntreDoisEnderecos(enderecoUsuario, enderecoInstituicao);
 
             // Exibe a distância no Label
 
