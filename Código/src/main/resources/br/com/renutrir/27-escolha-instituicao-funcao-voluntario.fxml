@@ -60,7 +60,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="785.0">
                <children>
                   <ListView fx:id="instituicaoListView" layoutX="15.0" layoutY="11.0" prefHeight="313.0" prefWidth="372.0" />
-                  <ComboBox fx:id="cboxFuncaoVoluntario" layoutX="275.0" layoutY="336.0" prefHeight="27.0" prefWidth="225.0" promptText="Escoha a função de voluntário:" />
+                   <ListView fx:id="funcaoVoluntarioListView" layoutX="275.0" layoutY="336.0" prefHeight="100.0" prefWidth="225.0" />
                   <Label fx:id="instituicaoDetalhesLabel" alignment="TOP_LEFT" layoutX="394.0" layoutY="11.0" prefHeight="312.0" prefWidth="392.0" text="Selecione uma instituição" wrapText="true" />
                </children>
             </AnchorPane>

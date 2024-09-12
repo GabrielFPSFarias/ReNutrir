@@ -41,7 +41,7 @@
                 <!-- Label para mostrar todas as informações da instituição -->
                 <Label fx:id="instituicaoInformacoesLabel" alignment="TOP_LEFT" layoutX="20.0" layoutY="10.0" prefHeight="325.0" prefWidth="773.0" text="Confirma todas as informações fornecidas" wrapText="true" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="20.0">
                     <font>
-                        <Font size="17.0" />
+                        <Font size="14.0" />
                     </font>
                 </Label>
             </children>
