@@ -104,7 +104,23 @@ public class RepositorioSolicitacaoDoacao {
         salvarSolicitacoes(todasSolicitacoes);
     }
 
+    public void removerSolicitacao(SolicitacaoDoacao solicitacaoParaRemover) {
+        List<SolicitacaoDoacao> todasSolicitacoes = carregarSolicitacoes();
 
+        boolean removido = todasSolicitacoes.removeIf(solicitacao ->
+                solicitacao.getTipoItem().equals(solicitacaoParaRemover.getTipoItem()) &&
+                        solicitacao.getItem().equals(solicitacaoParaRemover.getItem()) &&
+                        solicitacao.getNomeInstituicao().equals(solicitacaoParaRemover.getNomeInstituicao()) &&
+                        solicitacao.getNomeUsuario().equals(solicitacaoParaRemover.getNomeUsuario())
+        );
+
+        if (removido) {
+            salvarSolicitacoes(todasSolicitacoes);
+            System.out.println("Solicitação removida com sucesso.");
+        } else {
+            System.err.println("Erro: Solicitação não encontrada para remoção.");
+        }
+    }
 
     public Endereco getEnderecoInstituicao(String tipoItem, String item, String nomeInstituicao, String nomeUsuario) {
         List<SolicitacaoDoacao> solicitacoes = carregarSolicitacoes();

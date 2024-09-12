@@ -319,12 +319,15 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         repositorioSolicitacao.atualizarSolicitacao(solicitacaoAtualizada);
 
         int quantidadeFaltando = solicitacaoSelecionada.getFaltam() - quantidade;
-        solicitacaoAtualizada.setFaltam(quantidadeFaltando);
-        repositorioSolicitacao.atualizarSolicitacao(solicitacaoAtualizada);
+        solicitacaoSelecionada.setFaltam(quantidadeFaltando);
 
-        if (quantidadeFaltando <= 0) {
+        if (quantidadeFaltando > 0) {
+            repositorioSolicitacao.atualizarSolicitacao(solicitacaoSelecionada);
+        } else {
             tableViewDoacoesSolicitadas.getItems().remove(solicitacaoSelecionada);
+            repositorioSolicitacao.removerSolicitacao(solicitacaoSelecionada);
         }
+
 
         Platform.runLater(() -> {
             try {
