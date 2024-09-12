@@ -185,6 +185,21 @@ public class RepositorioIntencaoDoacao {
         return removido;
     }
 
+public boolean removerIntencaoDataNome(IntencaoDoacao intencao) {
+        boolean removido = false;
+        Iterator<IntencaoDoacao> iterator = this.intencoes.iterator();
+        while (iterator.hasNext()) {
+            IntencaoDoacao intencoes = iterator.next();
+            if (intencao.getData().equals(intencoes.getData()) &&
+                    intencao.getNomeUsuarioDoador().equals(intencoes.getNomeUsuarioDoador())) {
+                iterator.remove();
+                salvarIntencoes();
+                removido = true;
+            }
+        }
+        return removido;
+    }
+
     public void atualizarIntencao(IntencaoDoacao intencao) {
         for (int i = 0; i < intencoes.size(); i++) {
             if (intencoes.get(i).equals(intencao)) {
