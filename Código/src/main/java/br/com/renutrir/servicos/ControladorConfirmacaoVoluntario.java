@@ -1,23 +1,19 @@
 package br.com.renutrir.servicos;
 
+import br.com.renutrir.model.Doador;
 import br.com.renutrir.model.Instituicao;
+import br.com.renutrir.renutrir.HelloController;
+import br.com.renutrir.sessao.SessaoDoador;
+import br.com.renutrir.sessao.SessaoInstituicao;
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import br.com.renutrir.repositorio.RepositorioInstituicao;
-
-import java.util.Optional;
+import javafx.stage.Stage;
+import br.com.renutrir.servicos.ControladorListaInstituicoes;
 
 public class ControladorConfirmacaoVoluntario {
+    ControladorListaInstituicoes controladorListaInstituicoes = new ControladorListaInstituicoes();
 
-    private  ControladorEscolhaInstituicaoFuncaoVoluntario controladorEscolhaInstituicaoFuncaoVoluntario;
-    private RepositorioInstituicao repositorioInstituicoes;
-
-    public ControladorConfirmacaoVoluntario() {
-
-       this.controladorEscolhaInstituicaoFuncaoVoluntario = new ControladorEscolhaInstituicaoFuncaoVoluntario();
-       this.repositorioInstituicoes = new RepositorioInstituicao();
-    }
 @FXML
  private Label instituicaoInformacoesLabel;
 
@@ -28,33 +24,32 @@ private Button confirmarVoluntarioBotao;
 @FXML
 public void voltarBotao72(){
 
-    controladorEscolhaInstituicaoFuncaoVoluntario.realizarTrocaDeTela("/br/com/renutrir/27-escolha-instituicao-funcao-voluntario.fxml", "ReNutrir - Escolha de instituição e função do voluntário",voltarBotao72);
-    }
-
-    public String getConfirmacaoDados (String nomeUsuario) {
-
-        Optional<Instituicao> instituicaoOptional = repositorioInstituicoes.buscarInstituicaoPorNomeUsuario(nomeUsuario);
-
-        if (instituicaoOptional.isPresent()) {
-
-            Instituicao instituicao = instituicaoOptional.get();
-
-            StringBuilder detalhes = new StringBuilder();
-            detalhes.append("Nome: ").append(instituicao.getNome()).append("\n\n");
-            detalhes.append(instituicao.getEndereco()).append("\n\n");
-            detalhes.append("Telefone: ").append(instituicao.getTelefone()).append("\n\n");
-            detalhes.append("Email: ").append(instituicao.getEmail()).append("\n\n");
-            detalhes.append("Horário de funcionamento: ").append(instituicao.getHorarioInicial()).append(" às ").append(instituicao.getHorarioFinal());
-            detalhes.append("Descrição: ").append(instituicao.getDescricao());
-
-            return detalhes.toString();
-        } else {
-            return "Detalhes da instituição não encontrados.";
-        }
+    controladorListaInstituicoes.realizarTrocaDeTela("/br/com/renutrir/05.5-lista-instituicoes1.fxml", "ReNutrir - Lista de Instituições",voltarBotao72);
     }
 @FXML
 public void confirmarVoluntarioBotao (){
 
 
     }
+
+    /*public void realizarTrocaDeTela(String fxmlArquivo, String titulo) {
+        System.out.println("Clicou: " + fxmlArquivo);
+        Stage stage = (Stage) voltarBotao72.getScene().getWindow();
+        hc.trocarTela(stage, fxmlArquivo, titulo);
+
+        if (fxmlArquivo.equals("/br/com/renutrir/03-login.fxml")){
+            SessaoDoador.getInstancia().limparSessao();
+            SessaoInstituicao.getInstancia().limparSessao();
+        } else {
+            Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+            if (doadorLogado != null) {
+                System.out.println("Doador logado: " + doadorLogado.getNome()); //testar
+            }
+
+            Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+            if (instituicaoLogada != null) {
+                System.out.println("Instituição logada: " + instituicaoLogada.getNome()); //testar tbm
+            }
+        }
+    }*/
 }

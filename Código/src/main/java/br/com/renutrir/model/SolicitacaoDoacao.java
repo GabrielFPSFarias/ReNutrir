@@ -1,8 +1,6 @@
 package br.com.renutrir.model;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
 
 public class SolicitacaoDoacao implements Serializable{
     private static final long serialVersionUID = 8983558202217591746L;
@@ -21,6 +19,14 @@ public class SolicitacaoDoacao implements Serializable{
         this.nomeInstituicao = nomeInstituicao;
         this.nomeUsuario = nomeUsuario;
         this.faltam = quantidade;
+    }
+
+    public SolicitacaoDoacao(SolicitacaoDoacao solicitacaoDoacao) {
+
+    }
+
+    public SolicitacaoDoacao() {
+        //
     }
 
     // Getters e Setters
