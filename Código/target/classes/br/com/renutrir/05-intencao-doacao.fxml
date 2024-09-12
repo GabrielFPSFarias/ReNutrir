@@ -72,7 +72,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <ListView fx:id="instituicoesListView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="107.0" prefWidth="396.0" onMouseClicked="#onInstituicaoClicada" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ListView fx:id="instituicoesListView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="107.0" prefWidth="396.0" onMouseClicked="#onInstituicaoSelecionada" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label fx:id="distanciaLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="479.0" text="Distância para a Instituição selecionada" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     </children>
                 </GridPane>
