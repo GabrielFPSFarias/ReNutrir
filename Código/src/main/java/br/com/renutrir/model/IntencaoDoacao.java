@@ -115,6 +115,14 @@ public class IntencaoDoacao implements Serializable {
         return item;
     }
 
+    public String getNomeInstituicao() {
+        return instituicao != null ? instituicao.getNome() : "Desconhecido";
+    }
+
+    public String getDetalhesDoacao() {
+        return String.format("%s (Quantidade: %d)", item, quantidade);
+    }
+
     @Override
     public String toString() {
         if (this.doador == null) {

@@ -8,6 +8,7 @@ import br.com.renutrir.repositorio.RepositorioDoacoes;
 import br.com.renutrir.repositorio.RepositorioIntencaoDoacao;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +22,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,6 +35,52 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControladorDoacoesPendentes implements Initializable {
+
+    @FXML
+    private TableColumn<IntencaoDoacao, String> tableInsDestinadaPend;
+    @FXML
+    private TableColumn<IntencaoDoacao, String> tableDetalhesIntPend;
+    @FXML
+    private TableView<IntencaoDoacao> tableDoacoesPendentes;
+
+    private RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+
+    private void configurarTabela() {
+        System.out.println("Configurando tabela...");
+        tableInsDestinadaPend.setCellValueFactory(new PropertyValueFactory<>("nomeInstituicao"));
+        tableDetalhesIntPend.setCellValueFactory(new PropertyValueFactory<>("detalhesDoacao"));
+
+        System.out.println("Colunas configuradas: ");
+        System.out.println("Nome Instituição: " + tableInsDestinadaPend.getCellValueFactory());
+        System.out.println("Detalhes Doação: " + tableDetalhesIntPend.getCellValueFactory());
+    }
+
+    private void carregarIntencoesPendentes(Doador doadorLogado) {
+        System.out.println("Carregando intenções pendentes...");
+
+        configurarTabela();
+
+        List<IntencaoDoacao> intencoesDoador = repositorioIntencaoDoacao.getIntencoes()
+                .stream()
+                .filter(intencao -> intencao.getDoador().equals(doadorLogado) && intencao.getStatus().equals("Pendente"))
+                .toList();
+
+        if (intencoesDoador.isEmpty()) {
+            System.out.println("Nenhuma intenção de doação pendente encontrada.");
+        } else {
+            intencoesDoador.forEach(intencao -> System.out.println("Intenção: " + intencao.getDetalhesDoacao()));
+        }
+
+        ObservableList<IntencaoDoacao> intencoesPendentes = FXCollections.observableArrayList(intencoesDoador);
+        tableDoacoesPendentes.setItems(intencoesPendentes);
+        System.out.println("Itens definidos na tabela: " + tableDoacoesPendentes.getItems());
+    }
+
+
+    @FXML
+    public void botaoVoltar18() {
+        realizarTrocaDeTela("/br/com/renutrir/04-menu-doador.fxml", "ReNutrir - Doador");
+    }
 
     public void trocarTela(Stage stage, String fxmlFile, String title) {
         try {
@@ -230,7 +280,29 @@ public class ControladorDoacoesPendentes implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        preencherCBoxDPendentes();
-        setInformacoesItencaoDoacao();
+        Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
+        if (doadorLogado != null) {
+            carregarIntencoesPendentes(doadorLogado);
+        } else {
+            System.err.println("Doador logado é null");
+        }
+
+        if (tableDoacoesPendentes == null) {
+            tableDoacoesPendentes = new TableView<>();
+            tableDetalhesIntPend = new TableColumn<>();
+            tableInsDestinadaPend = new TableColumn<>();
+        }
+
+        tableDoacoesPendentes.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                System.out.println("Item selecionado: " + newVal.getDetalhesDoacao());
+            }
+        });
+        
+        Instituicao instituicaoLogada = SessaoInstituicao.getInstancia().getInstituicaoLogada();
+        if (instituicaoLogada != null) {
+            preencherCBoxDPendentes();
+            setInformacoesItencaoDoacao();
+        }
     }
 }
