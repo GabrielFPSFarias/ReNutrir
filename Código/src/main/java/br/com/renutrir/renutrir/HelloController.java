@@ -5,14 +5,9 @@ import br.com.renutrir.repositorio.*;
 import br.com.renutrir.servicos.*;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,27 +15,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
-import javafx.scene.text.*;
-import javafx.util.Duration;
 
 import java.io.*;
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.*;
-
-import javafx.scene.layout.VBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Cell;
-import javafx.scene.control.SelectionMode;
 
 
 public class HelloController {
@@ -62,7 +41,7 @@ public class HelloController {
     @FXML
     public void botaoListaDoacaoEfetuada(){
 
-        realizarTrocaDeTela("/br/com/renutrir/05.5-lista-instituicoes1.fxml", "ReNutrir - Lista das Instituições");
+        realizarTrocaDeTela("/br/com/renutrir/27-escolha-instituicao-funcao-voluntario.fxml", "ReNutrir - Lista das Instituições");
     }
 
     public ControladorDoacoesPendentes controladorDoacoesPendentes = new ControladorDoacoesPendentes();
@@ -598,10 +577,6 @@ public class HelloController {
 
     public void botaoDoacoesSolicitadas(ActionEvent actionEvent) {
         realizarTrocaDeTela("/br/com/renutrir/07-confirmar-doacao.fxml", "ReNutrir - Confirmar Doação");
-    }
-
-    public void botaoSejaVoluntario(ActionEvent actionEvent) {
-        realizarTrocaDeTela("/br/com/renutrir/09-seja-voluntario.fxml", "ReNutrir - Seja Voluntario");
     }
 
     public void botaoTransportesDoacoes(ActionEvent actionEvent) {
