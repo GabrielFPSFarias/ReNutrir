@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class IntencaoDoacao implements Serializable {
+    private static final long serialVersionUID = 7947643167872848823L;
+
     private String tipoItem; // Valor, alimento, Roupas, Móveis, etc.
     private String item;
     private int quantidade;
@@ -39,6 +41,9 @@ public class IntencaoDoacao implements Serializable {
         this.nomeItem = nomeItem;
         this.quantidade = quantidade;
         this.dataHora = LocalDateTime.now();
+    }
+
+    public IntencaoDoacao(String nãoHáIntençõesPendentes) {
     }
 
     public String getNomeUsuarioDoador() {
