@@ -1,18 +1,12 @@
 package br.com.renutrir.servicos;
 
 import br.com.renutrir.model.*;
-import br.com.renutrir.renutrir.ProgressAlert;
 import br.com.renutrir.repositorio.RepositorioIntencaoDoacao;
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import br.com.renutrir.repositorio.*;
-import br.com.renutrir.servicos.*;
-import br.com.renutrir.main.*;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -21,32 +15,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import java.io.*;
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Optional;
-import java.awt.*;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 import br.com.renutrir.renutrir.HelloController;
 import br.com.renutrir.sessao.SessaoDoador;
 import br.com.renutrir.sessao.SessaoInstituicao;
-import javafx.util.Duration;
 
 public class ControladorIntencaoDeDoacao implements Initializable {
 
@@ -241,7 +226,6 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             if(controlador.instituicaoNomeLabel == null) {
                 controlador.instituicaoNomeLabel = new Label();
             }
-            controlador.instituicaoNomeLabel.setText("Instituição - TP Solicitação");
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -285,12 +269,17 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setTitle("ReNutrir - Doação Solicitação");
 
+            System.out.println("Selecionou Solicitação: " + solicitacaoSelecionada);
+
             if (fieldInserirQtdItem == null){
                 fieldInserirQtdItem = new TextField();
             }
 
             ControladorIntencaoDeDoacao controlador = loader.getController();
             controlador.setInformacoes(solicitacaoSelecionada, fieldInserirQtdItem.getText());
+
+            System.out.println("Informações passadas pro próximo controlador: " +
+                    "Solicitação: " + solicitacaoSelecionada + ", Quantidade: " + fieldInserirQtdItem.getText());
 
             stage.setScene(new Scene(root));
             stage.show();
@@ -304,6 +293,11 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         nomeInstSolicitadoraLabel.setText(solicitacao.getNomeInstituicao());
         nomeItemSolicitadoLabel.setText(solicitacao.getItem());
         fieldInserirQtdItem.setText(quantidade);
+
+        System.out.println("Informações tela 05-2: " +
+                "Instituição: " + solicitacao.getNomeInstituicao() +
+                ", Item: " + solicitacao.getItem() +
+                ", Quantidade: " + quantidade);
     }
 
 
@@ -319,6 +313,8 @@ public class ControladorIntencaoDeDoacao implements Initializable {
     void botaoVoltar76(ActionEvent event) {
         realizarTrocaDeTela("/br/com/renutrir/05-1-doar-instituicoes.fxml", "ReNutrir - Doações Solicitadas");
     }
+
+    private SolicitacaoDoacao solicitacao;
 
     @FXML
     void doarItemSolicitadoBotao(ActionEvent event) {
@@ -347,9 +343,16 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
         solicitacaoSelecionada.setFaltam(quantidadeFaltante - quantidadeDoada);
 
+        SolicitacaoDoacao novaSolicitacao = new SolicitacaoDoacao(
+                solicitacaoSelecionada.getTipoItem(),
+                solicitacaoSelecionada.getItem(),
+                solicitacaoSelecionada.getQuantidade(),
+                solicitacaoSelecionada.getNomeInstituicao(),
+                solicitacaoSelecionada.getNomeUsuario()
+        );
+
         RepositorioInstituicao repositorioInstituicao = new RepositorioInstituicao();
         RepositorioSolicitacaoDoacao repositorioSolicitacao = new RepositorioSolicitacaoDoacao(repositorioInstituicao);
-
         repositorioSolicitacao.atualizarSolicitacao(solicitacaoSelecionada);
 
         Endereco enderecoInstituicao = repositorioSolicitacao.getEnderecoInstituicao(
@@ -374,7 +377,7 @@ public class ControladorIntencaoDeDoacao implements Initializable {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("ReNutrir - Doação Concluída");
+            stage.setTitle("ReNutrir - Intenção Concluída");
             stage.show();
 
         } catch (IOException e) {
@@ -382,7 +385,6 @@ public class ControladorIntencaoDeDoacao implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de doação concluída.");
         }
     }
-
 
 
     @FXML
@@ -399,8 +401,6 @@ public class ControladorIntencaoDeDoacao implements Initializable {
         exibirInfoDoacaoLabel.setText(infoDoacao);
         labelEnderecoInstituicaoSel.setText(enderecoInstituicao);
     }
-
-
 
 
     //Label
