@@ -26,6 +26,38 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import br.com.renutrir.model.*;
+import br.com.renutrir.renutrir.ProgressAlert;
+import br.com.renutrir.repositorio.RepositorioDoacoes;
+import br.com.renutrir.repositorio.RepositorioDoador;
+import br.com.renutrir.repositorio.RepositorioIntencaoDoacao;
+import br.com.renutrir.sessao.SessaoDoador;
+import br.com.renutrir.sessao.SessaoInstituicao;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -44,6 +76,13 @@ public class ControladorDoacoesPendentes implements Initializable {
     private TableView<IntencaoDoacao> tableDoacoesPendentes;
 
     private RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
+    
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
     private void configurarTabela() {
         System.out.println("Configurando tabela...");
@@ -250,16 +289,18 @@ public class ControladorDoacoesPendentes implements Initializable {
      */
 
     @FXML
-    public void botaoDoacaoRecebidaF(ActionEvent actionEvent) {
+    void botaoDoacaoRecebidaF(ActionEvent actionEvent) {
         IntencaoDoacao intencaoDoacao = this.getIntencaoSelecionada();
+        System.out.println(intencaoDoacao);
         if (intencaoDoacao == null) {
             new Alert(Alert.AlertType.ERROR, "Nenhuma intenção de doação selecionada.").showAndWait();
             return;
         }
         RepositorioIntencaoDoacao repositorioIntencaoDoacao = new RepositorioIntencaoDoacao();
         RepositorioDoacoes repositorioDoacoes = new RepositorioDoacoes();
+        RepositorioDoador repositorioDoador = new RepositorioDoador();
 
-        boolean sucessoRemocao = repositorioIntencaoDoacao.removerIntencao(intencaoDoacao);
+        boolean sucessoRemocao = repositorioIntencaoDoacao.removerIntencaoDataNome(intencaoDoacao);
 
         if (!sucessoRemocao) {
             new Alert(Alert.AlertType.ERROR, "Falha ao remover a intenção de doação.").showAndWait();
@@ -274,10 +315,45 @@ public class ControladorDoacoesPendentes implements Initializable {
         );
         repositorioDoacoes.adicionarDoacao(doacao);
         System.out.println(doacao + " " + doacao.getStatus() + " " + doacao.getData());
+        Optional<Doador> doadorOp = repositorioDoador.buscarDoadorPorCpf(doacao.getDoador().getCpf());
+        if(doadorOp.isPresent()){
+            Doador doador = doadorOp.get();
+        if (doador.getCertificado() == null) {
+                doador.setCertificado(new Certificado(0));
+            }
+            System.out.println(doador.getCertificado().getQuantDoacoes());
+            doador.getCertificado().adicionarDoacao();
+            System.out.println(doador.getCertificado().getQuantDoacoes());
+
+            ProgressAlert progressAlert = new ProgressAlert();
+            progressAlert.start(new Stage());
+            progressAlert.showProgress();
+            ControladorDoacaoConcluida controladorDoacaoConcluida = new ControladorDoacaoConcluida();
+
+            new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+
+                    repositorioDoacoes.adicionarDoacao(doacao);
+                    controladorDoacaoConcluida.salvarDoacoesEmArquivo(repositorioDoacoes);
+
+                    Platform.runLater(() -> {
+                        controladorDoacaoConcluida.verificarProgressoParaCertificado(doador);
+                    });
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+            progressAlert.hideProgress();
+            showAlert(Alert.AlertType.INFORMATION, "Doação Recebida", "Doação registrada com sucesso!");
+        }
+
         realizarTrocaDeTela("/br/com/renutrir/19-menu-instituicao.fxml", "ReNutrir - Menu Instituição");
     }
 
 
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Doador doadorLogado = SessaoDoador.getInstancia().getDoadorLogado();
