@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 public class ControladorGoogleMapsService {
 
-    private static final String API_KEY = "{API KEY Google Maps";
+    private static final String API_KEY = "{API KEY Google Maps}";
 
     public String calcularDistanciaEntreDoisEnderecos(String origem, String destino) throws Exception {
         origem = origem.replace(" ", "+");
