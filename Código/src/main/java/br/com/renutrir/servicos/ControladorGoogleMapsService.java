@@ -9,13 +9,13 @@ import org.json.JSONObject;
 
 public class ControladorGoogleMapsService {
 
-    private static final String API_KEY = "AIzaSyC60cxhNaxQJN2Ra7frE6E8AR2JCwNMLCk";
+    private static final String API_KEY = "{API KEY Google Maps";
 
     public String calcularDistanciaEntreDoisEnderecos(String origem, String destino) throws Exception {
         origem = origem.replace(" ", "+");
         destino = destino.replace(" ", "+");
 
-        String urlString = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + origem + "&destinations=" + destino + "&key=" + API_KEY;
+        String urlString = "{url/distance-matrix-google-maps}" + origem + "&destinations=" + destino + "&key=" + API_KEY;
 
         URL url = new URL(urlString);
         HttpURLConnection conn = null;
